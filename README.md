@@ -3,6 +3,6 @@ Twixt Project
 
 Participants:
  - Roman Onisim (username: onisimm)
- - Sultan Roxana (username: roxanasultan)
+ - Sultan Roxana (username: RoxanaSultan)
  - Șușcă Elena (username: Elenaaa19)
- - Toma Livia (username: Livia-unitbv)
+ - Toma Livia (username: LiviaTomaNeagu)

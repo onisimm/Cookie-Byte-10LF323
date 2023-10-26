@@ -131,6 +131,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Board.cpp" />
     <ClCompile Include="Board.cppm" />
     <ClCompile Include="Dot.cpp" />
     <ClCompile Include="Dot.cppm" />

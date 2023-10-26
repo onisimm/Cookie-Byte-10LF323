@@ -1,5 +1,5 @@
 # Cookie-Byte-10LF323
-Twixt Project
+Twixt Game Project
 
 Participants:
  - Roman Onisim (username: onisimm)

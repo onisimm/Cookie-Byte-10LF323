@@ -12,7 +12,7 @@ namespace twixt {
         // Constructor
         Dot();
 
-        enum class DotState : uint8_t {
+        enum class DotStatus : uint8_t {
             Player1, // occupied by player 1
             Player2, // occupied by player 2
             Clear // not occupied yet
@@ -21,13 +21,15 @@ namespace twixt {
         // Getters
         int getCoordX();
         int getCoordY();
+        DotStatus getStatus() const;
 
         // Setters
         void setCoordX(int);
         void setCoordY(int);
+        void setStatus(DotStatus);
 
     private:
-        DotState m_state : 2;
+        DotStatus m_status : 2;
         int m_x, m_y; // coordinates
     };
 };

@@ -1,6 +1,5 @@
 #include "Board.cppm"
 
-<<<<<<< HEAD
 namespace twixt {
 	void Board::addPossibleBridges(std::vector<std::vector<std::vector<std::pair<int, int>>>>& possible, int x, int y, twixt::Dot::DotStatus status)
 	{
@@ -11,9 +10,7 @@ namespace twixt {
 				possible[x + pair.first][y + pair.second].push_back({ x,y });
 		}
 	}
-=======
-namespace twixt
-{
+
 	Board::Board(){}
 
 	Board::Board(uint32_t size)
@@ -36,6 +33,5 @@ namespace twixt
 		m_possibleBridgesPlayer1 = newBoard.m_possibleBridgesPlayer1;
 		m_possibleBridgesPlayer2 = newBoard.m_possibleBridgesPlayer2;
 		m_matrixDot = newBoard.m_matrixDot;
->>>>>>> bcec62e (Added constructor of Board class)
 	}
 }

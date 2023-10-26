@@ -132,7 +132,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Dot.cpp" />
-    <ClCompile Include="Dot.cppm" />
+    <ClCompile Include="Dot.cppm">
+      <LanguageStandard_C Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">stdc17</LanguageStandard_C>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">CompileAsCppModule</CompileAs>
+    </ClCompile>
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

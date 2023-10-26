@@ -4,6 +4,16 @@ namespace twixt {
 
     // Constructor
     Dot::Dot() : m_status(DotStatus::Clear), m_x(0), m_y(0) {}
+    // Constructor de copiere
+    Dot::Dot(const Dot& newDot) : m_status(newDot.m_status), m_x(newDot.m_x), m_y(newDot.m_y) {}
+    // Operatorul egal
+    Dot& Dot::operator=(const Dot& newDot)
+    {
+        this->m_status = newDot.m_status;
+        this->m_x = newDot.m_x;
+        this->m_y = newDot.m_y;
+        return *this;
+    }
 
     // Getters
     int Dot::getCoordX() {

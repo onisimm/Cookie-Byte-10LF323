@@ -2,7 +2,7 @@ module;
 
 #include <cstdint>
 
-export module Dot;
+export module Dot.cppm;
 
 import <vector>;
 
@@ -11,6 +11,12 @@ namespace twixt {
     public:
         // Constructor
         Dot();
+        // Constructor de copiere
+        Dot(const Dot& newDot);
+        // Operatorul =
+        Dot& operator=(const Dot& newDot);
+        // Destructor 
+        ~Dot();
 
         enum class DotStatus : uint8_t {
             Player1, // occupied by player 1

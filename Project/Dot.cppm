@@ -9,12 +9,11 @@ import <vector>;
 namespace twixt {
     export class Dot {
     public:
-        // Constructor
-        Dot();
-        // Constructor de copiere
-        Dot(const Dot& newDot);
-        // Operatorul =
-        Dot& operator=(const Dot& newDot);
+        // Constructors
+        Dot(); // default
+
+        Dot(const Dot& newDot); // copy
+        
         // Destructor 
         ~Dot();
 
@@ -33,6 +32,9 @@ namespace twixt {
         void setCoordX(int);
         void setCoordY(int);
         void setStatus(DotStatus);
+
+        // Operators overload
+        Dot& operator=(const Dot& newDot); // = overload
 
     private:
         DotStatus m_status : 2;

@@ -1,11 +1,13 @@
 module;
-#include <cstdint>;
+
+#include <cstdint>
 
 export module Dot;
+
 import <vector>;
 
 namespace twixt {
-	export class Dot {
+    export class Dot {
     public:
         // Constructor
         Dot();
@@ -20,11 +22,12 @@ namespace twixt {
         int getCoordX();
         int getCoordY();
 
-        // Setter
-        void setCoord(int x, int y);
+        // Setters
+        void setCoordX(int);
+        void setCoordY(int);
 
     private:
         DotState m_state : 2;
         int m_x, m_y; // coordinates
-	};
-}
+    };
+};

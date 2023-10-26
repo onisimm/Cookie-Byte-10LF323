@@ -6,7 +6,7 @@ import <vector>;
 
 namespace twixt {
 	export class Board {
-		// Constructor
+		// Constructor goes here
 	private:
 		std::vector<std::vector<std::vector<std::pair<int, int>>>> m_possibleBridgesPlayer1, m_possibleBridgesPlayer2;
 		std::vector<std::vector<Dot>> m_matrixDot;

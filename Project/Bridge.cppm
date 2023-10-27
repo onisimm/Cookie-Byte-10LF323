@@ -13,5 +13,13 @@ namespace twixt {
 		std::string m_second_dot;
 
 
+	public:
+		//Constructor
+		Bridge(std::string first_dot, std::string second_dot);
+		//Copy constructor
+		Bridge(const Bridge& newBridge);
+		//Destructor
+		~Bridge();
+		
 	};
 }

@@ -23,5 +23,6 @@ namespace twixt {
 		//Setters
 		void setName(std::string);
 		void setColor(std::string);
+		friend std::istream& operator>>(std::istream& in, Player& player);
 	};
 }

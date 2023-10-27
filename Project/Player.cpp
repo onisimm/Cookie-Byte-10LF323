@@ -18,4 +18,10 @@ namespace twixt {
 	void Player::setColor(std::string color) {
 		m_color = color;
 	}
+	std::istream& operator>>(std::istream& in, Player& player) {
+		in >> player.m_name >> player.m_color;
+		player.setName(player.m_name);
+		player.setColor(player.m_color);
+		return in;
+	}
 }

@@ -17,5 +17,11 @@ namespace twixt {
 		Player(const Player& newPlayer);
 		//Destructor
 		~Player();
+		//Getters
+		std::string getName();
+		std::string getColor();
+		//Setters
+		void setName(std::string);
+		void setColor(std::string);
 	};
 }

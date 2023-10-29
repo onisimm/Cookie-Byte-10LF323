@@ -6,6 +6,7 @@ export module Bridge.cppm;
 
 import<iostream>;
 
+
 namespace twixt {
 	export class Bridge {
 	private:
@@ -20,6 +21,11 @@ namespace twixt {
 		Bridge(const Bridge& newBridge);
 		//Destructor
 		~Bridge();
-		
+		//Getters
+		std::string getFirst_dot();
+		std::string getSecond_dot();
+		//Setters
+		void setFirst_dot(std::string);
+		void setSecond_dot(std::string);
 	};
 }

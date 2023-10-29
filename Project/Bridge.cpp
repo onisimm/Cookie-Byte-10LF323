@@ -9,6 +9,13 @@ namespace twixt {
 		m_first_dot{ newBridge.m_first_dot }, m_second_dot{ newBridge.m_second_dot } {}
 	
     Bridge::~Bridge() {}
+
+	Bridge& Bridge::operator=(const Bridge& other) {
+		// Copy
+		m_first_dot = other.m_first_dot;
+		m_second_dot = other.m_second_dot;
+
+	}
 	
 	std::string Bridge::getFirst_dot()  {
 		return m_first_dot;

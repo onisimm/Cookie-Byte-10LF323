@@ -21,6 +21,7 @@ namespace twixt {
 		Bridge(const Bridge& newBridge);
 		//Destructor
 		~Bridge();
+		Bridge& operator=(const Bridge& newBridge);
 		//Getters
 		std::string getFirst_dot();
 		std::string getSecond_dot();

@@ -1,9 +1,11 @@
 #include"Dot.h"
+#include "Board.h"
 #include<iostream>
 using namespace twixt;
 
 int main()
 {
-	Dot dooot;
+	Board board(24);
+	board.showBoard();
 	return 0;
 }

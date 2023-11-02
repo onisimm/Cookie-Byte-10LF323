@@ -1,5 +1,4 @@
-
-
+#pragma once
 #include <cstdint>
 #include <vector>
 
@@ -39,4 +38,4 @@ namespace twixt {
         DotStatus m_status : 2;
         int m_x, m_y; // coordinates
     };
-};
+}

@@ -1,7 +1,7 @@
 #include "Board.h"
 
 namespace twixt {
-	void Board::addPossibleBridges(std::vector<std::vector<std::vector<std::pair<int, int>>>>& possible, int x, int y, twixt::Dot::DotStatus status)
+	/*void Board::addPossibleBridges(std::vector<std::vector<std::vector<std::pair<int, int>>>>& possible, int x, int y, twixt::Dot::DotStatus status)
 	{
 		std::vector<std::pair<int, int>> positions{ { -2, -1 }, { -1, -2 }, { 1,-2 }, { 2, -1 }, { 2,1 }, { 1,2 }, { -1, 2 }, { -2, 1 } };
 		for (auto pair : positions)
@@ -9,7 +9,7 @@ namespace twixt {
 			if (m_matrixDot[x + pair.first][y + pair.second].getStatus() == Dot::DotStatus::Clear)
 				possible[x + pair.first][y + pair.second].push_back({ x,y });
 		}
-	}
+	}*/
 
 	void Board::showBoard()
 	{
@@ -35,9 +35,9 @@ namespace twixt {
 	Board::Board(uint32_t size)
 	{
 		m_matrixDot.resize(size);
-		for (auto line : m_matrixDot)
+		for (int i=0;i<m_matrixDot.size();i++)
 		{
-			line.resize(size);
+			m_matrixDot[i].resize(size);
 		}
 	}
 	Board::Board(const Board & newBoard)

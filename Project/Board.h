@@ -11,7 +11,7 @@ namespace twixt {
 		Board(const Board& newBoard);
 		~Board();
 		Board& operator=(const Board& newBoard);
-		void addPossibleBridges(std::vector<std::vector<std::vector<std::pair<int, int>>>>& possible, int x, int y, twixt::Dot::DotStatus status);
+		//void addPossibleBridges(std::vector<std::vector<std::vector<std::pair<int, int>>>>& possible, int x, int y, Dot::DotStatus status);
 		void showBoard();
 
 	private:

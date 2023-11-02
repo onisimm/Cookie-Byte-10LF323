@@ -18,9 +18,16 @@ namespace twixt {
 	void Player::setColor(Color color) {
 		m_color = color;
 	}
-	void Player::turn(Board board, int i, int j)
+	void Player::turn(Board& board)
 	{
-		//make matrix status => 
+		std::cout << "Pozitia aleasa este: ";
+		int i, j;
+		std::cin >> i >> j;
+		Dot::DotStatus status;
+		if (m_color == Color::Red)
+			status = Dot::DotStatus::Player1;
+		else status = Dot::DotStatus::Player2;
+		board.makeStatus(i, j, status);
 	}
 	std::istream& operator>>(std::istream& in, Player& player) {
 		in >> player.m_name;

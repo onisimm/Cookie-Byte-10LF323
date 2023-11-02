@@ -30,6 +30,11 @@ namespace twixt {
 
 	}
 
+	void Board::makeStatus(int i, int j, Dot::DotStatus status)
+	{
+		m_matrixDot[i][j].setStatus(status);
+	}
+
 	Board::Board(){}
 
 	Board::Board(uint32_t size)

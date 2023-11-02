@@ -27,7 +27,7 @@ namespace twixt {
 		void setName(std::string);
 		void setColor(Color);
 
-		void turn(Board board, int i, int j);
+		void turn(Board& board);
 
 		friend std::istream& operator>>(std::istream& in, Player& player);
 	private:

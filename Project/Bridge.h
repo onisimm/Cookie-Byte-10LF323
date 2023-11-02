@@ -1,14 +1,10 @@
-export module Bridge;
-
 #include<cstdint>
 
-export module Bridge.cppm;
-
-import<iostream>;
+#include<iostream>;
 
 
 namespace twixt {
-	export class Bridge {
+	class Bridge {
 	private:
 		std::string m_first_dot;
 		std::string m_second_dot;

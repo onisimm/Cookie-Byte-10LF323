@@ -1,14 +1,10 @@
-module;
 
 #include <cstdint>
-
-export module Player.cppm;
-
-import <iostream>;
+#include <iostream>;
 
 
 namespace twixt {
-	export class Player {
+	class Player {
 	private:
 		std::string m_name, m_color;
 	public:

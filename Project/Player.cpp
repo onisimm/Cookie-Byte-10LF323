@@ -1,4 +1,4 @@
-#include "Player.cppm"
+#include "Player.h"
 
 namespace twixt {
 	Player::Player(std::string name, std::string color) :

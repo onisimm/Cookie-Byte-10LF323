@@ -1,4 +1,4 @@
-import Dot.cppm;
+#include"Dot.h"
 #include<iostream>
 using namespace twixt;
 

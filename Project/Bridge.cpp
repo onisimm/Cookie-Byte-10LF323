@@ -1,4 +1,4 @@
-#include"Bridge.cppm"
+#include"Bridge.h"
 
 
 namespace twixt {
@@ -14,6 +14,7 @@ namespace twixt {
 		// Copy
 		m_first_dot = other.m_first_dot;
 		m_second_dot = other.m_second_dot;
+		return *this;
 
 	}
 	

@@ -13,7 +13,7 @@ namespace twixt {
 		Board& operator=(const Board& newBoard);
 		//void addPossibleBridges(std::vector<std::vector<std::vector<std::pair<int, int>>>>& possible, int x, int y, Dot::DotStatus status);
 		void showBoard();
-
+		bool isAvailableDot(Dot dot);
 		void makeStatus(int i, int j, Dot::DotStatus status);
 
 	private:

@@ -30,9 +30,21 @@ namespace twixt {
 
 	}
 
+	bool Board::isAvailableDot(Dot dot)
+	{
+		return dot.getStatus() == Dot::DotStatus::Clear;
+	}
+
 	void Board::makeStatus(int i, int j, Dot::DotStatus status)
 	{
-		m_matrixDot[i][j].setStatus(status);
+		if (isAvailableDot(m_matrixDot[i][j]))
+		{
+			m_matrixDot[i][j].setStatus(status);
+		}
+		else
+		{
+			std::cout << "Nodul este deja ocupat!\n";
+		}
 	}
 
 	Board::Board(){}

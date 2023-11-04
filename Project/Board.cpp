@@ -31,10 +31,35 @@ namespace twixt
 		if (isAvailableDot(m_matrixDot[i][j]))
 		{
 			m_matrixDot[i][j].setStatus(status);
+			buildPossibleBridges(m_matrixDot[i][j]);
 		}
 		else
 		{
 			std::cout << "Nodul este deja ocupat!\n";
+		}
+	}
+
+	void Board::buildPossibleBridges(Dot & dot)
+	{
+		dot.clearPossibleBridges();
+
+		std::vector<std::pair<int, int>> positions{ { -2, -1 }, { -1, -2 }, { 1,-2 }, { 2, -1 }, { 2,1 }, { 1,2 }, { -1, 2 }, { -2, 1 } };
+
+		int x = dot.getCoordX();
+		int y = dot.getCoordY();
+
+		for (auto pair : positions)
+		{
+			int newX = x + pair.first;
+			int newY = y + pair.second;
+
+			if (newX >= 0 && newX < m_matrixDot.size() && newY >= 0 && newY < m_matrixDot[newX].size()) 
+			{
+				if (m_matrixDot[newX][newY].getStatus() == Dot::DotStatus::Clear)
+				{
+					m_matrixDot[newX][newY].addPossibleBridge(&m_matrixDot[x][y]);
+				}
+			}
 		}
 	}
 

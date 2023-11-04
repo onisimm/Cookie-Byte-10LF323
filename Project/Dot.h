@@ -34,6 +34,7 @@ namespace twixt {
 
         void addPossibleBridge(Dot* possibleBridge);
         const std::vector<Dot*>& getPossibleBridges() const;
+        void clearPossibleBridges();
 
     private:
         DotStatus m_status : 2;

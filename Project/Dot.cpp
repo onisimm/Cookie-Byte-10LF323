@@ -64,5 +64,10 @@ namespace twixt {
         return m_possibleBridges;
     }
 
+    void Dot::clearPossibleBridges()
+    {
+        m_possibleBridges.clear();
+    }
+
     
 }

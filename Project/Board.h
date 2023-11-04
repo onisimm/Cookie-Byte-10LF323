@@ -20,6 +20,8 @@ namespace twixt {
 		bool isAvailableDot(Dot dot);
 		void makeStatus(int i, int j, Dot::DotStatus status);
 
+		void buildPossibleBridges(Dot & dot);
+
 	private:
 		std::vector<std::vector<Dot>> m_matrixDot;
 	};

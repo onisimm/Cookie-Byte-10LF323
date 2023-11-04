@@ -1,29 +1,37 @@
-module;
 
 #include <cstdint>
-
-export module Player.cppm;
-
-import <iostream>;
+#include <iostream>
+#include "Board.h"
+#include "Dot.h"
 
 
 namespace twixt {
-	export class Player {
-	private:
-		std::string m_name, m_color;
+	class Player {
 	public:
+		//enum
+		enum class Color : uint8_t {
+			Red,
+			Black
+		};
+
 		//Constructor
-		Player(std::string name, std::string color);
+		Player(std::string name, Color color);
 		//Copy constructor
 		Player(const Player& newPlayer);
 		//Destructor
 		~Player();
+		
 		//Getters
 		std::string getName();
-		std::string getColor();
+		Color getColor();
 		//Setters
 		void setName(std::string);
-		void setColor(std::string);
+		void setColor(Color);
+		void turn(Board& board);
+
 		friend std::istream& operator>>(std::istream& in, Player& player);
+	private:
+		std::string m_name;
+		Color m_color;
 	};
 }

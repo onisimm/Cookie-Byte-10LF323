@@ -1,19 +1,15 @@
-module;
-
+#pragma once
 #include <cstdint>
-
-export module Dot.cppm;
-
-import <vector>;
+#include <vector>
 
 namespace twixt {
-    export class Dot {
+    class Dot {
     public:
         // Constructors
         Dot(); // default
 
         Dot(const Dot& newDot); // copy
-        
+
         // Destructor 
         ~Dot();
 
@@ -36,8 +32,10 @@ namespace twixt {
         // Operators overload
         Dot& operator=(const Dot& newDot); // = overload
 
+
+
     private:
         DotStatus m_status : 2;
         int m_x, m_y; // coordinates
     };
-};
+}

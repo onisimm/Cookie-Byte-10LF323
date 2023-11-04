@@ -1,12 +1,9 @@
-export module Board;
-
-export import Dot.cppm;
-
-import <vector>;
-import <iostream>;
+#include <vector>
+#include <iostream>
+#include "Dot.h"
 
 namespace twixt {
-	export class Board {
+	class Board {
 	public:
 		// Constructor
 		Board();
@@ -14,13 +11,15 @@ namespace twixt {
 		Board(const Board& newBoard);
 		~Board();
 		Board& operator=(const Board& newBoard);
-		void addPossibleBridges(std::vector<std::vector<std::vector<std::pair<int, int>>>>& possible, int x, int y, twixt::Dot::DotStatus status);
+		//void addPossibleBridges(std::vector<std::vector<std::vector<std::pair<int, int>>>>& possible, int x, int y, Dot::DotStatus status);
 		void showBoard();
+		bool isAvailableDot(Dot dot);
+		void makeStatus(int i, int j, Dot::DotStatus status);
 
 	private:
 		std::vector<std::vector<std::vector<std::pair<int, int>>>> m_possibleBridges;
 		std::vector<std::vector<Dot>> m_matrixDot;
-	
+
 	};
 
 }

@@ -15,7 +15,7 @@ int main()
 	bool isPlaying = true;
 	std::string response;
 
-	while (isPlaying) 
+	while (isPlaying)
 	{
 		std::cout << "Este randul lui " << player1.getName() << "\n";
 		player1.turn(board);

@@ -14,22 +14,24 @@ namespace twixt {
 			Black
 		};
 
-		//Constructor
+		// Constructors
 		Player(std::string name, Color color);
-		//Copy constructor
-		Player(const Player& newPlayer);
-		//Destructor
+		Player(const Player& newPlayer); // copy constructor
+
+		// Destructor
 		~Player();
 		
-		//Getters
+		// Getters
 		std::string getName();
 		Color getColor();
-		//Setters
+		// Setters
 		void setName(std::string);
 		void setColor(Color);
+
 		void turn(Board& board);
 
 		friend std::istream& operator>>(std::istream& in, Player& player);
+
 	private:
 		std::string m_name;
 		Color m_color;

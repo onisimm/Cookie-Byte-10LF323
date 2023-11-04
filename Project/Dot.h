@@ -8,7 +8,7 @@ namespace twixt {
         // Constructors
         Dot(); // default
 
-        Dot(const Dot& newDot); // copy
+        Dot(const Dot& newDot); // copy constructor
 
         // Destructor 
         ~Dot();
@@ -32,10 +32,12 @@ namespace twixt {
         // Operators overload
         Dot& operator=(const Dot& newDot); // = overload
 
-
+        void addPossibleBridge(Dot* possibleBridge);
+        const std::vector<Dot*>& getPossibleBridges() const;
 
     private:
         DotStatus m_status : 2;
         int m_x, m_y; // coordinates
+        std::vector<Dot*> m_possibleBridges;
     };
 }

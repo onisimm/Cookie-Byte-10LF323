@@ -11,28 +11,34 @@ namespace twixt {
     Dot::~Dot() {}
 
     // Getters
-    int Dot::getCoordX() {
+    int Dot::getCoordX() 
+    {
         return m_x;
     }
 
-    int Dot::getCoordY() {
+    int Dot::getCoordY() 
+    {
         return m_y;
     }
 
-    twixt::Dot::DotStatus Dot::getStatus() const {
+    twixt::Dot::DotStatus Dot::getStatus() const 
+    {
         return m_status;
     }
 
     // Setters
-    void Dot::setCoordX(int x) {
+    void Dot::setCoordX(int x) 
+    {
         m_x = x;
     }
 
-    void Dot::setCoordY(int y) {
+    void Dot::setCoordY(int y) 
+    {
         m_y = y;
     }
 
-    void Dot::setStatus(DotStatus status) {
+    void Dot::setStatus(DotStatus status) 
+    {
         m_status = status;
     }
 
@@ -45,4 +51,18 @@ namespace twixt {
         return *this;
     }
 
+    void Dot::addPossibleBridge(Dot* possibleBridge)
+    {
+        if (std::find(m_possibleBridges.begin(), m_possibleBridges.end(), possibleBridge) == m_possibleBridges.end())
+        {
+            m_possibleBridges.push_back(possibleBridge);
+        }
+    }
+
+    const std::vector<Dot*>& Dot::getPossibleBridges() const 
+    {
+        return m_possibleBridges;
+    }
+
+    
 }

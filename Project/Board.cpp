@@ -40,27 +40,76 @@ namespace twixt
 		}
 	}
 
+	Board::TypeOfBridge Board::getTypeOfBridge(const Dot& dot1, const Dot& dot2) const
+	{
+		// Get type of bridge we're trying to build (from dot1 to dot2)
+		// by type of bridge, i mean the position of the bridge
+		// diagonally towards horizontal, (uphill or downhill) _- or -_
+		// or diagonally towards vertical (uphill or downhill) /  or \
+
+		int x1 = dot1.getCoordJ();
+		int y1 = dot1.getCoordI();
+		int x2 = dot2.getCoordJ();
+		int y2 = dot2.getCoordI();
+
+		Board::TypeOfBridge bridgeType;
+
+		if (abs(x1 - x2) == 1) // we got a horizontal type of bridge
+		{
+			// uphill horizontal bridge -> _-
+			// when min(y1,y2) belongs to the dot that has the max(x1,x2)
+			if ((y1 < y2 && x1 > x2) || (y1 > y2 && x1 < x2))
+			{
+				bridgeType = Board::TypeOfBridge::HorizontallUphill;
+			}
+			else
+			{
+				bridgeType = Board::TypeOfBridge::HorizontallDownhill;
+			}
+		}
+		else // if (abs(x1 - x2) == 2
+		{
+			if ((y1 < y2 && x1 > x2) || (y1 > y2 && x1 < x2))
+			{
+				bridgeType = Board::TypeOfBridge::VerticalUphill;
+			}
+			else
+			{
+				bridgeType = Board::TypeOfBridge::VerticalDownhill;
+			}
+		}
+
+		return bridgeType;
+	}
+
+	bool Board::checkObstructingBridges(const Dot& dot1, const Dot& dot2, const Board::TypeOfBridge& bridgeType) const
+	{
+		// TO DO
+		return true;
+	}
+
+
 	void Board::buildPossibleBridges(Dot& dot)
 	{
 		std::vector<std::pair<int, int>> positions{ { -2, -1 }, { -1, -2 }, { 1, -2 }, { 2, -1 }, { 2, 1 }, { 1, 2 }, { -1, 2 }, { -2, 1 } };
 
-		int x = dot.getCoordX();
-		int y = dot.getCoordY();
+		int y = dot.getCoordI();
+		int x = dot.getCoordJ();
 
 		std::cout << "Build possible bridges called for " << x << " " << y << std::endl;
 
 		for (auto pair : positions)
 		{
-			int newX = x + pair.first;
-			int newY = y + pair.second;
+			int newY = y + pair.first;
+			int newX = x + pair.second;
 
-			if (newX >= 0 && newX < m_matrixDot.size() && newY >= 0 && newY < m_matrixDot[newX].size()) // check boundaries
+			if (newY >= 0 && newY < m_matrixDot.size() && newX >= 0 && newX < m_matrixDot[newY].size()) // check boundaries
 			{
-				if (m_matrixDot[newX][newY].getStatus() == Dot::DotStatus::Clear &&
-					!m_matrixDot[newX][y].checkExistingBridge(&m_matrixDot[x][newY])) // check if the possible path for the bridge is not blocked on the other diagonal
+				if (m_matrixDot[newY][newX].getStatus() == Dot::DotStatus::Clear &&
+					checkObstructingBridges(dot, m_matrixDot[newY][newX], getTypeOfBridge(dot, m_matrixDot[newY][newX]))) // check if the possible path for the bridge is not blocked by a bridge
 				{
-					std::cout << "Possible bridge added between " << x << " " << y << "    and  " << newX << " " << newY << std::endl;
-					m_matrixDot[newX][newY].addPossibleBridge(&m_matrixDot[x][y]);
+					std::cout << "Possible bridge added between " << y << " " << x << "    and  " << newY << " " << newX << std::endl;
+					m_matrixDot[newY][newX].addPossibleBridge(&m_matrixDot[y][x]);
 				}
 			}
 		}
@@ -80,8 +129,8 @@ namespace twixt
 		{
 			for (int j = 0; j < size; ++j)
 			{
-				m_matrixDot[i][j].setCoordX(i);
-				m_matrixDot[i][j].setCoordY(j);
+				m_matrixDot[i][j].setCoordI(i);
+				m_matrixDot[i][j].setCoordJ(j);
 			}
 		}
 	}

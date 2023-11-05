@@ -4,21 +4,21 @@
 namespace twixt {
 
     // Constructors
-    Dot::Dot() : m_status(DotStatus::Clear), m_x(0), m_y(0) {}
-    Dot::Dot(const Dot& newDot) : m_status(newDot.m_status), m_x(newDot.m_x), m_y(newDot.m_y) {}
+    Dot::Dot() : m_status(DotStatus::Clear), m_i(0), m_j(0) {}
+    Dot::Dot(const Dot& newDot) : m_status(newDot.m_status), m_i(newDot.m_i), m_j(newDot.m_j) {}
 
     // Destructor
     Dot::~Dot() {}
 
     // Getters
-    int Dot::getCoordX() const
+    int Dot::getCoordI() const
     {
-        return m_x;
+        return m_i;
     }
 
-    int Dot::getCoordY() const
+    int Dot::getCoordJ() const
     {
-        return m_y;
+        return m_j;
     }
 
     twixt::Dot::DotStatus Dot::getStatus() const 
@@ -27,14 +27,14 @@ namespace twixt {
     }
 
     // Setters
-    void Dot::setCoordX(int x) 
+    void Dot::setCoordI(int x) 
     {
-        m_x = x;
+        m_i = x;
     }
 
-    void Dot::setCoordY(int y) 
+    void Dot::setCoordJ(int y) 
     {
-        m_y = y;
+        m_j = y;
     }
 
     void Dot::setStatus(DotStatus status) 
@@ -46,8 +46,8 @@ namespace twixt {
     Dot& Dot::operator=(const Dot& newDot)
     {
         this->m_status = newDot.m_status;
-        this->m_x = newDot.m_x;
-        this->m_y = newDot.m_y;
+        this->m_i = newDot.m_i;
+        this->m_j = newDot.m_j;
         return *this;
     }
 
@@ -73,8 +73,8 @@ namespace twixt {
     {
         m_existingBridges.push_back(connectionDot);
 
-        std::cout << "BUILT BRIDGE between " << this->getCoordX() << " " << this->getCoordY() << 
-            " AND " << connectionDot->getCoordX() << " " << connectionDot->getCoordY() << std::endl;
+        std::cout << "BUILT BRIDGE between " << this->getCoordI() << " " << this->getCoordJ() << 
+            " AND " << connectionDot->getCoordI() << " " << connectionDot->getCoordJ() << std::endl;
     }
 
     const std::vector<Dot*>& Dot::getExistingBridges() const

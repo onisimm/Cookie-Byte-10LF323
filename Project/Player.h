@@ -22,13 +22,14 @@ namespace twixt {
 		~Player();
 		
 		// Getters
-		std::string getName();
-		Color getColor();
+		std::string getName() const;
+		Color getColor() const;
+
 		// Setters
 		void setName(std::string);
 		void setColor(Color);
 
-		void turn(Board& board);
+		void turn(Board& board) const;
 
 		friend std::istream& operator>>(std::istream& in, Player& player);
 

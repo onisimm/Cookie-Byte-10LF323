@@ -9,12 +9,12 @@ namespace twixt {
 
 	Player::~Player() {}
 
-	std::string Player::getName() 
+	std::string Player::getName() const
 	{
 		return m_name;
 	}
 
-	Player::Color Player::getColor() 
+	Player::Color Player::getColor() const
 	{
 		return m_color;
 	}
@@ -29,7 +29,7 @@ namespace twixt {
 		m_color = color;
 	}
 
-	void Player::turn(Board& board)
+	void Player::turn(Board& board) const
 	{
 		std::cout << "Pozitia aleasa este: ";
 

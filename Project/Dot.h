@@ -20,8 +20,8 @@ namespace twixt {
         };
 
         // Getters
-        int getCoordX();
-        int getCoordY();
+        int getCoordX() const;
+        int getCoordY() const;
         DotStatus getStatus() const;
         const std::vector<Dot*>& getPossibleBridges() const;
         const std::vector<Dot*>& getExistingBridges() const;

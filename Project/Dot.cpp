@@ -11,12 +11,12 @@ namespace twixt {
     Dot::~Dot() {}
 
     // Getters
-    int Dot::getCoordX() 
+    int Dot::getCoordX() const
     {
         return m_x;
     }
 
-    int Dot::getCoordY() 
+    int Dot::getCoordY() const
     {
         return m_y;
     }

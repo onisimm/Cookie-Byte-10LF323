@@ -90,10 +90,35 @@ namespace twixt
 		return *this;
 	}
 
-	bool doIntersect(const Dot& p1, const Dot& p2, const Dot& q1, const Dot& q2)
-	{
-		// TODO
-		return true;
+	int orientation(const Dot& p, const Dot& q, const Dot& r) {
+		int val = (q.getCoordJ() - p.getCoordJ()) * (r.getCoordI() - q.getCoordI()) -
+			(q.getCoordI() - p.getCoordI()) * (r.getCoordJ() - q.getCoordJ());
+
+		if (val == 0) return 0;
+		return (val > 0) ? 1 : 2;
+	}
+
+	bool onSegment(const Dot& p, const Dot& q, const Dot& r) {
+		if (q.getCoordI() <= std::max(p.getCoordI(), r.getCoordI()) && q.getCoordI() >= std::min(p.getCoordI(), r.getCoordI()) &&
+			q.getCoordJ() <= std::max(p.getCoordJ(), r.getCoordJ()) && q.getCoordJ() >= std::min(p.getCoordJ(), r.getCoordJ()))
+			return true;
+		return false;
+	}
+
+	bool doIntersect(const Dot& p1, const Dot& p2, const Dot& q1, const Dot& q2) {
+		int o1 = orientation(p1, p2, q1);
+		int o2 = orientation(p1, p2, q2);
+		int o3 = orientation(q1, q2, p1);
+		int o4 = orientation(q1, q2, p2);
+
+		if (o1 != o2 && o3 != o4) return true;
+
+		if (o1 == 0 && onSegment(p1, q1, p2)) return true;
+		if (o2 == 0 && onSegment(p1, q2, p2)) return true;
+		if (o3 == 0 && onSegment(q1, p1, q2)) return true;
+		if (o4 == 0 && onSegment(q1, p2, q2)) return true;
+
+		return false;
 	}
 
 	bool Board::checkObstructingBridges(const Dot& dot1, const Dot& dot2) const

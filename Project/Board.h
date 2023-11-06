@@ -23,8 +23,9 @@ namespace twixt {
 		Board& operator=(const Board& newBoard);
 
 		void showBoard() const;
-		bool isAvailableDot(const Dot& dot) const;
-		void makeStatus(int i, int j, Dot::DotStatus status);
+		void changeDotStatus(int i, int j, Dot::DotStatus status);
+
+		friend bool doIntersect(const Dot& p1, const Dot& p2, const Dot& q1, const Dot& q2);
 
 		bool checkObstructingBridges(const Dot& dot1, const Dot& dot2) const;
 		void buildPossibleBridges(Dot& dot);

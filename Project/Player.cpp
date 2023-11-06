@@ -43,7 +43,7 @@ namespace twixt {
 		else 
 			status = Dot::DotStatus::Player2;
 
-		board.makeStatus(i, j, status);
+		board.changeDotStatus(i, j, status);
 	}
 
 	std::istream& operator>>(std::istream& in, Player& player) 

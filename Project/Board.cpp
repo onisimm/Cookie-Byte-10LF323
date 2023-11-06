@@ -10,15 +10,17 @@ namespace twixt
 			{
 				if (m_matrixDot[i][j].getStatus() == Dot::DotStatus::Clear)
 					std::cout << "_";
+
 				if (m_matrixDot[i][j].getStatus() == Dot::DotStatus::Player1)
 					std::cout << "R";
+
 				if (m_matrixDot[i][j].getStatus() == Dot::DotStatus::Player2)
 					std::cout << "B";
+
 				std::cout << " ";
 			}
 			std::cout << "\n";
 		}
-
 	}
 
 	void Board::changeDotStatus(int i, int j, Dot::DotStatus status)
@@ -26,8 +28,11 @@ namespace twixt
 		if (m_matrixDot[i][j].getStatus() == Dot::DotStatus::Clear)
 		{
 			m_matrixDot[i][j].setStatus(status);
-			buildPossibleBridges(m_matrixDot[i][j]); // building possible bridges in the dots around
-			possibleToExistingBridges(m_matrixDot[i][j]);
+			buildPossibleBridges(m_matrixDot[i][j]); // adding this dot as possible bridge in dots around
+			if (!m_matrixDot[i][j].getPossibleBridges().empty())
+			{
+				possibleToExistingBridges(m_matrixDot[i][j]); // building current dot's possible bridges
+			}
 		}
 		else
 		{
@@ -103,6 +108,22 @@ namespace twixt
 		return *this;
 	}
 
+	void Board::possibleToExistingBridges(Dot& dot)
+	{
+		for (auto dotForBridge : dot.getPossibleBridges())
+		{
+			if (dot.getStatus() == dotForBridge->getStatus() && dot.getStatus() != Dot::DotStatus::Clear)
+			{
+				if (checkObstructingBridges(dot, *dotForBridge))
+				{
+					dot.buildBridge(dotForBridge);
+				}
+			}
+		}
+
+		dot.clearPossibleBridges();
+	}
+
 	int orientation(const Dot& p, const Dot& q, const Dot& r) {
 		int val = (q.getCoordJ() - p.getCoordJ()) * (r.getCoordI() - q.getCoordI()) -
 			(q.getCoordI() - p.getCoordI()) * (r.getCoordJ() - q.getCoordJ());
@@ -142,9 +163,9 @@ namespace twixt
 		int y2 = dot2.getCoordI();
 
 		// Check if any existing bridge obstructs the way from dot1 to dot2
-		for (int i = std::min(y1, y2); i < std::max(y1, y2); ++i)
+		for (int i = std::min(y1, y2); i <= std::max(y1, y2); ++i)
 		{
-			for (int j = std::min(x1, x2); j < std::max(x1, x2); ++j)
+			for (int j = std::min(x1, x2); j <= std::max(x1, x2); ++j)
 			{
 				if (m_matrixDot[i][j] == dot1 || m_matrixDot[i][j] == dot2)
 				{
@@ -155,6 +176,7 @@ namespace twixt
 				{
 					if (doIntersect(dot1, dot2, m_matrixDot[i][j], *bridgeDot))
 					{
+						// std::cout << "Couldn't build a bridge between (" << dot1 << " and " << dot2 << " because of the bridge between " << m_matrixDot[i][j] << " and " << *bridgeDot << "\n";
 						return false;
 					}
 				}
@@ -162,6 +184,7 @@ namespace twixt
 		}
 		return true;
 	}
+
 
 
 	void Board::buildPossibleBridges(Dot& dot)
@@ -178,8 +201,7 @@ namespace twixt
 
 			if (newY >= 0 && newY < m_matrixDot.size() && newX >= 0 && newX < m_matrixDot[newY].size()) // check boundaries
 			{
-				if (m_matrixDot[newY][newX].getStatus() == Dot::DotStatus::Clear &&
-					checkObstructingBridges(dot, m_matrixDot[newY][newX])) // check if the possible path for the bridge is not blocked by a bridge
+				if (m_matrixDot[newY][newX].getStatus() == Dot::DotStatus::Clear)
 				{
 					m_matrixDot[newY][newX].addPossibleBridge(&m_matrixDot[y][x]);
 				}

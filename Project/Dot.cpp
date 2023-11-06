@@ -1,3 +1,4 @@
+//dot.cpp
 #include "Dot.h"
 #include <iostream>
 
@@ -21,23 +22,23 @@ namespace twixt {
         return m_j;
     }
 
-    twixt::Dot::DotStatus Dot::getStatus() const 
+    twixt::Dot::DotStatus Dot::getStatus() const
     {
         return m_status;
     }
 
     // Setters
-    void Dot::setCoordI(int x) 
+    void Dot::setCoordI(int x)
     {
         m_i = x;
     }
 
-    void Dot::setCoordJ(int y) 
+    void Dot::setCoordJ(int y)
     {
         m_j = y;
     }
 
-    void Dot::setStatus(DotStatus status) 
+    void Dot::setStatus(DotStatus status)
     {
         m_status = status;
     }
@@ -53,7 +54,7 @@ namespace twixt {
 
     bool Dot::operator==(const Dot& otherDot) const
     {
-        return false;
+        return this->m_i == otherDot.m_i && this->m_j == otherDot.m_j;
     }
 
     void Dot::addPossibleBridge(Dot* possibleBridgeDot)
@@ -64,7 +65,7 @@ namespace twixt {
         }
     }
 
-    const std::vector<Dot*>& Dot::getPossibleBridges() const 
+    const std::vector<Dot*>& Dot::getPossibleBridges() const
     {
         return m_possibleBridges;
     }
@@ -78,7 +79,7 @@ namespace twixt {
     {
         m_existingBridges.push_back(connectionDot);
 
-        std::cout << "BUILT BRIDGE between " << this->getCoordI() << " " << this->getCoordJ() << 
+        std::cout << "BUILT BRIDGE between " << this->getCoordI() << " " << this->getCoordJ() <<
             " AND " << connectionDot->getCoordI() << " " << connectionDot->getCoordJ() << std::endl;
     }
 
@@ -92,18 +93,34 @@ namespace twixt {
         return std::find(m_existingBridges.begin(), m_existingBridges.end(), dotToCheck) != m_existingBridges.end();
     }
 
-    void Dot::possibleToExistingBridges()
-    {
-        for (auto dotForBridge : getPossibleBridges())
-        {
-            buildBridge(dotForBridge);
-        }
-
-        clearPossibleBridges();
-    }
-
     void Dot::clearExistingBridges()
     {
         m_existingBridges.clear();
     }
+
+    std::ostream& operator<<(std::ostream& os, const twixt::Dot& dot) {
+        // Output the relevant information about the Dot object
+        os << "Dot Position: (" << dot.getCoordI() << ", " << dot.getCoordJ() << ") "
+            << "Status: ";
+
+        /*switch (dot.getStatus()) {
+        case twixt::Dot::DotStatus::Player1:
+            os << "Player1";
+            break;
+        case twixt::Dot::DotStatus::Player2:
+            os << "Player2";
+            break;
+        case twixt::Dot::DotStatus::Clear:
+            os << "Clear";
+            break;
+        }*/
+
+        //os << ", Possible Bridges: " << dot.getPossibleBridges().size()
+        //    << ", Existing Bridges: " << dot.getExistingBridges().size();
+
+        os << std::endl;
+
+        return os;
+    }
+
 }

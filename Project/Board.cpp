@@ -40,6 +40,19 @@ namespace twixt
 		}
 	}
 
+	void Board::possibleToExistingBridges(Dot& dot)
+	{
+		for (auto dotForBridge : dot.getPossibleBridges())
+		{
+			if (checkObstructingBridges(dot, *dotForBridge))
+			{
+				dot.buildBridge(dotForBridge);
+			}
+		}
+
+		dot.clearPossibleBridges();
+	}
+
 	Board::Board() {}
 
 	Board::Board(uint32_t size)

@@ -51,6 +51,11 @@ namespace twixt {
         return *this;
     }
 
+    bool Dot::operator==(const Dot& otherDot) const
+    {
+        return false;
+    }
+
     void Dot::addPossibleBridge(Dot* possibleBridgeDot)
     {
         if (std::find(m_possibleBridges.begin(), m_possibleBridges.end(), possibleBridgeDot) == m_possibleBridges.end())
@@ -101,6 +106,4 @@ namespace twixt {
     {
         m_existingBridges.clear();
     }
-
-    
 }

@@ -34,6 +34,7 @@ namespace twixt {
 
         // Operators overload
         Dot& operator=(const Dot& newDot); // = overload
+        bool operator==(const Dot& otherDot) const;
 
         void addPossibleBridge(Dot* possibleBridgeDot);
         void clearPossibleBridges();

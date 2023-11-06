@@ -27,12 +27,25 @@ namespace twixt
 		{
 			m_matrixDot[i][j].setStatus(status);
 			buildPossibleBridges(m_matrixDot[i][j]); // building possible bridges in the dots around
-			m_matrixDot[i][j].possibleToExistingBridges();
+			possibleToExistingBridges(m_matrixDot[i][j]);
 		}
 		else
 		{
 			std::cout << "Nodul este deja ocupat!\n";
 		}
+	}
+
+	void Board::possibleToExistingBridges(Dot& dot)
+	{
+		for (auto dotForBridge : dot.getPossibleBridges())
+		{
+			if (checkObstructingBridges(dot, *dotForBridge))
+			{
+				dot.buildBridge(dotForBridge);
+			}
+		}
+
+		dot.clearPossibleBridges();
 	}
 
 	Board::Board() {}

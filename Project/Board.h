@@ -25,6 +25,8 @@ namespace twixt {
 		void showBoard() const;
 		void changeDotStatus(int i, int j, Dot::DotStatus status);
 
+		void possibleToExistingBridges(Dot& dot);
+
 		friend int orientation(const Dot& p, const Dot& q, const Dot& r);
 		friend bool onSegment(const Dot& p, const Dot& q, const Dot& r);
 		friend bool doIntersect(const Dot& p1, const Dot& p2, const Dot& q1, const Dot& q2);

@@ -92,16 +92,6 @@ namespace twixt {
         return std::find(m_existingBridges.begin(), m_existingBridges.end(), dotToCheck) != m_existingBridges.end();
     }
 
-    void Dot::possibleToExistingBridges()
-    {
-        for (auto dotForBridge : getPossibleBridges())
-        {
-            buildBridge(dotForBridge);
-        }
-
-        clearPossibleBridges();
-    }
-
     void Dot::clearExistingBridges()
     {
         m_existingBridges.clear();

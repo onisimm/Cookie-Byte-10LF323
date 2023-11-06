@@ -43,8 +43,6 @@ namespace twixt {
         void clearExistingBridges();
         const bool& checkExistingBridge(Dot* dotToCheck) const; // check if there's a bridge between this dot and dotToCheck
 
-        void possibleToExistingBridges();
-
     private:
         DotStatus m_status : 2;
 

@@ -213,6 +213,7 @@ namespace twixt
 		{
 			checkDot = path[path.size() - 1].first;
 			position = path[path.size() - 1].second;
+			//de verificat bug pt existing bridges.
 			if (position < checkDot.getExistingBridges().size())
 			{
 				path.push_back({ *(checkDot.getExistingBridges())[position], -1 });
@@ -226,7 +227,7 @@ namespace twixt
 			{
 				path.pop_back();
 			}
-			if(!path.empty())
+			if (!path.empty())
 				path[path.size() - 1].second++;
 
 		}

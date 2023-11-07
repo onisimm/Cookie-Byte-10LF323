@@ -95,6 +95,14 @@ namespace twixt {
         return std::find(m_existingBridges.begin(), m_existingBridges.end(), dotToCheck) != m_existingBridges.end();
     }
 
+    bool Dot::isDotInPath(std::vector<std::pair<Dot, int>> path) const
+    {
+        for (auto i : path)
+            if (i.first == *this)
+                return true;
+        return false;
+    }
+
     void Dot::clearExistingBridges()
     {
         m_existingBridges.clear();

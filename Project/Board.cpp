@@ -201,7 +201,7 @@ namespace twixt
 		//parcurgere matrice pentru a gasi dot-ul
 		//Dot firstDot = findDotInMargins();
 		Dot firstDot = m_matrixDot[0][0];
-		Dot checkDot;
+		Dot checkDot, newDot;
 		int position;
 
 		//Creating path vector: pair of dot in path and position of existing bridges for the dot.
@@ -213,16 +213,18 @@ namespace twixt
 		{
 			checkDot = path[path.size() - 1].first;
 			position = path[path.size() - 1].second;
-			//de verificat bug pt existing bridges.
 			//de verificat sa nu mai existe noul nod deja in path
-			std::cout << "checkDot are size " << checkDot.getExistingBridges().size() << "\n";
 			if (position < checkDot.getExistingBridges().size())
 			{
-				path.push_back({ *(checkDot.getExistingBridges())[position], -1 });
-				checkDot = path[path.size() - 1].first;
-				if (checkDot == m_matrixDot[2][1])
+				newDot = *(checkDot.getExistingBridges())[position];
+				if (!newDot.isDotInPath(path))
 				{
-					isFinalDot = true;
+					path.push_back({ newDot, -1 });
+					checkDot = path[path.size() - 1].first;
+					if (checkDot == m_matrixDot[4][2])
+					{
+						isFinalDot = true;
+					}
 				}
 			}
 			else

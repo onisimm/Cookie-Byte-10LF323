@@ -195,4 +195,104 @@ namespace twixt
 			}
 		}
 	}
+
+	bool Board::checkPath(twixt::Dot::DotStatus status)
+	{
+		std::vector<Dot> margins = FindDotInMargins(status);
+		if (margins.empty()) return false;
+		int index = 0;
+		Dot firstDot = margins[index];
+		Dot checkDot, newDot;
+		int position;
+
+		//Creating path vector: pair of dot in path and position of existing bridges for the dot.
+		std::vector<std::pair<Dot, int>> path;
+
+		bool isFinalDot = false;
+		path.push_back({ firstDot, 0 });
+		while (!isFinalDot && !path.empty())
+		{
+			checkDot = path[path.size() - 1].first;
+			position = path[path.size() - 1].second;
+			if (position < checkDot.getExistingBridges().size())
+			{
+				newDot = *(checkDot.getExistingBridges())[position];
+				if (!newDot.isDotInPath(path))
+				{
+					path.push_back({ newDot, -1 });
+					checkDot = path[path.size() - 1].first;
+					if (checkFinalMargin(checkDot, status))
+					{
+						isFinalDot = true;
+					}
+				}
+			}
+			else
+			{
+				path.pop_back();
+			}
+			if (!path.empty())
+				path[path.size() - 1].second++;
+			else
+			{
+				index++;
+				if (index < margins.size())
+				{
+					path.push_back({ margins[index], 0 });
+				}
+			}
+
+		}
+		return isFinalDot;
+	}
+
+	std::vector<Dot> Board::FindDotInMargins(Dot::DotStatus status)
+	{
+		std::vector<Dot> margin;
+		if (status == Dot::DotStatus::Player1)
+		{
+			for (int i = 0; i < m_matrixDot.size(); i++)
+			{
+				if (m_matrixDot[0][i].getStatus() == Dot::DotStatus::Player1)
+				{
+					margin.push_back(m_matrixDot[0][i]);
+				}
+			}
+		}
+		else
+		{
+			for (int i = 0; i < m_matrixDot.size(); i++)
+			{
+				if (m_matrixDot[i][0].getStatus() == Dot::DotStatus::Player2)
+				{
+					margin.push_back(m_matrixDot[i][0]);
+				}
+			}
+		}
+		return margin;
+	}
+	bool Board::checkFinalMargin(Dot dotToCheck, Dot::DotStatus status)
+	{
+		if (status == Dot::DotStatus::Player1)
+		{
+			for (int i = 0; i < m_matrixDot.size(); i++)
+			{
+				if (dotToCheck == m_matrixDot[m_matrixDot.size() - 1][i])
+				{
+					return true;
+				}
+			}
+		}
+		else
+		{
+			for (int i = 0; i < m_matrixDot.size(); i++)
+			{
+				if (dotToCheck == m_matrixDot[i][m_matrixDot.size() - 1])
+				{
+					return true;
+				}
+			}
+		}
+		return false;
+	}
 }

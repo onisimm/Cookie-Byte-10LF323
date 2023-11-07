@@ -36,7 +36,7 @@ namespace twixt {
 
 		bool checkPath() const;
 		std::vector<Dot> FindDotInMargins(Dot::DotStatus status);
-		bool checkFinalMargin(Dot dotToCheck);
+		bool checkFinalMargin(Dot dotToCheck, Dot::DotStatus status);
 
 	private:
 		std::vector<std::vector<Dot>> m_matrixDot;

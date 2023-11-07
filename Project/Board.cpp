@@ -257,8 +257,28 @@ namespace twixt
 		}
 		return margin;
 	}
-	bool Board::checkFinalMargin(Dot dotToCheck)
+	bool Board::checkFinalMargin(Dot dotToCheck, Dot::DotStatus status)
 	{
-		return true;
+		if (status == Dot::DotStatus::Player1)
+		{
+			for (int i = 0; i < m_matrixDot.size(); i++)
+			{
+				if (dotToCheck == m_matrixDot[m_matrixDot.size() - 1][i])
+				{
+					return true;
+				}
+			}
+		}
+		else
+		{
+			for (int i = 0; i < m_matrixDot.size(); i++)
+			{
+				if (dotToCheck == m_matrixDot[i][m_matrixDot.size() - 1])
+				{
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 }

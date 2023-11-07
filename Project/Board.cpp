@@ -214,6 +214,8 @@ namespace twixt
 			checkDot = path[path.size() - 1].first;
 			position = path[path.size() - 1].second;
 			//de verificat bug pt existing bridges.
+			//de verificat sa nu mai existe noul nod deja in path
+			std::cout << "checkDot are size " << checkDot.getExistingBridges().size() << "\n";
 			if (position < checkDot.getExistingBridges().size())
 			{
 				path.push_back({ *(checkDot.getExistingBridges())[position], -1 });

@@ -35,6 +35,8 @@ namespace twixt {
 		void buildPossibleBridges(Dot& dot);
 
 		bool checkPath() const;
+		Dot FindDotInMargins();
+		bool checkFinalMargin(Dot dotToCheck);
 
 	private:
 		std::vector<std::vector<Dot>> m_matrixDot;

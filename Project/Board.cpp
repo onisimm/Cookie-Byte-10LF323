@@ -235,4 +235,13 @@ namespace twixt
 		}
 		return isFinalDot;
 	}
+
+	Dot Board::FindDotInMargins()
+	{
+		return Dot();
+	}
+	bool Board::checkFinalMargin(Dot dotToCheck)
+	{
+		return true;
+	}
 }

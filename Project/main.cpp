@@ -5,7 +5,7 @@ using namespace twixt;
 
 int main()
 {
-	Board board(24);
+	Board board(3);
 	Player player1("nume1", Player::Color::Red);
 	Player player2("nume2", Player::Color::Black);
 
@@ -21,23 +21,21 @@ int main()
 		player1.turn(board);
 		board.showBoard();
 		std::cout << "\n";
-		std::cout << "Doriti sa continuati jocul? ";
-		std::cin >> response;
-
-		if (response == "Nu")
-		{
-			isPlaying = false;
-		}
-
+	
 		std::cout << "Este randul lui " << player2.getName() << "\n";
 		player2.turn(board);
 		board.showBoard();
 		std::cout << "\n";
+
 		std::cout << "Doriti sa continuati jocul? ";
 		std::cin >> response;
 
-		if (response == "Nu") 
+		if (response == "Nu" || response == "nu")
 		{
+			isPlaying = false;
+		}
+		if (board.checkPath()) {
+			std::cout << "AM castigat!";
 			isPlaying = false;
 		}
 	}

@@ -195,4 +195,41 @@ namespace twixt
 			}
 		}
 	}
+
+	bool Board::checkPath() const
+	{
+		//parcurgere matrice pentru a gasi dot-ul
+		//Dot firstDot = findDotInMargins();
+		Dot firstDot = m_matrixDot[0][0];
+		Dot checkDot;
+		int position;
+
+		//Creating path vector: pair of dot in path and position of existing bridges for the dot.
+		std::vector<std::pair<Dot, int>> path;
+
+		bool isFinalDot = false;
+		path.push_back({ firstDot, 0 });
+		while (!isFinalDot && !path.empty())
+		{
+			checkDot = path[path.size() - 1].first;
+			position = path[path.size() - 1].second;
+			if (position < checkDot.getExistingBridges().size())
+			{
+				path.push_back({ *(checkDot.getExistingBridges())[position], -1 });
+				checkDot = path[path.size() - 1].first;
+				if (checkDot == m_matrixDot[2][1])
+				{
+					isFinalDot = true;
+				}
+			}
+			else
+			{
+				path.pop_back();
+			}
+			if(!path.empty())
+				path[path.size() - 1].second++;
+
+		}
+		return isFinalDot;
+	}
 }

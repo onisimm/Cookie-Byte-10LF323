@@ -196,11 +196,11 @@ namespace twixt
 		}
 	}
 
-	bool Board::checkPath() const
+	bool Board::checkPath(twixt::Dot::DotStatus status)
 	{
-		//parcurgere matrice pentru a gasi dot-ul
-		//Dot firstDot = findDotInMargins();
-		Dot firstDot = m_matrixDot[0][0];
+		std::vector<Dot> margins = FindDotInMargins(status);
+		int index = 0;
+		Dot firstDot = margins[index];
 		Dot checkDot, newDot;
 		int position;
 
@@ -213,7 +213,6 @@ namespace twixt
 		{
 			checkDot = path[path.size() - 1].first;
 			position = path[path.size() - 1].second;
-			//de verificat sa nu mai existe noul nod deja in path
 			if (position < checkDot.getExistingBridges().size())
 			{
 				newDot = *(checkDot.getExistingBridges())[position];
@@ -221,7 +220,7 @@ namespace twixt
 				{
 					path.push_back({ newDot, -1 });
 					checkDot = path[path.size() - 1].first;
-					if (checkDot == m_matrixDot[4][2])
+					if (checkFinalMargin(checkDot, status))
 					{
 						isFinalDot = true;
 					}
@@ -233,6 +232,11 @@ namespace twixt
 			}
 			if (!path.empty())
 				path[path.size() - 1].second++;
+			else
+			{
+				index++;
+				path.push_back({ margins[index], 0 });
+			}
 
 		}
 		return isFinalDot;

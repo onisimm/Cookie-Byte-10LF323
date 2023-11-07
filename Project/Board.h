@@ -35,7 +35,7 @@ namespace twixt {
 		void buildPossibleBridges(Dot& dot);
 
 		bool checkPath() const;
-		Dot FindDotInMargins();
+		std::vector<Dot> FindDotInMargins(Dot::DotStatus status);
 		bool checkFinalMargin(Dot dotToCheck);
 
 	private:

@@ -238,9 +238,24 @@ namespace twixt
 		return isFinalDot;
 	}
 
-	Dot Board::FindDotInMargins()
+	std::vector<Dot> Board::FindDotInMargins(Dot::DotStatus status)
 	{
-		return Dot();
+		std::vector<Dot> margin;
+		if (status == Dot::DotStatus::Player1)
+		{
+			for (int i = 0; i < m_matrixDot.size(); i++)
+			{
+				margin.push_back(m_matrixDot[0][i]);
+			}
+		}
+		else
+		{
+			for (int i = 0; i < m_matrixDot.size(); i++)
+			{
+				margin.push_back(m_matrixDot[i][0]);
+			}
+		}
+		return margin;
 	}
 	bool Board::checkFinalMargin(Dot dotToCheck)
 	{

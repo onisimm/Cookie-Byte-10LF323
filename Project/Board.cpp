@@ -199,6 +199,7 @@ namespace twixt
 	bool Board::checkPath(twixt::Dot::DotStatus status)
 	{
 		std::vector<Dot> margins = FindDotInMargins(status);
+		if (margins.empty()) return false;
 		int index = 0;
 		Dot firstDot = margins[index];
 		Dot checkDot, newDot;
@@ -235,7 +236,10 @@ namespace twixt
 			else
 			{
 				index++;
-				path.push_back({ margins[index], 0 });
+				if (index < margins.size())
+				{
+					path.push_back({ margins[index], 0 });
+				}
 			}
 
 		}
@@ -249,14 +253,20 @@ namespace twixt
 		{
 			for (int i = 0; i < m_matrixDot.size(); i++)
 			{
-				margin.push_back(m_matrixDot[0][i]);
+				if (m_matrixDot[0][i].getStatus() == Dot::DotStatus::Player1)
+				{
+					margin.push_back(m_matrixDot[0][i]);
+				}
 			}
 		}
 		else
 		{
 			for (int i = 0; i < m_matrixDot.size(); i++)
 			{
-				margin.push_back(m_matrixDot[i][0]);
+				if (m_matrixDot[i][0].getStatus() == Dot::DotStatus::Player2)
+				{
+					margin.push_back(m_matrixDot[i][0]);
+				}
 			}
 		}
 		return margin;

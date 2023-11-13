@@ -8,6 +8,28 @@ void ReadPlayers(Player& player1, Player& player2)
 	std::cin >> player1 >> player2;
 }
 
+void GameTurns(Player player, bool& isPlaying, Board& board)
+{
+	std::cout << "It's " << player.getName() << "'s turn!\n";
+	player.turn(board);
+	board.showBoard();
+	std::cout << "\n";
+	Dot::DotStatus status;
+	if (player.getColor() == Player::Color::Red)
+	{
+		status = Dot::DotStatus::Player1;
+	}
+	else
+	{
+		status = Dot::DotStatus::Player2;
+	}
+	if (board.checkPath(status))
+	{
+		std::cout << "You won!";
+		isPlaying = false;
+	}
+}
+
 int main()
 {
 	Board board(24);
@@ -22,35 +44,8 @@ int main()
 
 	while (isPlaying)
 	{
-		std::cout << "It's " << player1.getName() << "'s turn!\n";
-		player1.turn(board);
-		board.showBoard();
-		std::cout << "\n";
-
-		if (board.checkPath(Dot::DotStatus::Player1)) {
-			if (player1.getColor() == Player::Color::Red)
-			{
-				std::cout << "Red won!";
-			}
-			else
-			{
-				std::cout << "Black won!";
-			}
-			isPlaying = false;
-			break;
-		}
-	
-		std::cout << "It's " << player2.getName() << "'s turn!\n";
-		player2.turn(board);
-		board.showBoard();
-		std::cout << "\n";
-
-		if (board.checkPath(Dot::DotStatus::Player2)) {
-			std::cout << "Black won!";
-			isPlaying = false;
-			break;
-		}
-
+		GameTurns(player1, isPlaying, board);
+		GameTurns(player2, isPlaying, board);
 		std::cout << "Do you want to continue the game? ";
 		std::cin >> response;
 		if (response == "No" || response == "no")

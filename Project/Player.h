@@ -15,6 +15,7 @@ namespace twixt {
 		};
 
 		// Constructors
+		Player() {};
 		Player(std::string name, Color color);
 		Player(const Player& newPlayer); // copy constructor
 

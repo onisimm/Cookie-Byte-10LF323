@@ -60,10 +60,7 @@ namespace twixt
 		}
 	}
 
-	Board::Board(const Board& newBoard)
-	{
-		m_matrixDot = newBoard.m_matrixDot;
-	}
+	Board::Board(const Board& newBoard) : m_matrixDot{ newBoard.m_matrixDot } {}
 
 	Board::~Board() {}
 
@@ -75,6 +72,12 @@ namespace twixt
 		}
 
 		throw std::out_of_range("Index out of bounds while trying to get Dot.");
+	}
+
+	uint32_t Board::getSize() const
+	{
+		//Getter for matrixSize;
+		return m_matrixDot.size();
 	}
 
 	void Board::setDot(int i, int j, const Dot& dot)
@@ -183,8 +186,11 @@ namespace twixt
 
 		for (auto pair : positions)
 		{
-			int newY = y + pair.first;
-			int newX = x + pair.second;
+			auto [newY, newX] = pair;
+			newY += y;
+			newX += x;
+			/*int newY = y + pair.first;
+			int newX = x + pair.second;*/
 
 			if (newY >= 0 && newY < m_matrixDot.size() && newX >= 0 && newX < m_matrixDot[newY].size()) // check boundaries
 			{
@@ -202,8 +208,9 @@ namespace twixt
 		if (margins.empty()) return false;
 		int index = 0;
 		Dot firstDot = margins[index];
-		Dot checkDot, newDot;
-		int position;
+		Dot newDot;
+		/*Dot checkDot, newDot;
+		int position;*/
 
 		//Creating path vector: pair of dot in path and position of existing bridges for the dot.
 		std::vector<std::pair<Dot, int>> path;
@@ -212,8 +219,9 @@ namespace twixt
 		path.push_back({ firstDot, 0 });
 		while (!isFinalDot && !path.empty())
 		{
-			checkDot = path[path.size() - 1].first;
-			position = path[path.size() - 1].second;
+			auto [checkDot, position] = path[path.size() - 1];
+			/*checkDot = path[path.size() - 1].first;
+			position = path[path.size() - 1].second;*/
 			if (position < checkDot.getExistingBridges().size())
 			{
 				newDot = *(checkDot.getExistingBridges())[position];
@@ -257,6 +265,10 @@ namespace twixt
 				{
 					margin.push_back(m_matrixDot[0][i]);
 				}
+				if (m_matrixDot[1][i].getStatus() == Dot::DotStatus::Player1)
+				{
+					margin.push_back(m_matrixDot[1][i]);
+				}
 			}
 		}
 		else
@@ -266,6 +278,10 @@ namespace twixt
 				if (m_matrixDot[i][0].getStatus() == Dot::DotStatus::Player2)
 				{
 					margin.push_back(m_matrixDot[i][0]);
+				}
+				if (m_matrixDot[i][1].getStatus() == Dot::DotStatus::Player2)
+				{
+					margin.push_back(m_matrixDot[i][1]);
 				}
 			}
 		}
@@ -277,7 +293,7 @@ namespace twixt
 		{
 			for (int i = 0; i < m_matrixDot.size(); i++)
 			{
-				if (dotToCheck == m_matrixDot[m_matrixDot.size() - 1][i])
+				if (dotToCheck == m_matrixDot[m_matrixDot.size() - 1][i] || dotToCheck== m_matrixDot[m_matrixDot.size() - 2][i])
 				{
 					return true;
 				}
@@ -287,7 +303,7 @@ namespace twixt
 		{
 			for (int i = 0; i < m_matrixDot.size(); i++)
 			{
-				if (dotToCheck == m_matrixDot[i][m_matrixDot.size() - 1])
+				if (dotToCheck == m_matrixDot[i][m_matrixDot.size() - 1] || dotToCheck== m_matrixDot[m_matrixDot.size() - 2][i])
 				{
 					return true;
 				}

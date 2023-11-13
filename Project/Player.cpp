@@ -31,38 +31,36 @@ namespace twixt {
 
 	void Player::turn(Board& board) const
 	{
-		std::cout << "Pozitia aleasa este: ";
+		std::cout << "Enter position: ";
 
 		int i, j;
 		std::cin >> i >> j;
 
-		Dot::DotStatus status;
-
 		if (m_color == Color::Red)
-			status = Dot::DotStatus::Player1;
+		{
+			if (j != 0 && j != board.getSize() - 1)
+				board.changeDotStatus(i, j, Dot::DotStatus::Player1);
+			else {
+				std::cout << "Not possible! Try again!\n";
+				turn(board);
+			}
+		}
 		else 
-			status = Dot::DotStatus::Player2;
+		{
+			if (i != 0 && i != board.getSize() - 1)
+				board.changeDotStatus(i, j, Dot::DotStatus::Player2);
+			else {
+				std::cout << "Not possible! Try again!\n";
+				turn(board);
+			}
+		}
 
-		board.changeDotStatus(i, j, status);
+		
 	}
 
 	std::istream& operator>>(std::istream& in, Player& player) 
 	{
 		in >> player.m_name;
-
-		std::string color;
-		in >> color;
-
-		if (color == "red") 
-		{
-			player.m_color = Player::Color::Red;
-		}
-
-		if (color == "black") 
-		{
-			player.m_color = Player::Color::Black;
-		}
-
 		player.setName(player.m_name);
 		return in;
 	}

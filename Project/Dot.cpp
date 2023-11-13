@@ -5,8 +5,8 @@
 namespace twixt {
 
     // Constructors
-    Dot::Dot() : m_status(DotStatus::Clear), m_i(0), m_j(0) {}
-    Dot::Dot(const Dot& newDot) : m_status(newDot.m_status), m_i(newDot.m_i), m_j(newDot.m_j), m_existingBridges(newDot.m_existingBridges) {}
+    Dot::Dot() : m_status{ DotStatus::Clear }, m_i{ 0 }, m_j{ 0 } {}
+    Dot::Dot(const Dot& newDot) : m_status{ newDot.m_status }, m_i{ newDot.m_i }, m_j{ newDot.m_j }, m_existingBridges{ newDot.m_existingBridges } {}
 
     // Destructor
     Dot::~Dot() {}

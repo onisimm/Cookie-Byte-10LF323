@@ -29,7 +29,7 @@ namespace twixt {
 		m_color = color;
 	}
 
-	void Player::turn(Board& board) const
+	void Player::turn(Board& board) 
 	{
 		std::cout << "Enter position: ";
 
@@ -38,8 +38,13 @@ namespace twixt {
 
 		if (m_color == Color::Red)
 		{
-			if (j != 0 && j != board.getSize() - 1)
+			if (j != 0 && j != (board.getSize() - 1))
+			{
 				board.changeDotStatus(i, j, Dot::DotStatus::Player1);
+
+				//Added the Dot in the player's stack:
+				//existingDots.push(&(board.getMatrixDot(i,j))); 
+			}
 			else {
 				std::cout << "Not possible! Try again!\n";
 				turn(board);
@@ -47,8 +52,13 @@ namespace twixt {
 		}
 		else 
 		{
-			if (i != 0 && i != board.getSize() - 1)
+			if (i != 0 && i != (board.getSize() - 1))
+			{
 				board.changeDotStatus(i, j, Dot::DotStatus::Player2);
+
+				//Added the Dot in the player's stack
+				//existingDots.push(&(board.getMatrixDot(i, j)));
+			}
 			else {
 				std::cout << "Not possible! Try again!\n";
 				turn(board);

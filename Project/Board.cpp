@@ -80,6 +80,16 @@ namespace twixt
 		return m_matrixDot.size();
 	}
 
+	std::vector<std::vector<Dot>> Board::getMatrix()
+	{
+		return m_matrixDot;
+	}
+
+	Dot Board::getMatrixDot(int i, int j)
+	{
+		return m_matrixDot[i][j];
+	}
+
 	void Board::setDot(int i, int j, const Dot& dot)
 	{
 		if (i >= 0 && i < m_matrixDot.size() && j >= 0 && j < m_matrixDot[i].size())

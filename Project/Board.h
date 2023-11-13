@@ -18,6 +18,8 @@ namespace twixt {
 		// Getters
 		Dot getDot(int i, int j) const;
 		uint32_t getSize() const;
+		std::vector<std::vector<Dot>> getMatrix();
+		Dot getMatrixDot(int, int);
 
 		// Setters
 		void setDot(int i, int j, const Dot& dot);

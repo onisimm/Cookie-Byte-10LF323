@@ -257,6 +257,10 @@ namespace twixt
 				{
 					margin.push_back(m_matrixDot[0][i]);
 				}
+				if (m_matrixDot[1][i].getStatus() == Dot::DotStatus::Player1)
+				{
+					margin.push_back(m_matrixDot[1][i]);
+				}
 			}
 		}
 		else
@@ -266,6 +270,10 @@ namespace twixt
 				if (m_matrixDot[i][0].getStatus() == Dot::DotStatus::Player2)
 				{
 					margin.push_back(m_matrixDot[i][0]);
+				}
+				if (m_matrixDot[i][1].getStatus() == Dot::DotStatus::Player2)
+				{
+					margin.push_back(m_matrixDot[i][1]);
 				}
 			}
 		}
@@ -277,7 +285,7 @@ namespace twixt
 		{
 			for (int i = 0; i < m_matrixDot.size(); i++)
 			{
-				if (dotToCheck == m_matrixDot[m_matrixDot.size() - 1][i])
+				if (dotToCheck == m_matrixDot[m_matrixDot.size() - 1][i] || dotToCheck== m_matrixDot[m_matrixDot.size() - 2][i])
 				{
 					return true;
 				}
@@ -287,7 +295,7 @@ namespace twixt
 		{
 			for (int i = 0; i < m_matrixDot.size(); i++)
 			{
-				if (dotToCheck == m_matrixDot[i][m_matrixDot.size() - 1])
+				if (dotToCheck == m_matrixDot[i][m_matrixDot.size() - 1] || dotToCheck== m_matrixDot[m_matrixDot.size() - 2][i])
 				{
 					return true;
 				}

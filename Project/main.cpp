@@ -5,7 +5,7 @@ using namespace twixt;
 
 int main()
 {
-	Board board(5);
+	Board board(6);
 	Player player1("nume1", Player::Color::Red);
 	Player player2("nume2", Player::Color::Black);
 

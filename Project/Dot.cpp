@@ -103,6 +103,16 @@ namespace twixt {
         return false;
     }
 
+    void Dot::deleteAllBridgesForADot()
+    {
+        for (auto i : m_existingBridges)
+        {
+            auto it = find(i->m_existingBridges.begin(), i->m_existingBridges.end(), *this);
+            i->m_existingBridges.erase(it);
+        }
+        m_existingBridges.clear();
+    }
+
     void Dot::clearExistingBridges()
     {
         m_existingBridges.clear();

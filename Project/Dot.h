@@ -51,6 +51,8 @@ namespace twixt {
 
         bool isDotInPath(std::vector<std::pair<Dot, int>> path) const;
 
+        void deleteAllBridgesForADot();
+
     private:
         DotStatus m_status : 2;
 

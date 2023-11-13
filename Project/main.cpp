@@ -3,11 +3,16 @@
 #include<iostream>
 using namespace twixt;
 
+void ReadPlayers(Player& player1, Player& player2)
+{
+	std::cin >> player1 >> player2;
+}
+
 int main()
 {
-	Board board(6);
-	Player player1("nume1", Player::Color::Red);
-	Player player2("nume2", Player::Color::Black);
+	Board board(24);
+	Player player1("player1", Player::Color::Red);
+	Player player2("player2", Player::Color::Black);
 
 	board.showBoard();
 
@@ -21,17 +26,24 @@ int main()
 		player1.turn(board);
 		board.showBoard();
 		std::cout << "\n";
+
+		if (board.checkPath(Dot::DotStatus::Player1)) {
+			if (player1.getColor() == Player::Color::Red)
+			{
+				std::cout << "Red won!";
+			}
+			else
+			{
+				std::cout << "Black won!";
+			}
+			isPlaying = false;
+			break;
+		}
 	
 		std::cout << "It's " << player2.getName() << "'s turn!\n";
 		player2.turn(board);
 		board.showBoard();
 		std::cout << "\n";
-
-		if (board.checkPath(Dot::DotStatus::Player1)) {
-			std::cout << "Red won!";
-			isPlaying = false;
-			break;
-		}
 
 		if (board.checkPath(Dot::DotStatus::Player2)) {
 			std::cout << "Black won!";

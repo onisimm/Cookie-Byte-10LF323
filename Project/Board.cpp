@@ -186,8 +186,11 @@ namespace twixt
 
 		for (auto pair : positions)
 		{
-			int newY = y + pair.first;
-			int newX = x + pair.second;
+			auto [newY, newX] = pair;
+			newY += y;
+			newX += x;
+			/*int newY = y + pair.first;
+			int newX = x + pair.second;*/
 
 			if (newY >= 0 && newY < m_matrixDot.size() && newX >= 0 && newX < m_matrixDot[newY].size()) // check boundaries
 			{
@@ -205,8 +208,9 @@ namespace twixt
 		if (margins.empty()) return false;
 		int index = 0;
 		Dot firstDot = margins[index];
-		Dot checkDot, newDot;
-		int position;
+		Dot newDot;
+		/*Dot checkDot, newDot;
+		int position;*/
 
 		//Creating path vector: pair of dot in path and position of existing bridges for the dot.
 		std::vector<std::pair<Dot, int>> path;
@@ -215,8 +219,9 @@ namespace twixt
 		path.push_back({ firstDot, 0 });
 		while (!isFinalDot && !path.empty())
 		{
-			checkDot = path[path.size() - 1].first;
-			position = path[path.size() - 1].second;
+			auto [checkDot, position] = path[path.size() - 1];
+			/*checkDot = path[path.size() - 1].first;
+			position = path[path.size() - 1].second;*/
 			if (position < checkDot.getExistingBridges().size())
 			{
 				newDot = *(checkDot.getExistingBridges())[position];

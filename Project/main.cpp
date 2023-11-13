@@ -32,7 +32,7 @@ void GameTurns(Player player, bool& isPlaying, Board& board)
 
 int main()
 {
-	Board board(24);
+	Board board(4);
 	Player player1("player1", Player::Color::Red);
 	Player player2("player2", Player::Color::Black);
 
@@ -45,6 +45,7 @@ int main()
 	while (isPlaying)
 	{
 		GameTurns(player1, isPlaying, board);
+		if (isPlaying == false) break;
 		GameTurns(player2, isPlaying, board);
 		std::cout << "Do you want to continue the game? ";
 		std::cin >> response;

@@ -85,7 +85,7 @@ namespace twixt
 		return m_matrixDot;
 	}
 
-	Dot Board::getMatrixDot(int i, int j)
+	Dot& Board::getMatrixDot(int i, int j)
 	{
 		return m_matrixDot[i][j];
 	}
@@ -325,9 +325,10 @@ namespace twixt
 	{
 
 		std::vector<Dot*> firstExistingBridges = firstDot.getExistingBridges();
-		firstExistingBridges.erase(find(firstDot.getExistingBridges().begin(), firstDot.getExistingBridges().end(), secondDot));
+		firstExistingBridges.erase(find(firstExistingBridges.begin(), firstExistingBridges.end(), &secondDot));
 		std::vector<Dot*> secondExistingBridges = secondDot.getExistingBridges();
-		secondExistingBridges.erase(find(secondDot.getExistingBridges().begin(), secondDot.getExistingBridges().end(), firstDot));
+		secondExistingBridges.erase(find(secondExistingBridges.begin(), secondExistingBridges.end(), &firstDot));
+		std::cout << "DELETE BRIDGE between " << firstDot.getCoordI() << " " << firstDot.getCoordJ() << " and " << secondDot.getCoordI() << " " << secondDot.getCoordJ();
 
 	}
 }

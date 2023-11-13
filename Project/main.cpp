@@ -32,7 +32,7 @@ void GameTurns(Player player, bool& isPlaying, Board& board)
 
 int main()
 {
-	Board board(4);
+	Board board(24);
 	Player player1("player1", Player::Color::Red);
 	Player player2("player2", Player::Color::Black);
 
@@ -52,6 +52,15 @@ int main()
 		if (response == "No" || response == "no")
 		{
 			isPlaying = false;
+		}
+		if (response == "delete" || response == "Delete")
+		{
+			std::cout << "Choose the first dot: ";
+			int i1, j1, i2, j2;
+			std::cin >> i1 >> j1;
+			std::cout << "Choose the second dot: ";
+			std::cin >> i2 >> j2;
+			board.deleteBridge(board.getMatrixDot(i1, j1), board.getMatrixDot(i2, j2));
 		}
 	}
 	return 0;

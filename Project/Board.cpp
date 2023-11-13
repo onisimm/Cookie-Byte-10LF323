@@ -60,10 +60,7 @@ namespace twixt
 		}
 	}
 
-	Board::Board(const Board& newBoard)
-	{
-		m_matrixDot = newBoard.m_matrixDot;
-	}
+	Board::Board(const Board& newBoard) : m_matrixDot{ newBoard.m_matrixDot } {}
 
 	Board::~Board() {}
 

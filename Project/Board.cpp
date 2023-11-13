@@ -321,4 +321,13 @@ namespace twixt
 		}
 		return false;
 	}
+	void Board::deleteBridge(Dot& firstDot, Dot& secondDot)
+	{
+
+		std::vector<Dot*> firstExistingBridges = firstDot.getExistingBridges();
+		firstExistingBridges.erase(find(firstDot.getExistingBridges().begin(), firstDot.getExistingBridges().end(), secondDot));
+		std::vector<Dot*> secondExistingBridges = secondDot.getExistingBridges();
+		secondExistingBridges.erase(find(secondDot.getExistingBridges().begin(), secondDot.getExistingBridges().end(), firstDot));
+
+	}
 }

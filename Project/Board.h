@@ -43,6 +43,7 @@ namespace twixt {
 		std::vector<Dot> FindDotInMargins(Dot::DotStatus status);
 		bool checkFinalMargin(Dot dotToCheck, Dot::DotStatus status);
 
+		void deleteBridge(Dot& firstDot, Dot& secondDot);
 	private:
 		std::vector<std::vector<Dot>> m_matrixDot;
 	};

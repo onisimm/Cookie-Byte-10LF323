@@ -31,7 +31,7 @@ namespace twixt {
 
 	void Player::turn(Board& board) const
 	{
-		std::cout << "Pozitia aleasa este: ";
+		std::cout << "Enter position: ";
 
 		int i, j;
 		std::cin >> i >> j;
@@ -61,20 +61,6 @@ namespace twixt {
 	std::istream& operator>>(std::istream& in, Player& player) 
 	{
 		in >> player.m_name;
-
-		std::string color;
-		in >> color;
-
-		if (color == "red") 
-		{
-			player.m_color = Player::Color::Red;
-		}
-
-		if (color == "black") 
-		{
-			player.m_color = Player::Color::Black;
-		}
-
 		player.setName(player.m_name);
 		return in;
 	}

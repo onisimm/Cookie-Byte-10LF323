@@ -77,6 +77,12 @@ namespace twixt
 		throw std::out_of_range("Index out of bounds while trying to get Dot.");
 	}
 
+	uint32_t Board::getSize() const
+	{
+		//Getter for matrixSize;
+		return m_matrixDot.size();
+	}
+
 	void Board::setDot(int i, int j, const Dot& dot)
 	{
 		if (i >= 0 && i < m_matrixDot.size() && j >= 0 && j < m_matrixDot[i].size())

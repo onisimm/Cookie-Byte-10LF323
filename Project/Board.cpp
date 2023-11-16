@@ -64,11 +64,11 @@ namespace twixt
 
 	Board::~Board() {}
 
-	Dot Board::getDot(int i, int j) const
+	Dot* Board::getDot(int i, int j)
 	{
 		if (i >= 0 && i < m_matrixDot.size() && j >= 0 && j < m_matrixDot[i].size())
 		{
-			return m_matrixDot[i][j];
+			return &(m_matrixDot[i][j]);
 		}
 
 		throw std::out_of_range("Index out of bounds while trying to get Dot.");
@@ -78,6 +78,16 @@ namespace twixt
 	{
 		//Getter for matrixSize;
 		return m_matrixDot.size();
+	}
+
+	std::vector<std::vector<Dot>> Board::getMatrix()
+	{
+		return m_matrixDot;
+	}
+
+	Dot& Board::getMatrixDot(int i, int j)
+	{
+		return m_matrixDot[i][j];
 	}
 
 	void Board::setDot(int i, int j, const Dot& dot)
@@ -310,5 +320,15 @@ namespace twixt
 			}
 		}
 		return false;
+	}
+	void Board::deleteBridge(Dot& firstDot, Dot& secondDot)
+	{
+
+		std::vector<Dot*> firstExistingBridges = firstDot.getExistingBridges();
+		firstExistingBridges.erase(find(firstExistingBridges.begin(), firstExistingBridges.end(), &secondDot));
+		std::vector<Dot*> secondExistingBridges = secondDot.getExistingBridges();
+		secondExistingBridges.erase(find(secondExistingBridges.begin(), secondExistingBridges.end(), &firstDot));
+		std::cout << "DELETE BRIDGE between " << firstDot.getCoordI() << " " << firstDot.getCoordJ() << " and " << secondDot.getCoordI() << " " << secondDot.getCoordJ();
+
 	}
 }

@@ -16,8 +16,10 @@ namespace twixt {
 		~Board();
 
 		// Getters
-		Dot getDot(int i, int j) const;
+		Dot* getDot(int i, int j);
 		uint32_t getSize() const;
+		std::vector<std::vector<Dot>> getMatrix();
+		Dot& getMatrixDot(int, int);
 
 		// Setters
 		void setDot(int i, int j, const Dot& dot);
@@ -41,6 +43,7 @@ namespace twixt {
 		std::vector<Dot> FindDotInMargins(Dot::DotStatus status);
 		bool checkFinalMargin(Dot dotToCheck, Dot::DotStatus status);
 
+		void deleteBridge(Dot& firstDot, Dot& secondDot);
 	private:
 		std::vector<std::vector<Dot>> m_matrixDot;
 	};

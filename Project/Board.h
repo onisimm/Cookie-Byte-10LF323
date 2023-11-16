@@ -16,7 +16,7 @@ namespace twixt {
 		~Board();
 
 		// Getters
-		Dot getDot(int i, int j) const;
+		Dot* getDot(int i, int j);
 		uint32_t getSize() const;
 		std::vector<std::vector<Dot>> getMatrix();
 		Dot& getMatrixDot(int, int);

@@ -107,8 +107,10 @@ namespace twixt {
     {
         for (auto i : m_existingBridges)
         {
-            auto it = find(i->m_existingBridges.begin(), i->m_existingBridges.end(), *this);
-            i->m_existingBridges.erase(it);
+            auto it = find(i->m_existingBridges.begin(), i->m_existingBridges.end(), &(*this));
+            if (it == i->m_existingBridges.end())
+                std::cout << "este end pentru " << i->getCoordI()<< " " << i->getCoordJ();
+            else i->m_existingBridges.erase(it);
         }
         m_existingBridges.clear();
     }

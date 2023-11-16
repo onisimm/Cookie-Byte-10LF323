@@ -64,11 +64,11 @@ namespace twixt
 
 	Board::~Board() {}
 
-	Dot Board::getDot(int i, int j) const
+	Dot* Board::getDot(int i, int j)
 	{
 		if (i >= 0 && i < m_matrixDot.size() && j >= 0 && j < m_matrixDot[i].size())
 		{
-			return m_matrixDot[i][j];
+			return &(m_matrixDot[i][j]);
 		}
 
 		throw std::out_of_range("Index out of bounds while trying to get Dot.");

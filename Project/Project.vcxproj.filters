@@ -27,9 +27,6 @@
     <ClCompile Include="Player.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Mines.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Board.h">
@@ -39,9 +36,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Player.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Mines.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

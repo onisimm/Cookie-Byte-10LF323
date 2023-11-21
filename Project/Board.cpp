@@ -41,6 +41,7 @@ namespace twixt
 		{
 			mineExplodes(m_matrixDot[i][j]);
 			std::cout << "You lost your turn!\n";
+			showBoard();
 			std::cout << "Choose another mine!\n";
 			int mineI, mineJ;
 			std::cin >> mineI >> mineJ;

@@ -23,9 +23,27 @@ namespace twixt {
     }
     
 
-    Dot& Dot::operator=(Dot&& other) noexcept
-    {
-      
+    Dot& Dot::operator=(Dot&& other) noexcept {
+        if (this != &other) {
+            // Release resources from the current object
+            m_possibleBridges.clear();
+            m_existingBridges.clear();
+
+            // Move resources from the other object
+            m_status = other.m_status;
+            m_i = other.m_i;
+            m_j = other.m_j;
+            m_possibleBridges = std::move(other.m_possibleBridges);
+            m_existingBridges = std::move(other.m_existingBridges);
+
+            // Reset the moved from object
+            other.m_status = DotStatus::Clear;
+            other.m_i = 0;
+            other.m_j = 0;
+            other.m_possibleBridges.clear();
+            other.m_existingBridges.clear();
+        }
+        return *this;
     }
 
     // Destructor

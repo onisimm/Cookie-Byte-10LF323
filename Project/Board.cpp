@@ -17,6 +17,9 @@ namespace twixt
 				if (m_matrixDot[i][j].getStatus() == Dot::DotStatus::Player2)
 					std::cout << "B";
 
+				if (m_matrixDot[i][j].getStatus() == Dot::DotStatus::Bulldozer)
+					std::cout << "@";
+
 				std::cout << " ";
 			}
 			std::cout << "\n";

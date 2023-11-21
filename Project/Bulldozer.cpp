@@ -15,8 +15,9 @@ void twixt::Bulldozer::destoryRandomDot(Board& board)
 	board.getDot(position.first, position.second)->setStatus(Dot::DotStatus::Clear);
 	position.first = i;
 	position.second = j;
-	std::cout << "VOm distruge " << i << " " << j << "\n";
+	std::cout << "The dot " << i << " " << j << "will be destroyed\n";
 	board.getDot(i, j)->deleteAllBridgesForADot();
+	std::cout << "Deleted.\n";
 }
 
 twixt::Bulldozer::Bulldozer(Board& board)

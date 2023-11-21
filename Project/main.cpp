@@ -3,6 +3,8 @@
 #include<iostream>
 using namespace twixt;
 
+#define BOARD_SIZE 24
+
 void ReadPlayers(Player& player1, Player& player2)
 {
 	std::cin >> player1 >> player2;
@@ -33,7 +35,7 @@ void GameTurns(Player player, bool& isPlaying, Board& board)
 int main()
 {
 	std::cout << "Hello";
-	Board board(24);
+	Board board(BOARD_SIZE);
 	Player player1("player1", Player::Color::Red);
 	Player player2("player2", Player::Color::Black);
 

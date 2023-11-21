@@ -22,7 +22,8 @@ namespace twixt {
         {
             Player1, // occupied by player 1
             Player2, // occupied by player 2
-            Clear // not occupied yet
+            Clear, // not occupied yet
+            Bulldozer,
         };
 
         // Getters

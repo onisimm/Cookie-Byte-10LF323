@@ -27,7 +27,7 @@
     <ClCompile Include="Player.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Bridge.cpp">
+    <ClCompile Include="Bulldozer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -35,13 +35,13 @@
     <ClInclude Include="Board.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Bridge.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Dot.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Player.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Bulldozer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

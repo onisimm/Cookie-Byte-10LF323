@@ -8,7 +8,7 @@ namespace twixt
 		{
 			for (int j = 0; j < m_matrixDot[i].size(); j++)
 			{
-				if (m_matrixDot[i][j].getStatus() == Dot::DotStatus::Clear)
+				if (m_matrixDot[i][j].getStatus() == Dot::DotStatus::Clear )
 					std::cout << "_";
 
 				if (m_matrixDot[i][j].getStatus() == Dot::DotStatus::Player1)

@@ -1,9 +1,13 @@
+#ifndef PLAYER_H
+#define PLAYER_H
 
 #include <cstdint>
 #include <iostream>
 #include <stack>
 #include "Board.h"
 #include "Dot.h"
+
+
 
 
 namespace twixt {
@@ -41,3 +45,5 @@ namespace twixt {
 		std::stack<Dot*> existingDots;
 	};
 }
+
+#endif

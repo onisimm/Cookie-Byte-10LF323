@@ -17,6 +17,9 @@ namespace twixt
 				if (m_matrixDot[i][j].getStatus() == Dot::DotStatus::Player2)
 					std::cout << "B";
 
+				if (m_matrixDot[i][j].getStatus() == Dot::DotStatus::Mines)
+					std::cout << "M";
+
 				std::cout << " ";
 			}
 			std::cout << "\n";
@@ -33,6 +36,11 @@ namespace twixt
 			{
 				possibleToExistingBridges(m_matrixDot[i][j]); // building current dot's possible bridges
 			}
+		}
+		else if (m_matrixDot[i][j].getStatus() == Dot::DotStatus::Mines)
+		{
+			mineExplodes(m_matrixDot[i][j]);
+			std::cout << "You lost your turn!\n";
 		}
 		else
 		{
@@ -328,7 +336,7 @@ namespace twixt
 		firstExistingBridges.erase(find(firstExistingBridges.begin(), firstExistingBridges.end(), &secondDot));
 		std::vector<Dot*> secondExistingBridges = secondDot.getExistingBridges();
 		secondExistingBridges.erase(find(secondExistingBridges.begin(), secondExistingBridges.end(), &firstDot));
-		std::cout << "DELETE BRIDGE between " << firstDot.getCoordI() << " " << firstDot.getCoordJ() << " and " << secondDot.getCoordI() << " " << secondDot.getCoordJ();
+		std::cout << "DELETED BRIDGE between " << firstDot.getCoordI() << " " << firstDot.getCoordJ() << " and " << secondDot.getCoordI() << " " << secondDot.getCoordJ();
 
 	}
 	void Board::placeMine()
@@ -343,8 +351,6 @@ namespace twixt
 		}
 		m_matrixDot[i][j].setStatus(Dot::DotStatus::Mines);
 		std::cout << "Mine placed on " << i << " " << j << "\n";
-		//std::cout << "placeMines called!\n";
-		/*int rand() % 4;*/
 	}
 	void Board::mineExplodes(Dot& mine)
 	{

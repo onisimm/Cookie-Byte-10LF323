@@ -32,10 +32,14 @@ void GameTurns(Player player, bool& isPlaying, Board& board)
 
 int main()
 {
-	std::cout << "Hello";
 	Board board(24);
 	Player player1("player1", Player::Color::Red);
 	Player player2("player2", Player::Color::Black);
+
+	for (int i = 0; i < 3; i++)
+	{
+		board.placeMine();
+	}
 
 	board.showBoard();
 

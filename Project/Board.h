@@ -1,9 +1,7 @@
-
-
+#pragma once
 #include <vector>
 #include <iostream>
 #include "Dot.h"
-#include "Mines.h"
 #include <random>
 
 namespace twixt {

@@ -47,6 +47,7 @@ namespace twixt {
 
 		void deleteBridge(Dot& firstDot, Dot& secondDot);
 
+		void placeMine();
 		void mineExplodes(Dot& mine);
 	private:
 		std::vector<std::vector<Dot>> m_matrixDot;

@@ -331,7 +331,21 @@ namespace twixt
 		std::cout << "DELETE BRIDGE between " << firstDot.getCoordI() << " " << firstDot.getCoordJ() << " and " << secondDot.getCoordI() << " " << secondDot.getCoordJ();
 
 	}
-	
+	void Board::placeMine()
+	{
+		srand(time(NULL));
+		int i = rand() % 22 + 1;
+		int j = rand() % 22 + 1;
+		while (m_matrixDot[i][j].getStatus() != Dot::DotStatus::Clear)
+		{
+			i = rand() % 22 + 1;
+			j = rand() % 22 + 1;
+		}
+		m_matrixDot[i][j].setStatus(Dot::DotStatus::Mines);
+		std::cout << "Mine placed on " << i << " " << j << "\n";
+		//std::cout << "placeMines called!\n";
+		/*int rand() % 4;*/
+	}
 	void Board::mineExplodes(Dot& mine)
 	{
 		std::vector<std::pair<int, int>> positions{ {-1, -1},{-1,0},{-1,1},{0,1},{1,1},{1,0},{1,-1},{0,-1} };

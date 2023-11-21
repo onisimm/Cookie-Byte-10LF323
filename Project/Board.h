@@ -1,8 +1,8 @@
-
-
+#pragma once
 #include <vector>
 #include <iostream>
 #include "Dot.h"
+#include <random>
 
 #ifndef BOARD_H
 #define BOARD_H
@@ -47,6 +47,10 @@ namespace twixt {
 		bool checkFinalMargin(Dot dotToCheck, Dot::DotStatus status);
 
 		void deleteBridge(Dot& firstDot, Dot& secondDot);
+
+		void placeMine(int i, int j);
+		void placeRandomMine();
+		void mineExplodes(Dot& mine);
 	private:
 		std::vector<std::vector<Dot>> m_matrixDot;
 	};

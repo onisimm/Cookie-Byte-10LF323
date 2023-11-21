@@ -8,7 +8,7 @@ namespace twixt
 		{
 			for (int j = 0; j < m_matrixDot[i].size(); j++)
 			{
-				if (m_matrixDot[i][j].getStatus() == Dot::DotStatus::Clear )
+				if (m_matrixDot[i][j].getStatus() == Dot::DotStatus::Clear)
 					std::cout << "_";
 
 				if (m_matrixDot[i][j].getStatus() == Dot::DotStatus::Player1)
@@ -17,8 +17,13 @@ namespace twixt
 				if (m_matrixDot[i][j].getStatus() == Dot::DotStatus::Player2)
 					std::cout << "B";
 
+
 				if (m_matrixDot[i][j].getStatus() == Dot::DotStatus::Bulldozer)
 					std::cout << "@";
+
+				if (m_matrixDot[i][j].getStatus() == Dot::DotStatus::Mines)
+					std::cout << "M";
+
 
 				std::cout << " ";
 			}
@@ -37,9 +42,19 @@ namespace twixt
 				possibleToExistingBridges(m_matrixDot[i][j]); // building current dot's possible bridges
 			}
 		}
+		else if (m_matrixDot[i][j].getStatus() == Dot::DotStatus::Mines)
+		{
+			mineExplodes(m_matrixDot[i][j]);
+			std::cout << "You lost your turn!\n";
+			showBoard();
+			std::cout << "Choose another mine!\n";
+			int mineI, mineJ;
+			std::cin >> mineI >> mineJ;
+			placeMine(mineI, mineJ);
+		}
 		else
 		{
-			std::cout << "Nodul este deja ocupat!\n";
+			std::cout << "Node already occupied!\n";
 		}
 	}
 
@@ -331,7 +346,51 @@ namespace twixt
 		firstExistingBridges.erase(find(firstExistingBridges.begin(), firstExistingBridges.end(), &secondDot));
 		std::vector<Dot*> secondExistingBridges = secondDot.getExistingBridges();
 		secondExistingBridges.erase(find(secondExistingBridges.begin(), secondExistingBridges.end(), &firstDot));
-		std::cout << "DELETE BRIDGE between " << firstDot.getCoordI() << " " << firstDot.getCoordJ() << " and " << secondDot.getCoordI() << " " << secondDot.getCoordJ();
+		std::cout << "DELETED BRIDGE between " << firstDot.getCoordI() << " " << firstDot.getCoordJ() << " and " << secondDot.getCoordI() << " " << secondDot.getCoordJ();
 
+	}
+	void Board::placeMine(int i, int j)
+	{
+		m_matrixDot[i][j].setStatus(Dot::DotStatus::Mines);
+		std::cout << "Mine placed on " << i << " " << j << "\n";
+	}
+	void Board::placeRandomMine()
+	{
+		srand(time(NULL));
+		int i = rand() % 22 + 1;
+		int j = rand() % 22 + 1;
+		while (m_matrixDot[i][j].getStatus() != Dot::DotStatus::Clear)
+		{
+			i = rand() % 22 + 1;
+			j = rand() % 22 + 1;
+		}
+		placeMine(i, j);
+	}
+	void Board::mineExplodes(Dot& mine)
+	{
+		std::vector<std::pair<int, int>> positions{ {-1, -1},{-1,0},{-1,1},{0,1},{1,1},{1,0},{1,-1},{0,-1} };
+		int i = mine.getCoordI();
+		int j = mine.getCoordJ();
+		std::cout << "Mine " << i << " " << j << " exploded!\n";
+		for (auto pair : positions)
+		{
+			auto [newI, newJ] = pair;
+			newI += i;
+			newJ += j;
+			if (newI >= 0 && newI < m_matrixDot.size() && newJ >= 0 && newJ < m_matrixDot[newI].size()) // check boundaries
+			{
+				if (m_matrixDot[newI][newJ].getStatus() == Dot::DotStatus::Player1 || m_matrixDot[newI][newJ].getStatus() == Dot::DotStatus::Player2)
+				{
+					m_matrixDot[newI][newJ].setStatus(Dot::DotStatus::Clear);
+					m_matrixDot[newI][newJ].deleteAllBridgesForADot();
+					std::cout << "Dot " << newI << " " << newJ << " was erased!\n";
+				}
+				if (m_matrixDot[newI][newJ].getStatus() == Dot::DotStatus::Mines)
+				{
+					mineExplodes(m_matrixDot[newI][newJ]);
+				}
+			}
+		}
+		m_matrixDot[i][j].setStatus(Dot::DotStatus::Clear);
 	}
 }

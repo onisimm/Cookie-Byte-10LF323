@@ -6,8 +6,6 @@
 #include <iostream>
 
 namespace twixt {
-    class Player;
-
     class Dot {
     public:
         // Constructors
@@ -23,7 +21,8 @@ namespace twixt {
             Player1, // occupied by player 1
             Player2, // occupied by player 2
             Clear, // not occupied yet
-            Bulldozer,
+            Bulldozer, //occupied by a bulldozer
+            Mines //occupied by a mine
         };
 
         // Getters
@@ -55,8 +54,8 @@ namespace twixt {
         void deleteAllBridgesForADot();
 
     private:
+    
         DotStatus m_status : 2;
-
         int m_i, m_j; // coordinates
 
         std::vector<Dot*> m_possibleBridges;

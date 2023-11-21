@@ -92,9 +92,13 @@ namespace twixt
 		throw std::out_of_range("Index out of bounds while trying to set Dot.");
 	}
 
-	Board& Board::operator=(Board&& other) noexcept
-	{
-		// TODO: insert return statement here
+	// Move assignment operator
+	Board& Board::operator=(Board&& other) noexcept {
+		if (this != &other) {
+			// Move matrixDot
+			m_matrixDot = std::move(other.m_matrixDot);
+		}
+		return *this;
 	}
 
 

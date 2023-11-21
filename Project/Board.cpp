@@ -80,6 +80,10 @@ namespace twixt
 
 	Board::Board(const Board& newBoard) : m_matrixDot{ newBoard.m_matrixDot } {}
 
+	// Move constructor
+	Board::Board(Board&& other) noexcept
+		: m_matrixDot(std::move(other.m_matrixDot)) {}
+
 	Board::~Board() {}
 
 	Dot* Board::getDot(int i, int j)
@@ -117,6 +121,15 @@ namespace twixt
 		}
 
 		throw std::out_of_range("Index out of bounds while trying to set Dot.");
+	}
+
+	// Move assignment operator
+	Board& Board::operator=(Board&& other) noexcept {
+		if (this != &other) {
+			// Move matrixDot
+			m_matrixDot = std::move(other.m_matrixDot);
+		}
+		return *this;
 	}
 
 

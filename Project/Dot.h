@@ -12,6 +12,11 @@ namespace twixt {
         Dot(); // default
 
         Dot(const Dot& newDot); // copy constructor
+        // Add move constructor
+        Dot(Dot&& other) noexcept;
+
+        // Add move assignment operator
+        Dot& operator=(Dot&& other) noexcept;
 
         // Destructor 
         ~Dot();
@@ -62,3 +67,7 @@ namespace twixt {
         std::vector<Dot*> m_existingBridges;
     };
 }
+
+
+
+

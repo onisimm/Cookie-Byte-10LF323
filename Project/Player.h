@@ -1,14 +1,11 @@
+
 #ifndef PLAYER_H
 #define PLAYER_H
-
 #include <cstdint>
 #include <iostream>
 #include <stack>
 #include "Board.h"
 #include "Dot.h"
-
-
-
 
 namespace twixt {
 	class Player {
@@ -16,17 +13,19 @@ namespace twixt {
 		//enum
 		enum class Color : uint8_t {
 			Red,
-			Black
+			Black,
+			NoColor
 		};
 
 		// Constructors
 		Player() {};
 		Player(std::string name, Color color);
-		Player(const Player& newPlayer); // copy constructor
+		Player(const Player& other);//copy constructor
+		Player(Player&& other) noexcept; // move constructor
 
 		// Destructor
 		~Player();
-		
+
 		// Getters
 		std::string getName() const;
 		Color getColor() const;

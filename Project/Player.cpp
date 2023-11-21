@@ -1,4 +1,4 @@
-#include "Player.h"
+﻿#include "Player.h"
 
 namespace twixt {
 	Player::Player(std::string name, Color color) :
@@ -6,6 +6,13 @@ namespace twixt {
 
 	Player::Player(const Player& newPlayer) :
 		m_name{ newPlayer.m_name }, m_color{ newPlayer.m_color } {}
+	// Implementarea move constructorului
+	twixt::Player::Player(Player&& other) noexcept : m_name(std::move(other.m_name)), m_color(other.m_color) {
+		// Setăm membrii altui obiect pe nullptr sau valorile implicite
+		other.m_name.clear();
+		other.m_color = Color::NoColor;
+
+	}
 
 	Player::~Player() {}
 

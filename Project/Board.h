@@ -14,6 +14,8 @@ namespace twixt {
 		Board();
 		Board(uint32_t size);
 		Board(const Board& newBoard);
+		//Add move constructor
+		Board(Board&& other) noexcept;
 
 		// Destructor
 		~Board();
@@ -26,6 +28,9 @@ namespace twixt {
 
 		// Setters
 		void setDot(int i, int j, const Dot& dot);
+
+		// Move assignment operator
+		Board& operator=(Board&& other) noexcept;
 
 		// Operators Overload
 		Board& operator=(const Board& newBoard);

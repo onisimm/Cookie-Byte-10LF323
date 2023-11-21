@@ -36,7 +36,6 @@ void GameTurns(Player player, bool& isPlaying, Board& board)
 int main()
 {
 	Board board(BOARD_SIZE);
-	Board board(24);
 
 	Player player1("player1", Player::Color::Red);
 	Player player2("player2", Player::Color::Black);

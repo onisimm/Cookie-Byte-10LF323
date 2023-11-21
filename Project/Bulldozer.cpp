@@ -56,3 +56,10 @@ void twixt::Bulldozer::flipCoin(Board& board)
 	destoryRandomDot(board);
 	board.showBoard();
 }
+
+bool twixt::Bulldozer::exists()
+{
+	if (position.first != 0)
+		return true;
+	return false;
+}

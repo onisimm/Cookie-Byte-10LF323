@@ -76,7 +76,7 @@ namespace twixt {
         m_j = y;
     }
 
-    void Dot::setStatus(DotStatus status)
+    void Dot::setStatus(const DotStatus& status)
     {
         m_status = status;
     }

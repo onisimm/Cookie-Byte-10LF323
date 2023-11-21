@@ -15,7 +15,9 @@ namespace twixt {
 
 	public:
 		Bulldozer(Board& board);
+		Bulldozer() {};
 		void flipCoin(Board& board);
+		bool exists();
 
 	};
 }

@@ -33,19 +33,9 @@ void GameTurns(Player player, bool& isPlaying, Board& board)
 	}
 }
 
-int main()
+
+void Game(Board board, Player player1, Player player2, Bulldozer bulldozer = Bulldozer())
 {
-	Board board(BOARD_SIZE);
-
-	Player player1("player1", Player::Color::Red);
-	Player player2("player2", Player::Color::Black);
-	Bulldozer bulldozer(board);
-
-	for (int i = 0; i < 3; i++)
-	{
-		board.placeRandomMine();
-	}
-
 	board.showBoard();
 
 	std::cout << "\n";
@@ -57,6 +47,10 @@ int main()
 		GameTurns(player1, isPlaying, board);
 		if (isPlaying == false) break;
 		GameTurns(player2, isPlaying, board);
+		if (bulldozer.exists())
+		{
+			bulldozer.flipCoin(board);
+		}
 		std::cout << "Do you want to continue the game? ";
 		std::cin >> response;
 		if (response == "No" || response == "no")
@@ -75,14 +69,41 @@ int main()
 		if (response == "deleteall" || response == "DeleteAll")
 		{
 			std::cout << "Choose the dot: ";
-			int i,j;
+			int i, j;
 			std::cin >> i >> j;
 			board.getDot(i, j)->deleteAllBridgesForADot();
 		}
-		if (response == "bulldozer")
-		{
-			bulldozer.flipCoin(board);
-		}
 	}
+	
+}
+
+int main()
+{
+	Board board(BOARD_SIZE);
+
+	Player player1("player1", Player::Color::Red);
+	Player player2("player2", Player::Color::Black);
+
+	std::cout << "Choose you game mode:\n1->DEFAULT\n2->BULLDOZER\n3->MINES.\n";
+	int mode;
+	std::cin >> mode;
+	switch (mode)
+	{
+	case 1:
+		Game(board, player1, player2);
+		break;
+	case 3:
+		for (int i = 0; i < 3; i++)
+		{
+			board.placeRandomMine();
+		}
+		Game(board, player1, player2);
+		break;
+	case 2:
+		Bulldozer bulldozer(board);
+		Game(board, player1, player2, bulldozer);
+		break;
+	}
+	
 	return 0;
 }

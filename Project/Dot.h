@@ -40,7 +40,7 @@ namespace twixt {
         // Setters
         void setCoordI(int);
         void setCoordJ(int);
-        void setStatus(DotStatus);
+        void setStatus(const DotStatus&);
 
         // Operators overload
         Dot& operator=(const Dot& newDot); // = overload
@@ -60,7 +60,7 @@ namespace twixt {
 
     private:
     
-        DotStatus m_status : 2;
+        DotStatus m_status : 3;
         int m_i, m_j; // coordinates
 
         std::vector<Dot*> m_possibleBridges;

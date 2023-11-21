@@ -22,7 +22,7 @@ namespace twixt
 					std::cout << "@";
 
 				if (m_matrixDot[i][j].getStatus() == Dot::DotStatus::Mines)
-					std::cout << "M";
+					std::cout << "_";
 
 
 				std::cout << " ";

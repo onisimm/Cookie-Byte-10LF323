@@ -8,6 +8,26 @@ namespace twixt {
     Dot::Dot() : m_status(DotStatus::Clear), m_i(0), m_j(0) {}
     Dot::Dot(const Dot& newDot) : m_status(newDot.m_status), m_i(newDot.m_i), m_j(newDot.m_j), m_existingBridges(newDot.m_existingBridges) {}
 
+    Dot::Dot(Dot&& other) noexcept
+        : m_status(other.m_status),
+        m_i(other.m_i),
+        m_j(other.m_j),
+        m_possibleBridges(std::move(other.m_possibleBridges)),
+        m_existingBridges(std::move(other.m_existingBridges)) {
+        // Reset the moved from object
+        other.m_status = DotStatus::Clear;
+        other.m_i = 0;
+        other.m_j = 0;
+        other.m_possibleBridges.clear();
+        other.m_existingBridges.clear();
+    }
+    
+
+    Dot& Dot::operator=(Dot&& other) noexcept
+    {
+      
+    }
+
     // Destructor
     Dot::~Dot() {}
 

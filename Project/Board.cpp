@@ -41,6 +41,10 @@ namespace twixt
 		{
 			mineExplodes(m_matrixDot[i][j]);
 			std::cout << "You lost your turn!\n";
+			std::cout << "Choose another mine!\n";
+			int mineI, mineJ;
+			std::cin >> mineI >> mineJ;
+			placeMine(mineI, mineJ);
 		}
 		else
 		{
@@ -339,7 +343,12 @@ namespace twixt
 		std::cout << "DELETED BRIDGE between " << firstDot.getCoordI() << " " << firstDot.getCoordJ() << " and " << secondDot.getCoordI() << " " << secondDot.getCoordJ();
 
 	}
-	void Board::placeMine()
+	void Board::placeMine(int i, int j)
+	{
+		m_matrixDot[i][j].setStatus(Dot::DotStatus::Mines);
+		std::cout << "Mine placed on " << i << " " << j << "\n";
+	}
+	void Board::placeRandomMine()
 	{
 		srand(time(NULL));
 		int i = rand() % 22 + 1;
@@ -349,8 +358,7 @@ namespace twixt
 			i = rand() % 22 + 1;
 			j = rand() % 22 + 1;
 		}
-		m_matrixDot[i][j].setStatus(Dot::DotStatus::Mines);
-		std::cout << "Mine placed on " << i << " " << j << "\n";
+		placeMine(i, j);
 	}
 	void Board::mineExplodes(Dot& mine)
 	{

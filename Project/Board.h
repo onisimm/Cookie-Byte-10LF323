@@ -3,6 +3,8 @@
 #include <vector>
 #include <iostream>
 #include "Dot.h"
+#include "Mines.h"
+#include <random>
 
 namespace twixt {
 	class Board {
@@ -44,6 +46,8 @@ namespace twixt {
 		bool checkFinalMargin(Dot dotToCheck, Dot::DotStatus status);
 
 		void deleteBridge(Dot& firstDot, Dot& secondDot);
+
+		void mineExplodes(Dot& mine);
 	private:
 		std::vector<std::vector<Dot>> m_matrixDot;
 	};

@@ -4,15 +4,14 @@
 #include "Board.h"
 #include "Dot.h"
 
-
-
 namespace twixt {
 	class Player {
 	public:
 		//enum
 		enum class Color : uint8_t {
 			Red,
-			Black
+			Black,
+			NoColor
 		};
 
 		// Constructors
@@ -41,10 +40,11 @@ namespace twixt {
 }
 
 // Implementarea move constructorului
- twixt::Player::Player(Player&& other) noexcept: m_name(std::move(other.m_name)),m_color(std::move(other.m_color)) {
-	// Setăm membrii altui obiect pe nullptr sau valorile implicite, în funcție de tipul lor.
+twixt::Player::Player(Player&& other) noexcept : m_name(std::move(other.m_name)), m_color(other.m_color) {
+	// Setăm membrii altui obiect pe nullptr sau valorile implicite
 	other.m_name.clear();
-	// other.m_color rămâne cu o valoare validă, dar nu ar trebui accesată în continuare în obiectul sursă.
+	other.m_color = Color::NoColor;
+
 }
 /*namespace twixt {
 	class Player {

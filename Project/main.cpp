@@ -1,7 +1,10 @@
 #include"Dot.h"
 #include "Player.h"
+#include "Bulldozer.h"
 #include<iostream>
 using namespace twixt;
+
+#define BOARD_SIZE 24
 
 void ReadPlayers(Player& player1, Player& player2)
 {
@@ -33,9 +36,10 @@ void GameTurns(Player player, bool& isPlaying, Board& board)
 int main()
 {
 	std::cout << "Hello";
-	Board board(24);
+	Board board(BOARD_SIZE);
 	Player player1("player1", Player::Color::Red);
 	Player player2("player2", Player::Color::Black);
+	Bulldozer bulldozer(board);
 
 	board.showBoard();
 
@@ -69,6 +73,10 @@ int main()
 			int i,j;
 			std::cin >> i >> j;
 			board.getDot(i, j)->deleteAllBridgesForADot();
+		}
+		if (response == "bulldozer")
+		{
+			bulldozer.flipCoin(board);
 		}
 	}
 	return 0;

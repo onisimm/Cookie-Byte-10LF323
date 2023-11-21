@@ -4,6 +4,9 @@
 #include <iostream>
 #include "Dot.h"
 
+#ifndef BOARD_H
+#define BOARD_H
+
 namespace twixt {
 	class Board {
 	public:
@@ -48,3 +51,5 @@ namespace twixt {
 		std::vector<std::vector<Dot>> m_matrixDot;
 	};
 }
+
+#endif

@@ -2,6 +2,8 @@
 
 namespace twixt
 {
+
+	//this function shows the board
 	void Board::showBoard() const
 	{
 		for (int i = 0; i < m_matrixDot.size(); i++)
@@ -42,7 +44,7 @@ namespace twixt
 				possibleToExistingBridges(m_matrixDot[i][j]); // building current dot's possible bridges
 			}
 		}
-		else if (m_matrixDot[i][j].getStatus() == Dot::DotStatus::Mines)
+		else if (m_matrixDot[i][j].getStatus() == Dot::DotStatus::Mines) // in case there is a mine it will explode
 		{
 			didMineExplode = true;
 			mineExplodes(m_matrixDot[i][j]);
@@ -105,16 +107,19 @@ namespace twixt
 
 	std::vector<std::vector<Dot>> Board::getMatrix()
 	{
+		//Getter for matrix
 		return m_matrixDot;
 	}
 
 	Dot& Board::getMatrixDot(int i, int j)
 	{
+		//Getter for a dot in position (i,j)
 		return m_matrixDot[i][j];
 	}
 
 	void Board::setDot(int i, int j, const Dot& dot)
 	{
+		//Setter for a dot in position (i,j) with the dot dot
 		if (i >= 0 && i < m_matrixDot.size() && j >= 0 && j < m_matrixDot[i].size())
 		{
 			m_matrixDot[i][j] = dot;
@@ -244,6 +249,7 @@ namespace twixt
 		}
 	}
 
+	//verify whether the path leads to win or not
 	bool Board::checkPath(twixt::Dot::DotStatus status)
 	{
 		std::vector<Dot> margins = FindDotInMargins(status);

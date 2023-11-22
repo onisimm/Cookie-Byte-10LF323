@@ -26,6 +26,7 @@ void twixt::Bulldozer::destoryRandomDot(Board& board)
 	
 }
 
+//Constructor 
 twixt::Bulldozer::Bulldozer(Board& board)
 {
 	srand(time(NULL));
@@ -44,6 +45,7 @@ twixt::Bulldozer::Bulldozer(Board& board)
 	position.second = j;
 }
 
+//Flipping the coin and deciding whether to destory a Dot or not
 void twixt::Bulldozer::flipCoin(Board& board)
 {
 	srand(time(NULL));
@@ -52,7 +54,7 @@ void twixt::Bulldozer::flipCoin(Board& board)
 		std::cout << "We flipped the coin and nothing will happen.\n";
 		return;
 	}
-
+	//If it did not exist the function, we will destory a Dot
 	destoryRandomDot(board);
 	board.showBoard();
 }

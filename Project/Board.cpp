@@ -31,7 +31,7 @@ namespace twixt
 		}
 	}
 
-	void Board::changeDotStatus(int i, int j, Dot::DotStatus status)
+	void Board::changeDotStatus(int i, int j, Dot::DotStatus status, bool& didMineExplode)
 	{
 		if (m_matrixDot[i][j].getStatus() == Dot::DotStatus::Clear)
 		{
@@ -44,10 +44,11 @@ namespace twixt
 		}
 		else if (m_matrixDot[i][j].getStatus() == Dot::DotStatus::Mines)
 		{
+			didMineExplode = true;
 			mineExplodes(m_matrixDot[i][j]);
 			std::cout << "You lost your turn!\n";
-			showBoard();
 			std::cout << "Choose another mine!\n";
+			showBoard();
 			int mineI, mineJ;
 			std::cin >> mineI >> mineJ;
 			placeMine(mineI, mineJ);

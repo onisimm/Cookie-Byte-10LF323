@@ -46,18 +46,23 @@ namespace twixt {
 		m_remainingDots = remainingDots;
 	}
 
-	void Player::turn(Board& board) 
+	void Player::turn(Board& board)
 	{
 		std::cout << "Enter position: ";
 
 		int i, j;
 		std::cin >> i >> j;
+		bool didMineExplode = false;
 
 		if (m_color == Color::Red)
 		{
 			if (j != 0 && j != (board.getSize() - 1))
 			{
-				board.changeDotStatus(i, j, Dot::DotStatus::Player1);
+				board.changeDotStatus(i, j, Dot::DotStatus::Player1, didMineExplode);
+				if (!didMineExplode)
+				{
+					m_remainingDots--;
+				}
 
 				//Added the Dot in the player's stack:
 				//existingDots.push(&(board.getMatrixDot(i,j))); 
@@ -67,11 +72,15 @@ namespace twixt {
 				turn(board);
 			}
 		}
-		else 
+		else
 		{
 			if (i != 0 && i != (board.getSize() - 1))
 			{
-				board.changeDotStatus(i, j, Dot::DotStatus::Player2);
+				board.changeDotStatus(i, j, Dot::DotStatus::Player2, didMineExplode);
+				if (!didMineExplode)
+				{
+					m_remainingDots--;
+				}
 
 				//Added the Dot in the player's stack
 				//existingDots.push(&(board.getMatrixDot(i, j)));
@@ -81,8 +90,11 @@ namespace twixt {
 				turn(board);
 			}
 		}
+	}
 
-		
+	bool Player::hasRemainingDots()
+	{
+		return m_remainingDots > 0;
 	}
 
 	std::istream& operator>>(std::istream& in, Player& player) 

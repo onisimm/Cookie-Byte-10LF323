@@ -36,7 +36,7 @@ namespace twixt {
 		Board& operator=(const Board& newBoard);
 
 		void showBoard() const;
-		void changeDotStatus(int i, int j, Dot::DotStatus status);
+		void changeDotStatus(int i, int j, Dot::DotStatus status, bool& didMineExplode);
 
 		void possibleToExistingBridges(Dot& dot);
 

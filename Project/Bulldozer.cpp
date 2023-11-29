@@ -32,14 +32,14 @@ twixt::Bulldozer::Bulldozer(Board& board)
 	auto [i, j] = position;
 	i = rand() % (board.getSize() - 2) + 1;
 	j = rand() % (board.getSize() - 2) + 1;
-
+	bool didMineExplode = false;
 	//find a clear Dot and set it as a bulldozer
 	while (board.getDot(i, j)->getStatus() != Dot::DotStatus::Clear)
 	{
 		i = rand() % (board.getSize() - 2) + 1;
 		j = rand() % (board.getSize() - 2) + 1;
 	}
-	board.changeDotStatus(i, j, Dot::DotStatus::Bulldozer);
+	board.changeDotStatus(i, j, Dot::DotStatus::Bulldozer, didMineExplode);
 	position.first = i;
 	position.second = j;
 }

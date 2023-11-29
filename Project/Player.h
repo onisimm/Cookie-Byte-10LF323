@@ -37,6 +37,7 @@ namespace twixt {
 		void setRemainingDots(int);
 
 		void turn(Board& board);
+		bool hasRemainingDots();
 
 		friend std::istream& operator>>(std::istream& in, Player& player);
 

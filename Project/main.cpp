@@ -4,16 +4,18 @@
 #include<iostream>
 using namespace twixt;
 
-#define BOARD_SIZE 24
+#define BOARD_SIZE 10
+#define DOTS_NUMBER 3
 
 void ReadPlayers(Player& player1, Player& player2)
 {
 	std::cin >> player1 >> player2;
 }
 
-void GameTurns(Player player, bool& isPlaying, Board& board)
+void GameTurns(Player& player, bool& isPlaying, Board& board)
 {
 	std::cout << "It's " << player.getName() << "'s turn!\n";
+	std::cout << "REMAINING DOTS for " << player.getName() << ": " << player.getRemainingDots() << "\n";
 	player.turn(board);
 	board.showBoard();
 	std::cout << "\n";
@@ -28,9 +30,18 @@ void GameTurns(Player player, bool& isPlaying, Board& board)
 	}
 	if (board.checkPath(status))
 	{
-		std::cout << "You won!";
+		std::cout << "You won!\n";
 		isPlaying = false;
 	}
+}
+
+bool isTie(Player player1, Player player2)
+{
+	if (player1.hasRemainingDots() == false && player2.hasRemainingDots() == false)
+	{
+		return true;
+	}
+	else return false;
 }
 
 
@@ -42,14 +53,28 @@ void Game(Board board, Player player1, Player player2, Bulldozer bulldozer = Bul
 	bool isPlaying = true;
 	std::string response;
 
+
 	while (isPlaying)
 	{
 		GameTurns(player1, isPlaying, board);
 		if (isPlaying == false) break;
+		if (isTie(player1, player2))
+		{
+			std::cout << "It's a tie! Both players are out of dots!\n";
+			isPlaying = false;
+			break;
+		}
+
 		GameTurns(player2, isPlaying, board);
 		if (bulldozer.exists())
 		{
 			bulldozer.flipCoin(board);
+		}
+		if (isTie(player1, player2))
+		{
+			std::cout << "It's a tie! Both players are out of dots!\n";
+			isPlaying = false;
+			break;
 		}
 		std::cout << "Do you want to continue the game? ";
 		std::cin >> response;
@@ -74,15 +99,15 @@ void Game(Board board, Player player1, Player player2, Bulldozer bulldozer = Bul
 			board.getDot(i, j)->deleteAllBridgesForADot();
 		}
 	}
-	
+
 }
 
 int main()
 {
 	Board board(BOARD_SIZE);
 
-	Player player1("player1", Player::Color::Red);
-	Player player2("player2", Player::Color::Black);
+	Player player1("player1", Player::Color::Red, DOTS_NUMBER);
+	Player player2("player2", Player::Color::Black, DOTS_NUMBER);
 
 	std::cout << "Choose you game mode:\n1->DEFAULT\n2->BULLDOZER\n3->MINES.\n";
 	int mode;
@@ -104,6 +129,6 @@ int main()
 		Game(board, player1, player2, bulldozer);
 		break;
 	}
-	
+
 	return 0;
 }

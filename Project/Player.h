@@ -19,7 +19,7 @@ namespace twixt {
 
 		// Constructors
 		Player() {};
-		Player(std::string name, Color color);
+		Player(std::string name, Color color, int remainingDots);
 		Player(const Player& other);//copy constructor
 		Player(Player&& other) noexcept; // move constructor
 
@@ -29,10 +29,12 @@ namespace twixt {
 		// Getters
 		std::string getName() const;
 		Color getColor() const;
+		int getRemainingDots() const;
 
 		// Setters
 		void setName(std::string);
 		void setColor(Color);
+		void setRemainingDots(int);
 
 		void turn(Board& board);
 
@@ -42,6 +44,7 @@ namespace twixt {
 		std::string m_name;
 		Color m_color;
 		std::stack<Dot*> existingDots;
+		int m_remainingDots;
 	};
 }
 

@@ -1,11 +1,11 @@
 ﻿#include "Player.h"
 
 namespace twixt {
-	Player::Player(std::string name, Color color) :
-		m_name{ name }, m_color{ color } {}
+	Player::Player(std::string name, Color color, int remainingDots) :
+		m_name{ name }, m_color{ color }, m_remainingDots{ remainingDots } {}
 
 	Player::Player(const Player& newPlayer) :
-		m_name{ newPlayer.m_name }, m_color{ newPlayer.m_color } {}
+		m_name{ newPlayer.m_name }, m_color{ newPlayer.m_color }, m_remainingDots{ newPlayer.m_remainingDots } {}
 	// Implementarea move constructorului
 	twixt::Player::Player(Player&& other) noexcept : m_name(std::move(other.m_name)), m_color(other.m_color) {
 		// Setăm membrii altui obiect pe nullptr sau valorile implicite
@@ -26,6 +26,11 @@ namespace twixt {
 		return m_color;
 	}
 
+	int Player::getRemainingDots() const
+	{
+		return m_remainingDots;
+	}
+
 	void Player::setName(std::string name) 
 	{
 		m_name = name;
@@ -34,6 +39,11 @@ namespace twixt {
 	void Player::setColor(Color color) 
 	{
 		m_color = color;
+	}
+
+	void Player::setRemainingDots(int remainingDots)
+	{
+		m_remainingDots = remainingDots;
 	}
 
 	void Player::turn(Board& board) 

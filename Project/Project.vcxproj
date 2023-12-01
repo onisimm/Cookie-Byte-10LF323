@@ -136,12 +136,14 @@
     <ClCompile Include="Dot.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="TwixtGame.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Board.h" />
     <ClInclude Include="Bulldozer.h" />
     <ClInclude Include="Dot.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="TwixtGame.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

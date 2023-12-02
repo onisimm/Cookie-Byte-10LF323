@@ -1,6 +1,7 @@
 //dot.cpp
 #include "Dot.h"
 #include <iostream>
+#include <algorithm>
 
 namespace twixt {
 

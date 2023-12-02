@@ -1,8 +1,18 @@
 #include "TwixtGame.h"
+#include "mainwindow.h"
+#include <QApplication>
 
-int main()
+//int main()
+//{
+//	TwixtGame game;
+//	game.Run();
+//	return 0;
+//}
+
+int main(int argc, char *argv[])
 {
-	TwixtGame game;
-	game.Run();
-	return 0;
+    QApplication app(argc, argv);
+    MainWindow w;
+    w.show();
+    return app.exec();
 }

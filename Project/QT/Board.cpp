@@ -1,4 +1,5 @@
 #include "Board.h"
+#include <algorithm>
 
 namespace twixt
 {

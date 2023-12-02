@@ -18,6 +18,22 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="QT\Board.h" />
+    <ClInclude Include="QT\Bulldozer.h" />
+    <ClInclude Include="QT\Dot.h" />
+    <ClInclude Include="QT\Player.h" />
+    <ClInclude Include="QT\TwixtGame.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="QT\Board.cpp" />
+    <ClCompile Include="QT\Bulldozer.cpp" />
+    <ClCompile Include="QT\Dot.cpp" />
+    <ClCompile Include="QT\main.cpp" />
+    <ClCompile Include="QT\mainwindow.cpp" />
+    <ClCompile Include="QT\Player.cpp" />
+    <ClCompile Include="QT\TwixtGame.cpp" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
@@ -130,21 +146,6 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClCompile Include="Board.cpp" />
-    <ClCompile Include="Bulldozer.cpp" />
-    <ClCompile Include="Dot.cpp" />
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="Player.cpp" />
-    <ClCompile Include="TwixtGame.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Board.h" />
-    <ClInclude Include="Bulldozer.h" />
-    <ClInclude Include="Dot.h" />
-    <ClInclude Include="Player.h" />
-    <ClInclude Include="TwixtGame.h" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

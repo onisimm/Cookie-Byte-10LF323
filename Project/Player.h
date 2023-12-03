@@ -6,6 +6,7 @@
 #include <stack>
 #include "Board.h"
 #include "Dot.h"
+#include "ObjectInStack.h"
 
 namespace twixt {
 	class Player {
@@ -36,7 +37,7 @@ namespace twixt {
 		void setColor(Color);
 		void setRemainingDots(int);
 
-		void turn(Board& board);
+		ObjectInStack turn(Board& board);
 		bool hasRemainingDots();
 
 		friend std::istream& operator>>(std::istream& in, Player& player);

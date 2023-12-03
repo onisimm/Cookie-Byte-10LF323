@@ -3,12 +3,15 @@
 #include <iostream>
 #include "Dot.h"
 #include <random>
+#include <QObject>
 
 #ifndef BOARD_H
 #define BOARD_H
 
 namespace twixt {
-	class Board {
+	class Board : public QObject {
+		Q_OBJECT
+
 	public:
 		// Constructors
 		Board();

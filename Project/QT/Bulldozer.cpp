@@ -22,8 +22,6 @@ void twixt::Bulldozer::destoryRandomDot(Board& board)
 	//set the new position for the bulldozer
 	position.first = i;
 	position.second = j;
-
-	
 }
 
 //Constructor 
@@ -44,6 +42,8 @@ twixt::Bulldozer::Bulldozer(Board& board)
 	position.first = i;
 	position.second = j;
 }
+
+twixt::Bulldozer::Bulldozer(const Bulldozer& other) : position{other.position} {}
 
 //Flipping the coin and deciding whether to destory a Dot or not
 void twixt::Bulldozer::flipCoin(Board& board)

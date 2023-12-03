@@ -1,5 +1,4 @@
 #include "Board.h"
-#include <algorithm>
 
 namespace twixt
 {
@@ -18,7 +17,7 @@ namespace twixt
 					std::cout << "R";
 
 				if (m_matrixDot[i][j].getStatus() == Dot::DotStatus::Player2)
-					std::cout << "B";
+                    std::cout << "B";
 
 
 				if (m_matrixDot[i][j].getStatus() == Dot::DotStatus::Bulldozer)

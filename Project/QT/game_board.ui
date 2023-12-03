@@ -13,33 +13,41 @@
   <property name="windowTitle">
    <string>Twixt Game Board</string>
   </property>
-  <widget class="QWidget" name="gameBoardWidget">
+  <widget class="QWidget" name="gridLayoutWidget">
    <property name="geometry">
     <rect>
-     <x>20</x>
-     <y>20</y>
-     <width>560</width>
-     <height>560</height>
+     <x>140</x>
+     <y>50</y>
+     <width>291</width>
+     <height>291</height>
     </rect>
    </property>
-   <layout class="QGridLayout" name="gridLayout">
-    <item row="0" column="0">
-     <widget class="QPushButton" name="square_0_0">
-      <property name="text">
-       <string></string>
-      </property>
-     </widget>
-    </item>
-    <!-- Repeat the above QPushButton for each square in your game board -->
-    <item row="0" column="1">
-     <widget class="QPushButton" name="square_0_1">
-      <property name="text">
-       <string></string>
-      </property>
-     </widget>
-    </item>
-    <!-- Continue repeating for the entire grid -->
-   </layout>
+   <layout class="QGridLayout" name="gridLayout"/>
+  </widget>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>100</x>
+     <y>0</y>
+     <width>381</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <property name="font">
+    <font>
+     <family>Comic Sans MS</family>
+     <pointsize>15</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>This is where the game will be displayed</string>
+   </property>
   </widget>
  </widget>
  <resources/>

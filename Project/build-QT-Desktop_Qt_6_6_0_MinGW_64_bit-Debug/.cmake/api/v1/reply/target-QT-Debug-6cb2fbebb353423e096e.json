@@ -75,13 +75,13 @@
 			{
 				"command" : 4,
 				"file" : 1,
-				"line" : 66,
+				"line" : 67,
 				"parent" : 0
 			},
 			{
 				"command" : 5,
 				"file" : 1,
-				"line" : 49,
+				"line" : 50,
 				"parent" : 0
 			},
 			{
@@ -513,7 +513,8 @@
 				11,
 				12,
 				13,
-				15
+				16,
+				17
 			]
 		},
 		{
@@ -521,14 +522,15 @@
 			"sourceIndexes" : 
 			[
 				4,
-				16
+				15,
+				18
 			]
 		},
 		{
 			"name" : "CMake Rules",
 			"sourceIndexes" : 
 			[
-				17
+				19
 			]
 		}
 	],
@@ -619,9 +621,20 @@
 			"sourceGroupIndex" : 0
 		},
 		{
+			"backtrace" : 4,
+			"path" : "game_board.ui",
+			"sourceGroupIndex" : 2
+		},
+		{
 			"backtrace" : 0,
 			"isGenerated" : true,
 			"path" : "C:/Users/onisi/OneDrive/Desktop/school/modern-c++/Cookie-Byte-Twixt/Project/build-QT-Desktop_Qt_6_6_0_MinGW_64_bit-Debug/QT_autogen/include/ui_mainwindow.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 0,
+			"isGenerated" : true,
+			"path" : "C:/Users/onisi/OneDrive/Desktop/school/modern-c++/Cookie-Byte-Twixt/Project/build-QT-Desktop_Qt_6_6_0_MinGW_64_bit-Debug/QT_autogen/include/ui_game_board.h",
 			"sourceGroupIndex" : 1
 		},
 		{

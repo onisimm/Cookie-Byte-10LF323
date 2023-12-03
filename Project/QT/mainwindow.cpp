@@ -8,13 +8,10 @@ MainWindow::MainWindow(QWidget *parent)
     setupConnections();
 
     setWindowTitle("Twixt Game");
-    setFixedSize(600, 500);  // Adjust the size as needed
+    setFixedSize(600, 500);
 }
 
-MainWindow::~MainWindow()
-{
-    // Destructor
-}
+MainWindow::~MainWindow() {}
 
 void MainWindow::onDefaultButtonClicked()
 {
@@ -33,31 +30,36 @@ void MainWindow::onMinesButtonClicked()
 
 void MainWindow::createUI()
 {
-    QWidget *centralWidget = new QWidget(this);
-    QVBoxLayout *layout = new QVBoxLayout(centralWidget);
-
-    titleLabel = new QLabel("Choose your Twixt gamemode:", this);
-    titleLabel->setAlignment(Qt::AlignCenter);
-    titleLabel->setFont(QFont("Comic Sans MS", 15));
-
-    defaultButton = new QPushButton("Default", this);
-    defaultButton->setFont(QFont("Comic Sans MS"));
-
-    bulldozerButton = new QPushButton("Bulldozer", this);
-    bulldozerButton->setFont(QFont("Comic Sans MS"));
-
-    minesButton = new QPushButton("Mines", this);
-    minesButton->setFont(QFont("Comic Sans MS"));
-
-    layout->addWidget(titleLabel);
-    layout->addSpacerItem(new QSpacerItem(20, 40));
-    layout->addWidget(defaultButton);
-    layout->addWidget(bulldozerButton);
-    layout->addWidget(minesButton);
-
-    centralWidget->setLayout(layout);
+    QWidget* centralWidget = new QWidget(this);
     setCentralWidget(centralWidget);
+
+    QVBoxLayout* verticalLayout = new QVBoxLayout(centralWidget);
+
+    titleLabel = new QLabel("Choose your Twixt gamemode:");
+    titleLabel->setFont(QFont("Comic Sans MS", 15));
+    titleLabel->setAlignment(Qt::AlignCenter);
+
+    QSpacerItem* verticalSpacer = new QSpacerItem(20, 40, QSizePolicy::Maximum, QSizePolicy::Maximum);
+
+    defaultButton = new QPushButton("Default");
+    defaultButton->setFont(QFont("Comic Sans MS"));
+    defaultButton->setStyleSheet("text-align:center;"); // Center align the button text
+
+    bulldozerButton = new QPushButton("Bulldozer");
+    bulldozerButton->setFont(QFont("Comic Sans MS"));
+    bulldozerButton->setStyleSheet("text-align:center;"); // Center align the button text
+
+    minesButton = new QPushButton("Mines");
+    minesButton->setFont(QFont("Comic Sans MS"));
+    minesButton->setStyleSheet("text-align:center;"); // Center align the button text
+
+    verticalLayout->addWidget(titleLabel);
+    verticalLayout->addItem(verticalSpacer);
+    verticalLayout->addWidget(defaultButton);
+    verticalLayout->addWidget(bulldozerButton);
+    verticalLayout->addWidget(minesButton);
 }
+
 
 void MainWindow::setupConnections()
 {

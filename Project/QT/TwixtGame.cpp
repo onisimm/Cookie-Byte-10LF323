@@ -115,22 +115,31 @@ void TwixtGame::Run()
 	int mode;
 	std::cin >> mode;
 	switch (mode)
-	{
-	case 1:
+    {
+    case 1: {
 		GameLoop(board, player1, player2);
-		break;
-	case 2:
+        break;
+    }
+    case 2: {
 		Bulldozer bulldozer(board);
-		GameLoop(board, player1, player2, bulldozer);
-		break;
-	case 3:
+        GameLoop(board, player1, player2, bulldozer);
+        break;
+    }
+    case 3: {
 		for (int i = 0; i < 3; i++)
 		{
 			board.placeRandomMine();
 		}
 		GameLoop(board, player1, player2);
-		break;
-	default:
-		std::cout << "Not a valid option.\n";
+        break;
+    }
+    default: {
+        std::cout << "Not a valid option.\n";
+    }
 	}
+}
+
+void TwixtGame::runGameMode(int mode) {
+    // TODO
+    // Implement Run method, but using signals to interact with the GUI
 }

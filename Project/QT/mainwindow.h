@@ -2,6 +2,8 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QLabel>
+#include <QPushButton>
 
 class MainWindow : public QMainWindow
 {
@@ -17,7 +19,15 @@ private slots:
     void onMinesButtonClicked();
 
 private:
+    // UI components
+    QLabel *titleLabel;
+    QPushButton *defaultButton;
+    QPushButton *bulldozerButton;
+    QPushButton *minesButton;
 
+    // Private methods
+    void createUI();
+    void setupConnections();
 };
 
-#endif
+#endif // MAINWINDOW_H

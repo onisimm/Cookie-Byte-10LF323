@@ -119,6 +119,10 @@ void TwixtGame::Run()
 	case 1:
 		GameLoop(board, player1, player2);
 		break;
+	case 2:
+		Bulldozer bulldozer(board);
+		GameLoop(board, player1, player2, bulldozer);
+		break;
 	case 3:
 		for (int i = 0; i < 3; i++)
 		{
@@ -126,9 +130,7 @@ void TwixtGame::Run()
 		}
 		GameLoop(board, player1, player2);
 		break;
-	case 2:
-		Bulldozer bulldozer(board);
-		GameLoop(board, player1, player2, bulldozer);
-		break;
+	default:
+		std::cout << "Not a valid option.\n";
 	}
 }

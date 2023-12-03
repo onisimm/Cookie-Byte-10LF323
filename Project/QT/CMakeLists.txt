@@ -27,6 +27,7 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         mainwindow.h Board.h Player.h Dot.h Bulldozer.h
         TwixtGame.h
         TwixtGame.cpp
+        game_board.ui
     )
 # Define target properties for Android with Qt 6 as:
 #    set_property(TARGET QT APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR

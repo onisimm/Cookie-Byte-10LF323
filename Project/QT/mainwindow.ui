@@ -6,22 +6,43 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>300</height>
+    <width>600</width>
+    <height>500</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Twixt Game</string>
   </property>
+  <property name="layoutDirection">
+   <enum>Qt::LeftToRight</enum>
+  </property>
+  <property name="autoFillBackground">
+   <bool>true</bool>
+  </property>
+  <property name="tabShape">
+   <enum>QTabWidget::Rounded</enum>
+  </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QVBoxLayout" name="verticalLayout">
     <item>
      <widget class="QLabel" name="titleLabel">
-      <property name="alignment">
-       <set>Qt::AlignCenter</set>
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="font">
+       <font>
+        <family>Comic Sans MS</family>
+        <pointsize>15</pointsize>
+       </font>
       </property>
       <property name="text">
        <string>Choose your Twixt gamemode:</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
       </property>
      </widget>
     </item>
@@ -29,6 +50,9 @@
      <spacer name="verticalSpacer">
       <property name="orientation">
        <enum>Qt::Vertical</enum>
+      </property>
+      <property name="sizeType">
+       <enum>QSizePolicy::Maximum</enum>
       </property>
       <property name="sizeHint" stdset="0">
        <size>
@@ -38,22 +62,43 @@
       </property>
      </spacer>
     </item>
-    <item>
+    <item alignment="Qt::AlignHCenter">
      <widget class="QPushButton" name="defaultButton">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="font">
+       <font>
+        <family>Comic Sans MS</family>
+       </font>
+      </property>
       <property name="text">
        <string>Default</string>
       </property>
      </widget>
     </item>
-    <item>
+    <item alignment="Qt::AlignHCenter">
      <widget class="QPushButton" name="bulldozerButton">
+      <property name="font">
+       <font>
+        <family>Comic Sans MS</family>
+       </font>
+      </property>
       <property name="text">
        <string>Bulldozer</string>
       </property>
      </widget>
     </item>
-    <item>
+    <item alignment="Qt::AlignHCenter">
      <widget class="QPushButton" name="minesButton">
+      <property name="font">
+       <font>
+        <family>Comic Sans MS</family>
+       </font>
+      </property>
       <property name="text">
        <string>Mines</string>
       </property>

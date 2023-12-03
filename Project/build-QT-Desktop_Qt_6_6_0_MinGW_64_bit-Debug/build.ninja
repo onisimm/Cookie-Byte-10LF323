@@ -208,7 +208,7 @@ build QT_autogen_timestamp_deps: phony CMakeFiles/QT_autogen_timestamp_deps
 #############################################
 # Utility command for QT_autogen
 
-build QT_autogen: phony CMakeFiles/QT_autogen QT_autogen/include/ui_mainwindow.h QT_autogen/timestamp QT_autogen/mocs_compilation.cpp QT_autogen_timestamp_deps
+build QT_autogen: phony CMakeFiles/QT_autogen QT_autogen/include/ui_mainwindow.h QT_autogen/include/ui_game_board.h QT_autogen/timestamp QT_autogen/mocs_compilation.cpp QT_autogen_timestamp_deps
 
 
 #############################################
@@ -224,13 +224,13 @@ build QT_autogen/timestamp QT_autogen/mocs_compilation.cpp | ${cmake_ninja_workd
 #############################################
 # Phony custom command for CMakeFiles\QT_autogen_timestamp_deps
 
-build CMakeFiles/QT_autogen_timestamp_deps | ${cmake_ninja_workdir}CMakeFiles/QT_autogen_timestamp_deps: phony C$:/Qt/6.6.0/mingw_64/./bin/uic.exe C$:/Qt/6.6.0/mingw_64/./bin/moc.exe C$:/Qt/6.6.0/mingw_64/lib/libQt6Widgets.a C$:/Qt/6.6.0/mingw_64/lib/libQt6Core.a
+build CMakeFiles/QT_autogen_timestamp_deps | ${cmake_ninja_workdir}CMakeFiles/QT_autogen_timestamp_deps: phony C$:/Qt/6.6.0/mingw_64/./bin/moc.exe C$:/Qt/6.6.0/mingw_64/./bin/uic.exe C$:/Qt/6.6.0/mingw_64/lib/libQt6Widgets.a C$:/Qt/6.6.0/mingw_64/lib/libQt6Core.a
 
 
 #############################################
 # Phony custom command for CMakeFiles\QT_autogen
 
-build CMakeFiles/QT_autogen QT_autogen/include/ui_mainwindow.h | ${cmake_ninja_workdir}CMakeFiles/QT_autogen ${cmake_ninja_workdir}QT_autogen/include/ui_mainwindow.h: phony QT_autogen/timestamp || QT_autogen_timestamp_deps
+build CMakeFiles/QT_autogen QT_autogen/include/ui_mainwindow.h QT_autogen/include/ui_game_board.h | ${cmake_ninja_workdir}CMakeFiles/QT_autogen ${cmake_ninja_workdir}QT_autogen/include/ui_mainwindow.h ${cmake_ninja_workdir}QT_autogen/include/ui_game_board.h: phony QT_autogen/timestamp || QT_autogen_timestamp_deps
 
 # =============================================================================
 # Target aliases.

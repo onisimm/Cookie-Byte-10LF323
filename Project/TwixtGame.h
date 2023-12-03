@@ -22,4 +22,5 @@ public:
 	void Run();
 private:
 	GameMode m_gameMode;
+	GameStack m_gameStack;
 };

@@ -69,7 +69,8 @@ void TwixtGame::GameLoop(Board board, Player player1, Player player2, Bulldozer 
 
 		if (bulldozer.exists())
 		{
-			bulldozer.flipCoin(board);
+			if (bulldozer.flipCoin(board))
+				m_gameStack.AddInGameStack(board.getDot(bulldozer.getI(), bulldozer.getJ()), int(Dot::DotStatus::Bulldozer));
 		}
 
 		if (IsTie(player1, player2))

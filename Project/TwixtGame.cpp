@@ -1,5 +1,7 @@
 #include"TwixtGame.h"
 
+#ifndef TWIXTGAME_H
+#define TWIXTGAME_H
 #define BOARD_SIZE 24
 #define DOTS_NUMBER 50
 
@@ -12,7 +14,8 @@ void TwixtGame::GameTurns(Player& player, bool& isPlaying, Board& board)
 {
 	std::cout << "It's " << player.getName() << "'s turn!\n";
 	std::cout << "REMAINING DOTS for " << player.getName() << ": " << player.getRemainingDots() << "\n";
-	player.turn(board);
+	ObjectInStack object = player.turn(board);
+	m_gameStack.AddInGameStack(object.getDot(), object.getType());
 	board.showBoard();
 	std::cout << "\n";
 
@@ -141,3 +144,8 @@ void TwixtGame::Run()
 		break;
 	}
 }
+GameStack TwixtGame::getGameStack() const
+{
+	return m_gameStack;
+}
+#endif

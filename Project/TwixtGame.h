@@ -20,6 +20,9 @@ public:
 	bool IsTie(Player player1, Player player2);
 	void GameLoop(Board board, Player player1, Player player2, Bulldozer bulldozer = Bulldozer());
 	void Run();
+
+	//getter
+	GameStack getGameStack() const;
 private:
 	GameMode m_gameMode;
 	GameStack m_gameStack;

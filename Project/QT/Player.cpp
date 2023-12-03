@@ -46,7 +46,7 @@ namespace twixt {
 		m_remainingDots = remainingDots;
 	}
 
-	void Player::turn(Board& board)
+	ObjectInStack Player::turn(Board& board)
 	{
 		std::cout << "Enter position: ";
 
@@ -63,13 +63,12 @@ namespace twixt {
 				{
 					m_remainingDots--;
 				}
-
-				//Added the Dot in the player's stack:
-				//existingDots.push(&(board.getMatrixDot(i,j))); 
+				return ObjectInStack(board.getDot(i, j), int(board.getDot(i, j)->getStatus()));
+			
 			}
 			else {
 				std::cout << "Not possible! Try again!\n";
-				turn(board);
+				return turn(board);
 			}
 		}
 		else
@@ -81,13 +80,11 @@ namespace twixt {
 				{
 					m_remainingDots--;
 				}
-
-				//Added the Dot in the player's stack
-				//existingDots.push(&(board.getMatrixDot(i, j)));
+				return ObjectInStack(board.getDot(i, j), int(board.getDot(i, j)->getStatus()));
 			}
 			else {
 				std::cout << "Not possible! Try again!\n";
-				turn(board);
+				return turn(board);
 			}
 		}
 	}

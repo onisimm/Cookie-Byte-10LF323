@@ -46,17 +46,18 @@ twixt::Bulldozer::Bulldozer(Board& board)
 twixt::Bulldozer::Bulldozer(const Bulldozer& other) : position{other.position} {}
 
 //Flipping the coin and deciding whether to destory a Dot or not
-void twixt::Bulldozer::flipCoin(Board& board)
+bool twixt::Bulldozer::flipCoin(Board& board)
 {
 	srand(time(NULL));
 	if (rand() % 2)
 	{
 		std::cout << "We flipped the coin and nothing will happen.\n";
-		return;
+		return false;
 	}
 	//If it did not exist the function, we will destory a Dot
 	destoryRandomDot(board);
 	board.showBoard();
+	return true;
 }
 
 bool twixt::Bulldozer::exists()
@@ -64,4 +65,14 @@ bool twixt::Bulldozer::exists()
 	if (position.first != 0)
 		return true;
 	return false;
+}
+
+uint8_t twixt::Bulldozer::getI() const
+{
+	return position.first;
+}
+
+uint8_t twixt::Bulldozer::getJ() const
+{
+	return position.second;
 }

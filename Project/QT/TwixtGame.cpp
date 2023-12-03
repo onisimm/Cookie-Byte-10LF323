@@ -1,5 +1,7 @@
 #include"TwixtGame.h"
 
+#ifndef TWIXTGAME_H
+#define TWIXTGAME_H
 #define BOARD_SIZE 24
 #define DOTS_NUMBER 50
 
@@ -12,7 +14,8 @@ void TwixtGame::GameTurns(Player& player, bool& isPlaying, Board& board)
 {
 	std::cout << "It's " << player.getName() << "'s turn!\n";
 	std::cout << "REMAINING DOTS for " << player.getName() << ": " << player.getRemainingDots() << "\n";
-	player.turn(board);
+	ObjectInStack object = player.turn(board);
+	m_gameStack.AddInGameStack(object.getDot(), object.getType());
 	board.showBoard();
 	std::cout << "\n";
 
@@ -66,7 +69,8 @@ void TwixtGame::GameLoop(Board board, Player player1, Player player2, Bulldozer 
 
 		if (bulldozer.exists())
 		{
-			bulldozer.flipCoin(board);
+			if (bulldozer.flipCoin(board))
+				m_gameStack.AddInGameStack(board.getDot(bulldozer.getI(), bulldozer.getJ()), int(Dot::DotStatus::Bulldozer));
 		}
 
 		if (IsTie(player1, player2))
@@ -92,6 +96,8 @@ void TwixtGame::GameLoop(Board board, Player player1, Player player2, Bulldozer 
 			std::cout << "Choose the second dot: ";
 			std::cin >> i2 >> j2;
 			board.deleteBridge(board.getMatrixDot(i1, j1), board.getMatrixDot(i2, j2));
+			m_gameStack.AddInGameStack(&board.getMatrixDot(i1, j1), DELETEBRIDGE);
+			m_gameStack.AddInDeletedBridgesDotStack(&board.getMatrixDot(i2, j2));
 		}
 
 		if (response == "deleteall" || response == "DeleteAll")
@@ -114,29 +120,37 @@ void TwixtGame::Run()
 	std::cout << "Choose you game mode:\n1->DEFAULT\n2->BULLDOZER\n3->MINES.\n";
 	int mode;
 	std::cin >> mode;
+	//GameStack gameStack;
 	switch (mode)
-    {
-    case 1: {
+	{
+	case 1:
+		m_gameStack = GameStack(0);
+		m_gameMode = GameMode::Default;
 		GameLoop(board, player1, player2);
-        break;
-    }
-    case 2: {
-		Bulldozer bulldozer(board);
-        GameLoop(board, player1, player2, bulldozer);
-        break;
-    }
-    case 3: {
+		break;
+	case 3:
+		m_gameStack = GameStack(2);
+		m_gameMode = GameMode::Mines;
 		for (int i = 0; i < 3; i++)
 		{
 			board.placeRandomMine();
 		}
 		GameLoop(board, player1, player2);
-        break;
-    }
-    default: {
-        std::cout << "Not a valid option.\n";
-    }
+    break;
+	case 2:
+		m_gameStack = GameStack(1);
+		m_gameMode = GameMode::Bulldozer;
+		Bulldozer bulldozer(board);
+		GameLoop(board, player1, player2, bulldozer);
+		break;
 	}
+  default: {
+    std::cout << "Not a valid option.\n";
+  }
+}
+GameStack TwixtGame::getGameStack() const
+{
+	return m_gameStack;
 }
 
 void TwixtGame::runGameMode(int mode) {

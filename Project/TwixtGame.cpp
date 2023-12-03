@@ -114,12 +114,17 @@ void TwixtGame::Run()
 	std::cout << "Choose you game mode:\n1->DEFAULT\n2->BULLDOZER\n3->MINES.\n";
 	int mode;
 	std::cin >> mode;
+	GameStack gameStack;
 	switch (mode)
 	{
 	case 1:
+		gameStack = GameStack(0);
+		m_gameMode = GameMode::Default;
 		GameLoop(board, player1, player2);
 		break;
 	case 3:
+		gameStack = GameStack(2);
+		m_gameMode = GameMode::Mines;
 		for (int i = 0; i < 3; i++)
 		{
 			board.placeRandomMine();
@@ -127,6 +132,8 @@ void TwixtGame::Run()
 		GameLoop(board, player1, player2);
 		break;
 	case 2:
+		gameStack = GameStack(1);
+		m_gameMode = GameMode::Bulldozer;
 		Bulldozer bulldozer(board);
 		GameLoop(board, player1, player2, bulldozer);
 		break;

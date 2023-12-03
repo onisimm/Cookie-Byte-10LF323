@@ -16,8 +16,10 @@ namespace twixt {
 	public:
 		Bulldozer(Board& board);
 		Bulldozer() {};
-		void flipCoin(Board& board);
+		bool flipCoin(Board& board);
 		bool exists();
+		uint8_t getI() const;
+		uint8_t getJ() const;
 
 	};
 }

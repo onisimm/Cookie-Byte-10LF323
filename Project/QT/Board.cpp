@@ -39,6 +39,8 @@ namespace twixt
 		if (m_matrixDot[i][j].getStatus() == Dot::DotStatus::Clear)
 		{
 			m_matrixDot[i][j].setStatus(status);
+			m_matrixDot[i][j].setCoordI(i);
+			m_matrixDot[i][j].setCoordJ(j);
 			buildPossibleBridges(m_matrixDot[i][j]); // adding this dot as possible bridge in dots around
 			if (!m_matrixDot[i][j].getPossibleBridges().empty())
 			{

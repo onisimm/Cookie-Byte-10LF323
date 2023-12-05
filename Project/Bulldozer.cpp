@@ -11,6 +11,11 @@ void twixt::Bulldozer::destoryRandomDot(Board& board)
 		j = rand() % (board.getSize() - 2) + 1;
 	}
 
+	//assign the destroied dot 
+	m_dotDestroied.push(*board.getDot(i, j));
+	//assign the previous position
+	m_previousPosition.push(position);
+
 	//delete the random Dot
 	board.getDot(i, j)->setStatus(Dot::DotStatus::Bulldozer);
 	std::cout << "The dot " << i << " " << j << " will be destroyed\n";
@@ -76,3 +81,15 @@ uint8_t twixt::Bulldozer::getJ() const
 {
 	return position.second;
 }
+
+std::stack<std::pair<int, int>> twixt::Bulldozer::getPreviousPosition() const
+{
+	return m_previousPosition;
+}
+
+std::stack<twixt::Dot> twixt::Bulldozer::getDotDestroied() const
+{
+	return m_dotDestroied;
+}
+
+

@@ -41,13 +41,14 @@ bool TwixtGame::IsTie(Player player1, Player player2)
 	return !player1.hasRemainingDots() && !player2.hasRemainingDots();
 }
 
-void TwixtGame::GameLoop(Board board, Player player1, Player player2, Bulldozer bulldozer)
+void TwixtGame::GameLoop(Board& board, Player player1, Player player2, Bulldozer bulldozer)
 {
 	board.showBoard();
 	std::cout << "\n";
 
 	bool isPlaying = true;
 	std::string response;
+	SaveGame saveGame;
 
 	while (isPlaying)
 	{
@@ -106,6 +107,12 @@ void TwixtGame::GameLoop(Board board, Player player1, Player player2, Bulldozer 
 			int i, j;
 			std::cin >> i >> j;
 			board.getDot(i, j)->deleteAllBridgesForADot();
+		}
+
+		if (response == "save" || response == "Save")
+		{
+			saveGame.saveMatrix(board.getMatrix());
+			saveGame.saveStack(m_gameStack);
 		}
 	}
 }

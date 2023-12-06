@@ -10,20 +10,20 @@ namespace twixt
 		{
 			for (int j = 0; j < m_matrixDot[i].size(); j++)
 			{
-				if (m_matrixDot[i][j].getStatus() == Dot::DotStatus::Clear)
+				if (m_matrixDot[i][j]->getStatus() == Dot::DotStatus::Clear)
 					std::cout << "_";
 
-				if (m_matrixDot[i][j].getStatus() == Dot::DotStatus::Player1)
+				if (m_matrixDot[i][j]->getStatus() == Dot::DotStatus::Player1)
 					std::cout << "R";
 
-				if (m_matrixDot[i][j].getStatus() == Dot::DotStatus::Player2)
+				if (m_matrixDot[i][j]->getStatus() == Dot::DotStatus::Player2)
 					std::cout << "B";
 
 
-				if (m_matrixDot[i][j].getStatus() == Dot::DotStatus::Bulldozer)
+				if (m_matrixDot[i][j]->getStatus() == Dot::DotStatus::Bulldozer)
 					std::cout << "@";
 
-				if (m_matrixDot[i][j].getStatus() == Dot::DotStatus::Mines)
+				if (m_matrixDot[i][j]->getStatus() == Dot::DotStatus::Mines)
 					std::cout << "_";
 
 
@@ -35,18 +35,18 @@ namespace twixt
 
 	void Board::changeDotStatus(int i, int j, Dot::DotStatus status, bool& didMineExplode)
 	{
-		if (m_matrixDot[i][j].getStatus() == Dot::DotStatus::Clear)
+		if (m_matrixDot[i][j]->getStatus() == Dot::DotStatus::Clear)
 		{
-			m_matrixDot[i][j].setStatus(status);
-			m_matrixDot[i][j].setCoordI(i);
-			m_matrixDot[i][j].setCoordJ(j);
+			m_matrixDot[i][j]->setStatus(status);
+			m_matrixDot[i][j]->setCoordI(i);
+			m_matrixDot[i][j]->setCoordJ(j);
 			buildPossibleBridges(m_matrixDot[i][j]); // adding this dot as possible bridge in dots around
-			if (!m_matrixDot[i][j].getPossibleBridges().empty())
+			if (!m_matrixDot[i][j]->getPossibleBridges().empty())
 			{
 				possibleToExistingBridges(m_matrixDot[i][j]); // building current dot's possible bridges
 			}
 		}
-		else if (m_matrixDot[i][j].getStatus() == Dot::DotStatus::Mines) // in case there is a mine it will explode
+		else if (m_matrixDot[i][j]->getStatus() == Dot::DotStatus::Mines) // in case there is a mine it will explode
 		{
 			didMineExplode = true;
 			mineExplodes(m_matrixDot[i][j]);
@@ -77,13 +77,33 @@ namespace twixt
 		{
 			for (int j = 0; j < size; ++j)
 			{
-				m_matrixDot[i][j].setCoordI(i);
-				m_matrixDot[i][j].setCoordJ(j);
+				m_matrixDot[i][j] = new Dot;
+				m_matrixDot[i][j]->setCoordI(i);
+				m_matrixDot[i][j]->setCoordJ(j);
 			}
 		}
 	}
 
-	Board::Board(const Board& newBoard) : m_matrixDot{ newBoard.m_matrixDot } {}
+	Board::Board(const Board& newBoard)
+	{
+		m_matrixDot.resize(newBoard.getSize());
+		for (int i = 0; i < newBoard.getSize(); ++i)
+		{
+			m_matrixDot[i].resize(newBoard.getSize());
+		}
+
+		for (int i = 0; i < newBoard.getSize(); ++i)
+		{
+			for (int j = 0; j < newBoard.getSize(); ++j)
+			{
+				m_matrixDot[i][j] = new Dot;
+				m_matrixDot[i][j]->setCoordI(i);
+				m_matrixDot[i][j]->setCoordJ(j);
+				*m_matrixDot[i][j] = *newBoard.m_matrixDot[i][j];
+			}
+		}
+
+	}/*: m_matrixDot{newBoard.m_matrixDot} {}*/
 
 	// Move constructor
 	Board::Board(Board&& other) noexcept
@@ -95,7 +115,7 @@ namespace twixt
 	{
 		if (i >= 0 && i < m_matrixDot.size() && j >= 0 && j < m_matrixDot[i].size())
 		{
-			return &(m_matrixDot[i][j]);
+			return m_matrixDot[i][j];
 		}
 
 		throw std::out_of_range("Index out of bounds while trying to get Dot.");
@@ -107,13 +127,13 @@ namespace twixt
 		return m_matrixDot.size();
 	}
 
-	std::vector<std::vector<Dot>> Board::getMatrix()
+	std::vector<std::vector<Dot*>> Board::getMatrix()
 	{
 		//Getter for matrix
 		return m_matrixDot;
 	}
 
-	Dot& Board::getMatrixDot(int i, int j)
+	Dot* Board::getMatrixDot(int i, int j)
 	{
 		//Getter for a dot in position (i,j)
 		return m_matrixDot[i][j];
@@ -124,7 +144,7 @@ namespace twixt
 		//Setter for a dot in position (i,j) with the dot dot
 		if (i >= 0 && i < m_matrixDot.size() && j >= 0 && j < m_matrixDot[i].size())
 		{
-			m_matrixDot[i][j] = dot;
+			*m_matrixDot[i][j] = dot;
 			return;
 		}
 
@@ -147,20 +167,20 @@ namespace twixt
 		return *this;
 	}
 
-	void Board::possibleToExistingBridges(Dot& dot)
+	void Board::possibleToExistingBridges(Dot* dot)
 	{
-		for (auto dotForBridge : dot.getPossibleBridges())
+		for (auto dotForBridge : dot->getPossibleBridges())
 		{
-			if (dot.getStatus() == dotForBridge->getStatus() && dot.getStatus() != Dot::DotStatus::Clear)
+			if (dot->getStatus() == dotForBridge->getStatus() && dot->getStatus() != Dot::DotStatus::Clear)
 			{
-				if (checkObstructingBridges(dot, *dotForBridge))
+				if (checkObstructingBridges(*dot, *dotForBridge))
 				{
-					dot.buildBridge(dotForBridge);
+					dot->buildBridge(dotForBridge);
 				}
 			}
 		}
 
-		dot.clearPossibleBridges();
+		dot->clearPossibleBridges();
 	}
 
 	int orientation(const Dot& p, const Dot& q, const Dot& r) {
@@ -206,14 +226,14 @@ namespace twixt
 		{
 			for (int j = std::min(x1, x2); j <= std::max(x1, x2); ++j)
 			{
-				if (m_matrixDot[i][j] == dot1 || m_matrixDot[i][j] == dot2)
+				if (*m_matrixDot[i][j] == dot1 || *m_matrixDot[i][j] == dot2)
 				{
 					continue;
 				}
 
-				for (auto bridgeDot : m_matrixDot[i][j].getExistingBridges())
+				for (auto bridgeDot : m_matrixDot[i][j]->getExistingBridges())
 				{
-					if (doIntersect(dot1, dot2, m_matrixDot[i][j], *bridgeDot))
+					if (doIntersect(dot1, dot2, *m_matrixDot[i][j], *bridgeDot))
 					{
 						// std::cout << "Couldn't build a bridge between (" << dot1 << " and " << dot2 << " because of the bridge between " << m_matrixDot[i][j] << " and " << *bridgeDot << "\n";
 						return false;
@@ -226,12 +246,12 @@ namespace twixt
 
 
 
-	void Board::buildPossibleBridges(Dot& dot)
+	void Board::buildPossibleBridges(Dot* dot)
 	{
 		std::vector<std::pair<int, int>> positions{ { -2, -1 }, { -1, -2 }, { 1, -2 }, { 2, -1 }, { 2, 1 }, { 1, 2 }, { -1, 2 }, { -2, 1 } };
 
-		int y = dot.getCoordI();
-		int x = dot.getCoordJ();
+		int y = dot->getCoordI();
+		int x = dot->getCoordJ();
 
 		for (auto pair : positions)
 		{
@@ -243,9 +263,9 @@ namespace twixt
 
 			if (newY >= 0 && newY < m_matrixDot.size() && newX >= 0 && newX < m_matrixDot[newY].size()) // check boundaries
 			{
-				if (m_matrixDot[newY][newX].getStatus() == Dot::DotStatus::Clear)
+				if (m_matrixDot[newY][newX]->getStatus() == Dot::DotStatus::Clear)
 				{
-					m_matrixDot[newY][newX].addPossibleBridge(&m_matrixDot[y][x]);
+					m_matrixDot[newY][newX]->addPossibleBridge(m_matrixDot[y][x]);
 				}
 			}
 		}
@@ -254,16 +274,16 @@ namespace twixt
 	//verify whether the path leads to win or not
 	bool Board::checkPath(twixt::Dot::DotStatus status)
 	{
-		std::vector<Dot> margins = FindDotInMargins(status);
+		std::vector<Dot*> margins = FindDotInMargins(status);
 		if (margins.empty()) return false;
 		int index = 0;
-		Dot firstDot = margins[index];
-		Dot newDot;
+		Dot* firstDot = margins[index];
+		Dot* newDot;
 		/*Dot checkDot, newDot;
 		int position;*/
 
 		//Creating path vector: pair of dot in path and position of existing bridges for the dot.
-		std::vector<std::pair<Dot, int>> path;
+		std::vector<std::pair<Dot*, int>> path;
 
 		bool isFinalDot = false;
 		path.push_back({ firstDot, 0 });
@@ -272,10 +292,10 @@ namespace twixt
 			auto [checkDot, position] = path[path.size() - 1];
 			/*checkDot = path[path.size() - 1].first;
 			position = path[path.size() - 1].second;*/
-			if (position < checkDot.getExistingBridges().size())
+			if (position < checkDot->getExistingBridges().size())
 			{
-				newDot = *(checkDot.getExistingBridges())[position];
-				if (!newDot.isDotInPath(path))
+				newDot = checkDot->getExistingBridges()[position];
+				if (!newDot->isDotInPath(path))
 				{
 					path.push_back({ newDot, -1 });
 					checkDot = path[path.size() - 1].first;
@@ -304,18 +324,18 @@ namespace twixt
 		return isFinalDot;
 	}
 
-	std::vector<Dot> Board::FindDotInMargins(Dot::DotStatus status)
+	std::vector<Dot*> Board::FindDotInMargins(Dot::DotStatus status)
 	{
-		std::vector<Dot> margin;
+		std::vector<Dot*> margin;
 		if (status == Dot::DotStatus::Player1)
 		{
 			for (int i = 0; i < m_matrixDot.size(); i++)
 			{
-				if (m_matrixDot[0][i].getStatus() == Dot::DotStatus::Player1)
+				if (m_matrixDot[0][i]->getStatus() == Dot::DotStatus::Player1)
 				{
 					margin.push_back(m_matrixDot[0][i]);
 				}
-				if (m_matrixDot[1][i].getStatus() == Dot::DotStatus::Player1)
+				if (m_matrixDot[1][i]->getStatus() == Dot::DotStatus::Player1)
 				{
 					margin.push_back(m_matrixDot[1][i]);
 				}
@@ -325,11 +345,11 @@ namespace twixt
 		{
 			for (int i = 0; i < m_matrixDot.size(); i++)
 			{
-				if (m_matrixDot[i][0].getStatus() == Dot::DotStatus::Player2)
+				if (m_matrixDot[i][0]->getStatus() == Dot::DotStatus::Player2)
 				{
 					margin.push_back(m_matrixDot[i][0]);
 				}
-				if (m_matrixDot[i][1].getStatus() == Dot::DotStatus::Player2)
+				if (m_matrixDot[i][1]->getStatus() == Dot::DotStatus::Player2)
 				{
 					margin.push_back(m_matrixDot[i][1]);
 				}
@@ -337,7 +357,7 @@ namespace twixt
 		}
 		return margin;
 	}
-	bool Board::checkFinalMargin(Dot dotToCheck, Dot::DotStatus status)
+	bool Board::checkFinalMargin(Dot* dotToCheck, Dot::DotStatus status)
 	{
 		if (status == Dot::DotStatus::Player1)
 		{
@@ -361,19 +381,19 @@ namespace twixt
 		}
 		return false;
 	}
-	void Board::deleteBridge(Dot& firstDot, Dot& secondDot)
+	void Board::deleteBridge(Dot* firstDot, Dot* secondDot)
 	{
 
-		std::vector<Dot*> firstExistingBridges = firstDot.getExistingBridges();
-		firstExistingBridges.erase(find(firstExistingBridges.begin(), firstExistingBridges.end(), &secondDot));
-		std::vector<Dot*> secondExistingBridges = secondDot.getExistingBridges();
-		secondExistingBridges.erase(find(secondExistingBridges.begin(), secondExistingBridges.end(), &firstDot));
-		std::cout << "DELETED BRIDGE between " << firstDot.getCoordI() << " " << firstDot.getCoordJ() << " and " << secondDot.getCoordI() << " " << secondDot.getCoordJ();
+		std::vector<Dot*> firstExistingBridges = firstDot->getExistingBridges();
+		firstExistingBridges.erase(find(firstExistingBridges.begin(), firstExistingBridges.end(), secondDot));
+		std::vector<Dot*> secondExistingBridges = secondDot->getExistingBridges();
+		secondExistingBridges.erase(find(secondExistingBridges.begin(), secondExistingBridges.end(), firstDot));
+		std::cout << "DELETED BRIDGE between " << firstDot->getCoordI() << " " << firstDot->getCoordJ() << " and " << secondDot->getCoordI() << " " << secondDot->getCoordJ();
 
 	}
 	void Board::placeMine(int i, int j)
 	{
-		m_matrixDot[i][j].setStatus(Dot::DotStatus::Mines);
+		m_matrixDot[i][j]->setStatus(Dot::DotStatus::Mines);
 		std::cout << "Mine placed on " << i << " " << j << "\n";
 	}
 	void Board::placeRandomMine()
@@ -381,18 +401,18 @@ namespace twixt
 		srand(time(NULL));
 		int i = rand() % 22 + 1;
 		int j = rand() % 22 + 1;
-		while (m_matrixDot[i][j].getStatus() != Dot::DotStatus::Clear)
+		while (m_matrixDot[i][j]->getStatus() != Dot::DotStatus::Clear)
 		{
 			i = rand() % 22 + 1;
 			j = rand() % 22 + 1;
 		}
 		placeMine(i, j);
 	}
-	void Board::mineExplodes(Dot& mine)
+	void Board::mineExplodes(Dot* mine)
 	{
 		std::vector<std::pair<int, int>> positions{ {-1, -1},{-1,0},{-1,1},{0,1},{1,1},{1,0},{1,-1},{0,-1} };
-		int i = mine.getCoordI();
-		int j = mine.getCoordJ();
+		int i = mine->getCoordI();
+		int j = mine->getCoordJ();
 		std::cout << "Mine " << i << " " << j << " exploded!\n";
 		for (auto pair : positions)
 		{
@@ -401,19 +421,19 @@ namespace twixt
 			newJ += j;
 			if (newI >= 0 && newI < m_matrixDot.size() && newJ >= 0 && newJ < m_matrixDot[newI].size()) // check boundaries
 			{
-				if (m_matrixDot[newI][newJ].getStatus() == Dot::DotStatus::Player1 || m_matrixDot[newI][newJ].getStatus() == Dot::DotStatus::Player2)
+				if (m_matrixDot[newI][newJ]->getStatus() == Dot::DotStatus::Player1 || m_matrixDot[newI][newJ]->getStatus() == Dot::DotStatus::Player2)
 				{
 					//mine.setExplodedDots(m_matrixDot[newI][newJ]);
-					m_matrixDot[newI][newJ].setStatus(Dot::DotStatus::Clear);
-					m_matrixDot[newI][newJ].deleteAllBridgesForADot();
+					m_matrixDot[newI][newJ]->setStatus(Dot::DotStatus::Clear);
+					m_matrixDot[newI][newJ]->deleteAllBridgesForADot();
 					std::cout << "Dot " << newI << " " << newJ << " was erased!\n";
 				}
-				if (m_matrixDot[newI][newJ].getStatus() == Dot::DotStatus::Mines)
+				if (m_matrixDot[newI][newJ]->getStatus() == Dot::DotStatus::Mines)
 				{
 					mineExplodes(m_matrixDot[newI][newJ]);
 				}
 			}
 		}
-		m_matrixDot[i][j].setStatus(Dot::DotStatus::Clear);
+		m_matrixDot[i][j]->setStatus(Dot::DotStatus::Clear);
 	}
 }

@@ -23,7 +23,7 @@ namespace twixt {
 		// Getters
 		Dot* getDot(int i, int j);
 		uint32_t getSize() const;
-		std::vector<std::vector<Dot>> getMatrix();
+		std::vector<std::vector<Dot*>> getMatrix();
 		Dot& getMatrixDot(int, int);
 
 		// Setters
@@ -38,24 +38,24 @@ namespace twixt {
 		void showBoard() const;
 		void changeDotStatus(int i, int j, Dot::DotStatus status, bool& didMineExplode);
 
-		void possibleToExistingBridges(Dot& dot);
+		void possibleToExistingBridges(Dot* dot);
 
 		friend int orientation(const Dot& p, const Dot& q, const Dot& r);
 		friend bool onSegment(const Dot& p, const Dot& q, const Dot& r);
 		friend bool doIntersect(const Dot& p1, const Dot& p2, const Dot& q1, const Dot& q2);
 
 		bool checkObstructingBridges(const Dot& dot1, const Dot& dot2) const;
-		void buildPossibleBridges(Dot& dot);
+		void buildPossibleBridges(Dot* dot);
 
 		bool checkPath(Dot::DotStatus status);
-		std::vector<Dot> FindDotInMargins(Dot::DotStatus status);
-		bool checkFinalMargin(Dot dotToCheck, Dot::DotStatus status);
+		std::vector<Dot*> FindDotInMargins(Dot::DotStatus status);
+		bool checkFinalMargin(Dot* dotToCheck, Dot::DotStatus status);
 
-		void deleteBridge(Dot& firstDot, Dot& secondDot);
+		void deleteBridge(Dot* firstDot, Dot* secondDot);
 
 		void placeMine(int i, int j);
 		void placeRandomMine();
-		void mineExplodes(Dot& mine);
+		void mineExplodes(Dot* mine);
 	private:
 		std::vector<std::vector<Dot*>> m_matrixDot;
 	};

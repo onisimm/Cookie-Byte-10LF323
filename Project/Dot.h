@@ -1,14 +1,19 @@
 //dot.h
 
 #pragma once
+
+
+
+#ifndef DOT_H
+#define DOT_H
+
 #include <cstdint>
 #include <vector>
 #include <iostream>
-#include "Mine.h"
 
 namespace twixt {
-    //class Mine;
-    class Dot/* : public Mine*/{
+    class Mine;
+    class Dot {
     public:
         // Constructors
         Dot(); // default
@@ -60,6 +65,9 @@ namespace twixt {
 
         void deleteAllBridgesForADot();
 
+        void allocationMine();
+        Mine* getMine() const;
+     
     private:
     
         DotStatus m_status : 3;
@@ -67,5 +75,9 @@ namespace twixt {
 
         std::vector<Dot*> m_possibleBridges;
         std::vector<Dot*> m_existingBridges;
+        Mine* m_mine;
     };
 }
+
+#include "Mine.h"
+#endif // !DOT_H

@@ -1,14 +1,19 @@
 #pragma once
-#include <vector>
+
+#ifndef MINE_H
+#define MINE_H
 #include "Dot.h" 
+#include <vector>
+
+
 
 namespace twixt {
-	//class Dot;
 	class Mine
 	{
-	protected:
-		//std::vector<Dot*> m_explodedDots;
+	private:
+		std::vector<Dot> m_explodedDots;
 		Mine* m_previousMine;
+		bool m_triggered = false;
 	public:
 		Mine() : m_previousMine{ nullptr } {}
 		~Mine();
@@ -16,6 +21,10 @@ namespace twixt {
 
 		//setter
 		void setPreviousMine(Mine* previousMine);
-		//void setExplodedDots(Dot* explodedDot);
+		void setTrigger(bool);
+		void setExplodedDots(Dot* explodedDot);
+
 	};
 }
+
+#endif // !MINE_H

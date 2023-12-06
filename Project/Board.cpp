@@ -56,6 +56,7 @@ namespace twixt
 			int mineI, mineJ;
 			std::cin >> mineI >> mineJ;
 			placeMine(mineI, mineJ);
+			
 		}
 		else
 		{
@@ -395,6 +396,8 @@ namespace twixt
 	{
 		m_matrixDot[i][j]->setStatus(Dot::DotStatus::Mines);
 		std::cout << "Mine placed on " << i << " " << j << "\n";
+		m_matrixDot[i][j]->allocationMine();
+		//se adauga in vectorul de mine o noua mina vector<MIne*> ... Mine* nouaMina = new Mine
 	}
 	void Board::placeRandomMine()
 	{
@@ -414,6 +417,7 @@ namespace twixt
 		int i = mine->getCoordI();
 		int j = mine->getCoordJ();
 		std::cout << "Mine " << i << " " << j << " exploded!\n";
+		mine->getMine()->setTrigger(true);
 		for (auto pair : positions)
 		{
 			auto [newI, newJ] = pair;
@@ -421,9 +425,9 @@ namespace twixt
 			newJ += j;
 			if (newI >= 0 && newI < m_matrixDot.size() && newJ >= 0 && newJ < m_matrixDot[newI].size()) // check boundaries
 			{
+				mine->getMine()->setExplodedDots(m_matrixDot[newI][newJ]);
 				if (m_matrixDot[newI][newJ]->getStatus() == Dot::DotStatus::Player1 || m_matrixDot[newI][newJ]->getStatus() == Dot::DotStatus::Player2)
 				{
-					//mine.setExplodedDots(m_matrixDot[newI][newJ]);
 					m_matrixDot[newI][newJ]->setStatus(Dot::DotStatus::Clear);
 					m_matrixDot[newI][newJ]->deleteAllBridgesForADot();
 					std::cout << "Dot " << newI << " " << newJ << " was erased!\n";

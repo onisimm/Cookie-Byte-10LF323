@@ -113,10 +113,10 @@ namespace twixt
 		return m_matrixDot;
 	}
 
-	Dot& Board::getMatrixDot(int i, int j)
+	Dot* Board::getMatrixDot(int i, int j)
 	{
 		//Getter for a dot in position (i,j)
-		return *m_matrixDot[i][j];
+		return m_matrixDot[i][j];
 	}
 
 	void Board::setDot(int i, int j, const Dot& dot)

@@ -8,7 +8,7 @@
 
 namespace twixt {
     //class Mine;
-    class Dot : public Mine{
+    class Dot/* : public Mine*/{
     public:
         // Constructors
         Dot(); // default

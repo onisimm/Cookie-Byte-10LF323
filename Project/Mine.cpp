@@ -1,16 +1,7 @@
 #include "Mine.h"
 
-twixt::Mine::~Mine()
-{
-	delete m_previousMine;
-}
 
-twixt::Mine::Mine(const Mine& newMine) : m_previousMine{ newMine.m_previousMine }, m_explodedDots{ newMine.m_explodedDots } {}
-
-void twixt::Mine::setPreviousMine(Mine* previousMine)
-{
-	m_previousMine = previousMine;
-}
+twixt::Mine::Mine(const Mine& newMine) : m_explodedDots{ newMine.m_explodedDots } {}
 
 void twixt::Mine::setTrigger(bool trigger)
 {
@@ -20,5 +11,23 @@ void twixt::Mine::setTrigger(bool trigger)
 
 void twixt::Mine::setExplodedDots(Dot* explodedDot)
 {
-	m_explodedDots.push_back(*explodedDot);
+	Mine* ptrMine = dynamic_cast<Mine*>(explodedDot);
+	if (ptrMine)
+	{
+		Mine* newMine = new Mine;
+		*newMine = *ptrMine;
+		m_explodedDots.push_back(newMine);
+	}
+	else
+	{
+		Dot* newDot = new Dot;
+		*newDot = *explodedDot;
+		m_explodedDots.push_back(newDot);
+	}
+	
+}
+
+bool twixt::Mine::getTrigger()
+{
+	return m_triggered;
 }

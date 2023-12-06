@@ -2,7 +2,7 @@
 
 #ifndef TWIXTGAME_H
 #define TWIXTGAME_H
-#define BOARD_SIZE 6
+#define BOARD_SIZE 24
 #define DOTS_NUMBER 50
 
 void TwixtGame::ReadPlayers(Player& player1, Player& player2)
@@ -41,7 +41,7 @@ bool TwixtGame::IsTie(Player player1, Player player2)
 	return !player1.hasRemainingDots() && !player2.hasRemainingDots();
 }
 
-void TwixtGame::GameLoop(Board board, Player player1, Player player2, Bulldozer bulldozer)
+void TwixtGame::GameLoop(Board& board, Player player1, Player player2, Bulldozer bulldozer)
 {
 	board.showBoard();
 	std::cout << "\n";
@@ -138,10 +138,11 @@ void TwixtGame::Run()
 	case 3:
 		m_gameStack = GameStack(2);
 		m_gameMode = GameMode::Mines;
-		for (int i = 0; i < 3; i++)
+		for (int i = 0; i < 2; i++)
 		{
 			board.placeRandomMine();
 		}
+		board.placeMine(board.copieI, board.copieJ + 1);
 		GameLoop(board, player1, player2);
 		break;
 	case 2:

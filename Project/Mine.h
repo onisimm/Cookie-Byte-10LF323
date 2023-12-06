@@ -8,21 +8,24 @@
 
 
 namespace twixt {
-	class Mine
+	class Mine : public Dot
 	{
 	private:
-		std::vector<Dot> m_explodedDots;
-		Mine* m_previousMine;
+		std::vector<Dot*> m_explodedDots;
+		//Mine* m_previousMine;
 		bool m_triggered = false;
 	public:
-		Mine() : m_previousMine{ nullptr } {}
-		~Mine();
+		Mine() {}
+		~Mine() = default;
 		Mine(const Mine& newMine);
 
 		//setter
-		void setPreviousMine(Mine* previousMine);
+		//void setPreviousMine(Mine* previousMine);
 		void setTrigger(bool);
 		void setExplodedDots(Dot* explodedDot);
+
+		//getter
+		bool getTrigger();
 
 	};
 }

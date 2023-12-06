@@ -153,7 +153,7 @@ namespace twixt {
         m_existingBridges.clear();
     }
 
-    void Dot::allocationMine()
+   /* void Dot::allocationMine()
     {
         m_mine = new Mine();
     }
@@ -161,7 +161,7 @@ namespace twixt {
     Mine* Dot::getMine() const
     {
        return m_mine;
-    }
+    }*/
 
     void Dot::clearExistingBridges()
     {

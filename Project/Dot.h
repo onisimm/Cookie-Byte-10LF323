@@ -26,7 +26,7 @@ namespace twixt {
         Dot& operator=(Dot&& other) noexcept;
 
         // Destructor 
-        ~Dot();
+        virtual ~Dot();
 
         enum class DotStatus : uint8_t
         {
@@ -65,8 +65,8 @@ namespace twixt {
 
         void deleteAllBridgesForADot();
 
-        void allocationMine();
-        Mine* getMine() const;
+       /* void allocationMine();
+        Mine* getMine() const;*/
      
     private:
     
@@ -75,7 +75,7 @@ namespace twixt {
 
         std::vector<Dot*> m_possibleBridges;
         std::vector<Dot*> m_existingBridges;
-        Mine* m_mine;
+       // Mine* m_mine;
     };
 }
 

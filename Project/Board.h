@@ -55,7 +55,10 @@ namespace twixt {
 
 		void placeMine(int i, int j);
 		void placeRandomMine();
-		void mineExplodes(Dot* mine);
+		void mineExplodes(Mine* mine);
+
+		int copieI;
+		int copieJ;
 	private:
 		std::vector<std::vector<Dot*>> m_matrixDot;
 	};

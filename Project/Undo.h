@@ -7,10 +7,16 @@ namespace twixt {
 	class Undo
 	{
 	private:
-		GameStack m_undoGameStack;
+		twixt::Dot m_lastDot;
+		int m_type;
+		Board* board;
 	public:
-		Undo(GameStack gameStack);
-		void pressed(Board board);
+		Undo(GameStack gameStack, Board* gameBoard);
+		void pressed();
+		void undoPlayers(Dot::DotStatus status);
+		void undoBulldozer();
+		void undoMines();
+		void undoDeleteBridge();
 
 	};
 }

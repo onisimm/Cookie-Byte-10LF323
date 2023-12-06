@@ -111,7 +111,8 @@ void TwixtGame::GameLoop(Board board, Player player1, Player player2, Bulldozer 
 
 		if (response == "undo")
 		{
-			//undo class
+			Undo undo(m_gameStack, &board);
+			undo.pressed();
 		}
 	}
 }

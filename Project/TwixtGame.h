@@ -3,6 +3,7 @@
 #include"Player.h"
 #include"Bulldozer.h"
 #include "GameStack.h"
+#include "Undo.h"
 #include<iostream>
 using namespace twixt;
 

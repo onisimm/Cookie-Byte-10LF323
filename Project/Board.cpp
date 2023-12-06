@@ -403,6 +403,7 @@ namespace twixt
 			{
 				if (m_matrixDot[newI][newJ].getStatus() == Dot::DotStatus::Player1 || m_matrixDot[newI][newJ].getStatus() == Dot::DotStatus::Player2)
 				{
+					//mine.setExplodedDots(m_matrixDot[newI][newJ]);
 					m_matrixDot[newI][newJ].setStatus(Dot::DotStatus::Clear);
 					m_matrixDot[newI][newJ].deleteAllBridgesForADot();
 					std::cout << "Dot " << newI << " " << newJ << " was erased!\n";

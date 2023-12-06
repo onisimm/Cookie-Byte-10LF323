@@ -12,7 +12,6 @@ namespace twixt {
 	{
 	private:
 		std::vector<Dot*> m_explodedDots;
-		//Mine* m_previousMine;
 		bool m_triggered = false;
 	public:
 		Mine() {}
@@ -26,6 +25,8 @@ namespace twixt {
 
 		//getter
 		bool getTrigger();
+		std::vector<Dot*> getExplodedDots();
+
 
 	};
 }

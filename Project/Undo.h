@@ -7,7 +7,7 @@ namespace twixt {
 	class Undo
 	{
 	private:
-		twixt::Dot m_lastDot;
+		twixt::Dot* m_lastDot;
 		int m_type;
 		Board* board;
 	public:

@@ -4,9 +4,10 @@
 #include <cstdint>
 #include <vector>
 #include <iostream>
+#include "Mine.h"
 
 namespace twixt {
-    class Dot {
+    class Dot : public Mine{
     public:
         // Constructors
         Dot(); // default

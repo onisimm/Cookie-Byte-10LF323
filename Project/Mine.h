@@ -5,16 +5,17 @@
 namespace twixt {
 	class Mine
 	{
-	private:
-		std::vector<Dot> m_explodedDots;
+	protected:
+		std::vector<Dot*> m_explodedDots;
 		Mine* m_previousMine;
 	public:
 		Mine() : m_previousMine{ nullptr } {}
 		~Mine();
+		Mine(const Mine& newMine);
 
 		//setter
 		void setPreviousMine(Mine* previousMine);
-		void setExplodedDots(Dot explodedDot);
+		void setExplodedDots(Dot* explodedDot);
 	};
 }
 

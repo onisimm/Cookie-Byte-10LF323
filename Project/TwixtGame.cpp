@@ -2,7 +2,7 @@
 
 #ifndef TWIXTGAME_H
 #define TWIXTGAME_H
-#define BOARD_SIZE 24
+#define BOARD_SIZE 6
 #define DOTS_NUMBER 50
 
 void TwixtGame::ReadPlayers(Player& player1, Player& player2)
@@ -96,8 +96,8 @@ void TwixtGame::GameLoop(Board board, Player player1, Player player2, Bulldozer 
 			std::cout << "Choose the second dot: ";
 			std::cin >> i2 >> j2;
 			board.deleteBridge(board.getMatrixDot(i1, j1), board.getMatrixDot(i2, j2));
-			m_gameStack.AddInGameStack(&board.getMatrixDot(i1, j1), DELETEBRIDGE);
-			m_gameStack.AddInDeletedBridgesDotStack(&board.getMatrixDot(i2, j2));
+			m_gameStack.AddInGameStack(board.getMatrixDot(i1, j1), DELETEBRIDGE);
+			m_gameStack.AddInDeletedBridgesDotStack(board.getMatrixDot(i2, j2));
 		}
 
 		if (response == "deleteall" || response == "DeleteAll")

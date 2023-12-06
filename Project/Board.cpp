@@ -77,13 +77,33 @@ namespace twixt
 		{
 			for (int j = 0; j < size; ++j)
 			{
+				m_matrixDot[i][j] = new Dot;
 				m_matrixDot[i][j]->setCoordI(i);
 				m_matrixDot[i][j]->setCoordJ(j);
 			}
 		}
 	}
 
-	Board::Board(const Board& newBoard) : m_matrixDot{ newBoard.m_matrixDot } {}
+	Board::Board(const Board& newBoard)
+	{
+		m_matrixDot.resize(newBoard.getSize());
+		for (int i = 0; i < newBoard.getSize(); ++i)
+		{
+			m_matrixDot[i].resize(newBoard.getSize());
+		}
+
+		for (int i = 0; i < newBoard.getSize(); ++i)
+		{
+			for (int j = 0; j < newBoard.getSize(); ++j)
+			{
+				m_matrixDot[i][j] = new Dot;
+				m_matrixDot[i][j]->setCoordI(i);
+				m_matrixDot[i][j]->setCoordJ(j);
+				*m_matrixDot[i][j] = *newBoard.m_matrixDot[i][j];
+			}
+		}
+
+	}/*: m_matrixDot{newBoard.m_matrixDot} {}*/
 
 	// Move constructor
 	Board::Board(Board&& other) noexcept
@@ -365,9 +385,9 @@ namespace twixt
 	{
 
 		std::vector<Dot*> firstExistingBridges = firstDot->getExistingBridges();
-		firstExistingBridges.erase(find(firstExistingBridges.begin(), firstExistingBridges.end(), &secondDot));
+		firstExistingBridges.erase(find(firstExistingBridges.begin(), firstExistingBridges.end(), secondDot));
 		std::vector<Dot*> secondExistingBridges = secondDot->getExistingBridges();
-		secondExistingBridges.erase(find(secondExistingBridges.begin(), secondExistingBridges.end(), &firstDot));
+		secondExistingBridges.erase(find(secondExistingBridges.begin(), secondExistingBridges.end(), firstDot));
 		std::cout << "DELETED BRIDGE between " << firstDot->getCoordI() << " " << firstDot->getCoordJ() << " and " << secondDot->getCoordI() << " " << secondDot->getCoordJ();
 
 	}

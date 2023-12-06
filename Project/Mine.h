@@ -3,6 +3,7 @@
 #include "Dot.h" 
 
 namespace twixt {
+	//class Dot;
 	class Mine
 	{
 	protected:
@@ -18,4 +19,3 @@ namespace twixt {
 		void setExplodedDots(Dot* explodedDot);
 	};
 }
-

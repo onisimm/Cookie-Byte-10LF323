@@ -7,6 +7,7 @@
 #include "Mine.h"
 
 namespace twixt {
+    //class Mine;
     class Dot : public Mine{
     public:
         // Constructors
@@ -68,7 +69,3 @@ namespace twixt {
         std::vector<Dot*> m_existingBridges;
     };
 }
-
-
-
-

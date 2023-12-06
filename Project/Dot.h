@@ -56,7 +56,7 @@ namespace twixt {
         void clearExistingBridges(); // clear all the existingBridges
         const bool& checkExistingBridge(Dot* dotToCheck) const; // check if there's a bridge between this dot and dotToCheck
 
-        bool isDotInPath(std::vector<std::pair<Dot, int>> path) const;
+        bool isDotInPath(std::vector<std::pair<Dot*, int>> path) const;
 
         void deleteAllBridgesForADot();
 

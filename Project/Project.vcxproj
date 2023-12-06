@@ -139,6 +139,7 @@
     <ClCompile Include="ObjectInStack.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="TwixtGame.cpp" />
+    <ClCompile Include="Undo.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Board.h" />
@@ -148,6 +149,7 @@
     <ClInclude Include="ObjectInStack.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="TwixtGame.h" />
+    <ClInclude Include="Undo.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

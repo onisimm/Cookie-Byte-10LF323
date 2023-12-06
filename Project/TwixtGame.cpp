@@ -107,6 +107,12 @@ void TwixtGame::GameLoop(Board board, Player player1, Player player2, Bulldozer 
 			std::cin >> i >> j;
 			board.getDot(i, j)->deleteAllBridgesForADot();
 		}
+		//nu se adauga automat bridge-uri
+
+		if (response == "undo")
+		{
+			//undo class
+		}
 	}
 }
 

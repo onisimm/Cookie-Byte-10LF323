@@ -146,9 +146,13 @@ namespace twixt {
         for (auto i : m_existingBridges)
         {
             auto it = find(i->m_existingBridges.begin(), i->m_existingBridges.end(), &(*this));
-            if (it == i->m_existingBridges.end())
-                std::cout << "este end pentru " << i->getCoordI()<< " " << i->getCoordJ();
-            else i->m_existingBridges.erase(it);
+            if (it != i->m_existingBridges.end())
+                //std::cout << "este end pentru " << i->getCoordI()<< " " << i->getCoordJ();
+            /*else*/
+            {
+                i->m_existingBridges.erase(it);
+                std::cout << "DELETED BRIDGE between " << m_i << " " << m_j << " AND " << i->getCoordI() << " " << i->getCoordJ() << "\n";
+            }
         }
         m_existingBridges.clear();
     }

@@ -51,17 +51,18 @@ namespace twixt
 			didMineExplode = true;
 			Mine* MinePointer = dynamic_cast<Mine*>(m_matrixDot[i][j]);
 			mineExplodes(MinePointer);
-			std::cout << "You lost your turn!\n";
+			/*std::cout << "You lost your turn!\n";
 			std::cout << "Choose another mine!\n";
 			showBoard();
 			int mineI, mineJ;
 			std::cin >> mineI >> mineJ;
-			placeMine(mineI, mineJ);
-			
+			placeMine(mineI, mineJ);*/
 		}
 		else
 		{
-			std::cout << "Node already occupied!\n";
+			std::cout << "Node already occupied!\nChoose another dot!\nEnter position: ";
+			std::cin >> i >> j;
+			changeDotStatus(i, j, status, didMineExplode);
 		}
 	}
 
@@ -412,7 +413,7 @@ namespace twixt
 		firstExistingBridges.erase(find(firstExistingBridges.begin(), firstExistingBridges.end(), secondDot));
 		std::vector<Dot*> secondExistingBridges = secondDot->getExistingBridges();
 		secondExistingBridges.erase(find(secondExistingBridges.begin(), secondExistingBridges.end(), firstDot));
-		std::cout << "DELETED BRIDGE between " << firstDot->getCoordI() << " " << firstDot->getCoordJ() << " and " << secondDot->getCoordI() << " " << secondDot->getCoordJ();
+		std::cout << "DELETED BRIDGE between " << firstDot->getCoordI() << " " << firstDot->getCoordJ() << " and " << secondDot->getCoordI() << " " << secondDot->getCoordJ() << "\n";
 
 	}
 	void Board::placeMine(int i, int j)

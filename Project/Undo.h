@@ -10,6 +10,7 @@ namespace twixt {
 		twixt::Dot* m_lastDot;
 		int m_type;
 		Board* board;
+		Dot* m_deletedBridgeDot;
 	public:
 		Undo(GameStack gameStack, Board* gameBoard);
 		void pressed();

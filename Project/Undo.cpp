@@ -11,6 +11,10 @@ twixt::Undo::Undo(GameStack gameStack, Board* gameBoard)
 		m_lastDot = new Dot(*topDot);
 	}
 	m_type = gameStack.GetGameStack().top().second;
+	if (m_type == DELETEBRIDGE)
+	{
+		m_deletedBridgeDot = new Dot(*gameStack.GetDeletedBridgesDotStack().top());
+	}
 	board = gameBoard;
 }
 
@@ -43,11 +47,14 @@ void twixt::Undo::undoPlayers(Dot::DotStatus status)
 {
 	if (m_lastDot->getExistingBridges().size())
 	{
-		//board->getDot(m_lastDot->getCoordI(), m_lastDot->getCoordJ())->deleteAllBridgesForADot();
-		m_lastDot->deleteAllBridgesForADot();
+		board->getDot(m_lastDot->getCoordI(), m_lastDot->getCoordJ())->deleteAllBridgesForADot();
 	}
-	board->rebuildPossibleBridges(m_lastDot, status);
-	m_lastDot->setStatus(Dot::DotStatus::Clear);
+
+	board->rebuildPossibleBridges(board->getDot(m_lastDot->getCoordI(), m_lastDot->getCoordJ()), status);
+	board->getDot(m_lastDot->getCoordI(), m_lastDot->getCoordJ())->setStatus(Dot::DotStatus::Clear);
+
+	//m_lastDot->setStatus(Dot::DotStatus::Clear);
+	// 
 	//std::vector<std::pair<int, int>> positions{ { -2, -1 }, { -1, -2 }, { 1, -2 }, { 2, -1 }, { 2, 1 }, { 1, 2 }, { -1, 2 }, { -2, 1 } };
 	//int i = m_lastDot->getCoordI();
 	//int j = m_lastDot->getCoordJ();
@@ -86,15 +93,13 @@ void twixt::Undo::undoMines()
 		else
 		{
 			std::cout << "rebuilt the dot\n";
-			m_lastDot->getExistingBridges();
-			m_lastDot->clearPossibleBridges();
-			m_lastDot->setStatus(static_cast<Dot::DotStatus>(m_type));
+			//roxana
 		}
 	}
 }
 
 void twixt::Undo::undoDeleteBridge()
 {
-	//Roxana
-
+	board->getDot(m_lastDot->getCoordI(), m_lastDot->getCoordJ())->buildBridge(m_deletedBridgeDot);
+	board->getDot(m_deletedBridgeDot->getCoordI(), m_deletedBridgeDot->getCoordJ())->buildBridge(m_lastDot);	
 }

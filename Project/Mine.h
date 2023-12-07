@@ -19,7 +19,6 @@ namespace twixt {
 		Mine(const Mine& newMine);
 
 		//setter
-		//void setPreviousMine(Mine* previousMine);
 		void setTrigger(bool);
 		void setExplodedDots(Dot* explodedDot);
 

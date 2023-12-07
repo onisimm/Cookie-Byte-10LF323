@@ -1,6 +1,5 @@
 #include "Mine.h"
 
-
 twixt::Mine::Mine(const Mine& newMine): m_triggered{newMine.m_triggered}
 {
 	for (auto element : newMine.m_explodedDots)
@@ -15,6 +14,11 @@ twixt::Mine::Mine(const Mine& newMine): m_triggered{newMine.m_triggered}
 		m_explodedDots.push_back(newElement);
 	}
 }
+
+twixt::Mine::~Mine()
+{}
+
+twixt::Mine::Mine(const Mine& newMine) : m_explodedDots{newMine.m_explodedDots} {}
 
 void twixt::Mine::setTrigger(bool trigger)
 {

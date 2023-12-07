@@ -64,10 +64,6 @@ namespace twixt {
         bool isDotInPath(std::vector<std::pair<Dot*, int>> path) const;
 
         void deleteAllBridgesForADot();
-
-       /* void allocationMine();
-        Mine* getMine() const;*/
-     
     private:
     
         DotStatus m_status : 3;
@@ -79,5 +75,5 @@ namespace twixt {
     };
 }
 
-#include "Mine.h"
+//#include "Mine.h"
 #endif // !DOT_H

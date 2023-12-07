@@ -24,7 +24,7 @@ namespace twixt
 					std::cout << "@";
 
 				if (m_matrixDot[i][j]->getStatus() == Dot::DotStatus::Mines)
-					std::cout << "_";
+					std::cout << "M";
 
 
 				std::cout << " ";
@@ -268,6 +268,28 @@ namespace twixt
 				if (m_matrixDot[newY][newX]->getStatus() == Dot::DotStatus::Clear)
 				{
 					m_matrixDot[newY][newX]->addPossibleBridge(m_matrixDot[y][x]);
+				}
+			}
+		}
+	}
+
+	void Board::rebuildPossibleBridges(Dot* dot, Dot::DotStatus status)
+	{
+		std::vector<std::pair<int, int>> positions{ { -2, -1 }, { -1, -2 }, { 1, -2 }, { 2, -1 }, { 2, 1 }, { 1, 2 }, { -1, 2 }, { -2, 1 } };
+		int i = dot->getCoordI();
+		int j = dot->getCoordJ();
+
+		for (auto pair : positions)
+		{
+			auto [newI, newJ] = pair;
+			newI += i;
+			newJ += j;
+
+			if (newI >= 0 && newI < m_matrixDot.size() && newJ >= 0 && newJ < m_matrixDot[newJ].size()) // check boundaries
+			{
+				if (m_matrixDot[newI][newJ]->getStatus() == status)
+				{
+					dot->addPossibleBridge(m_matrixDot[newI][newJ]);
 				}
 			}
 		}

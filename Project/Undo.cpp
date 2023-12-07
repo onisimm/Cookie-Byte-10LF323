@@ -42,9 +42,30 @@ void twixt::Undo::pressed()
 void twixt::Undo::undoPlayers(Dot::DotStatus status)
 {
 	if (m_lastDot->getExistingBridges().size())
-		board->getDot(m_lastDot->getCoordI(), m_lastDot->getCoordJ())->deleteAllBridgesForADot();
-	//de verificat possible bridges
-	//Rox
+	{
+		//board->getDot(m_lastDot->getCoordI(), m_lastDot->getCoordJ())->deleteAllBridgesForADot();
+		m_lastDot->deleteAllBridgesForADot();
+	}
+	board->rebuildPossibleBridges(m_lastDot, status);
+	m_lastDot->setStatus(Dot::DotStatus::Clear);
+	//std::vector<std::pair<int, int>> positions{ { -2, -1 }, { -1, -2 }, { 1, -2 }, { 2, -1 }, { 2, 1 }, { 1, 2 }, { -1, 2 }, { -2, 1 } };
+	//int i = m_lastDot->getCoordI();
+	//int j = m_lastDot->getCoordJ();
+
+	//for (auto pair : positions)
+	//{
+	//	auto [newI, newJ] = pair;
+	//	newI += i;
+	//	newJ += j;
+	//	
+	//	if (newI >= 0 && newI < board->getMatrix().size() && newJ >= 0 && newJ < board->getMatrix()[newJ].size()) // check boundaries
+	//	{
+	//		if (board->getMatrix()[newI][newJ]->getStatus() == status)
+	//		{
+	//			m_lastDot->addPossibleBridge(board->getMatrix()[newI][newJ]);
+	//		}
+	//	}
+	//}
 }
 
 void twixt::Undo::undoBulldozer()
@@ -65,7 +86,9 @@ void twixt::Undo::undoMines()
 		else
 		{
 			std::cout << "rebuilt the dot\n";
-			//Roxana
+			m_lastDot->getExistingBridges();
+			m_lastDot->clearPossibleBridges();
+			m_lastDot->setStatus(static_cast<Dot::DotStatus>(m_type));
 		}
 	}
 }
@@ -73,4 +96,5 @@ void twixt::Undo::undoMines()
 void twixt::Undo::undoDeleteBridge()
 {
 	//Roxana
+
 }

@@ -44,11 +44,12 @@ void twixt::Undo::undoPlayers(Dot::DotStatus status)
 	if (m_lastDot->getExistingBridges().size())
 		board->getDot(m_lastDot->getCoordI(), m_lastDot->getCoordJ())->deleteAllBridgesForADot();
 	//de verificat possible bridges
-		
+	//Rox
 }
 
 void twixt::Undo::undoBulldozer()
 {
+	//Livia
 }
 
 void twixt::Undo::undoMines()
@@ -59,14 +60,17 @@ void twixt::Undo::undoMines()
 		{
 			std::cout << "DO the same\n";
 			//do the same
+			//Livia
 		}
 		else
 		{
 			std::cout << "rebuilt the dot\n";
+			//Roxana
 		}
 	}
 }
 
 void twixt::Undo::undoDeleteBridge()
 {
+	//Roxana
 }

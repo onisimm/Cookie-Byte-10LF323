@@ -75,5 +75,5 @@ namespace twixt {
     };
 }
 
-//#include "Mine.h"
+#include "Mine.h"
 #endif // !DOT_H

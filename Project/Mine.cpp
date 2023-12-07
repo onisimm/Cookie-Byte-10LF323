@@ -15,10 +15,6 @@ twixt::Mine::Mine(const Mine& newMine): m_triggered{newMine.m_triggered}
 	}
 }
 
-twixt::Mine::~Mine()
-{}
-
-twixt::Mine::Mine(const Mine& newMine) : m_explodedDots{newMine.m_explodedDots} {}
 
 void twixt::Mine::setTrigger(bool trigger)
 {

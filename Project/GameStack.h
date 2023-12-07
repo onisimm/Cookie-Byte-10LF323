@@ -17,6 +17,7 @@ public:
 
 	//getter
 	std::stack<std::pair<Dot*, uint8_t>> GetGameStack() const;
+	std::stack<Dot*> GetDeletedBridgesDotStack() const;
 
 	void AddInGameStack(Dot*, uint8_t);
 	void AddInDeletedBridgesDotStack(Dot*);

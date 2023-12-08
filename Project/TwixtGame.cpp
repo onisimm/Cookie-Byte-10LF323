@@ -117,6 +117,10 @@ void TwixtGame::GameLoop(Board& board, Player player1, Player player2, Bulldozer
 	}
 }
 
+void TwixtGame::ResetGame()
+{
+}
+
 void TwixtGame::Run()
 {
 	Board board(BOARD_SIZE);

@@ -21,4 +21,8 @@ void GameStack::AddInDeletedBridgesDotStack(Dot* dot)
 
 void GameStack::Clear()
 {
+	while (m_stack.empty())
+	{
+		m_stack.pop();
+	}
 }

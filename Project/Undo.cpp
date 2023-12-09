@@ -5,7 +5,9 @@ twixt::Undo::Undo(GameStack gameStack, Board* gameBoard)
 	Dot* topDot = gameStack.GetGameStack().top().first;
 
 	if (Mine* ptrMine = dynamic_cast<Mine*>(topDot)) {
-		m_lastDot = new Mine(*ptrMine);
+		//m_lastDot = new Mine(*ptrMine);
+		//m_lastMine = new Mine(*ptrMine);
+		m_lastMine = ptrMine;
 	}
 	else {
 		m_lastDot = new Dot(*topDot);
@@ -50,29 +52,8 @@ void twixt::Undo::undoPlayers(Dot::DotStatus status)
 		board->getDot(m_lastDot->getCoordI(), m_lastDot->getCoordJ())->deleteAllBridgesForADot();
 	}
 
-	board->rebuildPossibleBridges(board->getDot(m_lastDot->getCoordI(), m_lastDot->getCoordJ()), status);
+	board->rebuildPossibleBridges(board->getDot(m_lastDot->getCoordI(), m_lastDot->getCoordJ()));
 	board->getDot(m_lastDot->getCoordI(), m_lastDot->getCoordJ())->setStatus(Dot::DotStatus::Clear);
-
-	//m_lastDot->setStatus(Dot::DotStatus::Clear);
-	// 
-	//std::vector<std::pair<int, int>> positions{ { -2, -1 }, { -1, -2 }, { 1, -2 }, { 2, -1 }, { 2, 1 }, { 1, 2 }, { -1, 2 }, { -2, 1 } };
-	//int i = m_lastDot->getCoordI();
-	//int j = m_lastDot->getCoordJ();
-
-	//for (auto pair : positions)
-	//{
-	//	auto [newI, newJ] = pair;
-	//	newI += i;
-	//	newJ += j;
-	//	
-	//	if (newI >= 0 && newI < board->getMatrix().size() && newJ >= 0 && newJ < board->getMatrix()[newJ].size()) // check boundaries
-	//	{
-	//		if (board->getMatrix()[newI][newJ]->getStatus() == status)
-	//		{
-	//			m_lastDot->addPossibleBridge(board->getMatrix()[newI][newJ]);
-	//		}
-	//	}
-	//}
 }
 
 void twixt::Undo::undoBulldozer()
@@ -82,7 +63,11 @@ void twixt::Undo::undoBulldozer()
 
 void twixt::Undo::undoMines()
 {
-	for (auto elements : dynamic_cast<Mine*>(m_lastDot)->getExplodedDots())
+	bool didMineExplode = false;
+
+	board->getMatrixDot(m_lastMine->getNewPlacedMine()->getCoordI(), m_lastMine->getNewPlacedMine()->getCoordJ())->setStatus(Dot::DotStatus::Clear);
+	
+	for (auto elements : dynamic_cast<Mine*>(m_lastMine)->getExplodedDots())
 	{
 		if (Mine* checkMine = dynamic_cast<Mine*>(elements))
 		{
@@ -92,10 +77,12 @@ void twixt::Undo::undoMines()
 		}
 		else
 		{
-			std::cout << "rebuilt the dot\n";
-			//roxana
+			std::cout << "REBUILT DOT " << elements->getCoordI() << " " << elements->getCoordJ() << "\n";
+			board->changeDotStatus(elements->getCoordI(), elements->getCoordJ(), elements->getStatus(), didMineExplode);
 		}
 	}
+
+	board->placeMine(m_lastMine->getCoordI(), m_lastMine->getCoordJ());
 }
 
 void twixt::Undo::undoDeleteBridge()

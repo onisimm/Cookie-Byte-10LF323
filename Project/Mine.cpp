@@ -40,6 +40,11 @@ void twixt::Mine::setExplodedDots(Dot* explodedDot)
 	
 }
 
+void twixt::Mine::setNewPlacedMine(Mine* newPlacedMine)
+{
+	m_newPlacedMine = newPlacedMine;
+}
+
 bool twixt::Mine::getTrigger()
 {
 	return m_triggered;
@@ -48,4 +53,9 @@ bool twixt::Mine::getTrigger()
 std::vector<twixt::Dot*> twixt::Mine::getExplodedDots()
 {
 	return m_explodedDots;
+}
+
+twixt::Mine* twixt::Mine::getNewPlacedMine() const
+{
+	return m_newPlacedMine;
 }

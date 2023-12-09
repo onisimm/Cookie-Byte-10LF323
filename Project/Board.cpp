@@ -51,12 +51,13 @@ namespace twixt
 			didMineExplode = true;
 			Mine* MinePointer = dynamic_cast<Mine*>(m_matrixDot[i][j]);
 			mineExplodes(MinePointer);
-			/*std::cout << "You lost your turn!\n";
+			std::cout << "You lost your turn!\n";
 			std::cout << "Choose another mine!\n";
 			showBoard();
 			int mineI, mineJ;
 			std::cin >> mineI >> mineJ;
-			placeMine(mineI, mineJ);*/
+			placeMine(mineI, mineJ);
+			MinePointer->setNewPlacedMine(dynamic_cast<Mine*>(m_matrixDot[mineI][mineJ]));
 		}
 		else
 		{
@@ -274,7 +275,7 @@ namespace twixt
 		}
 	}
 
-	void Board::rebuildPossibleBridges(Dot* dot, Dot::DotStatus status)
+	void Board::rebuildPossibleBridges(Dot* dot)
 	{
 		std::vector<std::pair<int, int>> positions{ { -2, -1 }, { -1, -2 }, { 1, -2 }, { 2, -1 }, { 2, 1 }, { 1, 2 }, { -1, 2 }, { -2, 1 } };
 		int i = dot->getCoordI();
@@ -288,9 +289,10 @@ namespace twixt
 
 			if (newI >= 0 && newI < m_matrixDot.size() && newJ >= 0 && newJ < m_matrixDot[newJ].size()) // check boundaries
 			{
-				if (m_matrixDot[newI][newJ]->getStatus() == status)
+				if (m_matrixDot[newI][newJ]->getStatus() == dot->getStatus())
 				{
 					dot->addPossibleBridge(m_matrixDot[newI][newJ]);
+					std::cout << "REBUILT POSSIBLE BRIDGE between " << newI << " " << newJ << " AND " << dot->getCoordI() << " " << dot->getCoordJ() << "\n";
 				}
 			}
 		}
@@ -418,7 +420,7 @@ namespace twixt
 	}
 	void Board::placeMine(int i, int j)
 	{
-		std::cout << "Mine placed on " << i << " " << j << "\n";
+		std::cout << "MINE PLACED on " << i << " " << j << "\n";
 		//m_matrixDot[i][j]->allocationMine();
 		delete m_matrixDot[i][j];
 		m_matrixDot[i][j] = new Mine;
@@ -445,9 +447,8 @@ namespace twixt
 		std::vector<std::pair<int, int>> positions{ {-1, -1},{-1,0},{-1,1},{0,1},{1,1},{1,0},{1,-1},{0,-1} };
 		int i = mine->getCoordI();
 		int j = mine->getCoordJ();
-		std::cout << "Mine " << i << " " << j << " exploded!\n";
+		std::cout << "MINE " << i << " " << j << " EXPLODED!\n";
 		mine->setTrigger(true);
-		//mine->setTrigger(true);
 		for (auto pair : positions)
 		{
 			auto [newI, newJ] = pair;
@@ -459,9 +460,11 @@ namespace twixt
 				if (m_matrixDot[newI][newJ]->getStatus() == Dot::DotStatus::Player1 || m_matrixDot[newI][newJ]->getStatus() == Dot::DotStatus::Player2)
 				{
 					mine->setExplodedDots(m_matrixDot[newI][newJ]);
+					rebuildPossibleBridges(m_matrixDot[newI][newJ]);
 					m_matrixDot[newI][newJ]->setStatus(Dot::DotStatus::Clear);
 					m_matrixDot[newI][newJ]->deleteAllBridgesForADot();
-					std::cout << "Dot " << newI << " " << newJ << " was erased!\n";
+					
+					std::cout << "DOT " << newI << " " << newJ << " EXPLODED!\n";
 				}
 				if (m_matrixDot[newI][newJ]->getStatus() == Dot::DotStatus::Mines && dynamic_cast<Mine*>(m_matrixDot[newI][newJ])->getTrigger() == false)
 				{

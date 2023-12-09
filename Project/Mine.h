@@ -13,6 +13,7 @@ namespace twixt {
 	private:
 		std::vector<Dot*> m_explodedDots;
 		bool m_triggered = false;
+		Mine* m_newPlacedMine = nullptr;
 	public:
 		Mine() {}
 		~Mine() = default;
@@ -21,11 +22,12 @@ namespace twixt {
 		//setter
 		void setTrigger(bool);
 		void setExplodedDots(Dot* explodedDot);
+		void setNewPlacedMine(Mine* newPlacedMine);
 
 		//getter
 		bool getTrigger();
 		std::vector<Dot*> getExplodedDots();
-
+		Mine* getNewPlacedMine() const;
 
 	};
 }

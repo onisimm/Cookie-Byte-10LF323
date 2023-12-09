@@ -28,5 +28,11 @@ void MainWindow::setupUi() {
     this->setMinimumSize(mainMenuWidget->frameSize());
 }
 
-void MainWindow::setupConnections() {};
+void MainWindow::setupConnections() {
+    connect(static_cast<MainMenuWidget*>(mainMenuWidget), &MainMenuWidget::playButtonClicked, this, &MainWindow::switchToGameScreen);
+};
+
+void MainWindow::switchToGameScreen() {
+    stackedWidget->setCurrentWidget(gameScreenWidget);
+}
 

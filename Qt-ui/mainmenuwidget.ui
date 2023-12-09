@@ -35,10 +35,10 @@
     <set>Qt::AlignCenter</set>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton">
+  <widget class="QPushButton" name="playButton">
    <property name="geometry">
     <rect>
-     <x>270</x>
+     <x>260</x>
      <y>160</y>
      <width>121</width>
      <height>24</height>
@@ -52,7 +52,7 @@
  <resources/>
  <connections>
   <connection>
-   <sender>pushButton</sender>
+   <sender>playButton</sender>
    <signal>clicked()</signal>
    <receiver>MainMenuWidget</receiver>
    <slot>slot1()</slot>

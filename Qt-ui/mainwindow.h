@@ -19,6 +19,10 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+public slots:
+    void switchToGameScreen();
+    // TODO: void switchToMainMenu();
+
 private:
     Ui::MainWindow *ui;
 

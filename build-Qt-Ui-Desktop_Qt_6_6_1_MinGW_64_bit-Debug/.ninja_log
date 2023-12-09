@@ -1,0 +1,23 @@
+# ninja log v5
+9	253	7238299513317448	Qt-Ui_autogen/timestamp	dd9ce93bf4756602
+9	253	7238299513317448	Qt-Ui_autogen/mocs_compilation.cpp	dd9ce93bf4756602
+534	2733	7238298562786211	CMakeFiles/Qt-Ui.dir/Qt-Ui_autogen/mocs_compilation.cpp.obj	8fb32be44eee324e
+9	253	7238299513317448	C:/Users/onisi/OneDrive/Desktop/school/modern-c++/Cookie-Byte-Twixt/build-Qt-Ui-Desktop_Qt_6_6_1_MinGW_64_bit-Debug/Qt-Ui_autogen/timestamp	dd9ce93bf4756602
+9	253	7238299513317448	C:/Users/onisi/OneDrive/Desktop/school/modern-c++/Cookie-Byte-Twixt/build-Qt-Ui-Desktop_Qt_6_6_1_MinGW_64_bit-Debug/Qt-Ui_autogen/mocs_compilation.cpp	dd9ce93bf4756602
+625	2463	7238262283960866	CMakeFiles/Qt-Ui.dir/gamescreen.cpp.obj	3c8b708feffe8dfd
+538	2808	7238298563563395	CMakeFiles/Qt-Ui.dir/main.cpp.obj	1ced7bff0a885c20
+271	2994	7238299540824169	CMakeFiles/Qt-Ui.dir/mainwindow.cpp.obj	21c56996385cae61
+3089	3362	7238299544411071	Qt-Ui.exe	e627b3216e966b65
+276	3086	7238299541743029	CMakeFiles/Qt-Ui.dir/gamescreenwidget.cpp.obj	5737eeb21809bffc
+282	3088	7238299541773005	CMakeFiles/Qt-Ui.dir/mainmenuwidget.cpp.obj	d09da60d376fc7c
+5	1223	7238290145659043	build.ninja	76e6b62aef65017
+9	815	7238301192757977	Qt-Ui_autogen/timestamp	dd9ce93bf4756602
+9	815	7238301192757977	Qt-Ui_autogen/mocs_compilation.cpp	dd9ce93bf4756602
+9	815	7238301192757977	C:/Users/onisi/OneDrive/Desktop/school/modern-c++/Cookie-Byte-Twixt/build-Qt-Ui-Desktop_Qt_6_6_1_MinGW_64_bit-Debug/Qt-Ui_autogen/timestamp	dd9ce93bf4756602
+9	815	7238301192757977	C:/Users/onisi/OneDrive/Desktop/school/modern-c++/Cookie-Byte-Twixt/build-Qt-Ui-Desktop_Qt_6_6_1_MinGW_64_bit-Debug/Qt-Ui_autogen/mocs_compilation.cpp	dd9ce93bf4756602
+816	3687	7238301222379984	CMakeFiles/Qt-Ui.dir/Qt-Ui_autogen/mocs_compilation.cpp.obj	8fb32be44eee324e
+837	3899	7238301224545278	CMakeFiles/Qt-Ui.dir/mainmenuwidget.cpp.obj	d09da60d376fc7c
+827	3914	7238301224700430	CMakeFiles/Qt-Ui.dir/mainwindow.cpp.obj	21c56996385cae61
+832	3947	7238301225021243	CMakeFiles/Qt-Ui.dir/gamescreenwidget.cpp.obj	5737eeb21809bffc
+821	4069	7238301226248864	CMakeFiles/Qt-Ui.dir/main.cpp.obj	1ced7bff0a885c20
+4069	4367	7238301229138402	Qt-Ui.exe	e627b3216e966b65

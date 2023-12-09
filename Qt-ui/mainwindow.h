@@ -21,7 +21,7 @@ public:
 
 public slots:
     void switchToGameScreen();
-    // TODO: void switchToMainMenu();
+    void switchToMainMenu();
 
 private:
     Ui::MainWindow *ui;
@@ -30,7 +30,7 @@ private:
     QWidget *mainMenuWidget;
     QWidget *gameScreenWidget;
 
-    void setupUi();                      // Setup the UI of the main window
-    void setupConnections();             // Setup signal-slot connections
+    void setupUi();             // Setup the UI of the main window
+    void setupConnections();    // Setup signal-slot connections
 };
 #endif // MAINWINDOW_H

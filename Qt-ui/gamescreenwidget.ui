@@ -32,17 +32,17 @@
     <string>Game started!</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton">
+  <widget class="QPushButton" name="backToMenuButton">
    <property name="geometry">
     <rect>
-     <x>490</x>
+     <x>440</x>
      <y>30</y>
-     <width>121</width>
+     <width>171</width>
      <height>24</height>
     </rect>
    </property>
    <property name="text">
-    <string>Quit game</string>
+    <string>Go back to main menu</string>
    </property>
   </widget>
  </widget>

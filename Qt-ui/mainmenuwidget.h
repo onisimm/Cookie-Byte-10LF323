@@ -16,12 +16,12 @@ public:
     ~MainMenuWidget();
 
 signals:
-    void playButtonClicked();
+    void on_playButton_clicked();
 
 private:
     Ui::MainMenuWidget *ui;
 
-    void setupConnections();             // Setup signal-slot connections
+    void setupConnections();    // Setup signal-slot connections
 };
 
 #endif // MAINMENUWIDGET_H

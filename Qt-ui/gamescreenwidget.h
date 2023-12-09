@@ -15,8 +15,13 @@ public:
     explicit GameScreenWidget(QWidget *parent = nullptr);
     ~GameScreenWidget();
 
+signals:
+    void on_backToMenuButton_clicked();
+
 private:
     Ui::GameScreenWidget *ui;
+
+    void setupConnections();    // Setup signal-slot connections
 };
 
 #endif // GAMESCREENWIDGET_H

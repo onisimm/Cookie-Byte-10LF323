@@ -12,7 +12,7 @@ MainMenuWidget::MainMenuWidget(QWidget *parent) :
 
 void MainMenuWidget::setupConnections()
 {
-    connect(ui->playButton, &QPushButton::clicked, this, &MainMenuWidget::playButtonClicked);
+    connect(ui->playButton, &QPushButton::clicked, this, &MainMenuWidget::on_playButton_clicked);
 }
 
 MainMenuWidget::~MainMenuWidget()

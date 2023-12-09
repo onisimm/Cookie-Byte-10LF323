@@ -29,10 +29,16 @@ void MainWindow::setupUi() {
 }
 
 void MainWindow::setupConnections() {
-    connect(static_cast<MainMenuWidget*>(mainMenuWidget), &MainMenuWidget::playButtonClicked, this, &MainWindow::switchToGameScreen);
+    connect(static_cast<MainMenuWidget*>(mainMenuWidget), &MainMenuWidget::on_playButton_clicked, this, &MainWindow::switchToGameScreen);
+
+    connect(static_cast<GameScreenWidget*>(gameScreenWidget), &GameScreenWidget::on_backToMenuButton_clicked, this, &MainWindow::switchToMainMenu);
 };
 
 void MainWindow::switchToGameScreen() {
     stackedWidget->setCurrentWidget(gameScreenWidget);
+}
+
+void MainWindow::switchToMainMenu() {
+    stackedWidget->setCurrentWidget(mainMenuWidget);
 }
 

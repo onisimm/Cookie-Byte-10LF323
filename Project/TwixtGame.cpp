@@ -12,27 +12,73 @@ void TwixtGame::ReadPlayers(Player& player1, Player& player2)
 
 void TwixtGame::GameTurns(Player& player, bool& isPlaying, Board& board)
 {
-	std::cout << "It's " << player.getName() << "'s turn!\n";
-	std::cout << "REMAINING DOTS for " << player.getName() << ": " << player.getRemainingDots() << "\n";
-	ObjectInStack object = player.turn(board);
-	m_gameStack.AddInGameStack(object.getDot(), object.getType());
-	board.showBoard();
-	std::cout << "\n";
+	std::string answer;
+	std::cout << player.getName() << ", what's you next move? ";
 
-	Dot::DotStatus status;
-	if (player.getColor() == Player::Color::Red)
+	std::cin >> answer;
+
+	for (auto& c : answer)
 	{
-		status = Dot::DotStatus::Player1;
-	}
-	else
-	{
-		status = Dot::DotStatus::Player2;
+		c = toupper(c);
 	}
 
-	if (board.checkPath(status))
+	if (answer == "ADD")
 	{
-		std::cout << "You won!\n";
-		isPlaying = false;
+		std::cout << "It's " << player.getName() << "'s turn!\n";
+		std::cout << "REMAINING DOTS for " << player.getName() << ": " << player.getRemainingDots() << "\n";
+		ObjectInStack object = player.turn(board);
+		m_gameStack.AddInGameStack(object.getDot(), object.getType());
+		board.showBoard();
+		std::cout << "\n";
+
+		Dot::DotStatus status;
+		if (player.getColor() == Player::Color::Red)
+		{
+			status = Dot::DotStatus::Player1;
+		}
+		else
+		{
+			status = Dot::DotStatus::Player2;
+		}
+
+		if (board.checkPath(status))
+		{
+			std::cout << "You won!\n";
+			isPlaying = false;
+		}
+	}
+	else if (answer == "DELETE")
+	{
+		std::cout << "Choose the first dot: ";
+		int i1, j1, i2, j2;
+		std::cin >> i1 >> j1;
+		std::cout << "Choose the second dot: ";
+		std::cin >> i2 >> j2;
+		board.deleteBridge(board.getMatrixDot(i1, j1), board.getMatrixDot(i2, j2));
+		m_gameStack.AddInGameStack(board.getMatrixDot(i1, j1), DELETEBRIDGE);
+		m_gameStack.AddInDeletedBridgesDotStack(board.getMatrixDot(i2, j2));
+	}
+	else if (answer == "DELETEALL")
+	{
+		std::cout << "Choose the dot: ";
+		int i, j;
+		std::cin >> i >> j;
+		board.getDot(i, j)->deleteAllBridgesForADot();
+	}
+		//nu se adauga automat bridge-uri
+	std::cout << "Do you want to undo the move? ";
+	std::cin >> answer;
+
+	for (auto& c : answer)
+	{
+		c = toupper(c);
+	}
+
+	if (answer == "YES")
+	{
+		Undo undo(m_gameStack, &board);
+		undo.pressed();
+		board.showBoard();
 	}
 }
 
@@ -47,7 +93,6 @@ void TwixtGame::GameLoop(Board& board, Player player1, Player player2, Bulldozer
 	std::cout << "\n";
 
 	bool isPlaying = true;
-	std::string response;
 
 	while (isPlaying)
 	{
@@ -70,7 +115,9 @@ void TwixtGame::GameLoop(Board& board, Player player1, Player player2, Bulldozer
 		if (bulldozer.exists())
 		{
 			if (bulldozer.flipCoin(board))
+			{
 				m_gameStack.AddInGameStack(board.getDot(bulldozer.getI(), bulldozer.getJ()), int(Dot::DotStatus::Bulldozer));
+			}
 		}
 
 		if (IsTie(player1, player2))
@@ -78,42 +125,6 @@ void TwixtGame::GameLoop(Board& board, Player player1, Player player2, Bulldozer
 			std::cout << "It's a tie! Both players are out of dots!\n";
 			isPlaying = false;
 			break;
-		}
-
-		std::cout << "Do you want to continue the game? ";
-		std::cin >> response;
-
-		if (response == "No" || response == "no")
-		{
-			isPlaying = false;
-		}
-
-		if (response == "delete" || response == "Delete")
-		{
-			std::cout << "Choose the first dot: ";
-			int i1, j1, i2, j2;
-			std::cin >> i1 >> j1;
-			std::cout << "Choose the second dot: ";
-			std::cin >> i2 >> j2;
-			board.deleteBridge(board.getMatrixDot(i1, j1), board.getMatrixDot(i2, j2));
-			m_gameStack.AddInGameStack(board.getMatrixDot(i1, j1), DELETEBRIDGE);
-			m_gameStack.AddInDeletedBridgesDotStack(board.getMatrixDot(i2, j2));
-		}
-
-		if (response == "deleteall" || response == "DeleteAll")
-		{
-			std::cout << "Choose the dot: ";
-			int i, j;
-			std::cin >> i >> j;
-			board.getDot(i, j)->deleteAllBridgesForADot();
-		}
-		//nu se adauga automat bridge-uri
-
-		if (response == "undo")
-		{
-			Undo undo(m_gameStack, &board);
-			undo.pressed();
-			board.showBoard();
 		}
 	}
 }
@@ -125,10 +136,11 @@ void TwixtGame::Run()
 	Player player1("player1", Player::Color::Red, DOTS_NUMBER);
 	Player player2("player2", Player::Color::Black, DOTS_NUMBER);
 
-	std::cout << "Choose you game mode:\n1->DEFAULT\n2->BULLDOZER\n3->MINES.\n";
+	std::cout << "Choose your game mode:\n1->DEFAULT\n2->BULLDOZER\n3->MINES.\n\n";
 	int mode;
 	std::cin >> mode;
 	//GameStack gameStack;
+	std::cout << "add - add dot\ndelete - delete a bridge\ndeleteall - delete existing bridges for a dot\n\n";
 	switch (mode)
 	{
 	case 1:

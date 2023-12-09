@@ -88,5 +88,5 @@ void twixt::Undo::undoMines()
 void twixt::Undo::undoDeleteBridge()
 {
 	board->getDot(m_lastDot->getCoordI(), m_lastDot->getCoordJ())->buildBridge(m_deletedBridgeDot);
-	board->getDot(m_deletedBridgeDot->getCoordI(), m_deletedBridgeDot->getCoordJ())->buildBridge(m_lastDot);	
+	//board->getDot(m_deletedBridgeDot->getCoordI(), m_deletedBridgeDot->getCoordJ())->buildBridge(m_lastDot);	
 }

@@ -35,6 +35,7 @@ namespace twixt
 
 	void Board::changeDotStatus(int i, int j, Dot::DotStatus status, bool& didMineExplode)
 	{
+		std::string response;
 		if (m_matrixDot[i][j]->getStatus() == Dot::DotStatus::Clear)
 		{
 			m_matrixDot[i][j]->setStatus(status);

@@ -133,10 +133,10 @@ namespace twixt {
         return std::find(m_existingBridges.begin(), m_existingBridges.end(), dotToCheck) != m_existingBridges.end();
     }
 
-    bool Dot::isDotInPath(std::vector<std::pair<Dot, int>> path) const
+    bool Dot::isDotInPath(std::vector<std::pair<Dot*, int>> path) const
     {
         for (auto i : path)
-            if (i.first == *this)
+            if (i.first == this)
                 return true;
         return false;
     }
@@ -146,12 +146,26 @@ namespace twixt {
         for (auto i : m_existingBridges)
         {
             auto it = find(i->m_existingBridges.begin(), i->m_existingBridges.end(), &(*this));
-            if (it == i->m_existingBridges.end())
-                std::cout << "este end pentru " << i->getCoordI()<< " " << i->getCoordJ();
-            else i->m_existingBridges.erase(it);
+            if (it != i->m_existingBridges.end())
+                //std::cout << "este end pentru " << i->getCoordI()<< " " << i->getCoordJ();
+            /*else*/
+            {
+                i->m_existingBridges.erase(it);
+                std::cout << "DELETED BRIDGE between " << m_i << " " << m_j << " AND " << i->getCoordI() << " " << i->getCoordJ() << "\n";
+            }
         }
         m_existingBridges.clear();
     }
+
+   /* void Dot::allocationMine()
+    {
+        m_mine = new Mine();
+    }
+
+    Mine* Dot::getMine() const
+    {
+       return m_mine;
+    }*/
 
     void Dot::clearExistingBridges()
     {

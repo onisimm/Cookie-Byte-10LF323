@@ -1,11 +1,18 @@
 //dot.h
 
 #pragma once
+
+
+
+#ifndef DOT_H
+#define DOT_H
+
 #include <cstdint>
 #include <vector>
 #include <iostream>
 
 namespace twixt {
+    class Mine;
     class Dot {
     public:
         // Constructors
@@ -19,7 +26,7 @@ namespace twixt {
         Dot& operator=(Dot&& other) noexcept;
 
         // Destructor 
-        ~Dot();
+        virtual ~Dot();
 
         enum class DotStatus : uint8_t
         {
@@ -54,10 +61,9 @@ namespace twixt {
         void clearExistingBridges(); // clear all the existingBridges
         const bool& checkExistingBridge(Dot* dotToCheck) const; // check if there's a bridge between this dot and dotToCheck
 
-        bool isDotInPath(std::vector<std::pair<Dot, int>> path) const;
+        bool isDotInPath(std::vector<std::pair<Dot*, int>> path) const;
 
         void deleteAllBridgesForADot();
-
     private:
     
         DotStatus m_status : 3;
@@ -65,9 +71,9 @@ namespace twixt {
 
         std::vector<Dot*> m_possibleBridges;
         std::vector<Dot*> m_existingBridges;
+       // Mine* m_mine;
     };
 }
 
-
-
-
+#include "Mine.h"
+#endif // !DOT_H

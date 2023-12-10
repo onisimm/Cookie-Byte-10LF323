@@ -3,6 +3,7 @@
 #include"Player.h"
 #include"Bulldozer.h"
 #include "GameStack.h"
+#include "Undo.h"
 #include<iostream>
 using namespace twixt;
 
@@ -18,7 +19,7 @@ public:
 	void ReadPlayers(Player& player1, Player& player2);
 	void GameTurns(Player& player, bool& isPlaying, Board& board);
 	bool IsTie(Player player1, Player player2);
-	void GameLoop(Board board, Player player1, Player player2, Bulldozer bulldozer = Bulldozer());
+	void GameLoop(Board& board, Player player1, Player player2, Bulldozer bulldozer = Bulldozer());
 	void Run();
 
 	//getter

@@ -412,11 +412,14 @@ namespace twixt
 	void Board::deleteBridge(Dot* firstDot, Dot* secondDot)
 	{
 
-		std::vector<Dot*> firstExistingBridges = firstDot->getExistingBridges();
-		firstExistingBridges.erase(find(firstExistingBridges.begin(), firstExistingBridges.end(), secondDot));
-		std::vector<Dot*> secondExistingBridges = secondDot->getExistingBridges();
-		secondExistingBridges.erase(find(secondExistingBridges.begin(), secondExistingBridges.end(), firstDot));
-		std::cout << "DELETED BRIDGE between " << firstDot->getCoordI() << " " << firstDot->getCoordJ() << " and " << secondDot->getCoordI() << " " << secondDot->getCoordJ() << "\n";
+		std::vector<Dot*> firstExistingBridges = firstDot.getExistingBridges();
+		firstExistingBridges.erase(find(firstExistingBridges.begin(), firstExistingBridges.end(), &secondDot));
+		firstDot.setExistingBridges(firstExistingBridges);
+
+		std::vector<Dot*> secondExistingBridges = secondDot.getExistingBridges();
+		secondExistingBridges.erase(find(secondExistingBridges.begin(), secondExistingBridges.end(), &firstDot));
+		secondDot.setExistingBridges(secondExistingBridges);
+		std::cout << "DELETED BRIDGE between " << firstDot.getCoordI() << " " << firstDot.getCoordJ() << " and " << secondDot.getCoordI() << " " << secondDot.getCoordJ() << "\n";
 
 	}
 	void Board::placeMine(int i, int j)

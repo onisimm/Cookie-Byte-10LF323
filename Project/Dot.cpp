@@ -81,6 +81,11 @@ namespace twixt {
         m_status = status;
     }
 
+    void Dot::setExistingBridges(const std::vector<Dot*>& existingBridges)
+    {
+        m_existingBridges = existingBridges;
+    }
+
     // Operatorul egal
     Dot& Dot::operator=(const Dot& newDot)
     {

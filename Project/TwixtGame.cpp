@@ -65,6 +65,11 @@ void TwixtGame::GameTurns(Player& player, bool& isPlaying, Board& board)
 		std::cin >> i >> j;
 		board.getDot(i, j)->deleteAllBridgesForADot();
 	}
+	else if (response == "SAVE")
+		{
+			saveGame.saveMatrix(board.getMatrix());
+			saveGame.saveStack(m_gameStack);
+		}
 		//nu se adauga automat bridge-uri
 	std::cout << "Do you want to undo the move? ";
 	std::cin >> answer;
@@ -93,6 +98,8 @@ void TwixtGame::GameLoop(Board& board, Player player1, Player player2, Bulldozer
 	std::cout << "\n";
 
 	bool isPlaying = true;
+	std::string response;
+	SaveGame saveGame;
 
 	while (isPlaying)
 	{
@@ -127,6 +134,19 @@ void TwixtGame::GameLoop(Board& board, Player player1, Player player2, Bulldozer
 			break;
 		}
 	}
+}
+
+void TwixtGame::ResetGame()
+{
+	//Reset board game
+	Board board(BOARD_SIZE);
+	//Reset stack
+	m_gameStack.Clear();
+	//Reset players
+	Player player1("player1", Player::Color::Red, DOTS_NUMBER);
+	Player player2("player2", Player::Color::Black, DOTS_NUMBER);
+	std::cout << "The game has been reset.\n";
+	GameLoop(board, player1, player2);
 }
 
 void TwixtGame::Run()

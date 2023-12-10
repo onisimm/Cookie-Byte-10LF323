@@ -48,6 +48,7 @@ namespace twixt {
         void setCoordI(int);
         void setCoordJ(int);
         void setStatus(const DotStatus&);
+        void setExistingBridges(const std::vector<Dot*>& existingBridges);
 
         // Operators overload
         Dot& operator=(const Dot& newDot); // = overload

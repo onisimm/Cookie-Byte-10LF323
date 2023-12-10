@@ -161,7 +161,7 @@ void TwixtGame::Run()
 	case 2:
 		m_gameStack = GameStack(1);
 		m_gameMode = GameMode::Bulldozer;
-		Bulldozer bulldozer(board);
+		Bulldozer bulldozer(&board);
 		GameLoop(board, player1, player2, bulldozer);
 		break;
 	}

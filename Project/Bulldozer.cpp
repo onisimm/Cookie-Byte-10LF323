@@ -31,21 +31,28 @@ void twixt::Bulldozer::destoryRandomDot(Board& board)
 	
 }
 
+void twixt::Bulldozer::allocateBulldozer(Dot*& dot)
+{
+	delete dot;
+	dot = this;
+}
+
 //Constructor 
-twixt::Bulldozer::Bulldozer(Board& board)
+twixt::Bulldozer::Bulldozer(Board* board)
 {
 	srand(time(NULL));
 	auto [i, j] = position;
-	i = rand() % (board.getSize() - 2) + 1;
-	j = rand() % (board.getSize() - 2) + 1;
+	i = rand() % (board->getSize() - 2) + 1;
+	j = rand() % (board->getSize() - 2) + 1;
 	bool didMineExplode = false;
 	//find a clear Dot and set it as a bulldozer
-	while (board.getDot(i, j)->getStatus() != Dot::DotStatus::Clear)
+	while (board->getDot(i, j)->getStatus() != Dot::DotStatus::Clear)
 	{
-		i = rand() % (board.getSize() - 2) + 1;
-		j = rand() % (board.getSize() - 2) + 1;
+		i = rand() % (board->getSize() - 2) + 1;
+		j = rand() % (board->getSize() - 2) + 1;
 	}
-	board.changeDotStatus(i, j, Dot::DotStatus::Bulldozer, didMineExplode);
+	allocateBulldozer(board->getDot(i, j));
+	board->changeDotStatus(i, j, Dot::DotStatus::Bulldozer, didMineExplode);
 	position.first = i;
 	position.second = j;
 }
@@ -90,6 +97,16 @@ std::stack<std::pair<int, int>> twixt::Bulldozer::getPreviousPosition() const
 std::stack<twixt::Dot> twixt::Bulldozer::getDotDestroied() const
 {
 	return m_dotDestroied;
+}
+
+void twixt::Bulldozer::setToPreviousPosition(Board& board)
+{
+	this->setStatus(Dot::DotStatus::Clear);
+	position.first = m_previousPosition.top().first;
+	position.second = m_previousPosition.top().second;
+
+	bool didMineExplode = false;
+	board.changeDotStatus(position.first, position.second, Dot::DotStatus::Bulldozer, didMineExplode);
 }
 
 

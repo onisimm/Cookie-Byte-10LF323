@@ -35,7 +35,7 @@ void twixt::Undo::pressed()
 		undoBulldozer();
 		break;
 	case 4:
-		undoMines();
+		undoMines(m_lastMine);
 		break;
 	case 5:
 		undoDeleteBridge();
@@ -58,10 +58,15 @@ void twixt::Undo::undoPlayers(Dot::DotStatus status)
 
 void twixt::Undo::undoBulldozer()
 {
-	//Livia
+	Bulldozer* lastBulldozer = dynamic_cast<Bulldozer*>(m_lastDot);
+	lastBulldozer->setToPreviousPosition(*board);
+	Dot copyOfDot = lastBulldozer->getDotDestroied().top();
+	board->rebuildPossibleBridges(board->getDot(copyOfDot.getCoordI(), copyOfDot.getCoordJ()));
+	bool didMineExplode = false;
+	board->changeDotStatus(copyOfDot.getCoordI(), copyOfDot.getCoordJ(), copyOfDot.getStatus(), didMineExplode);
 }
 
-void twixt::Undo::undoMines()
+void twixt::Undo::undoMines(Mine* mine)
 {
 	bool didMineExplode = false;
 
@@ -72,8 +77,8 @@ void twixt::Undo::undoMines()
 		if (Mine* checkMine = dynamic_cast<Mine*>(elements))
 		{
 			std::cout << "DO the same\n";
+			undoMines(checkMine);
 			//do the same
-			//Livia
 		}
 		else
 		{

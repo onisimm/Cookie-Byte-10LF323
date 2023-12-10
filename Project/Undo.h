@@ -2,6 +2,7 @@
 #include<stack>
 #include "GameStack.h"
 #include "Board.h"
+#include "Bulldozer.h"
 
 namespace twixt {
 	class Undo
@@ -17,7 +18,7 @@ namespace twixt {
 		void pressed();
 		void undoPlayers(Dot::DotStatus status);
 		void undoBulldozer();
-		void undoMines();
+		void undoMines(Mine* mine);
 		void undoDeleteBridge();
 
 	};

@@ -21,10 +21,6 @@ void twixt::Bulldozer::destoryRandomDot(Board& board)
 	board.getDot(i, j)->deleteAllBridgesForADot();
 
 	//eliminate the current bulldozer
-	//board.getDot(position.first, position.second)->setStatus(Dot::DotStatus::Clear);
-	/*delete board.getMatrixDot(position.first, position.second);
-	board.getDot(position.first, position.second) = new Dot();*/
-
 	delete board.getDot(position.first, position.second);
 	board.getDot(position.first, position.second) = new Dot(position.first, position.second);
 

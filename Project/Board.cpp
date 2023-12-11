@@ -116,7 +116,7 @@ namespace twixt
 
 	Board::~Board() {}
 
-	Dot* Board::getDot(int i, int j)
+	Dot*& Board::getDot(int i, int j)
 	{
 		if (i >= 0 && i < m_matrixDot.size() && j >= 0 && j < m_matrixDot[i].size())
 		{
@@ -288,7 +288,7 @@ namespace twixt
 			newI += i;
 			newJ += j;
 
-			if (newI >= 0 && newI < m_matrixDot.size() && newJ >= 0 && newJ < m_matrixDot[newJ].size()) // check boundaries
+			if (newI >= 0 && newI < m_matrixDot.size() && newJ >= 0 && newJ < m_matrixDot.size()) // check boundaries
 			{
 				if (m_matrixDot[newI][newJ]->getStatus() == dot->getStatus())
 				{
@@ -412,14 +412,14 @@ namespace twixt
 	void Board::deleteBridge(Dot* firstDot, Dot* secondDot)
 	{
 
-		std::vector<Dot*> firstExistingBridges = firstDot.getExistingBridges();
-		firstExistingBridges.erase(find(firstExistingBridges.begin(), firstExistingBridges.end(), &secondDot));
-		firstDot.setExistingBridges(firstExistingBridges);
+		std::vector<Dot*> firstExistingBridges = firstDot->getExistingBridges();
+		firstExistingBridges.erase(find(firstExistingBridges.begin(), firstExistingBridges.end(), secondDot));
+		firstDot->setExistingBridges(firstExistingBridges);
 
-		std::vector<Dot*> secondExistingBridges = secondDot.getExistingBridges();
-		secondExistingBridges.erase(find(secondExistingBridges.begin(), secondExistingBridges.end(), &firstDot));
-		secondDot.setExistingBridges(secondExistingBridges);
-		std::cout << "DELETED BRIDGE between " << firstDot.getCoordI() << " " << firstDot.getCoordJ() << " and " << secondDot.getCoordI() << " " << secondDot.getCoordJ() << "\n";
+		std::vector<Dot*> secondExistingBridges = secondDot->getExistingBridges();
+		secondExistingBridges.erase(find(secondExistingBridges.begin(), secondExistingBridges.end(), firstDot));
+		secondDot->setExistingBridges(secondExistingBridges);
+		std::cout << "DELETED BRIDGE between " << firstDot->getCoordI() << " " << firstDot->getCoordJ() << " and " << secondDot->getCoordI() << " " << secondDot->getCoordJ() << "\n";
 
 	}
 	void Board::placeMine(int i, int j)
@@ -472,8 +472,8 @@ namespace twixt
 				}
 				if (m_matrixDot[newI][newJ]->getStatus() == Dot::DotStatus::Mines && dynamic_cast<Mine*>(m_matrixDot[newI][newJ])->getTrigger() == false)
 				{
-					mineExplodes(dynamic_cast<Mine*>(m_matrixDot[newI][newJ]));
 					mine->setExplodedDots(m_matrixDot[newI][newJ]);
+					mineExplodes(dynamic_cast<Mine*>(m_matrixDot[newI][newJ]));
 				}
 				
 			}

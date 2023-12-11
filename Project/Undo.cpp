@@ -5,17 +5,20 @@ twixt::Undo::Undo(GameStack gameStack, Board* gameBoard)
 	Dot* topDot = gameStack.GetGameStack().top().first;
 
 	if (Mine* ptrMine = dynamic_cast<Mine*>(topDot)) {
-		//m_lastDot = new Mine(*ptrMine);
-		//m_lastMine = new Mine(*ptrMine);
-		m_lastMine = ptrMine;
+		m_lastDot = ptrMine;
 	}
-	else {
-		m_lastDot = new Dot(*topDot);
+	else if (Bulldozer* ptrBulldozer = dynamic_cast<Bulldozer*>(topDot))
+	{
+		m_lastDot = ptrBulldozer;
+	}
+	else
+	{
+		m_lastDot = topDot;
 	}
 	m_type = gameStack.GetGameStack().top().second;
 	if (m_type == DELETEBRIDGE)
 	{
-		m_deletedBridgeDot = new Dot(*gameStack.GetDeletedBridgesDotStack().top());
+		m_deletedBridgeDot = gameStack.GetDeletedBridgesDotStack().top();
 	}
 	board = gameBoard;
 }
@@ -35,7 +38,7 @@ void twixt::Undo::pressed()
 		undoBulldozer();
 		break;
 	case 4:
-		undoMines(m_lastMine);
+		undoMines(m_lastDot);
 		break;
 	case 5:
 		undoDeleteBridge();
@@ -66,19 +69,23 @@ void twixt::Undo::undoBulldozer()
 	board->changeDotStatus(copyOfDot.getCoordI(), copyOfDot.getCoordJ(), copyOfDot.getStatus(), didMineExplode);
 }
 
-void twixt::Undo::undoMines(Mine* mine)
+void twixt::Undo::undoMines(Dot* mine)
 {
+	Mine* lastMine = dynamic_cast<Mine*>(mine);
 	bool didMineExplode = false;
-
-	board->getMatrixDot(m_lastMine->getNewPlacedMine()->getCoordI(), m_lastMine->getNewPlacedMine()->getCoordJ())->setStatus(Dot::DotStatus::Clear);
 	
-	for (auto elements : dynamic_cast<Mine*>(m_lastMine)->getExplodedDots())
+	if (lastMine->getNewPlacedMine())
+	{
+		board->getMatrixDot(lastMine->getNewPlacedMine()->getCoordI(), lastMine->getNewPlacedMine()->getCoordJ())->setStatus(Dot::DotStatus::Clear);
+
+	}
+
+	for (auto elements : dynamic_cast<Mine*>(lastMine)->getExplodedDots())
 	{
 		if (Mine* checkMine = dynamic_cast<Mine*>(elements))
 		{
 			std::cout << "DO the same\n";
 			undoMines(checkMine);
-			//do the same
 		}
 		else
 		{
@@ -87,11 +94,10 @@ void twixt::Undo::undoMines(Mine* mine)
 		}
 	}
 
-	board->placeMine(m_lastMine->getCoordI(), m_lastMine->getCoordJ());
+	board->placeMine(lastMine->getCoordI(), lastMine->getCoordJ());
 }
 
 void twixt::Undo::undoDeleteBridge()
 {
 	board->getDot(m_lastDot->getCoordI(), m_lastDot->getCoordJ())->buildBridge(m_deletedBridgeDot);
-	//board->getDot(m_deletedBridgeDot->getCoordI(), m_deletedBridgeDot->getCoordJ())->buildBridge(m_lastDot);	
 }

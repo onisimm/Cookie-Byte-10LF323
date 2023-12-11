@@ -13,7 +13,7 @@ public:
 	std::vector<std::vector<Dot>> getSavedMatrix() const;
 	GameStack getSavedStack() const;
 
-	void saveMatrix(std::vector<std::vector<Dot>> m_gameMatrix);
+	void saveMatrix(std::vector<std::vector<Dot*>> m_gameMatrix);
 	void saveStack(GameStack m_gameStack);
 };
 

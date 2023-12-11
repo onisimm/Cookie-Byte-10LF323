@@ -17,16 +17,20 @@ void twixt::Bulldozer::destoryRandomDot(Board& board)
 	m_previousPosition.push(position);
 
 	//delete the random Dot
-	board.getDot(i, j)->setStatus(Dot::DotStatus::Bulldozer);
 	std::cout << "The dot " << i << " " << j << " will be destroyed\n";
 	board.getDot(i, j)->deleteAllBridgesForADot();
 
 	//eliminate the current bulldozer
 	board.getDot(position.first, position.second)->setStatus(Dot::DotStatus::Clear);
 
+	allocateBulldozer(board.getDot(i, j));
+	board.getDot(i, j)->setStatus(Dot::DotStatus::Bulldozer);
+
 	//set the new position for the bulldozer
 	position.first = i;
 	position.second = j;
+	this->setCoordI(i);
+	this->setCoordJ(j);
 
 	
 }
@@ -52,20 +56,25 @@ twixt::Bulldozer::Bulldozer(Board* board)
 		j = rand() % (board->getSize() - 2) + 1;
 	}
 	allocateBulldozer(board->getDot(i, j));
+	/*delete board->getDot(i, j);
+	board->getDot(i, j) = new Bulldozer;*/
 	board->changeDotStatus(i, j, Dot::DotStatus::Bulldozer, didMineExplode);
 	position.first = i;
 	position.second = j;
 }
 
+twixt::Bulldozer::Bulldozer(const Bulldozer& bulldozer) : Dot(bulldozer), position{ bulldozer.position }, m_previousPosition{ bulldozer.m_previousPosition }, m_dotDestroied{bulldozer.m_dotDestroied}
+{}
+
 //Flipping the coin and deciding whether to destory a Dot or not
 bool twixt::Bulldozer::flipCoin(Board& board)
 {
-	srand(time(NULL));
+	/*srand(time(NULL));
 	if (rand() % 2)
 	{
 		std::cout << "We flipped the coin and nothing will happen.\n";
 		return false;
-	}
+	}*/
 	//If it did not exist the function, we will destory a Dot
 	destoryRandomDot(board);
 	board.showBoard();

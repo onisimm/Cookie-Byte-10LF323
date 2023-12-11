@@ -12,13 +12,12 @@ namespace twixt {
 		int m_type;
 		Board* board;
 		Dot* m_deletedBridgeDot;
-		Mine* m_lastMine;
 	public:
 		Undo(GameStack gameStack, Board* gameBoard);
 		void pressed();
 		void undoPlayers(Dot::DotStatus status);
 		void undoBulldozer();
-		void undoMines(Mine* mine);
+		void undoMines(Dot* mine);
 		void undoDeleteBridge();
 
 	};

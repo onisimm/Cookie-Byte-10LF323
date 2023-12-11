@@ -62,8 +62,10 @@ namespace twixt {
 				if (!didMineExplode)
 				{
 					m_remainingDots--;
+					return ObjectInStack(board.getDot(i, j), int(board.getDot(i, j)->getStatus()));
 				}
-				return ObjectInStack(board.getDot(i, j), int(board.getDot(i, j)->getStatus()));
+				return ObjectInStack(board.getDot(i, j), int(Dot::DotStatus::Mines));
+				
 			
 			}
 			else {

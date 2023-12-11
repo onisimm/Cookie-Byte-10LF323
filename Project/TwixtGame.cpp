@@ -65,7 +65,7 @@ void TwixtGame::GameTurns(Player& player, bool& isPlaying, Board& board)
 		std::cin >> i >> j;
 		board.getDot(i, j)->deleteAllBridgesForADot();
 	}
-	else if (response == "SAVE")
+	else if (answer == "SAVE")
 		{
 			saveGame.saveMatrix(board.getMatrix());
 			saveGame.saveStack(m_gameStack);
@@ -98,8 +98,6 @@ void TwixtGame::GameLoop(Board& board, Player player1, Player player2, Bulldozer
 	std::cout << "\n";
 
 	bool isPlaying = true;
-	std::string response;
-	SaveGame saveGame;
 
 	while (isPlaying)
 	{
@@ -118,12 +116,27 @@ void TwixtGame::GameLoop(Board& board, Player player1, Player player2, Bulldozer
 		}
 
 		GameTurns(player2, isPlaying, board);
-
+		std::string answer;
 		if (bulldozer.exists())
 		{
 			if (bulldozer.flipCoin(board))
 			{
 				m_gameStack.AddInGameStack(board.getDot(bulldozer.getI(), bulldozer.getJ()), int(Dot::DotStatus::Bulldozer));
+
+				std::cout << "Do you want to undo the move? ";
+				std::cin >> answer;
+
+				for (auto& c : answer)
+				{
+					c = toupper(c);
+				}
+
+				if (answer == "YES")
+				{
+					Undo undo(m_gameStack, &board);
+					undo.pressed();
+					board.showBoard();
+				}
 			}
 		}
 
@@ -136,18 +149,18 @@ void TwixtGame::GameLoop(Board& board, Player player1, Player player2, Bulldozer
 	}
 }
 
-void TwixtGame::ResetGame()
-{
-	//Reset board game
-	Board board(BOARD_SIZE);
-	//Reset stack
-	m_gameStack.Clear();
-	//Reset players
-	Player player1("player1", Player::Color::Red, DOTS_NUMBER);
-	Player player2("player2", Player::Color::Black, DOTS_NUMBER);
-	std::cout << "The game has been reset.\n";
-	GameLoop(board, player1, player2);
-}
+//void TwixtGame::ResetGame()
+//{
+//	//Reset board game
+//	Board board(BOARD_SIZE);
+//	//Reset stack
+//	m_gameStack.Clear();
+//	//Reset players
+//	Player player1("player1", Player::Color::Red, DOTS_NUMBER);
+//	Player player2("player2", Player::Color::Black, DOTS_NUMBER);
+//	std::cout << "The game has been reset.\n";
+//	GameLoop(board, player1, player2);
+//}
 
 void TwixtGame::Run()
 {
@@ -171,11 +184,11 @@ void TwixtGame::Run()
 	case 3:
 		m_gameStack = GameStack(2);
 		m_gameMode = GameMode::Mines;
-		for (int i = 0; i < 2; i++)
+		for (int i = 0; i < 3; i++)
 		{
 			board.placeRandomMine();
 		}
-		board.placeMine(board.copieI, board.copieJ + 1);
+		//board.placeMine(board.copieI, board.copieJ + 1);
 		GameLoop(board, player1, player2);
 		break;
 	case 2:

@@ -19,6 +19,7 @@ namespace twixt {
 
 	public:
 		Bulldozer(Board* board);
+		Bulldozer(const Bulldozer& Bulldozer);
 		Bulldozer() {};
 		bool flipCoin(Board& board);
 		bool exists();

@@ -1,8 +1,9 @@
 #include "Undo.h"
 
-twixt::Undo::Undo(GameStack gameStack, Board* gameBoard)
+twixt::Undo::Undo(GameStack* gameStack, Board* gameBoard)
 {
-	Dot* topDot = gameStack.GetGameStack().top().first;
+	Dot* topDot = gameStack->GetGameStack().top().first;
+	
 
 	if (Mine* ptrMine = dynamic_cast<Mine*>(topDot)) {
 		m_lastDot = ptrMine;
@@ -15,12 +16,14 @@ twixt::Undo::Undo(GameStack gameStack, Board* gameBoard)
 	{
 		m_lastDot = topDot;
 	}
-	m_type = gameStack.GetGameStack().top().second;
+	m_type = gameStack->GetGameStack().top().second;
 	if (m_type == DELETEBRIDGE)
 	{
-		m_deletedBridgeDot = gameStack.GetDeletedBridgesDotStack().top();
+		m_deletedBridgeDot = gameStack->GetDeletedBridgesDotStack().top();
+		gameStack->popDeletedBridgesStack();
 	}
 	board = gameBoard;
+	gameStack->popGameStack();
 }
 
 void twixt::Undo::pressed()
@@ -41,6 +44,7 @@ void twixt::Undo::pressed()
 		undoMines(m_lastDot);
 		break;
 	case 5:
+
 		undoDeleteBridge();
 		break;
 	default:

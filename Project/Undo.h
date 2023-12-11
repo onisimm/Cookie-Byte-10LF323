@@ -13,7 +13,7 @@ namespace twixt {
 		Board* board;
 		Dot* m_deletedBridgeDot;
 	public:
-		Undo(GameStack gameStack, Board* gameBoard);
+		Undo(GameStack* gameStack, Board* gameBoard);
 		void pressed();
 		void undoPlayers(Dot::DotStatus status);
 		void undoBulldozer();

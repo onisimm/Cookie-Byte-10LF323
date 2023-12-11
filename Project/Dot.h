@@ -17,6 +17,7 @@ namespace twixt {
     public:
         // Constructors
         Dot(); // default
+        Dot(int, int);
 
         Dot(const Dot& newDot); // copy constructor
         // Add move constructor
@@ -65,6 +66,7 @@ namespace twixt {
         bool isDotInPath(std::vector<std::pair<Dot*, int>> path) const;
 
         void deleteAllBridgesForADot();
+
     private:
     
         DotStatus m_status : 3;
@@ -73,6 +75,8 @@ namespace twixt {
         std::vector<Dot*> m_possibleBridges;
         std::vector<Dot*> m_existingBridges;
        // Mine* m_mine;
+
+        
     };
 }
 

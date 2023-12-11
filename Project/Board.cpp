@@ -150,10 +150,22 @@ namespace twixt
 		if (i >= 0 && i < m_matrixDot.size() && j >= 0 && j < m_matrixDot[i].size())
 		{
 			*m_matrixDot[i][j] = dot;
+			m_matrixDot[i][j]->setCoordI(i);
+			m_matrixDot[i][j]->setCoordJ(j);
 			return;
 		}
 
 		throw std::out_of_range("Index out of bounds while trying to set Dot.");
+	}
+
+	void Board::setNewDot(int i, int j)
+	{
+		if (m_matrixDot[i][j] != nullptr) {
+			delete m_matrixDot[i][j];
+		}
+		m_matrixDot[i][j] = new Dot();
+		m_matrixDot[i][j]->setCoordI(i);
+		m_matrixDot[i][j]->setCoordJ(j);
 	}
 
 	// Move assignment operator

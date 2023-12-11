@@ -13,6 +13,16 @@ std::stack<Dot*> GameStack::GetDeletedBridgesDotStack() const
 	return m_deletedBridgesDotStack;
 }
 
+void GameStack::popGameStack()
+{
+	m_stack.pop();
+}
+
+void GameStack::popDeletedBridgesStack()
+{
+	m_deletedBridgesDotStack.pop();
+}
+
 void GameStack::AddInGameStack(Dot* dot, uint8_t type)
 {
 	m_stack.push({ dot, type });

@@ -73,18 +73,25 @@ void TwixtGame::GameTurns(Player& player, bool& isPlaying, Board& board)
 		//nu se adauga automat bridge-uri
 	std::cout << "Do you want to undo the move? ";
 	std::cin >> answer;
-
-	for (auto& c : answer)
+	while (answer!="no")
 	{
-		c = toupper(c);
-	}
+		
 
-	if (answer == "YES")
-	{
-		Undo undo(m_gameStack, &board);
-		undo.pressed();
-		board.showBoard();
+		for (auto& c : answer)
+		{
+			c = toupper(c);
+		}
+
+		if (answer == "YES")
+		{
+			Undo undo(&m_gameStack, &board);
+			undo.pressed();
+			board.showBoard();
+		}
+		std::cout << "\nDo you want to undo the move? ";
+		std::cin >> answer;
 	}
+	
 }
 
 bool TwixtGame::IsTie(Player player1, Player player2)
@@ -133,7 +140,7 @@ void TwixtGame::GameLoop(Board& board, Player player1, Player player2, Bulldozer
 
 				if (answer == "YES")
 				{
-					Undo undo(m_gameStack, &board);
+					Undo undo(&m_gameStack, &board);
 					undo.pressed();
 					board.showBoard();
 				}

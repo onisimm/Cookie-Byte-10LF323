@@ -21,6 +21,8 @@ namespace twixt {
 		Bulldozer(Board* board);
 		Bulldozer(const Bulldozer& Bulldozer);
 		Bulldozer() {};
+		~Bulldozer()override
+		{}
 		bool flipCoin(Board& board);
 		bool exists();
 		uint8_t getI() const;

@@ -28,6 +28,7 @@ namespace twixt {
 
 		// Setters
 		void setDot(int i, int j, const Dot& dot);
+		void setNewDot(int i, int j);
 
 		// Move assignment operator
 		Board& operator=(Board&& other) noexcept;

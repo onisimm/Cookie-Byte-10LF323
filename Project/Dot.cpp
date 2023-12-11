@@ -6,6 +6,7 @@ namespace twixt {
 
     // Constructors
     Dot::Dot() : m_status{ DotStatus::Clear }, m_i{ 0 }, m_j{ 0 } {}
+    Dot::Dot(int i, int j) : m_status{ DotStatus::Clear }, m_i{ i }, m_j{ j } {}
     Dot::Dot(const Dot& newDot) : m_status{ newDot.m_status }, m_i{ newDot.m_i }, m_j{ newDot.m_j }, m_existingBridges{ newDot.m_existingBridges } {}
 
     Dot::Dot(Dot&& other) noexcept
@@ -161,6 +162,7 @@ namespace twixt {
         }
         m_existingBridges.clear();
     }
+
 
    /* void Dot::allocationMine()
     {

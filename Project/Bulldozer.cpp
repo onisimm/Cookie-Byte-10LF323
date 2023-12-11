@@ -21,16 +21,25 @@ void twixt::Bulldozer::destoryRandomDot(Board& board)
 	board.getDot(i, j)->deleteAllBridgesForADot();
 
 	//eliminate the current bulldozer
-	board.getDot(position.first, position.second)->setStatus(Dot::DotStatus::Clear);
+	//board.getDot(position.first, position.second)->setStatus(Dot::DotStatus::Clear);
+	/*delete board.getMatrixDot(position.first, position.second);
+	board.getDot(position.first, position.second) = new Dot();*/
 
-	allocateBulldozer(board.getDot(i, j));
-	board.getDot(i, j)->setStatus(Dot::DotStatus::Bulldozer);
+	delete board.getDot(position.first, position.second);
+	board.getDot(position.first, position.second) = new Dot(position.first, position.second);
+
+	delete board.getDot(i, j);
+
+	
 
 	//set the new position for the bulldozer
 	position.first = i;
 	position.second = j;
 	this->setCoordI(i);
 	this->setCoordJ(j);
+	this->setStatus(Dot::DotStatus::Bulldozer);
+	
+	board.getDot(i, j) = new Bulldozer(*this);
 
 	
 }
@@ -38,7 +47,8 @@ void twixt::Bulldozer::destoryRandomDot(Board& board)
 void twixt::Bulldozer::allocateBulldozer(Dot*& dot)
 {
 	delete dot;
-	dot = this;
+	dot = new Bulldozer(*this);
+
 }
 
 //Constructor 
@@ -55,12 +65,11 @@ twixt::Bulldozer::Bulldozer(Board* board)
 		i = rand() % (board->getSize() - 2) + 1;
 		j = rand() % (board->getSize() - 2) + 1;
 	}
-	allocateBulldozer(board->getDot(i, j));
-	/*delete board->getDot(i, j);
-	board->getDot(i, j) = new Bulldozer;*/
-	board->changeDotStatus(i, j, Dot::DotStatus::Bulldozer, didMineExplode);
+	delete board->getDot(i, j);
 	position.first = i;
 	position.second = j;
+	board->getDot(i, j) = new Bulldozer(*this);
+	board->changeDotStatus(i, j, Dot::DotStatus::Bulldozer, didMineExplode);
 }
 
 twixt::Bulldozer::Bulldozer(const Bulldozer& bulldozer) : Dot(bulldozer), position{ bulldozer.position }, m_previousPosition{ bulldozer.m_previousPosition }, m_dotDestroied{bulldozer.m_dotDestroied}
@@ -116,6 +125,7 @@ void twixt::Bulldozer::setToPreviousPosition(Board& board)
 
 	bool didMineExplode = false;
 	board.changeDotStatus(position.first, position.second, Dot::DotStatus::Bulldozer, didMineExplode);
+	m_previousPosition.pop();
 }
 
 

@@ -21,5 +21,6 @@ public:
 
 	void AddInGameStack(Dot*, uint8_t);
 	void AddInDeletedBridgesDotStack(Dot*);
+	void Clear();
 };
 

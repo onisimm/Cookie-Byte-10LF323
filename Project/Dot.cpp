@@ -110,7 +110,7 @@ namespace twixt {
         }
     }
 
-    const std::vector<Dot*>& Dot::getPossibleBridges() const
+    /*const std::vector<Dot*>& Dot::getPossibleBridges() const
     {
         return m_possibleBridges;
     }
@@ -118,7 +118,7 @@ namespace twixt {
     void Dot::clearPossibleBridges()
     {
         m_possibleBridges.clear();
-    }
+    }*/
 
     void Dot::buildBridge(Dot* connectionDot)
     {

@@ -132,6 +132,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Board.cpp" />
+    <ClCompile Include="Bridge.cpp" />
     <ClCompile Include="Bulldozer.cpp" />
     <ClCompile Include="Dot.cpp" />
     <ClCompile Include="GameStack.cpp" />
@@ -145,6 +146,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Board.h" />
+    <ClInclude Include="Bridge.h" />
     <ClInclude Include="Bulldozer.h" />
     <ClInclude Include="Dot.h" />
     <ClInclude Include="GameStack.h" />

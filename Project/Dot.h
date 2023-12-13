@@ -56,10 +56,10 @@ namespace twixt {
         bool operator==(const Dot& otherDot) const; // == overload 
         friend std::ostream& operator<<(std::ostream& os, const Dot& dot); // << overload
 
-        void addPossibleBridge(Dot* possibleBridgeDot); // add a possible bridge between this and possibleBridgeDot
-        void clearPossibleBridges(); // clear all the possibleBridges
+        //void addPossibleBridge(Dot* possibleBridgeDot); // add a possible bridge between this and possibleBridgeDot
+        //void clearPossibleBridges(); // clear all the possibleBridges
 
-        void buildBridge(Dot* connectionDot); // build a bridge between this and connectionDot
+        //void buildBridge(Dot* connectionDot); // build a bridge between this and connectionDot
         void clearExistingBridges(); // clear all the existingBridges
         const bool& checkExistingBridge(Dot* dotToCheck) const; // check if there's a bridge between this dot and dotToCheck
 
@@ -72,9 +72,8 @@ namespace twixt {
         DotStatus m_status : 3;
         int m_i, m_j; // coordinates
 
-        std::vector<Dot*> m_possibleBridges;
+       //std::vector<Dot*> m_possibleBridges;
         std::vector<Dot*> m_existingBridges;
-       // Mine* m_mine;
 
         
     };

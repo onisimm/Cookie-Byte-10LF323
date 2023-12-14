@@ -64,10 +64,26 @@ void twixt::Undo::undoPlayers(Dot::DotStatus status)
 void twixt::Undo::undoBulldozer()
 {
 	Bulldozer* lastBulldozer = dynamic_cast<Bulldozer*>(m_lastDot);
+	int coordILastBulldozer = lastBulldozer->getCoordI();
+	int coordJLastBulldozer = lastBulldozer->getCoordJ();
+	//set lastBulldozer to previous position
 	lastBulldozer->setToPreviousPosition(*board);
+	
+	//make a copy of the last DestroiedDot
 	Dot copyOfDot = lastBulldozer->getDotDestroied().top();
 	bool didMineExplode = false;
-	board->changeDotStatus(copyOfDot.getCoordI(), copyOfDot.getCoordJ(), copyOfDot.getStatus(), didMineExplode);
+	//delete the last dot that is on the i and j of the destroiedDot
+	delete board->getDot(coordILastBulldozer, coordJLastBulldozer);
+	//alocate memory that copies data form copyOfDot
+	board->getDot(coordILastBulldozer, coordJLastBulldozer) = new Dot(copyOfDot);
+	//delete existing bridges
+	board->getDot(coordILastBulldozer, coordJLastBulldozer)->clearExistingBridges();
+	//build bridges for both copyOfDot and the other dot in bridge
+	for (auto bridges : copyOfDot.getExistingBridges())
+	{
+		bridges->rebuiltBridge();
+	}
+
 }
 
 void twixt::Undo::undoMines(Dot* mine)

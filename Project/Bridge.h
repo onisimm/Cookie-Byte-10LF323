@@ -30,6 +30,7 @@ namespace twixt {
 		bool isPillarInBridge(Dot* dot);
 		void deleteBridge();
 		Dot* returnTheOtherPillar(Dot* dot);
+		void rebuiltBridge();
 	};
 }
 

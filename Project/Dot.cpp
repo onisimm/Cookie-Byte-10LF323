@@ -134,7 +134,9 @@ namespace twixt {
     void Dot::addBridge(Dot* connectionDot)
     {
         std::cout << "BUILD BRIDGE BETWEEN " << m_i << " " << m_j << " AND " << connectionDot->getCoordI() << " " << connectionDot->getCoordJ() << "\n";
-        m_existingBridges.push_back(new Bridge(this, connectionDot));
+        Bridge* newBridge = new Bridge(this, connectionDot);
+        m_existingBridges.push_back(newBridge);
+        connectionDot->m_existingBridges.push_back(newBridge);
     }
 
     void Dot::clearExistingBridges()

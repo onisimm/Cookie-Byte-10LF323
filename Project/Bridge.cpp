@@ -63,3 +63,9 @@ twixt::Dot* twixt::Bridge::returnTheOtherPillar(Dot* dot)
 		return m_secondPillar;
 	return m_firstPillar;
 }
+
+void twixt::Bridge::rebuiltBridge()
+{
+	m_firstPillar->addBridge(m_secondPillar);
+	delete this;
+}

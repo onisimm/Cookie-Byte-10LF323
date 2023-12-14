@@ -58,8 +58,6 @@ void twixt::Undo::undoPlayers(Dot::DotStatus status)
 	{
 		board->getDot(m_lastDot->getCoordI(), m_lastDot->getCoordJ())->deleteAllBridgesForADot();
 	}
-
-	board->rebuildPossibleBridges(board->getDot(m_lastDot->getCoordI(), m_lastDot->getCoordJ()));
 	board->getDot(m_lastDot->getCoordI(), m_lastDot->getCoordJ())->setStatus(Dot::DotStatus::Clear);
 }
 
@@ -68,7 +66,6 @@ void twixt::Undo::undoBulldozer()
 	Bulldozer* lastBulldozer = dynamic_cast<Bulldozer*>(m_lastDot);
 	lastBulldozer->setToPreviousPosition(*board);
 	Dot copyOfDot = lastBulldozer->getDotDestroied().top();
-	board->rebuildPossibleBridges(board->getDot(copyOfDot.getCoordI(), copyOfDot.getCoordJ()));
 	bool didMineExplode = false;
 	board->changeDotStatus(copyOfDot.getCoordI(), copyOfDot.getCoordJ(), copyOfDot.getStatus(), didMineExplode);
 }
@@ -103,5 +100,5 @@ void twixt::Undo::undoMines(Dot* mine)
 
 void twixt::Undo::undoDeleteBridge()
 {
-	board->getDot(m_lastDot->getCoordI(), m_lastDot->getCoordJ())->buildBridge(m_deletedBridgeDot);
+	board->getDot(m_lastDot->getCoordI(), m_lastDot->getCoordJ())->addBridge(m_deletedBridgeDot);
 }

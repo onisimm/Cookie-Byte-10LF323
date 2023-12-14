@@ -41,11 +41,6 @@ namespace twixt
 			m_matrixDot[i][j]->setStatus(status);
 			m_matrixDot[i][j]->setCoordI(i);
 			m_matrixDot[i][j]->setCoordJ(j);
-			buildPossibleBridges(m_matrixDot[i][j]); // adding this dot as possible bridge in dots around
-			if (!m_matrixDot[i][j]->getPossibleBridges().empty())
-			{
-				possibleToExistingBridges(m_matrixDot[i][j]); // building current dot's possible bridges
-			}
 		}
 		else if (m_matrixDot[i][j]->getStatus() == Dot::DotStatus::Mines) // in case there is a mine it will explode
 		{
@@ -184,21 +179,6 @@ namespace twixt
 		return *this;
 	}
 
-	void Board::possibleToExistingBridges(Dot* dot)
-	{
-		for (auto dotForBridge : dot->getPossibleBridges())
-		{
-			if (dot->getStatus() == dotForBridge->getStatus() && dot->getStatus() != Dot::DotStatus::Clear)
-			{
-				if (checkObstructingBridges(*dot, *dotForBridge))
-				{
-					dot->buildBridge(dotForBridge);
-				}
-			}
-		}
-
-		dot->clearPossibleBridges();
-	}
 
 	int orientation(const Dot& p, const Dot& q, const Dot& r) {
 		int val = (q.getCoordJ() - p.getCoordJ()) * (r.getCoordI() - q.getCoordI()) -
@@ -248,9 +228,10 @@ namespace twixt
 					continue;
 				}
 
-				for (auto bridgeDot : m_matrixDot[i][j]->getExistingBridges())
+				for (auto bridge : m_matrixDot[i][j]->getExistingBridges())
 				{
-					if (doIntersect(dot1, dot2, *m_matrixDot[i][j], *bridgeDot))
+					auto [firstDot, secondDot] = bridge->getPillars();
+					if (doIntersect(dot1, dot2, *firstDot, *secondDot))
 					{
 						// std::cout << "Couldn't build a bridge between (" << dot1 << " and " << dot2 << " because of the bridge between " << m_matrixDot[i][j] << " and " << *bridgeDot << "\n";
 						return false;
@@ -259,56 +240,6 @@ namespace twixt
 			}
 		}
 		return true;
-	}
-
-
-
-	void Board::buildPossibleBridges(Dot* dot)
-	{
-		std::vector<std::pair<int, int>> positions{ { -2, -1 }, { -1, -2 }, { 1, -2 }, { 2, -1 }, { 2, 1 }, { 1, 2 }, { -1, 2 }, { -2, 1 } };
-
-		int y = dot->getCoordI();
-		int x = dot->getCoordJ();
-
-		for (auto pair : positions)
-		{
-			auto [newY, newX] = pair;
-			newY += y;
-			newX += x;
-			/*int newY = y + pair.first;
-			int newX = x + pair.second;*/
-
-			if (newY >= 0 && newY < m_matrixDot.size() && newX >= 0 && newX < m_matrixDot[newY].size()) // check boundaries
-			{
-				if (m_matrixDot[newY][newX]->getStatus() == Dot::DotStatus::Clear)
-				{
-					m_matrixDot[newY][newX]->addPossibleBridge(m_matrixDot[y][x]);
-				}
-			}
-		}
-	}
-
-	void Board::rebuildPossibleBridges(Dot* dot)
-	{
-		std::vector<std::pair<int, int>> positions{ { -2, -1 }, { -1, -2 }, { 1, -2 }, { 2, -1 }, { 2, 1 }, { 1, 2 }, { -1, 2 }, { -2, 1 } };
-		int i = dot->getCoordI();
-		int j = dot->getCoordJ();
-
-		for (auto pair : positions)
-		{
-			auto [newI, newJ] = pair;
-			newI += i;
-			newJ += j;
-
-			if (newI >= 0 && newI < m_matrixDot.size() && newJ >= 0 && newJ < m_matrixDot.size()) // check boundaries
-			{
-				if (m_matrixDot[newI][newJ]->getStatus() == dot->getStatus())
-				{
-					dot->addPossibleBridge(m_matrixDot[newI][newJ]);
-					std::cout << "REBUILT POSSIBLE BRIDGE between " << newI << " " << newJ << " AND " << dot->getCoordI() << " " << dot->getCoordJ() << "\n";
-				}
-			}
-		}
 	}
 
 	//verify whether the path leads to win or not
@@ -334,7 +265,7 @@ namespace twixt
 			position = path[path.size() - 1].second;*/
 			if (position < checkDot->getExistingBridges().size())
 			{
-				newDot = checkDot->getExistingBridges()[position];
+				newDot = checkDot->getExistingBridges()[position]->returnTheOtherPillar(checkDot);
 				if (!newDot->isDotInPath(path))
 				{
 					path.push_back({ newDot, -1 });
@@ -423,14 +354,15 @@ namespace twixt
 	}
 	void Board::deleteBridge(Dot* firstDot, Dot* secondDot)
 	{
+		Dot* findingSecondDot;
+		int index = 0;
+		findingSecondDot = firstDot->getExistingBridges()[index]->returnTheOtherPillar(firstDot);
+		while (findingSecondDot != secondDot) {
+			index++;
+			findingSecondDot = firstDot->getExistingBridges()[index]->returnTheOtherPillar(firstDot);
 
-		std::vector<Dot*> firstExistingBridges = firstDot->getExistingBridges();
-		firstExistingBridges.erase(find(firstExistingBridges.begin(), firstExistingBridges.end(), secondDot));
-		firstDot->setExistingBridges(firstExistingBridges);
-
-		std::vector<Dot*> secondExistingBridges = secondDot->getExistingBridges();
-		secondExistingBridges.erase(find(secondExistingBridges.begin(), secondExistingBridges.end(), firstDot));
-		secondDot->setExistingBridges(secondExistingBridges);
+		}
+		firstDot->getExistingBridges()[index]->deleteBridge();
 		std::cout << "DELETED BRIDGE between " << firstDot->getCoordI() << " " << firstDot->getCoordJ() << " and " << secondDot->getCoordI() << " " << secondDot->getCoordJ() << "\n";
 
 	}
@@ -476,7 +408,6 @@ namespace twixt
 				if (m_matrixDot[newI][newJ]->getStatus() == Dot::DotStatus::Player1 || m_matrixDot[newI][newJ]->getStatus() == Dot::DotStatus::Player2)
 				{
 					mine->setExplodedDots(m_matrixDot[newI][newJ]);
-					rebuildPossibleBridges(m_matrixDot[newI][newJ]);
 					m_matrixDot[newI][newJ]->setStatus(Dot::DotStatus::Clear);
 					m_matrixDot[newI][newJ]->deleteAllBridgesForADot();
 					

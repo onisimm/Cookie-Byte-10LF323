@@ -13,13 +13,11 @@ namespace twixt {
         : m_status(other.m_status),
         m_i(other.m_i),
         m_j(other.m_j),
-        m_possibleBridges(std::move(other.m_possibleBridges)),
         m_existingBridges(std::move(other.m_existingBridges)) {
         // Reset the moved from object
         other.m_status = DotStatus::Clear;
         other.m_i = 0;
         other.m_j = 0;
-        other.m_possibleBridges.clear();
         other.m_existingBridges.clear();
     }
     
@@ -27,21 +25,18 @@ namespace twixt {
     Dot& Dot::operator=(Dot&& other) noexcept {
         if (this != &other) {
             // Release resources from the current object
-            m_possibleBridges.clear();
             m_existingBridges.clear();
 
             // Move resources from the other object
             m_status = other.m_status;
             m_i = other.m_i;
             m_j = other.m_j;
-            m_possibleBridges = std::move(other.m_possibleBridges);
             m_existingBridges = std::move(other.m_existingBridges);
 
             // Reset the moved from object
             other.m_status = DotStatus::Clear;
             other.m_i = 0;
             other.m_j = 0;
-            other.m_possibleBridges.clear();
             other.m_existingBridges.clear();
         }
         return *this;
@@ -82,7 +77,7 @@ namespace twixt {
         m_status = status;
     }
 
-    void Dot::setExistingBridges(const std::vector<Dot*>& existingBridges)
+    void Dot::setExistingBridges(const std::vector<Bridge*>& existingBridges)
     {
         m_existingBridges = existingBridges;
     }
@@ -102,42 +97,17 @@ namespace twixt {
         return this->m_i == otherDot.m_i && this->m_j == otherDot.m_j;
     }
 
-    void Dot::addPossibleBridge(Dot* possibleBridgeDot)
-    {
-        if (std::find(m_possibleBridges.begin(), m_possibleBridges.end(), possibleBridgeDot) == m_possibleBridges.end())
-        {
-            m_possibleBridges.push_back(possibleBridgeDot);
-        }
-    }
 
-    /*const std::vector<Dot*>& Dot::getPossibleBridges() const
-    {
-        return m_possibleBridges;
-    }
-
-    void Dot::clearPossibleBridges()
-    {
-        m_possibleBridges.clear();
-    }*/
-
-    void Dot::buildBridge(Dot* connectionDot)
-    {
-        m_existingBridges.push_back(connectionDot);
-        connectionDot->m_existingBridges.push_back(this);
-
-        std::cout << "BUILT BRIDGE between " << this->getCoordI() << " " << this->getCoordJ() <<
-            " AND " << connectionDot->getCoordI() << " " << connectionDot->getCoordJ() << std::endl;
-    }
-
-    const std::vector<Dot*>& Dot::getExistingBridges() const
+    const std::vector<Bridge*>& Dot::getExistingBridges() const
     {
         return m_existingBridges;
     }
 
-    const bool& Dot::checkExistingBridge(Dot* dotToCheck) const
+   /* const bool& Dot::checkExistingBridge(Dot* dotToCheck) const
     {
+        std::cout << "S a apelat check exisgting bridges";
         return std::find(m_existingBridges.begin(), m_existingBridges.end(), dotToCheck) != m_existingBridges.end();
-    }
+    }*/
 
     bool Dot::isDotInPath(std::vector<std::pair<Dot*, int>> path) const
     {
@@ -151,32 +121,25 @@ namespace twixt {
     {
         for (auto i : m_existingBridges)
         {
-            auto it = find(i->m_existingBridges.begin(), i->m_existingBridges.end(), &(*this));
-            if (it != i->m_existingBridges.end())
-                //std::cout << "este end pentru " << i->getCoordI()<< " " << i->getCoordJ();
-            /*else*/
-            {
-                i->m_existingBridges.erase(it);
-                std::cout << "DELETED BRIDGE between " << m_i << " " << m_j << " AND " << i->getCoordI() << " " << i->getCoordJ() << "\n";
-            }
+            std::cout << "DELETED BRIDGE between " << i->getFirstPillar()->getCoordI() << " "<< i->getFirstPillar()->getCoordJ() << " AND " << i->getSecondPillar()->getCoordI() << " " << i->getSecondPillar()->getCoordJ() << "\n";
+             i->deleteBridge();
         }
-        m_existingBridges.clear();
     }
 
-
-   /* void Dot::allocationMine()
+    void Dot::removeBridgeFromExisting(Bridge* bridge)
     {
-        m_mine = new Mine();
+        m_existingBridges.erase(find(m_existingBridges.begin(), m_existingBridges.end(), bridge));
     }
 
-    Mine* Dot::getMine() const
+    void Dot::addBridge(Dot* connectionDot)
     {
-       return m_mine;
-    }*/
+        std::cout << "BUILD BRIDGE BETWEEN " << m_i << " " << m_j << " AND " << connectionDot->getCoordI() << " " << connectionDot->getCoordJ() << "\n";
+        m_existingBridges.push_back(new Bridge(this, connectionDot));
+    }
 
     void Dot::clearExistingBridges()
     {
-        m_existingBridges.clear();
+        deleteAllBridgesForADot();
     }
 
     std::ostream& operator<<(std::ostream& os, const twixt::Dot& dot) {

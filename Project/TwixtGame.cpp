@@ -70,6 +70,20 @@ void TwixtGame::GameTurns(Player& player, bool& isPlaying, Board& board)
 			saveGame.saveMatrix(board.getMatrix());
 			saveGame.saveStack(m_gameStack);
 		}
+	else if (answer == "ADDBRIDGE")
+	{
+		std::cout << "Enter the position of the first dot: ";
+		int i1, j1, i2, j2;
+		std::cin >> i1 >> j1;
+		std::cout << "Enter the position of the second dot: ";
+		std::cin >> i2 >> j2;
+		if (board.getMatrixDot(i1, j1)->getStatus() == board.getMatrixDot(i2, j2)->getStatus() && board.getMatrixDot(i1, j1)->getStatus() != Dot::DotStatus::Clear)
+		{
+			if (((abs(i1 - i2) == 1 && abs(j1 - j2) == 2) || (abs(i1 - i2) == 2 && abs(j1 - j2) == 1)) && board.checkObstructingBridges(*board.getMatrixDot(i1, j1), *board.getMatrixDot(i2, j2)))
+				board.getMatrixDot(i1, j1)->addBridge(board.getMatrixDot(i2, j2));
+		}
+		else std::cout << "the dots does not exist\n";
+	}
 		//nu se adauga automat bridge-uri
 	std::cout << "Do you want to undo the move? ";
 	std::cin >> answer;

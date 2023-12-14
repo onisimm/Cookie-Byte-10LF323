@@ -69,10 +69,10 @@ void twixt::Undo::undoBulldozer()
 	//set lastBulldozer to previous position
 	lastBulldozer->setToPreviousPosition(*board);
 	
-	//make a copy of the last DestroiedDot
-	Dot copyOfDot = lastBulldozer->getDotDestroied().top();
+	//make a copy of the last DestroyedDot
+	Dot copyOfDot = lastBulldozer->getDotDestroyed().top();
 	bool didMineExplode = false;
-	//delete the last dot that is on the i and j of the destroiedDot
+	//delete the last dot that is on the i and j of the destroyedDot
 	delete board->getDot(coordILastBulldozer, coordJLastBulldozer);
 	//alocate memory that copies data form copyOfDot
 	board->getDot(coordILastBulldozer, coordJLastBulldozer) = new Dot(copyOfDot);

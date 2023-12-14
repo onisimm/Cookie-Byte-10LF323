@@ -34,6 +34,7 @@ void twixt::Mine::setExplodedDots(Dot* explodedDot)
 	else
 	{
 		Dot* newDot = new Dot;
+		//sa trecem la Dot(*this);????????
 		*newDot = *explodedDot;
 		m_explodedDots.push_back(newDot);
 	}

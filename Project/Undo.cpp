@@ -108,6 +108,11 @@ void twixt::Undo::undoMines(Dot* mine)
 		{
 			std::cout << "REBUILT DOT " << elements->getCoordI() << " " << elements->getCoordJ() << "\n";
 			board->changeDotStatus(elements->getCoordI(), elements->getCoordJ(), elements->getStatus(), didMineExplode);
+			//de verificat zona de memorie cum se aloca ( daca elements este mina, sa se dealoce/aloce memorie corespunzator)
+			for (auto bridges : elements->getExistingBridges())
+			{
+				bridges->rebuiltBridge();
+			}
 		}
 	}
 

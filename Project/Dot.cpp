@@ -131,6 +131,15 @@ namespace twixt {
         m_existingBridges.erase(find(m_existingBridges.begin(), m_existingBridges.end(), bridge));
     }
 
+    Dot::DotStatus Dot::returnTheOtherPlayer()
+    {
+        if (m_status == Dot::DotStatus::Player1)
+            return Dot::DotStatus::Player2;
+        if (m_status == Dot::DotStatus::Player2)
+            return Dot::DotStatus::Player1;
+        return Dot::DotStatus::Clear;
+    }
+
     void Dot::addBridge(Dot* connectionDot)
     {
         std::cout << "BUILD BRIDGE BETWEEN " << m_i << " " << m_j << " AND " << connectionDot->getCoordI() << " " << connectionDot->getCoordJ() << "\n";

@@ -69,6 +69,9 @@ namespace twixt {
         void deleteAllBridgesForADot();
         void removeBridgeFromExisting(Bridge* bridge);
 
+        Dot::DotStatus returnTheOtherPlayer();
+
+
     private:
     
         DotStatus m_status : 3;

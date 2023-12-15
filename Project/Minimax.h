@@ -17,7 +17,8 @@ namespace twixt {
 
 	public:
 		Minimax() = default;
-		void suggestMove();
+		Minimax(Board* board);
+		void suggestMove(Dot::DotStatus status);
 
 	};
 }

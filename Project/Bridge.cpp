@@ -1,7 +1,7 @@
 #include "Bridge.h"
 
 
-twixt::Bridge::Bridge(const Bridge& bridge)
+twixt::Bridge::Bridge(const Bridge& bridge): m_firstPillar{bridge.m_firstPillar}, m_secondPillar{bridge.m_secondPillar}
 {
 }
 

@@ -13,7 +13,9 @@ void TwixtGame::ReadPlayers(Player& player1, Player& player2)
 void TwixtGame::GameTurns(Player& player, bool& isPlaying, Board& board)
 {
 	std::string answer;
-	std::cout << player.getName() << ", what's you next move? ";
+	std::cout << player.getName() << ", what's you next move?\n";
+	Minimax minimaxSuggestion(&board);
+	minimaxSuggestion.suggestMove((player.getColor() == Player::Color::Red) ? Dot::DotStatus::Player1 : Dot::DotStatus::Player2);
 
 	std::cin >> answer;
 

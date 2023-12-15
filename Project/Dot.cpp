@@ -140,12 +140,11 @@ namespace twixt {
         return Dot::DotStatus::Clear;
     }
 
-    Bridge* Dot::getBridgeFromDots(Dot* firstDot, Dot* secondDot)
+    Bridge* Dot::getBridgeFromDots(Dot* secondDot)
     {
-        for (auto i : firstDot->getExistingBridges())
+        for (auto i : m_existingBridges)
         {
-            if (firstDot == i->getFirstPillar() && secondDot == i->getSecondPillar() ||
-                firstDot == i->getSecondPillar() && secondDot == i->getFirstPillar())
+            if (i->isPillarInBridge(secondDot))
             {
                 return i;
             }

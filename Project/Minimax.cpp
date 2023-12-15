@@ -13,9 +13,10 @@ int twixt::Minimax::evaluate(Bridge* bridgeToEvaluate)
     return 0;
 }
 
-int twixt::Minimax::minimax(Dot::DotStatus status)
+twixt::Bridge* twixt::Minimax::minimax(Dot::DotStatus status)
 {
-    int maximumScore;
+    int maximumScore = 0;
+    Bridge* maximumBridge = nullptr;
    for(int i=0;i<copyOfBoard->getSize(); i++)
        for (int j = 0; j < copyOfBoard->getSize(); j++)
        {
@@ -24,9 +25,9 @@ int twixt::Minimax::minimax(Dot::DotStatus status)
    for (auto it : mapBridges)
    {
        maximumScore = std::max(maximumScore, it.second);
+       maximumBridge = it.first;
    }
-
-    return 0;
+   return maximumBridge;
 }
 
 void twixt::Minimax::canBlock(Dot* centralDot)
@@ -84,7 +85,33 @@ twixt::Dot* twixt::Minimax::blockOpponent(Dot* centralDot, Dot* firstOpponentDot
 
 int twixt::Minimax::longestPath(Dot* dot)
 {
-    return 0;
+    Dot* newDot;
+    int maximLength = 0;
+
+    //Creating path vector: pair of dot in path and position of existing bridges for the dot.
+    std::vector<std::pair<Dot*, int>> path;
+    path.push_back({ dot, 0 });
+
+    while (!path.empty())
+    {
+        auto [checkDot, position] = path[path.size() - 1];
+        if (position < checkDot->getExistingBridges().size())
+        {
+            newDot = checkDot->getExistingBridges()[position]->returnTheOtherPillar(checkDot);
+            if (!newDot->isDotInPath(path))
+            {
+                path[path.size() - 1].second++;
+                path.push_back({ newDot, 0 });
+                checkDot = path[path.size() - 1].first;
+                maximLength = std::max(maximLength, (int)path.size());
+            }
+        }
+        else
+        {
+            path.pop_back();
+        }
+    }
+    return maximLength;
 }
 
 void twixt::Minimax::scorePossibleBridges(Dot* dot)
@@ -109,4 +136,9 @@ void twixt::Minimax::scorePossibleBridges(Dot* dot)
                 }
             }
         }
+}
+
+void twixt::Minimax::suggestMove()
+{
+    //if minimax==nullptr, nu avem recomandare.
 }

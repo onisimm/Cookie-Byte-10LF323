@@ -6,7 +6,7 @@ namespace twixt {
 	{
 	private:
 		int evaluate(Bridge* bridgeToEvaluate);
-		int minimax(Dot::DotStatus status);
+		Bridge* minimax(Dot::DotStatus status);
 		void canBlock(Dot* centralDot);
 		Dot* blockOpponent(Dot* centralDot, Dot* firstOpponentDot, Dot* secondOpponentDot);
 		int longestPath(Dot* dot);

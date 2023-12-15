@@ -140,6 +140,19 @@ namespace twixt {
         return Dot::DotStatus::Clear;
     }
 
+    Bridge* Dot::getBridgeFromDots(Dot* firstDot, Dot* secondDot)
+    {
+        for (auto i : firstDot->getExistingBridges())
+        {
+            if (firstDot == i->getFirstPillar() && secondDot == i->getSecondPillar() ||
+                firstDot == i->getSecondPillar() && secondDot == i->getFirstPillar())
+            {
+                return i;
+            }
+        }
+        return nullptr;
+    }
+
     void Dot::addBridge(Dot* connectionDot)
     {
         std::cout << "BUILD BRIDGE BETWEEN " << m_i << " " << m_j << " AND " << connectionDot->getCoordI() << " " << connectionDot->getCoordJ() << "\n";

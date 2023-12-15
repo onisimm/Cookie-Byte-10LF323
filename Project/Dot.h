@@ -71,6 +71,8 @@ namespace twixt {
 
         Dot::DotStatus returnTheOtherPlayer();
 
+        Bridge* getBridgeFromDots(Dot* firstDot, Dot* secondDot);
+
 
     private:
     

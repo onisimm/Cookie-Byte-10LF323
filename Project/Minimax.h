@@ -10,7 +10,7 @@ namespace twixt {
 		void canBlock(Dot* centralDot);
 		Dot* blockOpponent(Dot* centralDot, Dot* firstOpponentDot, Dot* secondOpponentDot);
 		int longestPath(Dot* dot);
-
+		void scorePossibleBridges(Dot* dot);
 
 		Board *copyOfBoard;
 		std::unordered_map<Bridge*, int> mapBridges;

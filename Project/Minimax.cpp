@@ -15,8 +15,16 @@ int twixt::Minimax::evaluate(Bridge* bridgeToEvaluate)
 
 int twixt::Minimax::minimax(Dot::DotStatus status)
 {
-
-
+    int maximumScore;
+   for(int i=0;i<copyOfBoard->getSize(); i++)
+       for (int j = 0; j < copyOfBoard->getSize(); j++)
+       {
+           scorePossibleBridges(copyOfBoard->getMatrixDot(i, j));
+       }
+   for (auto it : mapBridges)
+   {
+       maximumScore = std::max(maximumScore, it.second);
+   }
 
     return 0;
 }
@@ -77,4 +85,28 @@ twixt::Dot* twixt::Minimax::blockOpponent(Dot* centralDot, Dot* firstOpponentDot
 int twixt::Minimax::longestPath(Dot* dot)
 {
     return 0;
+}
+
+void twixt::Minimax::scorePossibleBridges(Dot* dot)
+{
+        std::vector<std::pair<int, int>> positions{ { -2, -1 }, { -1, -2 }, { 1, -2 }, { 2, -1 }, { 2, 1 }, { 1, 2 }, { -1, 2 }, { -2, 1 } };
+
+        int y = dot->getCoordI();
+        int x = dot->getCoordJ();
+
+        for (auto pair : positions)
+        {
+            auto [newY, newX] = pair;
+            newY += y;
+            newX += x;
+
+            if (newY >= 0 && newY <copyOfBoard->getSize() && newX >= 0 && newX < copyOfBoard->getSize()) // check boundaries
+            {
+                if (copyOfBoard->getMatrixDot(newY,newX)->getStatus() == dot->getStatus())
+                {
+                    //if bridge nu exista in map, facem evaluate
+                    //evaluate(Bridge(copyOfBoard->getMatrixDot(newY, newX), dot));
+                }
+            }
+        }
 }

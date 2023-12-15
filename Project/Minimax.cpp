@@ -1,17 +1,29 @@
 #include "Minimax.h"
 
-int twixt::Minimax::evaluate()
+int twixt::Minimax::evaluate(Bridge* bridgeToEvaluate)
 {
+    int score = 0;
+    const int LONGEST_PATH_VALUE = 10;
+    const int EXISTING_BRIDGES_VALUE= 5;
+
+    score += (longestPath(bridgeToEvaluate->getFirstPillar()) + longestPath(bridgeToEvaluate->getSecondPillar())) * LONGEST_PATH_VALUE;
+    score += (bridgeToEvaluate->getFirstPillar()->getExistingBridges().size() + bridgeToEvaluate->getSecondPillar()->getExistingBridges().size()) * EXISTING_BRIDGES_VALUE;
+
+
     return 0;
 }
 
-int twixt::Minimax::minimax(Dot::DotStatus status, int depth)
+int twixt::Minimax::minimax(Dot::DotStatus status)
 {
+
+
+
     return 0;
 }
 
-bool twixt::Minimax::canBlock(Dot* centralDot)
+void twixt::Minimax::canBlock(Dot* centralDot)
 {
+    const int OPPONENT_LONGEST_PATH_VALUE = 7;
     std::vector<Dot*> opponentPlayerDots;
     for (int i = centralDot->getCoordI() - 2; i <= centralDot->getCoordI() + 2; i++)
         for (int j = centralDot->getCoordJ() - 2; j <= centralDot->getCoordJ() + 2; j++)
@@ -30,15 +42,19 @@ bool twixt::Minimax::canBlock(Dot* centralDot)
                 Dot* dotToBlock = blockOpponent(centralDot, opponentPlayerDots[i], opponentPlayerDots[j]);
                 if (dotToBlock != nullptr)
                 {
-                    //modifica score-ul pt acest Dot
+                    //mapBridges[{centralDot, dotToBlock}] += (longestPath(opponentPlayerDots[i]) + longestPath(opponentPlayerDots[j])) * 7;
                 }
             }
 
         }
-    return false;
 }
 
 twixt::Dot* twixt::Minimax::blockOpponent(Dot* centralDot, Dot* firstOpponentDot, Dot* secondOpponentDot)
 {
     return nullptr;
+}
+
+int twixt::Minimax::longestPath(Dot* dot)
+{
+    return 0;
 }

@@ -1,22 +1,22 @@
 #include "Minimax.h"
 
-int twixt::Minimax::evaluate(Bridge* bridgeToEvaluate)
+int twixt::Minimax::evaluate(std::pair<twixt::Dot*, twixt::Dot*> bridgeToEvaluate)
 {
     int score = 1;
     const int LONGEST_PATH_VALUE = 10;
     const int EXISTING_BRIDGES_VALUE= 5;
 
-    score += (longestPath(bridgeToEvaluate->getFirstPillar()) + longestPath(bridgeToEvaluate->getSecondPillar())) * LONGEST_PATH_VALUE;
-    score += (bridgeToEvaluate->getFirstPillar()->getExistingBridges().size() + bridgeToEvaluate->getSecondPillar()->getExistingBridges().size()) * EXISTING_BRIDGES_VALUE;
+    score += (longestPath(bridgeToEvaluate.first) + longestPath(bridgeToEvaluate.second)) * LONGEST_PATH_VALUE;
+    score += (bridgeToEvaluate.first->getExistingBridges().size() + bridgeToEvaluate.second->getExistingBridges().size()) * EXISTING_BRIDGES_VALUE;
 
 
     return score;
 }
 
-twixt::Bridge* twixt::Minimax::minimax(Dot::DotStatus status)
+std::pair<twixt::Dot*, twixt::Dot*> twixt::Minimax::minimax(Dot::DotStatus status)
 {
     int maximumScore = 0;
-    Bridge* maximumBridge = nullptr;
+    std::pair<twixt::Dot*, twixt::Dot*> maximumBridge{nullptr, nullptr };
    for(int i=0;i<copyOfBoard->getSize(); i++)
        for (int j = 0; j < copyOfBoard->getSize(); j++)
        {
@@ -137,10 +137,10 @@ void twixt::Minimax::scorePossibleBridges(Dot* dot)
             {
                 if (copyOfBoard->getMatrixDot(newY,newX)->getStatus() == dot->getStatus() && dot->getStatus() != Dot::DotStatus::Clear)
                 {
-                    Bridge* bridgeToEvaluate;
                     if (dot->getBridgeFromDots(copyOfBoard->getMatrixDot(newY, newX))==nullptr 
-                        && mapBridges.find(bridgeToEvaluate) == mapBridges.end())
-                        mapBridges[bridgeToEvaluate] = evaluate(bridgeToEvaluate);
+                        && mapBridges.find({ copyOfBoard->getMatrixDot(newY,newX),dot }) == mapBridges.end())
+                        mapBridges[std::make_pair(copyOfBoard->getMatrixDot(newY, newX), dot)] = evaluate({ copyOfBoard->getMatrixDot(newY,newX),dot });
+                    //de verificat: daca nu exista bridge-ul iontre cele 2 dot-uri, atunci se poate 
                 }
             }
         }
@@ -153,10 +153,10 @@ twixt::Minimax::Minimax(Board* board)
 
 void twixt::Minimax::suggestMove(Dot::DotStatus status)
 {
-    Bridge* myBridge = minimax(status);
-    if (myBridge != nullptr)
+    std::pair<twixt::Dot*, twixt::Dot*>myBridge = minimax(status);
+    if (myBridge != std::make_pair(nullptr, nullptr))
     {
-        std::cout << "It is recommended to create the bridge between " << myBridge->getFirstPillar()->getCoordI() << " " << myBridge->getFirstPillar()->getCoordJ() << " and " << myBridge->getSecondPillar()->getCoordI() << " " << myBridge->getSecondPillar()->getCoordJ() << ".\n";
+        std::cout << "It is recommended to create the bridge between " << myBridge.first->getCoordI() << " " << myBridge.first->getCoordJ() << " and " << myBridge.second->getCoordI() << " " << myBridge.second->getCoordJ() << ".\n";
     }
     else
     {

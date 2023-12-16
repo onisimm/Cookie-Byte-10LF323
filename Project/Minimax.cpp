@@ -17,7 +17,7 @@ std::pair<twixt::Dot*, twixt::Dot*> twixt::Minimax::minimax(Dot::DotStatus statu
 {
     int maximumScore = 0;
     std::pair<twixt::Dot*, twixt::Dot*> maximumBridge{nullptr, nullptr };
-   for(int i=0;i<copyOfBoard->getSize(); i++)
+    for (int i = 0; i < copyOfBoard->getSize(); i++)
        for (int j = 0; j < copyOfBoard->getSize(); j++)
        {
            if(copyOfBoard->getMatrixDot(i,j)->getStatus() == status)
@@ -53,7 +53,7 @@ void twixt::Minimax::canBlock(Dot* centralDot)
                 Dot* dotToBlock = blockOpponent(centralDot, opponentPlayerDots[i], opponentPlayerDots[j]);
                 if (dotToBlock != nullptr)
                 {
-                    //mapBridges[centralDot->getBridgeFromDots(dotToBlock)] += (longestPath(opponentPlayerDots[i]) + longestPath(opponentPlayerDots[j])) * 7;
+                    mapBridges[{centralDot, dotToBlock}] += (longestPath(opponentPlayerDots[i]) + longestPath(opponentPlayerDots[j])) * 7;
                 }
             }
 
@@ -75,10 +75,10 @@ twixt::Dot* twixt::Minimax::blockOpponent(Dot* centralDot, Dot* firstOpponentDot
         {
             if (copyOfBoard->getMatrix()[newI][newJ]->getStatus() == centralDot->getStatus())
             {
-                /*if (copyOfBoard->doIntersect(*copyOfBoard->getDot(i, j), *copyOfBoard->getDot(newI, newJ), *firstOpponentDot, *secondOpponentDot))
+                if (copyOfBoard->checkPossibleObstructingBridges(*copyOfBoard->getDot(i, j), *copyOfBoard->getDot(newI, newJ)))
                 {
                     return copyOfBoard->getDot(newI, newJ);
-                }*/
+                }
             }
         }
     }

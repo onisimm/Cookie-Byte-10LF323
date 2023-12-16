@@ -196,7 +196,7 @@ void TwixtGame::Run()
 	int mode;
 	std::cin >> mode;
 	//GameStack gameStack;
-	std::cout << "add - add dot\ndelete - delete a bridge\ndeleteall - delete existing bridges for a dot\n\n";
+	std::cout << "add - add dot\ndelete - delete a bridge\ndeleteall - delete existing bridges for a dot\naddbridge - add a bridge between two existing dots\n\n";
 	switch (mode)
 	{
 	case 1:

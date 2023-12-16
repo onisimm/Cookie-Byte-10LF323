@@ -46,7 +46,8 @@ namespace twixt {
 		friend bool doIntersect(const Dot& p1, const Dot& p2, const Dot& q1, const Dot& q2);
 
 		bool checkObstructingBridges(const Dot& dot1, const Dot& dot2) const;
-		void buildPossibleBridges(Dot* dot);
+		bool checkPossibleObstructingBridges(const Dot& dot1, const Dot& dot2) const;
+		std::vector<Bridge*> buildPossibleBridges(Dot* dot) const;
 
 		void rebuildPossibleBridges(Dot* dot);
 

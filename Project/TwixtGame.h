@@ -5,6 +5,7 @@
 #include "GameStack.h"
 #include "Undo.h"
 #include "SaveGame.h"
+#include "Minimax.h"
 #include<iostream>
 using namespace twixt;
 

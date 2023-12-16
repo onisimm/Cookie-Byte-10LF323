@@ -58,19 +58,32 @@ void twixt::Undo::undoPlayers(Dot::DotStatus status)
 	{
 		board->getDot(m_lastDot->getCoordI(), m_lastDot->getCoordJ())->deleteAllBridgesForADot();
 	}
-
-	board->rebuildPossibleBridges(board->getDot(m_lastDot->getCoordI(), m_lastDot->getCoordJ()));
 	board->getDot(m_lastDot->getCoordI(), m_lastDot->getCoordJ())->setStatus(Dot::DotStatus::Clear);
 }
 
 void twixt::Undo::undoBulldozer()
 {
 	Bulldozer* lastBulldozer = dynamic_cast<Bulldozer*>(m_lastDot);
+	int coordILastBulldozer = lastBulldozer->getCoordI();
+	int coordJLastBulldozer = lastBulldozer->getCoordJ();
+	//set lastBulldozer to previous position
 	lastBulldozer->setToPreviousPosition(*board);
-	Dot copyOfDot = lastBulldozer->getDotDestroied().top();
-	board->rebuildPossibleBridges(board->getDot(copyOfDot.getCoordI(), copyOfDot.getCoordJ()));
+	
+	//make a copy of the last DestroyedDot
+	Dot copyOfDot = lastBulldozer->getDotDestroyed().top();
 	bool didMineExplode = false;
-	board->changeDotStatus(copyOfDot.getCoordI(), copyOfDot.getCoordJ(), copyOfDot.getStatus(), didMineExplode);
+	//delete the last dot that is on the i and j of the destroyedDot
+	delete board->getDot(coordILastBulldozer, coordJLastBulldozer);
+	//alocate memory that copies data form copyOfDot
+	board->getDot(coordILastBulldozer, coordJLastBulldozer) = new Dot(copyOfDot);
+	//delete existing bridges
+	board->getDot(coordILastBulldozer, coordJLastBulldozer)->clearExistingBridges();
+	//build bridges for both copyOfDot and the other dot in bridge
+	for (auto bridges : copyOfDot.getExistingBridges())
+	{
+		bridges->rebuiltBridge();
+	}
+
 }
 
 void twixt::Undo::undoMines(Dot* mine)
@@ -95,6 +108,11 @@ void twixt::Undo::undoMines(Dot* mine)
 		{
 			std::cout << "REBUILT DOT " << elements->getCoordI() << " " << elements->getCoordJ() << "\n";
 			board->changeDotStatus(elements->getCoordI(), elements->getCoordJ(), elements->getStatus(), didMineExplode);
+			//de verificat zona de memorie cum se aloca ( daca elements este mina, sa se dealoce/aloce memorie corespunzator)
+			for (auto bridges : elements->getExistingBridges())
+			{
+				bridges->rebuiltBridge();
+			}
 		}
 	}
 
@@ -103,5 +121,5 @@ void twixt::Undo::undoMines(Dot* mine)
 
 void twixt::Undo::undoDeleteBridge()
 {
-	board->getDot(m_lastDot->getCoordI(), m_lastDot->getCoordJ())->buildBridge(m_deletedBridgeDot);
+	board->getDot(m_lastDot->getCoordI(), m_lastDot->getCoordJ())->addBridge(m_deletedBridgeDot);
 }

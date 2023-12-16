@@ -13,7 +13,9 @@ void TwixtGame::ReadPlayers(Player& player1, Player& player2)
 void TwixtGame::GameTurns(Player& player, bool& isPlaying, Board& board)
 {
 	std::string answer;
-	std::cout << player.getName() << ", what's you next move? ";
+	std::cout << player.getName() << ", what's you next move?\n";
+	Minimax minimaxSuggestion(&board);
+	minimaxSuggestion.suggestMove((player.getColor() == Player::Color::Red) ? Dot::DotStatus::Player1 : Dot::DotStatus::Player2);
 
 	std::cin >> answer;
 
@@ -194,7 +196,7 @@ void TwixtGame::Run()
 	int mode;
 	std::cin >> mode;
 	//GameStack gameStack;
-	std::cout << "add - add dot\ndelete - delete a bridge\ndeleteall - delete existing bridges for a dot\n\n";
+	std::cout << "add - add dot\ndelete - delete a bridge\ndeleteall - delete existing bridges for a dot\naddbridge - add a bridge between two existing dots\n\n";
 	switch (mode)
 	{
 	case 1:

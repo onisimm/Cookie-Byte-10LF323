@@ -242,6 +242,61 @@ namespace twixt
 		return true;
 	}
 
+	bool Board::checkPossibleObstructingBridges(const Dot& dot1, const Dot& dot2) const
+	{
+		int x1 = dot1.getCoordJ();
+		int y1 = dot1.getCoordI();
+		int x2 = dot2.getCoordJ();
+		int y2 = dot2.getCoordI();
+
+		// Check if any existing bridge obstructs the way from dot1 to dot2
+		for (int i = std::min(y1, y2); i <= std::max(y1, y2); ++i)
+		{
+			for (int j = std::min(x1, x2); j <= std::max(x1, x2); ++j)
+			{
+				if (*m_matrixDot[i][j] == dot1 || *m_matrixDot[i][j] == dot2)
+				{
+					continue;
+				}
+				std::vector<Bridge*> possibleBridges = buildPossibleBridges(m_matrixDot[i][j]);
+				for (auto bridge : possibleBridges)
+				{
+					auto [firstDot, secondDot] = bridge->getPillars();
+					if (doIntersect(dot1, dot2, *firstDot, *secondDot))
+					{
+						// std::cout << "Couldn't build a bridge between (" << dot1 << " and " << dot2 << " because of the bridge between " << m_matrixDot[i][j] << " and " << *bridgeDot << "\n";
+						return false;
+					}
+				}
+			}
+		}
+		return true;
+	}
+
+	std::vector<Bridge*> Board::buildPossibleBridges(Dot* dot) const
+	{
+		std::vector<std::pair<int, int>> positions{ { -2, -1 }, { -1, -2 }, { 1, -2 }, { 2, -1 }, { 2, 1 }, { 1, 2 }, { -1, 2 }, { -2, 1 } };
+		std::vector<Bridge*> possibleBridges;
+		int y = dot->getCoordI();
+		int x = dot->getCoordJ();
+
+		for (auto pair : positions)
+		{
+			auto [newY, newX] = pair;
+			newY += y;
+			newX += x;
+
+			if (newY >= 0 && newY < m_matrixDot.size() && newX >= 0 && newX < m_matrixDot[newY].size()) // check boundaries
+			{
+				if (m_matrixDot[newY][newX]->getStatus() == Dot::DotStatus::Clear)
+				{
+					possibleBridges.push_back(m_matrixDot[y][x]->getBridgeFromDots(m_matrixDot[newY][newX]));
+				}
+			}
+		}
+		return possibleBridges;
+	}
+
 	//verify whether the path leads to win or not
 	bool Board::checkPath(twixt::Dot::DotStatus status)
 	{

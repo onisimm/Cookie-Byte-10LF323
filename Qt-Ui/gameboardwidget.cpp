@@ -48,13 +48,13 @@ void GameBoardWidget::paintEvent(QPaintEvent *event) {
     // Draw the top border line
     pen.setColor(Qt::red);
     painter.setPen(pen);
-    QPoint topLeft(firstDotRect.left() + dotWidth, firstDotRect.top() - (dotWidth / 2));
-    QPoint topRight(lastDotRect.right() - dotWidth, firstDotRect.top() - (dotWidth / 2));
+    QPoint topLeft(firstDotRect.left(), firstDotRect.top() - (dotWidth / 2));
+    QPoint topRight(lastDotRect.right(), firstDotRect.top() - (dotWidth / 2));
     painter.drawLine(topLeft, topRight);
 
     // Draw the bottom border line
-    QPoint bottomLeft(firstDotRect.left() + dotWidth, lastDotRect.bottom() + (dotWidth / 2));
-    QPoint bottomRight(lastDotRect.right() - dotWidth, lastDotRect.bottom() + (dotWidth / 2));
+    QPoint bottomLeft(firstDotRect.left(), lastDotRect.bottom() + (dotWidth / 2));
+    QPoint bottomRight(lastDotRect.right(), lastDotRect.bottom() + (dotWidth / 2));
     painter.drawLine(bottomLeft, bottomRight);
 
     // Set pen color for the vertical lines
@@ -62,13 +62,13 @@ void GameBoardWidget::paintEvent(QPaintEvent *event) {
     painter.setPen(pen);
 
     // Draw the left border line
-    QPoint leftTop(firstDotRect.left() - (dotWidth / 2), firstDotRect.top() + dotWidth);
-    QPoint leftBottom(firstDotRect.left() - (dotWidth / 2), lastDotRect.bottom() - dotWidth);
+    QPoint leftTop(firstDotRect.left() - (dotWidth / 2), firstDotRect.top());
+    QPoint leftBottom(firstDotRect.left() - (dotWidth / 2), lastDotRect.bottom());
     painter.drawLine(leftTop, leftBottom);
 
     // Draw the right border line
-    QPoint rightTop(lastDotRect.right() + (dotWidth / 2), firstDotRect.top() + dotWidth);
-    QPoint rightBottom(lastDotRect.right() + (dotWidth / 2), lastDotRect.bottom() - dotWidth);
+    QPoint rightTop(lastDotRect.right() + (dotWidth / 2), firstDotRect.top());
+    QPoint rightBottom(lastDotRect.right() + (dotWidth / 2), lastDotRect.bottom());
     painter.drawLine(rightTop, rightBottom);
 }
 

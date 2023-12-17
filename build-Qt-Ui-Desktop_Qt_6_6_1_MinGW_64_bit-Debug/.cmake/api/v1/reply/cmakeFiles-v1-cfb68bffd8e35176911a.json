@@ -10,100 +10,105 @@
 		},
 		{
 			"isGenerated" : true,
-			"path" : "C:/Users/onisi/OneDrive/Desktop/school/modern-c++/Cookie-Byte-Twixt/build-Qt-Ui-Desktop_Qt_6_6_1_MinGW_64_bit-Debug/CMakeFiles/3.24.2/CMakeSystem.cmake"
+			"path" : "C:/Users/onisi/OneDrive/Desktop/school/modern-c++/Cookie-Byte-Twixt/build-Qt-Ui-Desktop_Qt_6_6_1_MinGW_64_bit-Debug/CMakeFiles/3.27.7/CMakeSystem.cmake"
 		},
 		{
 			"isCMake" : true,
 			"isExternal" : true,
-			"path" : "C:/Qt/Tools/CMake_64/share/cmake-3.24/Modules/CMakeSystemSpecificInitialize.cmake"
+			"path" : "C:/Qt/Tools/CMake_64/share/cmake-3.27/Modules/CMakeSystemSpecificInitialize.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Qt/Tools/CMake_64/share/cmake-3.27/Modules/Platform/Windows-Initialize.cmake"
 		},
 		{
 			"isGenerated" : true,
-			"path" : "C:/Users/onisi/OneDrive/Desktop/school/modern-c++/Cookie-Byte-Twixt/build-Qt-Ui-Desktop_Qt_6_6_1_MinGW_64_bit-Debug/CMakeFiles/3.24.2/CMakeCXXCompiler.cmake"
+			"path" : "C:/Users/onisi/OneDrive/Desktop/school/modern-c++/Cookie-Byte-Twixt/build-Qt-Ui-Desktop_Qt_6_6_1_MinGW_64_bit-Debug/CMakeFiles/3.27.7/CMakeCXXCompiler.cmake"
 		},
 		{
 			"isCMake" : true,
 			"isExternal" : true,
-			"path" : "C:/Qt/Tools/CMake_64/share/cmake-3.24/Modules/CMakeSystemSpecificInformation.cmake"
+			"path" : "C:/Qt/Tools/CMake_64/share/cmake-3.27/Modules/CMakeSystemSpecificInformation.cmake"
 		},
 		{
 			"isCMake" : true,
 			"isExternal" : true,
-			"path" : "C:/Qt/Tools/CMake_64/share/cmake-3.24/Modules/CMakeGenericSystem.cmake"
+			"path" : "C:/Qt/Tools/CMake_64/share/cmake-3.27/Modules/CMakeGenericSystem.cmake"
 		},
 		{
 			"isCMake" : true,
 			"isExternal" : true,
-			"path" : "C:/Qt/Tools/CMake_64/share/cmake-3.24/Modules/CMakeInitializeConfigs.cmake"
+			"path" : "C:/Qt/Tools/CMake_64/share/cmake-3.27/Modules/CMakeInitializeConfigs.cmake"
 		},
 		{
 			"isCMake" : true,
 			"isExternal" : true,
-			"path" : "C:/Qt/Tools/CMake_64/share/cmake-3.24/Modules/Platform/Windows.cmake"
+			"path" : "C:/Qt/Tools/CMake_64/share/cmake-3.27/Modules/Platform/Windows.cmake"
 		},
 		{
 			"isCMake" : true,
 			"isExternal" : true,
-			"path" : "C:/Qt/Tools/CMake_64/share/cmake-3.24/Modules/Platform/WindowsPaths.cmake"
+			"path" : "C:/Qt/Tools/CMake_64/share/cmake-3.27/Modules/Platform/WindowsPaths.cmake"
 		},
 		{
 			"isCMake" : true,
 			"isExternal" : true,
-			"path" : "C:/Qt/Tools/CMake_64/share/cmake-3.24/Modules/CMakeCXXInformation.cmake"
+			"path" : "C:/Qt/Tools/CMake_64/share/cmake-3.27/Modules/CMakeCXXInformation.cmake"
 		},
 		{
 			"isCMake" : true,
 			"isExternal" : true,
-			"path" : "C:/Qt/Tools/CMake_64/share/cmake-3.24/Modules/CMakeLanguageInformation.cmake"
+			"path" : "C:/Qt/Tools/CMake_64/share/cmake-3.27/Modules/CMakeLanguageInformation.cmake"
 		},
 		{
 			"isCMake" : true,
 			"isExternal" : true,
-			"path" : "C:/Qt/Tools/CMake_64/share/cmake-3.24/Modules/Compiler/GNU-CXX.cmake"
+			"path" : "C:/Qt/Tools/CMake_64/share/cmake-3.27/Modules/Compiler/GNU-CXX.cmake"
 		},
 		{
 			"isCMake" : true,
 			"isExternal" : true,
-			"path" : "C:/Qt/Tools/CMake_64/share/cmake-3.24/Modules/Compiler/GNU.cmake"
+			"path" : "C:/Qt/Tools/CMake_64/share/cmake-3.27/Modules/Compiler/GNU.cmake"
 		},
 		{
 			"isCMake" : true,
 			"isExternal" : true,
-			"path" : "C:/Qt/Tools/CMake_64/share/cmake-3.24/Modules/Compiler/CMakeCommonCompilerMacros.cmake"
+			"path" : "C:/Qt/Tools/CMake_64/share/cmake-3.27/Modules/Compiler/CMakeCommonCompilerMacros.cmake"
 		},
 		{
 			"isCMake" : true,
 			"isExternal" : true,
-			"path" : "C:/Qt/Tools/CMake_64/share/cmake-3.24/Modules/Platform/Windows-GNU-CXX.cmake"
+			"path" : "C:/Qt/Tools/CMake_64/share/cmake-3.27/Modules/Platform/Windows-GNU-CXX.cmake"
 		},
 		{
 			"isCMake" : true,
 			"isExternal" : true,
-			"path" : "C:/Qt/Tools/CMake_64/share/cmake-3.24/Modules/Platform/Windows-GNU.cmake"
+			"path" : "C:/Qt/Tools/CMake_64/share/cmake-3.27/Modules/Platform/Windows-GNU.cmake"
 		},
 		{
 			"isGenerated" : true,
-			"path" : "C:/Users/onisi/OneDrive/Desktop/school/modern-c++/Cookie-Byte-Twixt/build-Qt-Ui-Desktop_Qt_6_6_1_MinGW_64_bit-Debug/CMakeFiles/3.24.2/CMakeRCCompiler.cmake"
+			"path" : "C:/Users/onisi/OneDrive/Desktop/school/modern-c++/Cookie-Byte-Twixt/build-Qt-Ui-Desktop_Qt_6_6_1_MinGW_64_bit-Debug/CMakeFiles/3.27.7/CMakeRCCompiler.cmake"
 		},
 		{
 			"isCMake" : true,
 			"isExternal" : true,
-			"path" : "C:/Qt/Tools/CMake_64/share/cmake-3.24/Modules/CMakeRCInformation.cmake"
+			"path" : "C:/Qt/Tools/CMake_64/share/cmake-3.27/Modules/CMakeRCInformation.cmake"
 		},
 		{
 			"isCMake" : true,
 			"isExternal" : true,
-			"path" : "C:/Qt/Tools/CMake_64/share/cmake-3.24/Modules/Platform/Windows-windres.cmake"
+			"path" : "C:/Qt/Tools/CMake_64/share/cmake-3.27/Modules/Platform/Windows-windres.cmake"
 		},
 		{
 			"isCMake" : true,
 			"isExternal" : true,
-			"path" : "C:/Qt/Tools/CMake_64/share/cmake-3.24/Modules/Platform/Windows-GNU-CXX-ABI.cmake"
+			"path" : "C:/Qt/Tools/CMake_64/share/cmake-3.27/Modules/Platform/Windows-GNU-CXX-ABI.cmake"
 		},
 		{
 			"isCMake" : true,
 			"isExternal" : true,
-			"path" : "C:/Qt/Tools/CMake_64/share/cmake-3.24/Modules/CMakeCommonLanguageInclude.cmake"
+			"path" : "C:/Qt/Tools/CMake_64/share/cmake-3.27/Modules/CMakeCommonLanguageInclude.cmake"
 		},
 		{
 			"isExternal" : true,
@@ -144,37 +149,37 @@
 		{
 			"isCMake" : true,
 			"isExternal" : true,
-			"path" : "C:/Qt/Tools/CMake_64/share/cmake-3.24/Modules/CheckCXXCompilerFlag.cmake"
+			"path" : "C:/Qt/Tools/CMake_64/share/cmake-3.27/Modules/CheckCXXCompilerFlag.cmake"
 		},
 		{
 			"isCMake" : true,
 			"isExternal" : true,
-			"path" : "C:/Qt/Tools/CMake_64/share/cmake-3.24/Modules/CheckCXXSourceCompiles.cmake"
+			"path" : "C:/Qt/Tools/CMake_64/share/cmake-3.27/Modules/Internal/CheckCompilerFlag.cmake"
 		},
 		{
 			"isCMake" : true,
 			"isExternal" : true,
-			"path" : "C:/Qt/Tools/CMake_64/share/cmake-3.24/Modules/Internal/CheckSourceCompiles.cmake"
+			"path" : "C:/Qt/Tools/CMake_64/share/cmake-3.27/Modules/Internal/CheckFlagCommonConfig.cmake"
 		},
 		{
 			"isCMake" : true,
 			"isExternal" : true,
-			"path" : "C:/Qt/Tools/CMake_64/share/cmake-3.24/Modules/Internal/CheckCompilerFlag.cmake"
+			"path" : "C:/Qt/Tools/CMake_64/share/cmake-3.27/Modules/Internal/CheckSourceCompiles.cmake"
 		},
 		{
 			"isCMake" : true,
 			"isExternal" : true,
-			"path" : "C:/Qt/Tools/CMake_64/share/cmake-3.24/Modules/Internal/CheckFlagCommonConfig.cmake"
+			"path" : "C:/Qt/Tools/CMake_64/share/cmake-3.27/Modules/CMakeCheckCompilerFlagCommonPatterns.cmake"
 		},
 		{
 			"isCMake" : true,
 			"isExternal" : true,
-			"path" : "C:/Qt/Tools/CMake_64/share/cmake-3.24/Modules/Internal/CheckSourceCompiles.cmake"
+			"path" : "C:/Qt/Tools/CMake_64/share/cmake-3.27/Modules/CheckCXXSourceCompiles.cmake"
 		},
 		{
 			"isCMake" : true,
 			"isExternal" : true,
-			"path" : "C:/Qt/Tools/CMake_64/share/cmake-3.24/Modules/CMakeCheckCompilerFlagCommonPatterns.cmake"
+			"path" : "C:/Qt/Tools/CMake_64/share/cmake-3.27/Modules/Internal/CheckSourceCompiles.cmake"
 		},
 		{
 			"isExternal" : true,
@@ -219,7 +224,7 @@
 		{
 			"isCMake" : true,
 			"isExternal" : true,
-			"path" : "C:/Qt/Tools/CMake_64/share/cmake-3.24/Modules/CMakeFindDependencyMacro.cmake"
+			"path" : "C:/Qt/Tools/CMake_64/share/cmake-3.27/Modules/CMakeFindDependencyMacro.cmake"
 		},
 		{
 			"isExternal" : true,
@@ -228,32 +233,32 @@
 		{
 			"isCMake" : true,
 			"isExternal" : true,
-			"path" : "C:/Qt/Tools/CMake_64/share/cmake-3.24/Modules/FindThreads.cmake"
+			"path" : "C:/Qt/Tools/CMake_64/share/cmake-3.27/Modules/FindThreads.cmake"
 		},
 		{
 			"isCMake" : true,
 			"isExternal" : true,
-			"path" : "C:/Qt/Tools/CMake_64/share/cmake-3.24/Modules/CheckLibraryExists.cmake"
+			"path" : "C:/Qt/Tools/CMake_64/share/cmake-3.27/Modules/CheckLibraryExists.cmake"
 		},
 		{
 			"isCMake" : true,
 			"isExternal" : true,
-			"path" : "C:/Qt/Tools/CMake_64/share/cmake-3.24/Modules/CheckIncludeFileCXX.cmake"
+			"path" : "C:/Qt/Tools/CMake_64/share/cmake-3.27/Modules/CheckIncludeFileCXX.cmake"
 		},
 		{
 			"isCMake" : true,
 			"isExternal" : true,
-			"path" : "C:/Qt/Tools/CMake_64/share/cmake-3.24/Modules/CheckCXXSourceCompiles.cmake"
+			"path" : "C:/Qt/Tools/CMake_64/share/cmake-3.27/Modules/CheckCXXSourceCompiles.cmake"
 		},
 		{
 			"isCMake" : true,
 			"isExternal" : true,
-			"path" : "C:/Qt/Tools/CMake_64/share/cmake-3.24/Modules/FindPackageHandleStandardArgs.cmake"
+			"path" : "C:/Qt/Tools/CMake_64/share/cmake-3.27/Modules/FindPackageHandleStandardArgs.cmake"
 		},
 		{
 			"isCMake" : true,
 			"isExternal" : true,
-			"path" : "C:/Qt/Tools/CMake_64/share/cmake-3.24/Modules/FindPackageMessage.cmake"
+			"path" : "C:/Qt/Tools/CMake_64/share/cmake-3.27/Modules/FindPackageMessage.cmake"
 		},
 		{
 			"isExternal" : true,
@@ -294,7 +299,7 @@
 		{
 			"isCMake" : true,
 			"isExternal" : true,
-			"path" : "C:/Qt/Tools/CMake_64/share/cmake-3.24/Modules/CheckCXXCompilerFlag.cmake"
+			"path" : "C:/Qt/Tools/CMake_64/share/cmake-3.27/Modules/CheckCXXCompilerFlag.cmake"
 		},
 		{
 			"isExternal" : true,
@@ -339,41 +344,11 @@
 		{
 			"isCMake" : true,
 			"isExternal" : true,
-			"path" : "C:/Qt/Tools/CMake_64/share/cmake-3.24/Modules/CMakeFindDependencyMacro.cmake"
+			"path" : "C:/Qt/Tools/CMake_64/share/cmake-3.27/Modules/CMakeFindDependencyMacro.cmake"
 		},
 		{
 			"isExternal" : true,
 			"path" : "C:/Qt/6.6.1/mingw_64/lib/cmake/Qt6/Qt6Dependencies.cmake"
-		},
-		{
-			"isCMake" : true,
-			"isExternal" : true,
-			"path" : "C:/Qt/Tools/CMake_64/share/cmake-3.24/Modules/FindThreads.cmake"
-		},
-		{
-			"isCMake" : true,
-			"isExternal" : true,
-			"path" : "C:/Qt/Tools/CMake_64/share/cmake-3.24/Modules/CheckLibraryExists.cmake"
-		},
-		{
-			"isCMake" : true,
-			"isExternal" : true,
-			"path" : "C:/Qt/Tools/CMake_64/share/cmake-3.24/Modules/CheckIncludeFileCXX.cmake"
-		},
-		{
-			"isCMake" : true,
-			"isExternal" : true,
-			"path" : "C:/Qt/Tools/CMake_64/share/cmake-3.24/Modules/CheckCXXSourceCompiles.cmake"
-		},
-		{
-			"isCMake" : true,
-			"isExternal" : true,
-			"path" : "C:/Qt/Tools/CMake_64/share/cmake-3.24/Modules/FindPackageHandleStandardArgs.cmake"
-		},
-		{
-			"isCMake" : true,
-			"isExternal" : true,
-			"path" : "C:/Qt/Tools/CMake_64/share/cmake-3.24/Modules/FindPackageMessage.cmake"
 		},
 		{
 			"isExternal" : true,
@@ -390,7 +365,7 @@
 		{
 			"isCMake" : true,
 			"isExternal" : true,
-			"path" : "C:/Qt/Tools/CMake_64/share/cmake-3.24/Modules/CMakeFindDependencyMacro.cmake"
+			"path" : "C:/Qt/Tools/CMake_64/share/cmake-3.27/Modules/CMakeFindDependencyMacro.cmake"
 		},
 		{
 			"isExternal" : true,
@@ -411,7 +386,7 @@
 		{
 			"isCMake" : true,
 			"isExternal" : true,
-			"path" : "C:/Qt/Tools/CMake_64/share/cmake-3.24/Modules/CMakeFindDependencyMacro.cmake"
+			"path" : "C:/Qt/Tools/CMake_64/share/cmake-3.27/Modules/CMakeFindDependencyMacro.cmake"
 		},
 		{
 			"isExternal" : true,
@@ -432,7 +407,7 @@
 		{
 			"isCMake" : true,
 			"isExternal" : true,
-			"path" : "C:/Qt/Tools/CMake_64/share/cmake-3.24/Modules/CMakeFindDependencyMacro.cmake"
+			"path" : "C:/Qt/Tools/CMake_64/share/cmake-3.27/Modules/CMakeFindDependencyMacro.cmake"
 		},
 		{
 			"isExternal" : true,
@@ -469,7 +444,7 @@
 		{
 			"isCMake" : true,
 			"isExternal" : true,
-			"path" : "C:/Qt/Tools/CMake_64/share/cmake-3.24/Modules/CMakeFindDependencyMacro.cmake"
+			"path" : "C:/Qt/Tools/CMake_64/share/cmake-3.27/Modules/CMakeFindDependencyMacro.cmake"
 		},
 		{
 			"isExternal" : true,
@@ -522,7 +497,7 @@
 		{
 			"isCMake" : true,
 			"isExternal" : true,
-			"path" : "C:/Qt/Tools/CMake_64/share/cmake-3.24/Modules/CMakeFindDependencyMacro.cmake"
+			"path" : "C:/Qt/Tools/CMake_64/share/cmake-3.27/Modules/CMakeFindDependencyMacro.cmake"
 		},
 		{
 			"isExternal" : true,
@@ -535,17 +510,17 @@
 		{
 			"isCMake" : true,
 			"isExternal" : true,
-			"path" : "C:/Qt/Tools/CMake_64/share/cmake-3.24/Modules/CheckCXXSourceCompiles.cmake"
+			"path" : "C:/Qt/Tools/CMake_64/share/cmake-3.27/Modules/CheckCXXSourceCompiles.cmake"
 		},
 		{
 			"isCMake" : true,
 			"isExternal" : true,
-			"path" : "C:/Qt/Tools/CMake_64/share/cmake-3.24/Modules/FindPackageHandleStandardArgs.cmake"
+			"path" : "C:/Qt/Tools/CMake_64/share/cmake-3.27/Modules/FindPackageHandleStandardArgs.cmake"
 		},
 		{
 			"isCMake" : true,
 			"isExternal" : true,
-			"path" : "C:/Qt/Tools/CMake_64/share/cmake-3.24/Modules/FindPackageMessage.cmake"
+			"path" : "C:/Qt/Tools/CMake_64/share/cmake-3.27/Modules/FindPackageMessage.cmake"
 		},
 		{
 			"isExternal" : true,
@@ -562,7 +537,7 @@
 		{
 			"isCMake" : true,
 			"isExternal" : true,
-			"path" : "C:/Qt/Tools/CMake_64/share/cmake-3.24/Modules/CMakeFindDependencyMacro.cmake"
+			"path" : "C:/Qt/Tools/CMake_64/share/cmake-3.27/Modules/CMakeFindDependencyMacro.cmake"
 		},
 		{
 			"isExternal" : true,
@@ -595,7 +570,7 @@
 		{
 			"isCMake" : true,
 			"isExternal" : true,
-			"path" : "C:/Qt/Tools/CMake_64/share/cmake-3.24/Modules/CMakeFindDependencyMacro.cmake"
+			"path" : "C:/Qt/Tools/CMake_64/share/cmake-3.27/Modules/CMakeFindDependencyMacro.cmake"
 		},
 		{
 			"isExternal" : true,
@@ -624,7 +599,7 @@
 		{
 			"isCMake" : true,
 			"isExternal" : true,
-			"path" : "C:/Qt/Tools/CMake_64/share/cmake-3.24/Modules/CMakeFindDependencyMacro.cmake"
+			"path" : "C:/Qt/Tools/CMake_64/share/cmake-3.27/Modules/CMakeFindDependencyMacro.cmake"
 		},
 		{
 			"isExternal" : true,
@@ -677,7 +652,7 @@
 		{
 			"isCMake" : true,
 			"isExternal" : true,
-			"path" : "C:/Qt/Tools/CMake_64/share/cmake-3.24/Modules/GNUInstallDirs.cmake"
+			"path" : "C:/Qt/Tools/CMake_64/share/cmake-3.27/Modules/GNUInstallDirs.cmake"
 		},
 		{
 			"isExternal" : true,
@@ -694,7 +669,7 @@
 		{
 			"isCMake" : true,
 			"isExternal" : true,
-			"path" : "C:/Qt/Tools/CMake_64/share/cmake-3.24/Modules/CMakeFindDependencyMacro.cmake"
+			"path" : "C:/Qt/Tools/CMake_64/share/cmake-3.27/Modules/CMakeFindDependencyMacro.cmake"
 		},
 		{
 			"isExternal" : true,
@@ -707,27 +682,27 @@
 		{
 			"isCMake" : true,
 			"isExternal" : true,
-			"path" : "C:/Qt/Tools/CMake_64/share/cmake-3.24/Modules/FindVulkan.cmake"
+			"path" : "C:/Qt/Tools/CMake_64/share/cmake-3.27/Modules/FindVulkan.cmake"
 		},
 		{
 			"isCMake" : true,
 			"isExternal" : true,
-			"path" : "C:/Qt/Tools/CMake_64/share/cmake-3.24/Modules/FindPackageHandleStandardArgs.cmake"
+			"path" : "C:/Qt/Tools/CMake_64/share/cmake-3.27/Modules/FindPackageHandleStandardArgs.cmake"
 		},
 		{
 			"isCMake" : true,
 			"isExternal" : true,
-			"path" : "C:/Qt/Tools/CMake_64/share/cmake-3.24/Modules/FindPackageMessage.cmake"
+			"path" : "C:/Qt/Tools/CMake_64/share/cmake-3.27/Modules/FindPackageMessage.cmake"
 		},
 		{
 			"isCMake" : true,
 			"isExternal" : true,
-			"path" : "C:/Qt/Tools/CMake_64/share/cmake-3.24/Modules/FindPackageHandleStandardArgs.cmake"
+			"path" : "C:/Qt/Tools/CMake_64/share/cmake-3.27/Modules/FindPackageHandleStandardArgs.cmake"
 		},
 		{
 			"isCMake" : true,
 			"isExternal" : true,
-			"path" : "C:/Qt/Tools/CMake_64/share/cmake-3.24/Modules/FindPackageMessage.cmake"
+			"path" : "C:/Qt/Tools/CMake_64/share/cmake-3.27/Modules/FindPackageMessage.cmake"
 		},
 		{
 			"isExternal" : true,
@@ -744,7 +719,7 @@
 		{
 			"isCMake" : true,
 			"isExternal" : true,
-			"path" : "C:/Qt/Tools/CMake_64/share/cmake-3.24/Modules/CMakeFindDependencyMacro.cmake"
+			"path" : "C:/Qt/Tools/CMake_64/share/cmake-3.27/Modules/CMakeFindDependencyMacro.cmake"
 		},
 		{
 			"isExternal" : true,
@@ -789,7 +764,7 @@
 		{
 			"isCMake" : true,
 			"isExternal" : true,
-			"path" : "C:/Qt/Tools/CMake_64/share/cmake-3.24/Modules/CMakeFindDependencyMacro.cmake"
+			"path" : "C:/Qt/Tools/CMake_64/share/cmake-3.27/Modules/CMakeFindDependencyMacro.cmake"
 		},
 		{
 			"isExternal" : true,
@@ -810,7 +785,7 @@
 		{
 			"isCMake" : true,
 			"isExternal" : true,
-			"path" : "C:/Qt/Tools/CMake_64/share/cmake-3.24/Modules/CMakeFindDependencyMacro.cmake"
+			"path" : "C:/Qt/Tools/CMake_64/share/cmake-3.27/Modules/CMakeFindDependencyMacro.cmake"
 		},
 		{
 			"isExternal" : true,
@@ -831,7 +806,7 @@
 		{
 			"isCMake" : true,
 			"isExternal" : true,
-			"path" : "C:/Qt/Tools/CMake_64/share/cmake-3.24/Modules/CMakeFindDependencyMacro.cmake"
+			"path" : "C:/Qt/Tools/CMake_64/share/cmake-3.27/Modules/CMakeFindDependencyMacro.cmake"
 		},
 		{
 			"isExternal" : true,
@@ -852,7 +827,7 @@
 		{
 			"isCMake" : true,
 			"isExternal" : true,
-			"path" : "C:/Qt/Tools/CMake_64/share/cmake-3.24/Modules/CMakeFindDependencyMacro.cmake"
+			"path" : "C:/Qt/Tools/CMake_64/share/cmake-3.27/Modules/CMakeFindDependencyMacro.cmake"
 		},
 		{
 			"isExternal" : true,
@@ -873,7 +848,7 @@
 		{
 			"isCMake" : true,
 			"isExternal" : true,
-			"path" : "C:/Qt/Tools/CMake_64/share/cmake-3.24/Modules/CMakeFindDependencyMacro.cmake"
+			"path" : "C:/Qt/Tools/CMake_64/share/cmake-3.27/Modules/CMakeFindDependencyMacro.cmake"
 		},
 		{
 			"isExternal" : true,
@@ -894,7 +869,7 @@
 		{
 			"isCMake" : true,
 			"isExternal" : true,
-			"path" : "C:/Qt/Tools/CMake_64/share/cmake-3.24/Modules/CMakeFindDependencyMacro.cmake"
+			"path" : "C:/Qt/Tools/CMake_64/share/cmake-3.27/Modules/CMakeFindDependencyMacro.cmake"
 		},
 		{
 			"isExternal" : true,
@@ -915,7 +890,7 @@
 		{
 			"isCMake" : true,
 			"isExternal" : true,
-			"path" : "C:/Qt/Tools/CMake_64/share/cmake-3.24/Modules/CMakeFindDependencyMacro.cmake"
+			"path" : "C:/Qt/Tools/CMake_64/share/cmake-3.27/Modules/CMakeFindDependencyMacro.cmake"
 		},
 		{
 			"isExternal" : true,
@@ -936,7 +911,7 @@
 		{
 			"isCMake" : true,
 			"isExternal" : true,
-			"path" : "C:/Qt/Tools/CMake_64/share/cmake-3.24/Modules/CMakeFindDependencyMacro.cmake"
+			"path" : "C:/Qt/Tools/CMake_64/share/cmake-3.27/Modules/CMakeFindDependencyMacro.cmake"
 		},
 		{
 			"isExternal" : true,
@@ -957,7 +932,7 @@
 		{
 			"isCMake" : true,
 			"isExternal" : true,
-			"path" : "C:/Qt/Tools/CMake_64/share/cmake-3.24/Modules/CMakeFindDependencyMacro.cmake"
+			"path" : "C:/Qt/Tools/CMake_64/share/cmake-3.27/Modules/CMakeFindDependencyMacro.cmake"
 		},
 		{
 			"isExternal" : true,
@@ -978,7 +953,7 @@
 		{
 			"isCMake" : true,
 			"isExternal" : true,
-			"path" : "C:/Qt/Tools/CMake_64/share/cmake-3.24/Modules/CMakeFindDependencyMacro.cmake"
+			"path" : "C:/Qt/Tools/CMake_64/share/cmake-3.27/Modules/CMakeFindDependencyMacro.cmake"
 		},
 		{
 			"isExternal" : true,
@@ -999,7 +974,7 @@
 		{
 			"isCMake" : true,
 			"isExternal" : true,
-			"path" : "C:/Qt/Tools/CMake_64/share/cmake-3.24/Modules/CMakeFindDependencyMacro.cmake"
+			"path" : "C:/Qt/Tools/CMake_64/share/cmake-3.27/Modules/CMakeFindDependencyMacro.cmake"
 		},
 		{
 			"isExternal" : true,
@@ -1020,7 +995,7 @@
 		{
 			"isCMake" : true,
 			"isExternal" : true,
-			"path" : "C:/Qt/Tools/CMake_64/share/cmake-3.24/Modules/CMakeFindDependencyMacro.cmake"
+			"path" : "C:/Qt/Tools/CMake_64/share/cmake-3.27/Modules/CMakeFindDependencyMacro.cmake"
 		},
 		{
 			"isExternal" : true,
@@ -1041,7 +1016,7 @@
 		{
 			"isCMake" : true,
 			"isExternal" : true,
-			"path" : "C:/Qt/Tools/CMake_64/share/cmake-3.24/Modules/CMakeFindDependencyMacro.cmake"
+			"path" : "C:/Qt/Tools/CMake_64/share/cmake-3.27/Modules/CMakeFindDependencyMacro.cmake"
 		},
 		{
 			"isExternal" : true,
@@ -1062,7 +1037,7 @@
 		{
 			"isCMake" : true,
 			"isExternal" : true,
-			"path" : "C:/Qt/Tools/CMake_64/share/cmake-3.24/Modules/CMakeFindDependencyMacro.cmake"
+			"path" : "C:/Qt/Tools/CMake_64/share/cmake-3.27/Modules/CMakeFindDependencyMacro.cmake"
 		},
 		{
 			"isExternal" : true,
@@ -1083,7 +1058,7 @@
 		{
 			"isCMake" : true,
 			"isExternal" : true,
-			"path" : "C:/Qt/Tools/CMake_64/share/cmake-3.24/Modules/CMakeFindDependencyMacro.cmake"
+			"path" : "C:/Qt/Tools/CMake_64/share/cmake-3.27/Modules/CMakeFindDependencyMacro.cmake"
 		},
 		{
 			"isExternal" : true,
@@ -1104,7 +1079,7 @@
 		{
 			"isCMake" : true,
 			"isExternal" : true,
-			"path" : "C:/Qt/Tools/CMake_64/share/cmake-3.24/Modules/CMakeFindDependencyMacro.cmake"
+			"path" : "C:/Qt/Tools/CMake_64/share/cmake-3.27/Modules/CMakeFindDependencyMacro.cmake"
 		},
 		{
 			"isExternal" : true,
@@ -1125,7 +1100,7 @@
 		{
 			"isCMake" : true,
 			"isExternal" : true,
-			"path" : "C:/Qt/Tools/CMake_64/share/cmake-3.24/Modules/CMakeFindDependencyMacro.cmake"
+			"path" : "C:/Qt/Tools/CMake_64/share/cmake-3.27/Modules/CMakeFindDependencyMacro.cmake"
 		},
 		{
 			"isExternal" : true,
@@ -1146,7 +1121,7 @@
 		{
 			"isCMake" : true,
 			"isExternal" : true,
-			"path" : "C:/Qt/Tools/CMake_64/share/cmake-3.24/Modules/CMakeFindDependencyMacro.cmake"
+			"path" : "C:/Qt/Tools/CMake_64/share/cmake-3.27/Modules/CMakeFindDependencyMacro.cmake"
 		},
 		{
 			"isExternal" : true,
@@ -1191,7 +1166,7 @@
 		{
 			"isCMake" : true,
 			"isExternal" : true,
-			"path" : "C:/Qt/Tools/CMake_64/share/cmake-3.24/Modules/CMakeFindDependencyMacro.cmake"
+			"path" : "C:/Qt/Tools/CMake_64/share/cmake-3.27/Modules/CMakeFindDependencyMacro.cmake"
 		},
 		{
 			"isExternal" : true,
@@ -1208,7 +1183,7 @@
 		{
 			"isCMake" : true,
 			"isExternal" : true,
-			"path" : "C:/Qt/Tools/CMake_64/share/cmake-3.24/Modules/GNUInstallDirs.cmake"
+			"path" : "C:/Qt/Tools/CMake_64/share/cmake-3.27/Modules/GNUInstallDirs.cmake"
 		}
 	],
 	"kind" : "cmakeFiles",

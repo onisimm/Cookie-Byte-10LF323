@@ -11,31 +11,31 @@
 			"cmake" : "C:/Qt/Tools/CMake_64/bin/cmake.exe",
 			"cpack" : "C:/Qt/Tools/CMake_64/bin/cpack.exe",
 			"ctest" : "C:/Qt/Tools/CMake_64/bin/ctest.exe",
-			"root" : "C:/Qt/Tools/CMake_64/share/cmake-3.24"
+			"root" : "C:/Qt/Tools/CMake_64/share/cmake-3.27"
 		},
 		"version" : 
 		{
 			"isDirty" : false,
 			"major" : 3,
-			"minor" : 24,
-			"patch" : 2,
-			"string" : "3.24.2",
+			"minor" : 27,
+			"patch" : 7,
+			"string" : "3.27.7",
 			"suffix" : ""
 		}
 	},
 	"objects" : 
 	[
 		{
-			"jsonFile" : "codemodel-v2-744f2623003cc6141812.json",
+			"jsonFile" : "codemodel-v2-19c1e59233c48bf717af.json",
 			"kind" : "codemodel",
 			"version" : 
 			{
 				"major" : 2,
-				"minor" : 4
+				"minor" : 6
 			}
 		},
 		{
-			"jsonFile" : "cache-v2-e94f5514abd22fe8471b.json",
+			"jsonFile" : "cache-v2-3d91e0f9c1a8bb5a8976.json",
 			"kind" : "cache",
 			"version" : 
 			{
@@ -44,7 +44,7 @@
 			}
 		},
 		{
-			"jsonFile" : "cmakeFiles-v1-0d11408927f8d2e6ebd7.json",
+			"jsonFile" : "cmakeFiles-v1-cfb68bffd8e35176911a.json",
 			"kind" : "cmakeFiles",
 			"version" : 
 			{
@@ -57,7 +57,7 @@
 	{
 		"cache-v2" : 
 		{
-			"jsonFile" : "cache-v2-e94f5514abd22fe8471b.json",
+			"jsonFile" : "cache-v2-3d91e0f9c1a8bb5a8976.json",
 			"kind" : "cache",
 			"version" : 
 			{
@@ -67,7 +67,7 @@
 		},
 		"cmakeFiles-v1" : 
 		{
-			"jsonFile" : "cmakeFiles-v1-0d11408927f8d2e6ebd7.json",
+			"jsonFile" : "cmakeFiles-v1-cfb68bffd8e35176911a.json",
 			"kind" : "cmakeFiles",
 			"version" : 
 			{
@@ -77,12 +77,12 @@
 		},
 		"codemodel-v2" : 
 		{
-			"jsonFile" : "codemodel-v2-744f2623003cc6141812.json",
+			"jsonFile" : "codemodel-v2-19c1e59233c48bf717af.json",
 			"kind" : "codemodel",
 			"version" : 
 			{
 				"major" : 2,
-				"minor" : 4
+				"minor" : 6
 			}
 		}
 	}

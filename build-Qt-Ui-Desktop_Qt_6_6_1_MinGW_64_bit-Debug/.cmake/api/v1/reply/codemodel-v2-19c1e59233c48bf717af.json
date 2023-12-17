@@ -7,7 +7,7 @@
 				{
 					"build" : ".",
 					"hasInstallRule" : true,
-					"jsonFile" : "directory-.-Debug-98914bb93be9da11da8c.json",
+					"jsonFile" : "directory-.-Debug-5160f1241d08cc0759a4.json",
 					"minimumCMakeVersion" : 
 					{
 						"string" : "3.16"
@@ -44,7 +44,7 @@
 				{
 					"directoryIndex" : 0,
 					"id" : "Qt-Ui::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-Qt-Ui-Debug-714cfd30652c767a3439.json",
+					"jsonFile" : "target-Qt-Ui-Debug-b09a6c7c2dc8940954f4.json",
 					"name" : "Qt-Ui",
 					"projectIndex" : 0
 				},
@@ -74,6 +74,6 @@
 	"version" : 
 	{
 		"major" : 2,
-		"minor" : 4
+		"minor" : 6
 	}
 }

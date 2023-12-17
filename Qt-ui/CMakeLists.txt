@@ -25,6 +25,9 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         ${PROJECT_SOURCES}
         gamescreenwidget.h gamescreenwidget.cpp gamescreenwidget.ui
         mainmenuwidget.h mainmenuwidget.cpp mainmenuwidget.ui
+        dotwidget.h dotwidget.cpp
+        gameboardwidget.h gameboardwidget.cpp
+
 
 
 

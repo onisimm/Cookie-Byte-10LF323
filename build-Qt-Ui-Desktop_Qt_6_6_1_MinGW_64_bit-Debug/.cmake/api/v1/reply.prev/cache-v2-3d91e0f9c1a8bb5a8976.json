@@ -79,7 +79,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "24"
+			"value" : "27"
 		},
 		{
 			"name" : "CMAKE_CACHE_PATCH_VERSION",
@@ -91,7 +91,19 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "2"
+			"value" : "7"
+		},
+		{
+			"name" : "CMAKE_COLOR_DIAGNOSTICS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Enable colored diagnostics throughout."
+				}
+			],
+			"type" : "BOOL",
+			"value" : "1"
 		},
 		{
 			"name" : "CMAKE_COMMAND",
@@ -1251,7 +1263,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "C:/Qt/Tools/CMake_64/share/cmake-3.24"
+			"value" : "C:/Qt/Tools/CMake_64/share/cmake-3.27"
 		},
 		{
 			"name" : "CMAKE_SHARED_LINKER_FLAGS",
@@ -1460,6 +1472,22 @@
 			],
 			"type" : "FILEPATH",
 			"value" : "C:/Qt/Tools/mingw1120_64/bin/strip.exe"
+		},
+		{
+			"name" : "CMAKE_TAPI",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Path to a program."
+				}
+			],
+			"type" : "FILEPATH",
+			"value" : "CMAKE_TAPI-NOTFOUND"
 		},
 		{
 			"name" : "CMAKE_VERBOSE_MAKEFILE",

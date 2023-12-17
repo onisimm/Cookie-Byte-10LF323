@@ -23,6 +23,9 @@ CMAKE_AR:FILEPATH=C:/Qt/Tools/mingw1120_64/bin/ar.exe
 //No help, variable specified on the command line.
 CMAKE_BUILD_TYPE:STRING=Debug
 
+//Enable colored diagnostics throughout.
+CMAKE_COLOR_DIAGNOSTICS:BOOL=1
+
 //CXX compiler
 CMAKE_CXX_COMPILER:STRING=C:/Qt/Tools/mingw1120_64/bin/g++.exe
 
@@ -278,6 +281,9 @@ CMAKE_STATIC_LINKER_FLAGS_RELWITHDEBINFO:STRING=
 //Path to a program.
 CMAKE_STRIP:FILEPATH=C:/Qt/Tools/mingw1120_64/bin/strip.exe
 
+//Path to a program.
+CMAKE_TAPI:FILEPATH=CMAKE_TAPI-NOTFOUND
+
 //If this value is on, makefiles will be generated without the
 // .SILENT directive, and all commands will be echoed to the console
 // during the make.  This is useful for debugging only. With Visual
@@ -365,9 +371,9 @@ CMAKE_CACHEFILE_DIR:INTERNAL=c:/Users/onisi/OneDrive/Desktop/school/modern-c++/C
 //Major version of cmake used to create the current loaded cache
 CMAKE_CACHE_MAJOR_VERSION:INTERNAL=3
 //Minor version of cmake used to create the current loaded cache
-CMAKE_CACHE_MINOR_VERSION:INTERNAL=24
+CMAKE_CACHE_MINOR_VERSION:INTERNAL=27
 //Patch version of cmake used to create the current loaded cache
-CMAKE_CACHE_PATCH_VERSION:INTERNAL=2
+CMAKE_CACHE_PATCH_VERSION:INTERNAL=7
 //Path to CMake executable.
 CMAKE_COMMAND:INTERNAL=C:/Qt/Tools/CMake_64/bin/cmake.exe
 //Path to cpack program executable.
@@ -495,7 +501,7 @@ CMAKE_RC_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_READELF
 CMAKE_READELF-ADVANCED:INTERNAL=1
 //Path to CMake installation.
-CMAKE_ROOT:INTERNAL=C:/Qt/Tools/CMake_64/share/cmake-3.24
+CMAKE_ROOT:INTERNAL=C:/Qt/Tools/CMake_64/share/cmake-3.27
 //ADVANCED property for variable: CMAKE_SHARED_LINKER_FLAGS
 CMAKE_SHARED_LINKER_FLAGS-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_SHARED_LINKER_FLAGS_DEBUG
@@ -522,6 +528,8 @@ CMAKE_STATIC_LINKER_FLAGS_RELEASE-ADVANCED:INTERNAL=1
 CMAKE_STATIC_LINKER_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_STRIP
 CMAKE_STRIP-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: CMAKE_TAPI
+CMAKE_TAPI-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_VERBOSE_MAKEFILE
 CMAKE_VERBOSE_MAKEFILE-ADVANCED:INTERNAL=1
 //Details about finding Threads

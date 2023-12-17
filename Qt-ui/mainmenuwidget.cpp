@@ -1,6 +1,5 @@
 #include "mainmenuwidget.h"
 #include "ui_mainmenuwidget.h"
-#include <iostream>
 
 MainMenuWidget::MainMenuWidget(QWidget *parent) :
     QWidget(parent),

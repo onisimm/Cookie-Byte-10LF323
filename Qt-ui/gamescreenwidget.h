@@ -2,13 +2,13 @@
 #define GAMESCREENWIDGET_H
 
 #include <QWidget>
+#include "GameBoardWidget.h"
 
 namespace Ui {
 class GameScreenWidget;
 }
 
-class GameScreenWidget : public QWidget
-{
+class GameScreenWidget : public QWidget {
     Q_OBJECT
 
 public:
@@ -20,8 +20,8 @@ signals:
 
 private:
     Ui::GameScreenWidget *ui;
-
-    void setupConnections();    // Setup signal-slot connections
+    GameBoardWidget *gameBoard; // Pointer to the GameBoardWidget
+    void setupConnections();
 };
 
 #endif // GAMESCREENWIDGET_H

@@ -43,16 +43,18 @@ void GameBoardWidget::paintEvent(QPaintEvent *event) {
     QRect firstDotRect = layout->itemAtPosition(1, 1)->widget()->geometry();
     QRect lastDotRect = layout->itemAtPosition(22, 22)->widget()->geometry();
 
+    int dotWidth = firstDotRect.width();
+
     // Draw the top border line
     pen.setColor(Qt::red);
     painter.setPen(pen);
-    QPoint topLeft(firstDotRect.left(), firstDotRect.top());
-    QPoint topRight(lastDotRect.right() - firstDotRect.width(), firstDotRect.top());
+    QPoint topLeft(firstDotRect.left() + dotWidth, firstDotRect.top() - (dotWidth / 2));
+    QPoint topRight(lastDotRect.right() - dotWidth, firstDotRect.top() - (dotWidth / 2));
     painter.drawLine(topLeft, topRight);
 
     // Draw the bottom border line
-    QPoint bottomLeft(firstDotRect.left(), lastDotRect.bottom());
-    QPoint bottomRight(lastDotRect.right() - firstDotRect.width(), lastDotRect.bottom());
+    QPoint bottomLeft(firstDotRect.left() + dotWidth, lastDotRect.bottom() + (dotWidth / 2));
+    QPoint bottomRight(lastDotRect.right() - dotWidth, lastDotRect.bottom() + (dotWidth / 2));
     painter.drawLine(bottomLeft, bottomRight);
 
     // Set pen color for the vertical lines
@@ -60,13 +62,13 @@ void GameBoardWidget::paintEvent(QPaintEvent *event) {
     painter.setPen(pen);
 
     // Draw the left border line
-    QPoint leftTop(firstDotRect.left(), firstDotRect.top());
-    QPoint leftBottom(firstDotRect.left(), lastDotRect.bottom() - firstDotRect.height());
+    QPoint leftTop(firstDotRect.left() - (dotWidth / 2), firstDotRect.top() + dotWidth);
+    QPoint leftBottom(firstDotRect.left() - (dotWidth / 2), lastDotRect.bottom() - dotWidth);
     painter.drawLine(leftTop, leftBottom);
 
     // Draw the right border line
-    QPoint rightTop(lastDotRect.right(), firstDotRect.top());
-    QPoint rightBottom(lastDotRect.right(), lastDotRect.bottom() - firstDotRect.height());
+    QPoint rightTop(lastDotRect.right() + (dotWidth / 2), firstDotRect.top() + dotWidth);
+    QPoint rightBottom(lastDotRect.right() + (dotWidth / 2), lastDotRect.bottom() - dotWidth);
     painter.drawLine(rightTop, rightBottom);
 }
 

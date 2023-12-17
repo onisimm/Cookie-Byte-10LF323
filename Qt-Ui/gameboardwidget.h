@@ -3,7 +3,6 @@
 
 #include <QWidget>
 #include <QGridLayout>
-#include "DotWidget.h" // Make sure to include the header for DotWidget
 
 class GameBoardWidget : public QWidget {
     Q_OBJECT

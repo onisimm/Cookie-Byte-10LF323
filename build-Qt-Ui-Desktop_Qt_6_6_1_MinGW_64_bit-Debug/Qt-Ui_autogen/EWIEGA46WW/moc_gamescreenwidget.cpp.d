@@ -348,5 +348,4 @@ C:/Users/onisi/OneDrive/Desktop/school/modern-c++/Cookie-Byte-Twixt/build-Qt-Ui-
   C:/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/time.h \
   C:/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/vadefs.h \
   C:/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/wchar.h \
-  C:/Users/onisi/OneDrive/Desktop/school/modern-c++/Cookie-Byte-Twixt/Qt-Ui/DotWidget.h \
   C:/Users/onisi/OneDrive/Desktop/school/modern-c++/Cookie-Byte-Twixt/Qt-Ui/GameBoardWidget.h

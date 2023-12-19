@@ -36,7 +36,7 @@ void TwixtGame::GameTurns(Player& player, bool& isPlaying, Board& board)
 	else if (answer == "DELETE")
 	{
 		std::cout << "Choose the first dot: ";
-		int i1, j1, i2, j2;
+		size_t i1, j1, i2, j2;
 		std::cin >> i1 >> j1;
 		std::cout << "Choose the second dot: ";
 		std::cin >> i2 >> j2;
@@ -47,7 +47,7 @@ void TwixtGame::GameTurns(Player& player, bool& isPlaying, Board& board)
 	else if (answer == "DELETEALL")
 	{
 		std::cout << "Choose the dot: ";
-		int i, j;
+		size_t i, j;
 		std::cin >> i >> j;
 		board.getDot(i, j)->deleteAllBridgesForADot();
 	}
@@ -143,7 +143,7 @@ void TwixtGame::GameLoop(Board& board, Player player1, Player player2, Bulldozer
 		{
 			if (bulldozer.flipCoin(board))
 			{
-				m_gameStack.AddInGameStack(board.getDot(bulldozer.getI(), bulldozer.getJ()), int(Dot::DotStatus::Bulldozer));
+				m_gameStack.AddInGameStack(board.getDot(bulldozer.getI(), bulldozer.getJ()), size_t(Dot::DotStatus::Bulldozer));
 
 				std::cout << "Do you want to undo the move? ";
 				std::cin >> answer;
@@ -192,7 +192,7 @@ void TwixtGame::Run()
 	Player player2("player2", Player::Color::Black, DOTS_NUMBER);
 
 	std::cout << "Choose your game mode:\n1->DEFAULT\n2->BULLDOZER\n3->MINES.\n\n";
-	int mode;
+	uint8_t mode;
 	std::cin >> mode;
 	//GameStack gameStack;
 	std::cout << "add - add dot\ndelete - delete a bridge\ndeleteall - delete existing bridges for a dot\naddbridge - add a bridge between two existing dots\n\n";
@@ -206,7 +206,7 @@ void TwixtGame::Run()
 	case 3:
 		m_gameStack = GameStack(2);
 		m_gameMode = GameMode::Mines;
-		for (int i = 0; i < 3; i++)
+		for (size_t i = 0; i < 3; i++)
 		{
 			board.placeRandomMine();
 		}

@@ -20,7 +20,7 @@ namespace twixt {
     public:
         // Constructors
         Dot(); // default
-        Dot(int, int);
+        Dot(size_t, size_t);
 
         Dot(const Dot& newDot); // copy constructor
         // Add move constructor
@@ -42,14 +42,14 @@ namespace twixt {
         };
 
         // Getters
-        int getCoordI() const;
-        int getCoordJ() const;
+        size_t getCoordI() const;
+        size_t getCoordJ() const;
         DotStatus getStatus() const;
         const std::vector<Bridge*>& getExistingBridges() const;
 
         // Setters
-        void setCoordI(int);
-        void setCoordJ(int);
+        void setCoordI(size_t);
+        void setCoordJ(size_t);
         void setStatus(const DotStatus&);
         void setExistingBridges(const std::vector<Bridge*>& existingBridges);
 
@@ -64,7 +64,7 @@ namespace twixt {
         const bool& checkExistingBridge(Dot* dotToCheck) const; // check if there's a bridge between this dot and dotToCheck
   
 
-        bool isDotInPath(std::vector<std::pair<Dot*, int>> path) const;
+        bool isDotInPath(std::vector<std::pair<Dot*, size_t>> path) const;
 
         void deleteAllBridgesForADot();
         void removeBridgeFromExisting(Bridge* bridge);
@@ -77,7 +77,7 @@ namespace twixt {
     private:
     
         DotStatus m_status : 3;
-        int m_i, m_j; // coordinates
+        size_t m_i, m_j; // coordinates
         std::vector<Bridge*> m_existingBridges;
 
         

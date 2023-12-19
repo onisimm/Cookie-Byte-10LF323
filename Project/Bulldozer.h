@@ -11,8 +11,8 @@ namespace twixt {
 	class Bulldozer : public Dot
 	{
 	private:
-		std::pair<int, int> position;
-		std::stack<std::pair<int, int>> m_previousPosition;
+		std::pair<size_t, size_t> position;
+		std::stack<std::pair<size_t, size_t>> m_previousPosition;
 		std::stack<Dot> m_dotDestroyed;
 		void destoryRandomDot(Board& board);
 		void allocateBulldozer(Dot*& dot);
@@ -27,7 +27,7 @@ namespace twixt {
 		bool exists();
 		uint8_t getI() const;
 		uint8_t getJ() const;
-		std::stack<std::pair<int, int>> getPreviousPosition() const;
+		std::stack<std::pair<size_t, size_t>> getPreviousPosition() const;
 		std::stack<Dot> getDotDestroyed() const;
 		void setToPreviousPosition(Board& board);
 	};

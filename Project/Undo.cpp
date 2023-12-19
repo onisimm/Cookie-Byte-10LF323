@@ -64,8 +64,8 @@ void twixt::Undo::undoPlayers(Dot::DotStatus status)
 void twixt::Undo::undoBulldozer()
 {
 	Bulldozer* lastBulldozer = dynamic_cast<Bulldozer*>(m_lastDot);
-	int coordILastBulldozer = lastBulldozer->getCoordI();
-	int coordJLastBulldozer = lastBulldozer->getCoordJ();
+	size_t coordILastBulldozer = lastBulldozer->getCoordI();
+	size_t coordJLastBulldozer = lastBulldozer->getCoordJ();
 	//set lastBulldozer to previous position
 	lastBulldozer->setToPreviousPosition(*board);
 	

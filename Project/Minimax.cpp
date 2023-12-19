@@ -1,6 +1,6 @@
 #include "Minimax.h"
 
-int twixt::Minimax::evaluate(std::pair<twixt::Dot*, twixt::Dot*> bridgeToEvaluate)
+uint16_t twixt::Minimax::evaluate(std::pair<twixt::Dot*, twixt::Dot*> bridgeToEvaluate)
 {
     int score = 1;
     const int LONGEST_PATH_VALUE = 10;
@@ -15,7 +15,7 @@ int twixt::Minimax::evaluate(std::pair<twixt::Dot*, twixt::Dot*> bridgeToEvaluat
 
 std::pair<twixt::Dot*, twixt::Dot*> twixt::Minimax::minimax(Dot::DotStatus status)
 {
-    int maximumScore = 0;
+    uint16_t maximumScore = 0;
     std::pair<twixt::Dot*, twixt::Dot*> maximumBridge{nullptr, nullptr };
     for (int i = 0; i < copyOfBoard->getSize(); i++)
        for (int j = 0; j < copyOfBoard->getSize(); j++)
@@ -47,8 +47,8 @@ void twixt::Minimax::canBlock(Dot* centralDot)
     for (int i = 0; i < opponentPlayerDots.size() - 1; i++)
         for (int j = i + 1; j < opponentPlayerDots.size(); j++)
         {
-            if ((abs(opponentPlayerDots[i]->getCoordI() - opponentPlayerDots[j]->getCoordI()) == 1 && abs(opponentPlayerDots[i]->getCoordJ() - opponentPlayerDots[j]->getCoordJ()) == 2) ||
-                (abs(opponentPlayerDots[i]->getCoordI() - opponentPlayerDots[j]->getCoordI()) == 2 && abs(opponentPlayerDots[i]->getCoordJ() - opponentPlayerDots[j]->getCoordJ()) == 1))
+            if ((abs((int)opponentPlayerDots[i]->getCoordI() - (int)opponentPlayerDots[j]->getCoordI()) == 1 && abs((int)opponentPlayerDots[i]->getCoordJ() - (int)opponentPlayerDots[j]->getCoordJ()) == 2) ||
+                (abs((int)opponentPlayerDots[i]->getCoordI() - (int)opponentPlayerDots[j]->getCoordI()) == 2 && abs((int)opponentPlayerDots[i]->getCoordJ() - (int)opponentPlayerDots[j]->getCoordJ()) == 1))
             {
                 Dot* dotToBlock = blockOpponent(centralDot, opponentPlayerDots[i], opponentPlayerDots[j]);
                 if (dotToBlock != nullptr)
@@ -85,13 +85,13 @@ twixt::Dot* twixt::Minimax::blockOpponent(Dot* centralDot, Dot* firstOpponentDot
     return nullptr;
 }
 
-int twixt::Minimax::longestPath(Dot* dot)
+uint16_t twixt::Minimax::longestPath(Dot* dot)
 {
     Dot* newDot;
-    int maximLength = 0;
+    uint16_t maximLength = 0;
 
     //Creating path vector: pair of dot in path and position of existing bridges for the dot.
-    std::vector<std::pair<Dot*, int>> path;
+    std::vector<std::pair<Dot*, size_t>> path;
     path.push_back({ dot, 0 });
 
     while (!path.empty())
@@ -105,7 +105,7 @@ int twixt::Minimax::longestPath(Dot* dot)
                 path[path.size() - 1].second++;
                 path.push_back({ newDot, 0 });
                 checkDot = path[path.size() - 1].first;
-                maximLength = std::max(maximLength, (int)path.size());
+                maximLength = std::max(maximLength, (uint16_t)path.size());
             }
             else
             {

@@ -32,22 +32,6 @@ void TwixtGame::GameTurns(Player& player, bool& isPlaying, Board& board)
 		m_gameStack.AddInGameStack(object.getDot(), object.getType());
 		board.showBoard();
 		std::cout << "\n";
-
-		Dot::DotStatus status;
-		if (player.getColor() == Player::Color::Red)
-		{
-			status = Dot::DotStatus::Player1;
-		}
-		else
-		{
-			status = Dot::DotStatus::Player2;
-		}
-
-		if (board.checkPath(status))
-		{
-			std::cout << "You won!\n";
-			isPlaying = false;
-		}
 	}
 	else if (answer == "DELETE")
 	{
@@ -85,6 +69,21 @@ void TwixtGame::GameTurns(Player& player, bool& isPlaying, Board& board)
 				board.getMatrixDot(i1, j1)->addBridge(board.getMatrixDot(i2, j2));
 		}
 		else std::cout << "the dots does not exist\n";
+	}
+	Dot::DotStatus status;
+	if (player.getColor() == Player::Color::Red)
+	{
+		status = Dot::DotStatus::Player1;
+	}
+	else
+	{
+		status = Dot::DotStatus::Player2;
+	}
+	if (board.checkPath(status))
+	{
+		std::cout << "You won!\n";
+		isPlaying = false;
+		return;
 	}
 		//nu se adauga automat bridge-uri
 	std::cout << "Do you want to undo the move? ";

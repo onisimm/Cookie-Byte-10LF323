@@ -21,14 +21,14 @@ namespace twixt {
 		~Board();
 
 		// Getters
-		Dot*& getDot(int i, int j);
+		Dot*& getDot(size_t i, size_t j);
 		uint32_t getSize() const;
 		std::vector<std::vector<Dot*>> getMatrix();
-		Dot* getMatrixDot(int, int);
+		Dot* getMatrixDot(size_t, size_t);
 
 		// Setters
-		void setDot(int i, int j, const Dot& dot);
-		void setNewDot(int i, int j);
+		void setDot(size_t i, size_t j, const Dot& dot);
+		void setNewDot(size_t i, size_t j);
 
 		// Move assignment operator
 		Board& operator=(Board&& other) noexcept;
@@ -37,7 +37,9 @@ namespace twixt {
 		Board& operator=(const Board& newBoard);
 
 		void showBoard() const;
-		void changeDotStatus(int i, int j, Dot::DotStatus status, bool& didMineExplode);
+		void changeDotStatus(size_t i, size_t j, Dot::DotStatus status, bool& didMineExplode);
+		void changeDotStatus(size_t i, size_t j, Dot::DotStatus status);
+		
 
 		void possibleToExistingBridges(Dot* dot);
 
@@ -57,14 +59,15 @@ namespace twixt {
 
 		void deleteBridge(Dot* firstDot, Dot* secondDot);
 
-		void placeMine(int i, int j);
+		void placeMine(size_t i, size_t j);
 		void placeRandomMine();
 		void mineExplodes(Mine* mine);
 
-		int copieI;
-		int copieJ;
+		size_t copieI;
+		size_t copieJ;
 	private:
 		std::vector<std::vector<Dot*>> m_matrixDot;
+		bool falseMineExplode = false;
 	};
 }
 

@@ -28,8 +28,8 @@ void TwixtGame::GameTurns(Player& player, bool& isPlaying, Board& board)
 	{
 		std::cout << "It's " << player.getName() << "'s turn!\n";
 		std::cout << "REMAINING DOTS for " << player.getName() << ": " << player.getRemainingDots() << "\n";
-		ObjectInStack object = player.turn(board);
-		m_gameStack.AddInGameStack(object.getDot(), object.getType());
+		auto [dot, type] = player.turn(board);
+		m_gameStack.AddInGameStack(dot, type);
 		board.showBoard();
 		std::cout << "\n";
 	}

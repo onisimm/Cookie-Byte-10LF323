@@ -6,7 +6,7 @@
 #include <stack>
 #include "Board.h"
 #include "Dot.h"
-#include "ObjectInStack.h"
+//#include "ObjectInStack.h"
 
 namespace twixt {
 	class Player {
@@ -19,8 +19,8 @@ namespace twixt {
 		};
 
 		// Constructors
-		Player() {};
-		Player(std::string name, Color color, int remainingDots);
+		Player() = default;
+		Player(std::string name, Color color, uint8_t remainingDots);
 		Player(const Player& other);//copy constructor
 		Player(Player&& other) noexcept; // move constructor
 
@@ -30,14 +30,14 @@ namespace twixt {
 		// Getters
 		std::string getName() const;
 		Color getColor() const;
-		int getRemainingDots() const;
+		uint8_t getRemainingDots() const;
 
 		// Setters
 		void setName(std::string);
 		void setColor(Color);
-		void setRemainingDots(int);
+		void setRemainingDots(uint8_t);
 
-		ObjectInStack turn(Board& board);
+		std::pair<Dot*, uint8_t> turn(Board& board);
 		bool hasRemainingDots();
 
 		friend std::istream& operator>>(std::istream& in, Player& player);
@@ -45,8 +45,7 @@ namespace twixt {
 	private:
 		std::string m_name;
 		Color m_color;
-		std::stack<Dot*> existingDots;
-		int m_remainingDots;
+		uint8_t m_remainingDots;
 	};
 }
 

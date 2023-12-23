@@ -1,4 +1,4 @@
-#include"TwixtGame.h"
+﻿#include"TwixtGame.h"
 
 #ifndef TWIXTGAME_H
 #define TWIXTGAME_H
@@ -14,6 +14,31 @@ void TwixtGame::GameTurns(Player& player, bool& isPlaying, Board& board)
 {
 	std::string answer;
 	std::cout << player.getName() << ", what's you next move?\n";
+
+	// Verificare pentru jucătorul negru în prima tură
+	if (!blackPlayerStoleColor && player.getColor() == Player::Color::Black) {
+		std::cout << player.getName() << ", do you want to steal the red color? (YES/NO)\n";
+		std::cin >> answer;
+
+		for (auto& c : answer) {
+			c = toupper(c);
+		}
+	}
+	if (answer == "YES") {
+		// Setează culoarea jucătorului negru la roșu
+		player.setColor(Player::Color::Red);
+		// Setează indicatorul pe true după ce jucătorul a furat culoarea
+		blackPlayerStoleColor = true;
+		// Increment the number of pawns for the black player
+		player.setRemainingDots(player.getRemainingDots() + 1);
+		// Mesaj pentru indicarea faptului că jucătorul negru a furat culoarea
+		std::cout << "Black player stole the red color!\n";
+		std::cout << player.getName() << ", what's you next move?\n";
+
+
+	}
+
+
 	Minimax minimaxSuggestion(&board);
 	minimaxSuggestion.suggestMove((player.getColor() == Player::Color::Red) ? Dot::DotStatus::Player1 : Dot::DotStatus::Player2);
 
@@ -27,6 +52,9 @@ void TwixtGame::GameTurns(Player& player, bool& isPlaying, Board& board)
 	if (answer == "ADD")
 	{
 		std::cout << "It's " << player.getName() << "'s turn!\n";
+		// Incrementează numărul de doturi pentru jucătorul negru
+		player.setRemainingDots(player.getRemainingDots() + 1);
+
 		std::cout << "REMAINING DOTS for " << player.getName() << ": " << player.getRemainingDots() << "\n";
 		ObjectInStack object = player.turn(board);
 		m_gameStack.AddInGameStack(object.getDot(), object.getType());

@@ -1,4 +1,4 @@
-#include"TwixtGame.h"
+﻿#include"TwixtGame.h"
 
 #ifndef TWIXTGAME_H
 #define TWIXTGAME_H
@@ -14,6 +14,16 @@ void TwixtGame::GameTurns(Player& player, bool& isPlaying, Board& board)
 {
 	std::string answer;
 	std::cout << player.getName() << ", what's you next move?\n";
+
+	// Verificare pentru jucătorul negru în prima tură
+	if (!blackPlayerStoleColor && player.getColor() == Player::Color::Black) {
+		std::cout << player.getName() << ", do you want to steal the red color? (YES/NO)\n";
+		std::cin >> answer;
+
+		for (auto& c : answer) {
+			c = toupper(c);
+		}
+	}
 	Minimax minimaxSuggestion(&board);
 	minimaxSuggestion.suggestMove((player.getColor() == Player::Color::Red) ? Dot::DotStatus::Player1 : Dot::DotStatus::Player2);
 

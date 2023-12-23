@@ -1,12 +1,8 @@
 #pragma once
 
-#ifndef MINIMAX_H
-#define MINIMAX_H
-
-
-
 #include "Board.h"
-#include<unordered_map>
+#include <unordered_map>
+
 namespace twixt {
 	class Minimax
 	{
@@ -46,5 +42,3 @@ namespace twixt {
 
 	};
 }
-
-#endif // !MINIMAX_H

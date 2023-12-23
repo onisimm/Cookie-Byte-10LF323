@@ -1,5 +1,7 @@
 #pragma once
+
 #include "Dot.h"
+
 using namespace twixt;
 
 class ObjectInStack

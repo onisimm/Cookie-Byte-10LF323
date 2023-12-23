@@ -2,7 +2,6 @@
 
 namespace twixt
 {
-
 	//this function shows the board
 	void Board::showBoard() const
 	{

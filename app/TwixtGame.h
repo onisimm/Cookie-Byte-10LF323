@@ -1,12 +1,14 @@
 #pragma once
-#include"Dot.h"
-#include"Player.h"
+
+#include "Dot.h"
+#include "Player.h"
 #include "Bulldozer.h"
 #include "GameStack.h"
 #include "Undo.h"
 #include "SaveGame.h"
 #include "Minimax.h"
-#include<iostream>
+#include <iostream>
+
 using namespace twixt;
 
 class TwixtGame
@@ -31,6 +33,4 @@ private:
 	GameMode m_gameMode;
 	GameStack m_gameStack;
 	SaveGame saveGame;
-	bool blackPlayerStoleColor = false;
-
 };

@@ -16,4 +16,3 @@ public:
 	void saveMatrix(std::vector<std::vector<Dot*>> m_gameMatrix);
 	void saveStack(GameStack m_gameStack);
 };
-

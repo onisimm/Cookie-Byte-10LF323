@@ -1,8 +1,5 @@
 #pragma once
 
-#ifndef BRIDGE_H
-#define BRIDGE_H
-
 #include "Dot.h"
 
 namespace twixt {
@@ -33,5 +30,3 @@ namespace twixt {
 		void rebuiltBridge();
 	};
 }
-
-#endif // BRIDGE_H

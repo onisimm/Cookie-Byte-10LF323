@@ -1,5 +1,4 @@
-#ifndef GAMEBOARDWIDGET_H
-#define GAMEBOARDWIDGET_H
+#pragma once
 
 #include <QWidget>
 #include <QGridLayout>
@@ -16,5 +15,3 @@ protected:
 private:
     QGridLayout* layout; // The layout for the dots
 };
-
-#endif // GAMEBOARDWIDGET_H

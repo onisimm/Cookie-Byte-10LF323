@@ -1,6 +1,3 @@
-#ifndef MAINWINDOW_H
-#define MAINWINDOW_H
-
 #include <QMainWindow>
 #include <QStackedWidget>
 
@@ -33,4 +30,3 @@ private:
     void setupUi();             // Setup the UI of the main window
     void setupConnections();    // Setup signal-slot connections
 };
-#endif // MAINWINDOW_H

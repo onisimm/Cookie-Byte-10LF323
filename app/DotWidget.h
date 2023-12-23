@@ -1,5 +1,4 @@
-#ifndef DOTWIDGET_H
-#define DOTWIDGET_H
+#pragma once
 
 #include <QWidget>
 
@@ -23,5 +22,3 @@ private:
     QColor currentColor;
     bool pressed;
 };
-
-#endif // DOTWIDGET_H

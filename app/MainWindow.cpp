@@ -4,8 +4,8 @@
 #include "gamescreenwidget.h"
 #include <QStackedWidget>
 
-MainWindow::MainWindow(QWidget *parent)
-    :   QMainWindow(parent),
+MainWindow::MainWindow(QWidget* parent)
+    : QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
     setupUi();
@@ -41,4 +41,3 @@ void MainWindow::switchToGameScreen() {
 void MainWindow::switchToMainMenu() {
     stackedWidget->setCurrentWidget(mainMenuWidget);
 }
-

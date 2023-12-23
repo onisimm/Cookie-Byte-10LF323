@@ -26,7 +26,7 @@ void twixt::Bulldozer::destoryRandomDot(Board& board)
 
 	delete board.getDot(i, j);
 
-	
+
 
 	//set the new position for the bulldozer
 	position.first = i;
@@ -34,10 +34,10 @@ void twixt::Bulldozer::destoryRandomDot(Board& board)
 	this->setCoordI(i);
 	this->setCoordJ(j);
 	this->setStatus(Dot::DotStatus::Bulldozer);
-	
+
 	board.getDot(i, j) = new Bulldozer(*this);
 
-	
+
 }
 
 void twixt::Bulldozer::allocateBulldozer(Dot*& dot)
@@ -128,7 +128,4 @@ void twixt::Bulldozer::setToPreviousPosition(Board& board)
 
 	delete board.getDot(position.first, position.second);
 	board.getDot(position.first, position.second) = new Bulldozer(*this);
-	
 }
-
-

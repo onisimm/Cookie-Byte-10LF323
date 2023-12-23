@@ -33,4 +33,5 @@ private:
 	GameMode m_gameMode;
 	GameStack m_gameStack;
 	SaveGame saveGame;
+	bool blackPlayerStoleColor = false;
 };

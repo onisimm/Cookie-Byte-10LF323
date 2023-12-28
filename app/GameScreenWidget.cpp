@@ -31,7 +31,17 @@ void GameScreenWidget::setGamemodeLabel(const QString& gamemode)
 
 void GameScreenWidget::handleDotPressed(int row, int col, QColor color) {
     gameBoard->setDotColor(row, col, color);
-    switchPlayer(); // Switch the player after the move
+    switchPlayer();
+}
+
+void GameScreenWidget::setPlayerTurnLabel(const QString& nickname)
+{
+    if (nickname.isEmpty()) {
+        ui->playerTurnLabel->setText(player1Name + "'s turn");
+    }
+    else {
+        ui->playerTurnLabel->setText(nickname + "'s turn");
+    }
 }
 
 void GameScreenWidget::switchPlayer() {
@@ -42,5 +52,5 @@ void GameScreenWidget::switchPlayer() {
 void GameScreenWidget::updatePlayerTurnLabel() {
     QString currentPlayerName = isPlayer1CurrentPlayer ? player1Name : player2Name;
     gameBoard->setCurrentPlayer(isPlayer1CurrentPlayer);
-    ui->playerTurnLabel->setText(currentPlayerName + "'s turn");
+    setPlayerTurnLabel(currentPlayerName);
 }

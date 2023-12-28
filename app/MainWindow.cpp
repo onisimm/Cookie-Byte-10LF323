@@ -11,7 +11,6 @@ MainWindow::MainWindow(QWidget* parent)
     ui(new Ui::MainWindow)
 {
     setupUi();
-    setupConnections();
 }
 
 MainWindow::~MainWindow() {}
@@ -20,30 +19,24 @@ void MainWindow::setupUi() {
     stackedWidget = new QStackedWidget(this);
     setCentralWidget(stackedWidget);
 
-    mainMenuWidget = new MainMenuWidget();
-    gameScreenWidget = new GameScreenWidget();
-    settingsWidget = new SettingsWidget();
-
-    stackedWidget->addWidget(mainMenuWidget);
-    stackedWidget->addWidget(gameScreenWidget);
-    stackedWidget->addWidget(settingsWidget);
-
-    stackedWidget->setCurrentWidget(mainMenuWidget);
+    switchToMainMenu();
     this->setMinimumSize(mainMenuWidget->frameSize());
 }
 
-void MainWindow::setupConnections() {
-    // Play button
-    connect(static_cast<MainMenuWidget*>(mainMenuWidget), &MainMenuWidget::on_playButton_clicked, this, &MainWindow::switchToGameScreen);
-
-    // Settings button
-    connect(static_cast<MainMenuWidget*>(mainMenuWidget), &MainMenuWidget::on_settingsButton_clicked, this, &MainWindow::switchToSettingsScreen);
-};
+void MainWindow::deleteMenuWidgets()
+{
+    delete mainMenuWidget;
+    stackedWidget->removeWidget(mainMenuWidget);
+    delete settingsWidget;
+    stackedWidget->removeWidget(settingsWidget);
+    isMenuScreenConnected = false;
+}
 
 void MainWindow::switchToGameScreen() {
-    stackedWidget->setCurrentWidget(gameScreenWidget);
-
     if (!isGameScreenConnected) {
+        gameScreenWidget = new GameScreenWidget();
+        stackedWidget->addWidget(gameScreenWidget);
+
         // Back to Main Menu Button
         connect(static_cast<GameScreenWidget*>(gameScreenWidget), &GameScreenWidget::on_backToMenuButton_clicked, this, &MainWindow::confirmLeaveGame);
 
@@ -56,33 +49,42 @@ void MainWindow::switchToGameScreen() {
         QString player2Name = static_cast<SettingsWidget*>(settingsWidget)->getPlayer2Name();
         static_cast<GameScreenWidget*>(gameScreenWidget)->setPlayer1Name(player1Name);
         static_cast<GameScreenWidget*>(gameScreenWidget)->setPlayer2Name(player2Name);
+        static_cast<GameScreenWidget*>(gameScreenWidget)->setPlayerTurnLabel(); // It will be automatically set to Player1's nickname
 
         isGameScreenConnected = true;
+        stackedWidget->setCurrentWidget(gameScreenWidget);
     }
 }
 
 void MainWindow::switchToSettingsScreen() {
+    connect(static_cast<SettingsWidget*>(settingsWidget), &SettingsWidget::on_backToMenuButton_clicked, this, &MainWindow::switchToMainMenu);
     stackedWidget->setCurrentWidget(settingsWidget);
-
-    if (!isSettingsScreenConnected) {
-        connect(static_cast<SettingsWidget*>(settingsWidget), &SettingsWidget::on_backToMenuButton_clicked, this, &MainWindow::switchToMainMenu);
-        isSettingsScreenConnected = true;
-    }
 }
 
 void MainWindow::switchToMainMenu() {
+    if (!isMenuScreenConnected) {
+        mainMenuWidget = new MainMenuWidget();
+        stackedWidget->addWidget(mainMenuWidget);
+        isMenuScreenConnected = true;
+        settingsWidget = new SettingsWidget();
+        stackedWidget->addWidget(settingsWidget);
+
+        // Play button
+        connect(static_cast<MainMenuWidget*>(mainMenuWidget), &MainMenuWidget::on_playButton_clicked, this, &MainWindow::switchToGameScreen);
+
+        // Settings button
+        connect(static_cast<MainMenuWidget*>(mainMenuWidget), &MainMenuWidget::on_settingsButton_clicked, this, &MainWindow::switchToSettingsScreen);
+    }
+
     stackedWidget->setCurrentWidget(mainMenuWidget);
+
 
     if (isGameScreenConnected) {
         disconnect(static_cast<GameScreenWidget*>(gameScreenWidget), &GameScreenWidget::on_backToMenuButton_clicked, this, &MainWindow::confirmLeaveGame);
+        delete gameScreenWidget;
+        stackedWidget->removeWidget(gameScreenWidget);
         isGameScreenConnected = false;
     }
-
-    if (isSettingsScreenConnected) {
-        disconnect(static_cast<SettingsWidget*>(settingsWidget), &SettingsWidget::on_backToMenuButton_clicked, this, &MainWindow::switchToMainMenu);
-        isSettingsScreenConnected = false;
-    }
-
 }
 
 void MainWindow::confirmLeaveGame() {

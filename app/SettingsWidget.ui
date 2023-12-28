@@ -121,6 +121,9 @@
          <verstretch>0</verstretch>
         </sizepolicy>
        </property>
+       <property name="maxLength">
+        <number>40</number>
+       </property>
        <property name="placeholderText">
         <string>Player1</string>
        </property>
@@ -149,6 +152,9 @@
          <horstretch>0</horstretch>
          <verstretch>0</verstretch>
         </sizepolicy>
+       </property>
+       <property name="maxLength">
+        <number>30</number>
        </property>
        <property name="placeholderText">
         <string>Player2</string>

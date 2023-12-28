@@ -15,8 +15,6 @@ bool DotWidget::isPressed() const {
 void DotWidget::setPressed(bool pressed) {
     if (!isPressed() && pressed) {
         this->pressed = true;
-        currentColor = Qt::black;
-        update(); // Trigger a repaint whenever the state changes
         emit pressedChanged();
     }
 }
@@ -29,7 +27,6 @@ void DotWidget::mousePressEvent(QMouseEvent* event) {
 void DotWidget::paintEvent(QPaintEvent* event) {
     QPainter painter(this);
     painter.setRenderHint(QPainter::Antialiasing);
-    // The ellipse now fills the smaller widget while maintaining a border.
     painter.setBrush(QBrush(currentColor));
     int margin = 2; // Margin for the ellipse border
     QRect dotRect = rect().adjusted(margin, margin, -margin, -margin);
@@ -38,5 +35,5 @@ void DotWidget::paintEvent(QPaintEvent* event) {
 
 void DotWidget::setColor(const QColor& color) {
     currentColor = color;
-    update();
+    update(); // repaint
 }

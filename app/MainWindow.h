@@ -35,5 +35,7 @@ private:
     void setupConnections();    // Setup signal-slot connections
 
     bool isGameScreenConnected = false;
-    bool isSettingsScreenConnected = false;
+    bool isMenuScreenConnected = false;
+
+    void deleteMenuWidgets();
 };

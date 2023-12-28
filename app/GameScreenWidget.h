@@ -20,6 +20,7 @@ public:
 
     void setPlayer1Name(const QString& nickname) { player1Name = nickname; }
     void setPlayer2Name(const QString& nickname) { player2Name = nickname; }
+    void setPlayerTurnLabel(const QString& nickname = "");
 
     QString getPlayer1Name() const { return player1Name; }
     QString getPlayer2Name() const { return player2Name; }

@@ -2,6 +2,7 @@
 #include "./ui_mainwindow.h"
 #include "mainmenuwidget.h"
 #include "gamescreenwidget.h"
+#include "settingsWidget.h"
 #include <QStackedWidget>
 #include <QMessageBox>
 
@@ -21,9 +22,11 @@ void MainWindow::setupUi() {
 
     mainMenuWidget = new MainMenuWidget();
     gameScreenWidget = new GameScreenWidget();
+    settingsWidget = new SettingsWidget();
 
     stackedWidget->addWidget(mainMenuWidget);
     stackedWidget->addWidget(gameScreenWidget);
+    stackedWidget->addWidget(settingsWidget);
 
     stackedWidget->setCurrentWidget(mainMenuWidget);
     this->setMinimumSize(mainMenuWidget->frameSize());
@@ -32,6 +35,9 @@ void MainWindow::setupUi() {
 void MainWindow::setupConnections() {
     // Play button
     connect(static_cast<MainMenuWidget*>(mainMenuWidget), &MainMenuWidget::on_playButton_clicked, this, &MainWindow::switchToGameScreen);
+
+    // Settings button
+    connect(static_cast<MainMenuWidget*>(mainMenuWidget), &MainMenuWidget::on_settingsButton_clicked, this, &MainWindow::switchToSettingsScreen);
 };
 
 void MainWindow::switchToGameScreen() {
@@ -43,6 +49,15 @@ void MainWindow::switchToGameScreen() {
     }
 }
 
+void MainWindow::switchToSettingsScreen() {
+    stackedWidget->setCurrentWidget(settingsWidget);
+
+    if (!isSettingsScreenConnected) {
+        connect(static_cast<SettingsWidget*>(settingsWidget), &SettingsWidget::on_backToMenuButton_clicked, this, &MainWindow::switchToMainMenu);
+        isSettingsScreenConnected = true;
+    }
+}
+
 void MainWindow::switchToMainMenu() {
     stackedWidget->setCurrentWidget(mainMenuWidget);
 
@@ -50,6 +65,12 @@ void MainWindow::switchToMainMenu() {
         disconnect(static_cast<GameScreenWidget*>(gameScreenWidget), &GameScreenWidget::on_backToMenuButton_clicked, this, &MainWindow::confirmLeaveGame);
         isGameScreenConnected = false;
     }
+
+    if (isSettingsScreenConnected) {
+        disconnect(static_cast<SettingsWidget*>(settingsWidget), &SettingsWidget::on_backToMenuButton_clicked, this, &MainWindow::switchToMainMenu);
+        isSettingsScreenConnected = false;
+    }
+
 }
 
 void MainWindow::confirmLeaveGame() {

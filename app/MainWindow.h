@@ -18,6 +18,7 @@ public:
 
 public slots:
     void switchToGameScreen();
+    void switchToSettingsScreen();
     void switchToMainMenu();
 
     void confirmLeaveGame();
@@ -28,9 +29,11 @@ private:
     QStackedWidget* stackedWidget;
     QWidget* mainMenuWidget;
     QWidget* gameScreenWidget;
+    QWidget* settingsWidget;
 
     void setupUi();             // Setup the UI of the main window
     void setupConnections();    // Setup signal-slot connections
 
     bool isGameScreenConnected = false;
+    bool isSettingsScreenConnected = false;
 };

@@ -89,6 +89,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="SettingsWidget.cpp" />
     <QtRcc Include="MainWindow.qrc" />
     <QtUic Include="GameScreenWidget.ui" />
     <QtUic Include="MainMenuWidget.ui" />
@@ -100,6 +101,7 @@
     <ClCompile Include="MainMenuWidget.cpp" />
     <ClCompile Include="MainWindow.cpp" />
     <ClCompile Include="main.cpp" />
+    <QtUic Include="SettingsWidget.ui" />
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="MainMenuWidget.h" />
@@ -112,6 +114,9 @@
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="DotWidget.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <QtMoc Include="SettingsWidget.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

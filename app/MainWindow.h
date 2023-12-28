@@ -20,6 +20,8 @@ public slots:
     void switchToGameScreen();
     void switchToMainMenu();
 
+    void confirmLeaveGame();
+
 private:
     Ui::MainWindow* ui;
 
@@ -29,4 +31,6 @@ private:
 
     void setupUi();             // Setup the UI of the main window
     void setupConnections();    // Setup signal-slot connections
+
+    bool isGameScreenConnected = false;
 };

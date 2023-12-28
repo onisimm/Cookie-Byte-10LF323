@@ -16,6 +16,7 @@ public:
 
 signals:
     void on_playButton_clicked();
+    void on_settingsButton_clicked();
 
 private:
     Ui::MainMenuWidget* ui;

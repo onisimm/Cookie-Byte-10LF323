@@ -19,5 +19,5 @@ void GameScreenWidget::setupConnections()
 }
 
 GameScreenWidget::~GameScreenWidget() {
-    delete ui; // ui is deleted and it will automatically delete child widgets (including gameBoard if added to ui)
+    delete ui;
 }

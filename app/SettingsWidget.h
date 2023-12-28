@@ -12,6 +12,8 @@ public:
 	~SettingsWidget();
 
 	QString getGamemode() const;
+	QString getPlayer1Name() const;
+	QString getPlayer2Name() const;
 
 signals:
 	void on_backToMenuButton_clicked();

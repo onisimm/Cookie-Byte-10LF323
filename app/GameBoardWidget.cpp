@@ -20,9 +20,8 @@ GameBoardWidget::GameBoardWidget(QWidget* parent) : QWidget(parent) {
                 DotWidget* dot = new DotWidget(this);
                 layout->addWidget(dot, row, col);
                 connect(dot, &DotWidget::pressedChanged, this, [this, row, col]() {
-                    // Handle the dot being pressed, if needed
-                    // onDotPressed(row, col);
-                    });
+                    emit dotPressed(row, col);
+                });
             }
         }
     }

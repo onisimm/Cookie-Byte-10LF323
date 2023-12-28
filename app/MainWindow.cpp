@@ -51,6 +51,12 @@ void MainWindow::switchToGameScreen() {
         QString gamemode = static_cast<SettingsWidget*>(settingsWidget)->getGamemode();
         static_cast<GameScreenWidget*>(gameScreenWidget)->setGamemodeLabel(gamemode);
 
+        // Players' names
+        QString player1Name = static_cast<SettingsWidget*>(settingsWidget)->getPlayer1Name();
+        QString player2Name = static_cast<SettingsWidget*>(settingsWidget)->getPlayer2Name();
+        static_cast<GameScreenWidget*>(gameScreenWidget)->setPlayer1Name(player1Name);
+        static_cast<GameScreenWidget*>(gameScreenWidget)->setPlayer2Name(player2Name);
+
         isGameScreenConnected = true;
     }
 }

@@ -202,9 +202,9 @@ void TwixtGame::GameLoop(Board& board, Player player1, Player player2, Bulldozer
 //{
 //	//Reset board game
 //	Board board(BOARD_SIZE);
-//	//Reset stack
+//	Reset stack
 //	m_gameStack.Clear();
-//	//Reset players
+//	Reset players
 //	Player player1("player1", Player::Color::Red, DOTS_NUMBER);
 //	Player player2("player2", Player::Color::Black, DOTS_NUMBER);
 //	std::cout << "The game has been reset.\n";

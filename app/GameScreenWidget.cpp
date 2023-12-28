@@ -16,6 +16,7 @@ GameScreenWidget::GameScreenWidget(QWidget* parent) :
 void GameScreenWidget::setupConnections()
 {
     connect(ui->backToMenuButton, &QPushButton::clicked, this, &GameScreenWidget::on_backToMenuButton_clicked);
+    connect(gameBoard, &GameBoardWidget::dotPressed, this, &GameScreenWidget::handleDotPressed);
 }
 
 GameScreenWidget::~GameScreenWidget() {
@@ -25,4 +26,19 @@ GameScreenWidget::~GameScreenWidget() {
 void GameScreenWidget::setGamemodeLabel(const QString& gamemode)
 {
     ui->gamemodeLabel->setText("Gamemode: " + gamemode);
+}
+
+void GameScreenWidget::handleDotPressed(int row, int col) {
+    // TODO
+    switchPlayer();
+}
+
+void GameScreenWidget::switchPlayer() {
+    isPlayer1CurrentPlayer = isPlayer1CurrentPlayer ? false : true;
+    updatePlayerTurnLabel();
+}
+
+void GameScreenWidget::updatePlayerTurnLabel() {
+    QString currentPlayerName = isPlayer1CurrentPlayer ? player1Name : player2Name;
+    ui->playerTurnLabel->setText(currentPlayerName + "'s turn");
 }

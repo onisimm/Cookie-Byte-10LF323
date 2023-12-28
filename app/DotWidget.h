@@ -12,7 +12,7 @@ public:
     void setPressed(bool pressed);
 
 signals:
-    void pressedChanged(int row, int col);  // Signal to notify when the dot is pressed
+    void pressedChanged();
 
 protected:
     void paintEvent(QPaintEvent* event) override;
@@ -20,5 +20,5 @@ protected:
 
 private:
     QColor currentColor;
-    bool pressed;
+    bool pressed = false;
 };

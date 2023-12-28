@@ -56,6 +56,31 @@
    </property>
    <layout class="QGridLayout" name="mainLayout"/>
   </widget>
+  <widget class="QLabel" name="playerTurnLabel">
+   <property name="geometry">
+    <rect>
+     <x>220</x>
+     <y>80</y>
+     <width>231</width>
+     <height>81</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Comic Sans MS</family>
+     <pointsize>12</pointsize>
+    </font>
+   </property>
+   <property name="autoFillBackground">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Player1's turn</string>
+   </property>
+   <property name="scaledContents">
+    <bool>false</bool>
+   </property>
+  </widget>
  </widget>
  <resources/>
  <connections/>

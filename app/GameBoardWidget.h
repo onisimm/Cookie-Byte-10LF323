@@ -9,6 +9,9 @@ class GameBoardWidget : public QWidget {
 public:
     explicit GameBoardWidget(QWidget* parent = nullptr);
 
+signals:
+    void dotPressed(int row, int col);
+
 protected:
     void paintEvent(QPaintEvent* event) override;
 

@@ -55,6 +55,42 @@
     <ClCompile Include="SettingsWidget.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="TwixtGame.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Bulldozer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Undo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SaveGame.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjectInStack.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Minimax.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Mine.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Dot.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Bridge.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Board.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GameStack.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="MainMenuWidget.h">
@@ -83,5 +119,43 @@
     <QtUic Include="SettingsWidget.ui">
       <Filter>Form Files</Filter>
     </QtUic>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Undo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TwixtGame.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Bulldozer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SaveGame.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Minimax.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Mine.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Dot.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Bridge.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectInStack.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GameStack.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Board.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

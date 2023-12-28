@@ -4,29 +4,21 @@
 #include "Dot.h"
 #include <random>
 
-#ifndef BOARD_H
-#define BOARD_H
-
 namespace twixt {
 	class Board {
 	public:
-		// Constructors
 		Board();
 		Board(uint32_t size);
 		Board(const Board& newBoard);
-		//Add move constructor
 		Board(Board&& other) noexcept;
 
-		// Destructor
 		~Board();
 
-		// Getters
 		Dot*& getDot(int i, int j);
 		uint32_t getSize() const;
 		std::vector<std::vector<Dot*>> getMatrix();
 		Dot* getMatrixDot(int, int);
 
-		// Setters
 		void setDot(int i, int j, const Dot& dot);
 		void setNewDot(int i, int j);
 
@@ -67,5 +59,3 @@ namespace twixt {
 		std::vector<std::vector<Dot*>> m_matrixDot;
 	};
 }
-
-#endif

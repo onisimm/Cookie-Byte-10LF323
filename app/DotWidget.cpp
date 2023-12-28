@@ -13,11 +13,11 @@ bool DotWidget::isPressed() const {
 }
 
 void DotWidget::setPressed(bool pressed) {
-    if (!this->pressed && pressed) {
+    if (!isPressed() && pressed) {
         this->pressed = true;
-        currentColor = Qt::black; // Set the pressed color here
+        currentColor = Qt::black;
         update(); // Trigger a repaint whenever the state changes
-        // pressedChanged
+        emit pressedChanged();
     }
 }
 

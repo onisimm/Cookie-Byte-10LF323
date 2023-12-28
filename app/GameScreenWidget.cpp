@@ -1,5 +1,6 @@
 #include "GameScreenWidget.h"
 #include "ui_GameScreenWidget.h"
+#include "DotWidget.h"
 
 GameScreenWidget::GameScreenWidget(QWidget* parent) :
     QWidget(parent),
@@ -28,9 +29,9 @@ void GameScreenWidget::setGamemodeLabel(const QString& gamemode)
     ui->gamemodeLabel->setText("Gamemode: " + gamemode);
 }
 
-void GameScreenWidget::handleDotPressed(int row, int col) {
-    // TODO
-    switchPlayer();
+void GameScreenWidget::handleDotPressed(int row, int col, QColor color) {
+    gameBoard->setDotColor(row, col, color);
+    switchPlayer(); // Switch the player after the move
 }
 
 void GameScreenWidget::switchPlayer() {
@@ -40,5 +41,6 @@ void GameScreenWidget::switchPlayer() {
 
 void GameScreenWidget::updatePlayerTurnLabel() {
     QString currentPlayerName = isPlayer1CurrentPlayer ? player1Name : player2Name;
+    gameBoard->setCurrentPlayer(isPlayer1CurrentPlayer);
     ui->playerTurnLabel->setText(currentPlayerName + "'s turn");
 }

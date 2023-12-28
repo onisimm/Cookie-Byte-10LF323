@@ -35,3 +35,8 @@ void DotWidget::paintEvent(QPaintEvent* event) {
     QRect dotRect = rect().adjusted(margin, margin, -margin, -margin);
     painter.drawEllipse(dotRect);
 }
+
+void DotWidget::setColor(const QColor& color) {
+    currentColor = color;
+    update();
+}

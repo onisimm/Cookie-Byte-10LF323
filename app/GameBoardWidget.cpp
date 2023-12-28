@@ -20,10 +20,25 @@ GameBoardWidget::GameBoardWidget(QWidget* parent) : QWidget(parent) {
                 DotWidget* dot = new DotWidget(this);
                 layout->addWidget(dot, row, col);
                 connect(dot, &DotWidget::pressedChanged, this, [this, row, col]() {
-                    emit dotPressed(row, col);
+                    QColor color = isPlayer1CurrentPlayer ? Qt::red : Qt::black;
+                    emit dotPressed(row, col, color);
                 });
             }
         }
+    }
+}
+
+void GameBoardWidget::setCurrentPlayer(const bool& turn)
+{
+    isPlayer1CurrentPlayer = turn;
+}
+
+void GameBoardWidget::setDotColor(int row, int col, const QColor& color)
+{
+    QWidget* widget = layout->itemAtPosition(row, col)->widget();
+    DotWidget* dot = qobject_cast<DotWidget*>(widget);
+    if (dot) {
+        dot->setColor(color);
     }
 }
 

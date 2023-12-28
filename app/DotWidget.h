@@ -10,6 +10,7 @@ public:
 
     bool isPressed() const;
     void setPressed(bool pressed);
+    void setColor(const QColor& color);
 
 signals:
     void pressedChanged();

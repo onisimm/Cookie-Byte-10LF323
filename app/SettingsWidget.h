@@ -11,6 +11,8 @@ public:
 	SettingsWidget(QWidget *parent = nullptr);
 	~SettingsWidget();
 
+	QString getGamemode() const;
+
 signals:
 	void on_backToMenuButton_clicked();
 

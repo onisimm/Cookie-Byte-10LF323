@@ -14,6 +14,8 @@ public:
     explicit GameScreenWidget(QWidget* parent = nullptr);
     ~GameScreenWidget();
 
+    void setGamemodeLabel(const QString& gamemode);
+
 signals:
     void on_backToMenuButton_clicked();
 

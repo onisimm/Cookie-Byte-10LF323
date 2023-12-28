@@ -21,3 +21,8 @@ void GameScreenWidget::setupConnections()
 GameScreenWidget::~GameScreenWidget() {
     delete ui;
 }
+
+void GameScreenWidget::setGamemodeLabel(const QString& gamemode)
+{
+    ui->gamemodeLabel->setText("Gamemode: " + gamemode);
+}

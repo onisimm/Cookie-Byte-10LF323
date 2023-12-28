@@ -8,3 +8,8 @@ SettingsWidget::SettingsWidget(QWidget *parent)
 
 SettingsWidget::~SettingsWidget()
 {}
+
+QString SettingsWidget::getGamemode() const
+{
+	return ui.gamemodeOption->currentText();
+}

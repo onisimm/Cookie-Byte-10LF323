@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>650</width>
-    <height>500</height>
+    <width>750</width>
+    <height>600</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -19,64 +19,13 @@
      <rect>
       <x>40</x>
       <y>0</y>
-      <width>561</width>
-      <height>361</height>
+      <width>681</width>
+      <height>491</height>
      </rect>
     </property>
     <layout class="QGridLayout" name="gridLayout">
-     <item row="2" column="0" colspan="2">
-      <spacer name="verticalSpacer">
-       <property name="orientation">
-        <enum>Qt::Vertical</enum>
-       </property>
-       <property name="sizeType">
-        <enum>QSizePolicy::Maximum</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>150</width>
-         <height>50</height>
-        </size>
-       </property>
-      </spacer>
-     </item>
-     <item row="8" column="1">
-      <widget class="QComboBox" name="comboBox_2">
-       <item>
-        <property name="text">
-         <string>Default</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>Bulldozer</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>Mines</string>
-        </property>
-       </item>
-      </widget>
-     </item>
-     <item row="8" column="0">
-      <widget class="QLabel" name="label_4">
-       <property name="font">
-        <font>
-         <family>Comic Sans MS</family>
-         <pointsize>13</pointsize>
-        </font>
-       </property>
-       <property name="text">
-        <string>Gamemode:</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-      </widget>
-     </item>
      <item row="6" column="0">
-      <widget class="QLabel" name="label_3">
+      <widget class="QLabel" name="player2Label">
        <property name="font">
         <font>
          <family>Comic Sans MS</family>
@@ -88,19 +37,6 @@
        </property>
        <property name="alignment">
         <set>Qt::AlignCenter</set>
-       </property>
-      </widget>
-     </item>
-     <item row="6" column="1">
-      <widget class="QLineEdit" name="lineEdit_2">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-       <property name="placeholderText">
-        <string>Player2</string>
        </property>
       </widget>
      </item>
@@ -120,37 +56,8 @@
        </property>
       </spacer>
      </item>
-     <item row="4" column="0">
-      <widget class="QLabel" name="label_2">
-       <property name="font">
-        <font>
-         <family>Comic Sans MS</family>
-         <pointsize>13</pointsize>
-        </font>
-       </property>
-       <property name="text">
-        <string>Player1's Nickname:</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-      </widget>
-     </item>
-     <item row="4" column="1">
-      <widget class="QLineEdit" name="lineEdit">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-       <property name="placeholderText">
-        <string>Player1</string>
-       </property>
-      </widget>
-     </item>
      <item row="1" column="0" colspan="2">
-      <widget class="QLabel" name="label">
+      <widget class="QLabel" name="titleLabel">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
          <horstretch>0</horstretch>
@@ -171,20 +78,123 @@
        </property>
       </widget>
      </item>
+     <item row="4" column="0">
+      <widget class="QLabel" name="player1Label">
+       <property name="font">
+        <font>
+         <family>Comic Sans MS</family>
+         <pointsize>13</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Player1's Nickname:</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="10" column="1">
+      <widget class="QComboBox" name="gamemodeOption">
+       <item>
+        <property name="text">
+         <string>Default</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Bulldozer</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Mines</string>
+        </property>
+       </item>
+      </widget>
+     </item>
+     <item row="4" column="1">
+      <widget class="QLineEdit" name="player1Nickname">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="placeholderText">
+        <string>Player1</string>
+       </property>
+      </widget>
+     </item>
+     <item row="10" column="0">
+      <widget class="QLabel" name="gamemodeLabel">
+       <property name="font">
+        <font>
+         <family>Comic Sans MS</family>
+         <pointsize>13</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Gamemode:</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="6" column="1">
+      <widget class="QLineEdit" name="player2Nickname">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="placeholderText">
+        <string>Player2</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="0" colspan="2">
+      <spacer name="verticalSpacer">
+       <property name="orientation">
+        <enum>Qt::Vertical</enum>
+       </property>
+       <property name="sizeType">
+        <enum>QSizePolicy::Maximum</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>150</width>
+         <height>50</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item row="12" column="1">
+      <widget class="QPushButton" name="backToMenuButton">
+       <property name="text">
+        <string>Go back to main menu</string>
+       </property>
+      </widget>
+     </item>
+     <item row="11" column="0" colspan="2">
+      <spacer name="verticalSpacer_3">
+       <property name="orientation">
+        <enum>Qt::Vertical</enum>
+       </property>
+       <property name="sizeType">
+        <enum>QSizePolicy::Maximum</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>20</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
     </layout>
-   </widget>
-   <widget class="QPushButton" name="backToMenuButton">
-    <property name="geometry">
-     <rect>
-      <x>360</x>
-      <y>390</y>
-      <width>171</width>
-      <height>24</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Go back to main menu</string>
-    </property>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
@@ -192,7 +202,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>650</width>
+     <width>750</width>
      <height>22</height>
     </rect>
    </property>

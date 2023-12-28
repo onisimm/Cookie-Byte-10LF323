@@ -44,7 +44,13 @@ void MainWindow::switchToGameScreen() {
     stackedWidget->setCurrentWidget(gameScreenWidget);
 
     if (!isGameScreenConnected) {
+        // Back to Main Menu Button
         connect(static_cast<GameScreenWidget*>(gameScreenWidget), &GameScreenWidget::on_backToMenuButton_clicked, this, &MainWindow::confirmLeaveGame);
+
+        // Gamemode Label
+        QString gamemode = static_cast<SettingsWidget*>(settingsWidget)->getGamemode();
+        static_cast<GameScreenWidget*>(gameScreenWidget)->setGamemodeLabel(gamemode);
+
         isGameScreenConnected = true;
     }
 }

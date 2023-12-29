@@ -16,6 +16,8 @@ namespace twixt {
 		Bridge(const Bridge& bridge);
 		Bridge(Dot* firstDot, Dot* secondDot);
 		~Bridge();
+
+		Bridge& operator=(const Bridge& bridge);
 		
 		//setter
 		void setPillars(Dot* first, Dot* second);

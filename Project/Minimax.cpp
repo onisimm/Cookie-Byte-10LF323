@@ -20,10 +20,13 @@ std::pair<twixt::Dot*, twixt::Dot*> twixt::Minimax::minimax(Dot::DotStatus statu
     for (int i = 0; i < copyOfBoard->getSize(); i++)
        for (int j = 0; j < copyOfBoard->getSize(); j++)
        {
-           if(copyOfBoard->getMatrixDot(i,j)->getStatus() == status)
-              scorePossibleBridges(copyOfBoard->getMatrixDot(i, j));
+           if (copyOfBoard->getMatrixDot(i, j)->getStatus() == status)
+           {
+               scorePossibleBridges(copyOfBoard->getMatrixDot(i, j));
+               //canBlock(copyOfBoard->getMatrixDot(i, j));
+           }
        }
-   for (auto it : mapBridges)
+   for (auto& it : mapBridges)
    {
        maximumScore = std::max(maximumScore, it.second);
        if(maximumScore == it.second)
@@ -53,7 +56,9 @@ void twixt::Minimax::canBlock(Dot* centralDot)
                 Dot* dotToBlock = blockOpponent(centralDot, opponentPlayerDots[i], opponentPlayerDots[j]);
                 if (dotToBlock != nullptr)
                 {
-                    mapBridges[{centralDot, dotToBlock}] += (longestPath(opponentPlayerDots[i]) + longestPath(opponentPlayerDots[j])) * 7;
+                    uint16_t newScore = mapBridges[{centralDot, dotToBlock}];
+                    newScore += (longestPath(opponentPlayerDots[i]) + longestPath(opponentPlayerDots[j])) * OPPONENT_LONGEST_PATH_VALUE;
+                    mapBridges[{centralDot, dotToBlock}] = newScore; 
                 }
             }
 
@@ -62,7 +67,7 @@ void twixt::Minimax::canBlock(Dot* centralDot)
 
 twixt::Dot* twixt::Minimax::blockOpponent(Dot* centralDot, Dot* firstOpponentDot, Dot* secondOpponentDot)
 {
-    std::vector<std::pair<int, int>> positions{ { -2, -1 }, { -1, -2 }, { 1, -2 }, { 2, -1 }, { 2, 1 }, { 1, 2 }, { -1, 2 }, { -2, 1 } };
+    std::array<std::pair<int, int>, 8> positions{ { { -2, -1 }, { -1, -2 }, { 1, -2 }, { 2, -1 }, { 2, 1 }, { 1, 2 }, { -1, 2 }, { -2, 1 } } };
 
     int i = centralDot->getCoordI();
     int j = centralDot->getCoordJ();
@@ -75,10 +80,10 @@ twixt::Dot* twixt::Minimax::blockOpponent(Dot* centralDot, Dot* firstOpponentDot
         {
             if (copyOfBoard->getMatrix()[newI][newJ]->getStatus() == centralDot->getStatus())
             {
-                if (copyOfBoard->checkPossibleObstructingBridges(*copyOfBoard->getDot(i, j), *copyOfBoard->getDot(newI, newJ)))
+                /*if (doIntersect(*centralDot, *copyOfBoard->getDot(newI, newJ), *firstOpponentDot, *secondOpponentDot))
                 {
                     return copyOfBoard->getDot(newI, newJ);
-                }
+                }*/
             }
         }
     }
@@ -122,7 +127,7 @@ uint16_t twixt::Minimax::longestPath(Dot* dot)
 
 void twixt::Minimax::scorePossibleBridges(Dot* dot)
 {
-        std::vector<std::pair<int, int>> positions{ { -2, -1 }, { -1, -2 }, { 1, -2 }, { 2, -1 }, { 2, 1 }, { 1, 2 }, { -1, 2 }, { -2, 1 } };
+    std::array<std::pair<int, int>, 8> positions{ { { -2, -1 }, { -1, -2 }, { 1, -2 }, { 2, -1 }, { 2, 1 }, { 1, 2 }, { -1, 2 }, { -2, 1 } } };
 
         int y = dot->getCoordI();
         int x = dot->getCoordJ();
@@ -138,9 +143,10 @@ void twixt::Minimax::scorePossibleBridges(Dot* dot)
                 if (copyOfBoard->getMatrixDot(newY,newX)->getStatus() == dot->getStatus() && dot->getStatus() != Dot::DotStatus::Clear)
                 {
                     if (dot->getBridgeFromDots(copyOfBoard->getMatrixDot(newY, newX))==nullptr 
-                        && mapBridges.find({ copyOfBoard->getMatrixDot(newY,newX),dot }) == mapBridges.end())
+                        && mapBridges.find({ copyOfBoard->getMatrixDot(newY,newX),dot }) == mapBridges.end() 
+                        && mapBridges.find({dot, copyOfBoard->getMatrixDot(newY,newX)}) == mapBridges.end())
+                        
                         mapBridges[std::make_pair(copyOfBoard->getMatrixDot(newY, newX), dot)] = evaluate({ copyOfBoard->getMatrixDot(newY,newX),dot });
-                    //de verificat: daca nu exista bridge-ul iontre cele 2 dot-uri, atunci se poate 
                 }
             }
         }
@@ -160,6 +166,6 @@ void twixt::Minimax::suggestMove(Dot::DotStatus status)
     }
     else
     {
-        std::cout << " -> In this case there is no suggestion.\n";
+        std::cout << " -> In this case there are no suggestions.\n";
     }
 }

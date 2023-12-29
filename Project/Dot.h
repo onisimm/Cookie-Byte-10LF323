@@ -18,19 +18,6 @@ namespace twixt {
     class Bridge;
     class Dot {
     public:
-        // Constructors
-        Dot(); // default
-        Dot(size_t, size_t);
-
-        Dot(const Dot& newDot); // copy constructor
-        // Add move constructor
-        Dot(Dot&& other) noexcept;
-
-        // Add move assignment operator
-        Dot& operator=(Dot&& other) noexcept;
-
-        // Destructor 
-        virtual ~Dot();
 
         enum class DotStatus : uint8_t
         {
@@ -40,6 +27,15 @@ namespace twixt {
             Bulldozer, //occupied by a bulldozer
             Mines //occupied by a mine
         };
+
+        // Constructors
+        Dot(); // default
+        Dot(size_t, size_t);
+        Dot(const Dot& newDot); // copy constructor
+        Dot(Dot&& other) noexcept; // Add move constructor
+
+        // Destructor 
+        virtual ~Dot();
 
         // Getters
         size_t getCoordI() const;
@@ -55,14 +51,13 @@ namespace twixt {
 
         // Operators overload
         Dot& operator=(const Dot& newDot); // = overload
+        Dot& operator=(Dot&& other) noexcept;  // Add move assignment operator
         bool operator==(const Dot& otherDot) const; // == overload 
         friend std::ostream& operator<<(std::ostream& os, const Dot& dot); // << overload
 
 
         void addBridge(Dot* connectionDot);
         void clearExistingBridges(); // clear all the existingBridges
-        const bool& checkExistingBridge(Dot* dotToCheck) const; // check if there's a bridge between this dot and dotToCheck
-  
 
         bool isDotInPath(std::vector<std::pair<Dot*, size_t>> path) const;
 
@@ -73,6 +68,8 @@ namespace twixt {
 
         Bridge* getBridgeFromDots(Dot* secondDot);
 
+        //de facut aceasta clasa abstracta
+        //de implementat Pillar
 
     private:
     

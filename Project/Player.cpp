@@ -1,7 +1,7 @@
 ﻿#include "Player.h"
 
 namespace twixt {
-	Player::Player(std::string name, Color color, uint8_t remainingDots) :
+	Player::Player(std::string name, Color color, uint16_t remainingDots) :
 		m_name{ name }, m_color{ color }, m_remainingDots{ remainingDots } {}
 
 	Player::Player(const Player& newPlayer) :
@@ -28,7 +28,7 @@ namespace twixt {
 		return m_color;
 	}
 
-	uint8_t Player::getRemainingDots() const
+	uint16_t Player::getRemainingDots() const
 	{
 		return m_remainingDots;
 	}
@@ -43,12 +43,12 @@ namespace twixt {
 		m_color = color;
 	}
 
-	void Player::setRemainingDots(uint8_t remainingDots)
+	void Player::setRemainingDots(uint16_t remainingDots)
 	{
 		m_remainingDots = remainingDots;
 	}
 
-	std::pair<Dot*, uint8_t> Player::turn(Board& board)
+	std::pair<Dot*, uint16_t> Player::turn(Board& board)
 	{
 		std::cout << "Enter position: ";
 
@@ -64,9 +64,9 @@ namespace twixt {
 				if (!didMineExplode)
 				{
 					m_remainingDots--;
-					return { board.getDot(i, j), uint8_t(board.getDot(i, j)->getStatus()) };
+					return { board.getDot(i, j), uint16_t(board.getDot(i, j)->getStatus()) };
 				}
-				return { board.getDot(i, j), uint8_t(Dot::DotStatus::Mines) };
+				return { board.getDot(i, j), uint16_t(Dot::DotStatus::Mines) };
 				
 			
 			}
@@ -83,9 +83,9 @@ namespace twixt {
 				if (!didMineExplode)
 				{
 					m_remainingDots--;
-					return { board.getDot(i, j), uint8_t(board.getDot(i, j)->getStatus()) };
+					return { board.getDot(i, j), uint16_t(board.getDot(i, j)->getStatus()) };
 				}
-				return { board.getDot(i, j), uint8_t(Dot::DotStatus::Mines) };
+				return { board.getDot(i, j), uint16_t(Dot::DotStatus::Mines) };
 				
 			}
 			else {

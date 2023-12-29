@@ -20,7 +20,7 @@ namespace twixt {
 
 		// Constructors
 		Player() = default;
-		Player(std::string name, Color color, uint8_t remainingDots);
+		Player(std::string name, Color color, uint16_t remainingDots);
 		Player(const Player& other);//copy constructor
 		Player(Player&& other) noexcept; // move constructor
 
@@ -30,14 +30,14 @@ namespace twixt {
 		// Getters
 		std::string getName() const;
 		Color getColor() const;
-		uint8_t getRemainingDots() const;
+		uint16_t getRemainingDots() const;
 
 		// Setters
 		void setName(std::string);
 		void setColor(Color);
-		void setRemainingDots(uint8_t);
+		void setRemainingDots(uint16_t);
 
-		std::pair<Dot*, uint8_t> turn(Board& board);
+		std::pair<Dot*, uint16_t> turn(Board& board);
 		bool hasRemainingDots();
 
 		friend std::istream& operator>>(std::istream& in, Player& player);
@@ -45,7 +45,7 @@ namespace twixt {
 	private:
 		std::string m_name;
 		Color m_color;
-		uint8_t m_remainingDots;
+		uint16_t m_remainingDots;
 	};
 }
 

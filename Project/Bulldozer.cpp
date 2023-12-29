@@ -96,15 +96,15 @@ bool twixt::Bulldozer::exists()
 	return false;
 }
 
-uint8_t twixt::Bulldozer::getI() const
-{
-	return position.first;
-}
-
-uint8_t twixt::Bulldozer::getJ() const
-{
-	return position.second;
-}
+//uint8_t twixt::Bulldozer::getI() const
+//{
+//	return position.first;
+//}
+//
+//uint8_t twixt::Bulldozer::getJ() const
+//{
+//	return position.second;
+//}
 
 std::stack<std::pair<size_t, size_t>> twixt::Bulldozer::getPreviousPosition() const
 {

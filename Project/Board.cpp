@@ -201,7 +201,7 @@ namespace twixt
 		return false;
 	}
 
-	bool doIntersect(const Dot& p1, const Dot& p2, const Dot& q1, const Dot& q2) {
+	bool twixt::doIntersect(const Dot& p1, const Dot& p2, const Dot& q1, const Dot& q2) {
 		int o1 = orientation(p1, p2, q1);
 		int o2 = orientation(p1, p2, q2);
 		int o3 = orientation(q1, q2, p1);
@@ -250,25 +250,25 @@ namespace twixt
 
 	bool Board::checkPossibleObstructingBridges(const Dot& dot1, const Dot& dot2) const
 	{
-		size_t x1 = dot1.getCoordJ();
-		size_t y1 = dot1.getCoordI();
-		size_t x2 = dot2.getCoordJ();
-		size_t y2 = dot2.getCoordI();
+		size_t x1 = dot1.getCoordI();
+		size_t y1 = dot1.getCoordJ();
+		size_t x2 = dot2.getCoordI();
+		size_t y2 = dot2.getCoordJ();
 
 		// Check if any existing bridge obstructs the way from dot1 to dot2
-		for (size_t i = std::min(y1, y2); i <= std::max(y1, y2); ++i)
+		for (size_t i = std::min(x1, x2); i <= std::max(x1, x2); ++i)
 		{
-			for (size_t j = std::min(x1, x2); j <= std::max(x1, x2); ++j)
+			for (size_t j = std::min(y1, y2); j <= std::max(y1, y2); ++j)
 			{
-				if (*m_matrixDot[i][j] == dot1 || *m_matrixDot[i][j] == dot2)
+				if (*m_matrixDot[i][j] == dot1)
 				{
 					continue;
 				}
-				std::vector<Bridge*> possibleBridges = buildPossibleBridges(m_matrixDot[i][j]);
-				for (auto bridge : possibleBridges)
+				std::unordered_set<Dot*> possibleBridges = buildPossibleBridges(m_matrixDot[i][j]);
+				for (auto secondDot : possibleBridges)
 				{
-					auto [firstDot, secondDot] = bridge->getPillars();
-					if (doIntersect(dot1, dot2, *firstDot, *secondDot))
+					//auto [firstDot, secondDot] = bridge->getPillars();
+					if (doIntersect(dot1, dot2, *m_matrixDot[i][j], *secondDot))
 					{
 						// std::cout << "Couldn't build a bridge between (" << dot1 << " and " << dot2 << " because of the bridge between " << m_matrixDot[i][j] << " and " << *bridgeDot << "\n";
 						return false;
@@ -279,10 +279,10 @@ namespace twixt
 		return true;
 	}
 
-	std::vector<Bridge*> Board::buildPossibleBridges(Dot* dot) const
+	std::unordered_set<Dot*> Board::buildPossibleBridges(Dot* dot) const
 	{
-		std::vector<std::pair<size_t, size_t>> positions{ { -2, -1 }, { -1, -2 }, { 1, -2 }, { 2, -1 }, { 2, 1 }, { 1, 2 }, { -1, 2 }, { -2, 1 } };
-		std::vector<Bridge*> possibleBridges;
+		std::array<std::pair<int, int>, 8> positions{ { { -2, -1 }, { -1, -2 }, { 1, -2 }, { 2, -1 }, { 2, 1 }, { 1, 2 }, { -1, 2 }, { -2, 1 } } };
+		std::unordered_set<Dot*> possibleBridges;
 		size_t y = dot->getCoordI();
 		size_t x = dot->getCoordJ();
 
@@ -294,9 +294,9 @@ namespace twixt
 
 			if (newY >= 0 && newY < m_matrixDot.size() && newX >= 0 && newX < m_matrixDot[newY].size()) // check boundaries
 			{
-				if (m_matrixDot[newY][newX]->getStatus() == Dot::DotStatus::Clear)
+				if (m_matrixDot[newY][newX]->getStatus() == dot->getStatus() && dot->getBridgeFromDots(m_matrixDot[newY][newX]) == nullptr)
 				{
-					possibleBridges.push_back(m_matrixDot[y][x]->getBridgeFromDots(m_matrixDot[newY][newX]));
+					possibleBridges.insert(m_matrixDot[newY][newX]);
 				}
 			}
 		}
@@ -311,8 +311,6 @@ namespace twixt
 		size_t index = 0;
 		Dot* firstDot = margins[index];
 		Dot* newDot;
-		/*Dot checkDot, newDot;
-		int position;*/
 
 		//Creating path vector: pair of dot in path and position of existing bridges for the dot.
 		std::vector<std::pair<Dot*, size_t>> path;
@@ -322,8 +320,6 @@ namespace twixt
 		while (!isFinalDot && !path.empty())
 		{
 			auto [checkDot, position] = path[path.size() - 1];
-			/*checkDot = path[path.size() - 1].first;
-			position = path[path.size() - 1].second;*/
 			if (position < checkDot->getExistingBridges().size())
 			{
 				newDot = checkDot->getExistingBridges()[position]->returnTheOtherPillar(checkDot);
@@ -453,7 +449,7 @@ namespace twixt
 	}
 	void Board::mineExplodes(Mine* mine)
 	{
-		std::vector<std::pair<size_t, size_t>> positions{ {-1, -1},{-1,0},{-1,1},{0,1},{1,1},{1,0},{1,-1},{0,-1} };
+		std::array<std::pair<int, int>, 8> positions{ { {-1, -1},{-1,0},{-1,1},{0,1},{1,1},{1,0},{1,-1},{0,-1} } };
 		size_t i = mine->getCoordI();
 		size_t j = mine->getCoordJ();
 		std::cout << "MINE " << i << " " << j << " EXPLODED!\n";

@@ -25,8 +25,8 @@ namespace twixt {
 		{}
 		bool flipCoin(Board& board);
 		bool exists();
-		uint8_t getI() const;
-		uint8_t getJ() const;
+		//uint8_t getI() const;
+		//uint8_t getJ() const;
 		std::stack<std::pair<size_t, size_t>> getPreviousPosition() const;
 		std::stack<Dot> getDotDestroyed() const;
 		void setToPreviousPosition(Board& board);

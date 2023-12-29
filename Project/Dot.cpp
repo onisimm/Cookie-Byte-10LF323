@@ -113,12 +113,6 @@ namespace twixt {
         return m_existingBridges;
     }
 
-   /* const bool& Dot::checkExistingBridge(Dot* dotToCheck) const
-    {
-        std::cout << "S a apelat check exisgting bridges";
-        return std::find(m_existingBridges.begin(), m_existingBridges.end(), dotToCheck) != m_existingBridges.end();
-    }*/
-
     bool Dot::isDotInPath(std::vector<std::pair<Dot*, size_t>> path) const
     {
         for (auto i : path)

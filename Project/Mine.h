@@ -14,6 +14,7 @@ namespace twixt {
 		std::vector<Dot*> m_explodedDots;
 		bool m_triggered = false;
 		Mine* m_newPlacedMine = nullptr;
+
 	public:
 		Mine() {}
 		~Mine() = default;

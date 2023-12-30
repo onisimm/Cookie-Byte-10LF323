@@ -100,6 +100,7 @@
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="SaveGame.cpp" />
     <ClCompile Include="SettingsWidget.cpp" />
+    <ClCompile Include="TwixtGame.cpp" />
     <ClCompile Include="Undo.cpp" />
     <QtRcc Include="MainWindow.qrc" />
     <QtUic Include="GameScreenWidget.ui" />
@@ -140,6 +141,7 @@
     <ClInclude Include="ObjectInStack.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="SaveGame.h" />
+    <ClInclude Include="TwixtGame.h" />
     <ClInclude Include="Undo.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

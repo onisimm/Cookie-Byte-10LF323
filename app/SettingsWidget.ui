@@ -306,6 +306,15 @@
   <widget class="QStatusBar" name="statusBar"/>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
+ <tabstops>
+  <tabstop>player1Nickname</tabstop>
+  <tabstop>player2Nickname</tabstop>
+  <tabstop>gamemodeOption</tabstop>
+  <tabstop>gameboardSize</tabstop>
+  <tabstop>maxDots</tabstop>
+  <tabstop>maxBridges</tabstop>
+  <tabstop>backToMenuButton</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

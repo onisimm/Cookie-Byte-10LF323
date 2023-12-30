@@ -88,6 +88,9 @@
     <ClCompile Include="GameStack.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="TwixtGame.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="MainMenuWidget.h">
@@ -149,6 +152,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Board.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TwixtGame.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

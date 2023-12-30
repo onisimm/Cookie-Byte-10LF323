@@ -32,7 +32,6 @@ private:
     QWidget* settingsWidget;
 
     void setupUi();             // Setup the UI of the main window
-    void setupConnections();    // Setup signal-slot connections
 
     bool isGameScreenConnected = false;
     bool isMenuScreenConnected = false;

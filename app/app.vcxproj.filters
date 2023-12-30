@@ -55,9 +55,6 @@
     <ClCompile Include="SettingsWidget.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="TwixtGame.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Bulldozer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -122,9 +119,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Undo.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="TwixtGame.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Bulldozer.h">

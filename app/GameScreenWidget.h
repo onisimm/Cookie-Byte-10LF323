@@ -14,10 +14,10 @@ public:
     explicit GameScreenWidget(QWidget* parent = nullptr);
     ~GameScreenWidget();
 
-    void setGamemodeLabel(const QString& gamemode);
-
     void handleDotPressed(int row, int col, QColor color);
 
+    void setGameboardSize(const uint8_t& size);
+    void setGamemodeLabel(const QString& gamemode);
     void setPlayer1Name(const QString& nickname) { player1Name = nickname; }
     void setPlayer2Name(const QString& nickname) { player2Name = nickname; }
     void setPlayerTurnLabel(const QString& nickname = "");

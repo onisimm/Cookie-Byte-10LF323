@@ -14,6 +14,7 @@ public:
 	QString getGamemode() const;
 	QString getPlayer1Name() const;
 	QString getPlayer2Name() const;
+	int getGameboardSize() const;
 
 signals:
 	void on_backToMenuButton_clicked();

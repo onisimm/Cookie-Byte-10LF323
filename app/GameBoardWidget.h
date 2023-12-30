@@ -9,6 +9,7 @@ class GameBoardWidget : public QWidget {
 public:
     explicit GameBoardWidget(QWidget* parent = nullptr);
 
+    void setGameboardSize(const uint8_t& size);
     void setCurrentPlayer(const bool& turn);
     void setDotColor(int row, int col, const QColor& color);
 
@@ -20,5 +21,7 @@ protected:
 
 private:
     QGridLayout* layout; // The layout for the dots
+    uint8_t gameboardSize = 24;
     bool isPlayer1CurrentPlayer;
+    void buildBoard();
 };

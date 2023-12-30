@@ -51,6 +51,9 @@ void MainWindow::switchToGameScreen() {
         static_cast<GameScreenWidget*>(gameScreenWidget)->setPlayer2Name(player2Name);
         static_cast<GameScreenWidget*>(gameScreenWidget)->setPlayerTurnLabel(); // It will be automatically set to Player1's nickname
 
+        uint8_t gameboardSize = static_cast<SettingsWidget*>(settingsWidget)->getGameboardSize();
+        static_cast<GameScreenWidget*>(gameScreenWidget)->setGameboardSize(gameboardSize);
+
         isGameScreenConnected = true;
         stackedWidget->setCurrentWidget(gameScreenWidget);
     }

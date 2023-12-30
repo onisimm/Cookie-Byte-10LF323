@@ -23,3 +23,9 @@ QString SettingsWidget::getPlayer2Name() const {
     QString name = ui.player2Nickname->text();
     return name.isEmpty() ? "Player2" : name;
 }
+
+int SettingsWidget::getGameboardSize() const
+{
+    int size = ui.gameboardSize->value();
+    return size;
+}

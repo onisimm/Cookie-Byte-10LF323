@@ -33,15 +33,31 @@
         </font>
        </property>
        <property name="text">
-        <string>Player2's Nickname:</string>
+        <string>Player2's Nickname</string>
        </property>
        <property name="alignment">
         <set>Qt::AlignCenter</set>
        </property>
       </widget>
      </item>
-     <item row="7" column="0" colspan="2">
-      <spacer name="verticalSpacer_2">
+     <item row="10" column="0">
+      <widget class="QLabel" name="gamemodeLabel">
+       <property name="font">
+        <font>
+         <family>Comic Sans MS</family>
+         <pointsize>13</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Gamemode</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="11" column="0" colspan="2">
+      <spacer name="verticalSpacer_3">
        <property name="orientation">
         <enum>Qt::Vertical</enum>
        </property>
@@ -78,22 +94,6 @@
        </property>
       </widget>
      </item>
-     <item row="4" column="0">
-      <widget class="QLabel" name="player1Label">
-       <property name="font">
-        <font>
-         <family>Comic Sans MS</family>
-         <pointsize>13</pointsize>
-        </font>
-       </property>
-       <property name="text">
-        <string>Player1's Nickname:</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-      </widget>
-     </item>
      <item row="10" column="1">
       <widget class="QComboBox" name="gamemodeOption">
        <item>
@@ -113,24 +113,24 @@
        </item>
       </widget>
      </item>
-     <item row="4" column="1">
-      <widget class="QLineEdit" name="player1Nickname">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
+     <item row="7" column="0" colspan="2">
+      <spacer name="verticalSpacer_2">
+       <property name="orientation">
+        <enum>Qt::Vertical</enum>
        </property>
-       <property name="maxLength">
-        <number>40</number>
+       <property name="sizeType">
+        <enum>QSizePolicy::Maximum</enum>
        </property>
-       <property name="placeholderText">
-        <string>Player1</string>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>20</width>
+         <height>20</height>
+        </size>
        </property>
-      </widget>
+      </spacer>
      </item>
-     <item row="10" column="0">
-      <widget class="QLabel" name="gamemodeLabel">
+     <item row="4" column="0">
+      <widget class="QLabel" name="player1Label">
        <property name="font">
         <font>
          <family>Comic Sans MS</family>
@@ -138,26 +138,10 @@
         </font>
        </property>
        <property name="text">
-        <string>Gamemode:</string>
+        <string>Player1's Nickname</string>
        </property>
        <property name="alignment">
         <set>Qt::AlignCenter</set>
-       </property>
-      </widget>
-     </item>
-     <item row="6" column="1">
-      <widget class="QLineEdit" name="player2Nickname">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-       <property name="maxLength">
-        <number>30</number>
-       </property>
-       <property name="placeholderText">
-        <string>Player2</string>
        </property>
       </widget>
      </item>
@@ -177,28 +161,76 @@
        </property>
       </spacer>
      </item>
-     <item row="12" column="1">
+     <item row="15" column="1">
       <widget class="QPushButton" name="backToMenuButton">
        <property name="text">
         <string>Go back to main menu</string>
        </property>
       </widget>
      </item>
-     <item row="11" column="0" colspan="2">
-      <spacer name="verticalSpacer_3">
-       <property name="orientation">
-        <enum>Qt::Vertical</enum>
+     <item row="14" column="0">
+      <widget class="QLabel" name="gameboardSizeLabel">
+       <property name="font">
+        <font>
+         <family>Comic Sans MS</family>
+         <pointsize>13</pointsize>
+        </font>
        </property>
-       <property name="sizeType">
-        <enum>QSizePolicy::Maximum</enum>
+       <property name="text">
+        <string>Gameboard Size</string>
        </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>20</width>
-         <height>20</height>
-        </size>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
        </property>
-      </spacer>
+      </widget>
+     </item>
+     <item row="4" column="1">
+      <widget class="QLineEdit" name="player1Nickname">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="maxLength">
+        <number>40</number>
+       </property>
+       <property name="placeholderText">
+        <string>Player1</string>
+       </property>
+      </widget>
+     </item>
+     <item row="6" column="1">
+      <widget class="QLineEdit" name="player2Nickname">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="maxLength">
+        <number>30</number>
+       </property>
+       <property name="placeholderText">
+        <string>Player2</string>
+       </property>
+      </widget>
+     </item>
+     <item row="14" column="1">
+      <widget class="QSpinBox" name="gameboardSize">
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+       <property name="minimum">
+        <number>6</number>
+       </property>
+       <property name="maximum">
+        <number>35</number>
+       </property>
+       <property name="value">
+        <number>24</number>
+       </property>
+      </widget>
      </item>
     </layout>
    </widget>

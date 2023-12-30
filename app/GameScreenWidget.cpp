@@ -24,6 +24,11 @@ GameScreenWidget::~GameScreenWidget() {
     delete ui;
 }
 
+void GameScreenWidget::setGameboardSize(const uint8_t& size)
+{
+    gameBoard->setGameboardSize(size);
+}
+
 void GameScreenWidget::setGamemodeLabel(const QString& gamemode)
 {
     ui->gamemodeLabel->setText("Gamemode: " + gamemode);

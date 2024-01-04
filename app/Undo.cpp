@@ -3,7 +3,7 @@
 twixt::Undo::Undo(GameStack* gameStack, Board* gameBoard)
 {
 	Dot* topDot = gameStack->GetGameStack().top().first;
-	
+
 
 	if (Mine* ptrMine = dynamic_cast<Mine*>(topDot)) {
 		m_lastDot = ptrMine;
@@ -64,11 +64,11 @@ void twixt::Undo::undoPlayers(Dot::DotStatus status)
 void twixt::Undo::undoBulldozer()
 {
 	Bulldozer* lastBulldozer = dynamic_cast<Bulldozer*>(m_lastDot);
-	int coordILastBulldozer = lastBulldozer->getCoordI();
-	int coordJLastBulldozer = lastBulldozer->getCoordJ();
+	size_t coordILastBulldozer = lastBulldozer->getCoordI();
+	size_t coordJLastBulldozer = lastBulldozer->getCoordJ();
 	//set lastBulldozer to previous position
 	lastBulldozer->setToPreviousPosition(*board);
-	
+
 	//make a copy of the last DestroyedDot
 	Dot copyOfDot = lastBulldozer->getDotDestroyed().top();
 	bool didMineExplode = false;
@@ -90,7 +90,7 @@ void twixt::Undo::undoMines(Dot* mine)
 {
 	Mine* lastMine = dynamic_cast<Mine*>(mine);
 	bool didMineExplode = false;
-	
+
 	if (lastMine->getNewPlacedMine())
 	{
 		board->getMatrixDot(lastMine->getNewPlacedMine()->getCoordI(), lastMine->getNewPlacedMine()->getCoordJ())->setStatus(Dot::DotStatus::Clear);

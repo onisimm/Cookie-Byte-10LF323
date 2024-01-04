@@ -1,21 +1,16 @@
 #pragma once
 
-#include "Board.h"
-#include <unordered_map>
+#ifndef MINIMAX_H
+#define MINIMAX_H
 
+
+
+#include "Board.h"
+#include<unordered_map>
 namespace twixt {
 	class Minimax
 	{
 	private:
-		int evaluate(std::pair<twixt::Dot*, twixt::Dot*> bridgeToEvaluate);
-		std::pair<twixt::Dot*, twixt::Dot*> minimax(Dot::DotStatus status);
-		void canBlock(Dot* centralDot);
-		Dot* blockOpponent(Dot* centralDot, Dot* firstOpponentDot, Dot* secondOpponentDot);
-		int longestPath(Dot* dot);
-		void scorePossibleBridges(Dot* dot);
-
-		Board *copyOfBoard;
-
 		struct DotHash {
 			size_t operator()(const Dot* dot) const {
 				// Combine the hashes of x and y using a simple hash combining algorithm
@@ -31,14 +26,27 @@ namespace twixt {
 				return hash1 ^ hash2;
 			}
 		};
-		std::unordered_map<std::pair<Dot*, Dot*>, int, PairDotHash> mapBridges;
 
+		std::unordered_map<std::pair<Dot*, Dot*>, uint16_t, PairDotHash> mapBridges;
+		Board* copyOfBoard;
+
+		//Function that returns the score for each possible bridge
+		uint16_t evaluate(std::pair<twixt::Dot*, twixt::Dot*> bridgeToEvaluate);
+		//Function that returns the possible bridge with the highest score
+		std::pair<twixt::Dot*, twixt::Dot*> minimax(Dot::DotStatus status);
+		//Function that 
+		void canBlock(Dot* centralDot);
+		Dot* blockOpponent(Dot* centralDot, Dot* firstOpponentDot, Dot* secondOpponentDot);
+		uint16_t longestPath(Dot* dot);
+		void scorePossibleBridges(Dot* dot);
 
 	public:
 		Minimax() = default;
 		Minimax(Board* board);
 		void suggestMove(Dot::DotStatus status);
-	
+
 
 	};
 }
+
+#endif // !MINIMAX_H

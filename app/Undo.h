@@ -1,6 +1,5 @@
 #pragma once
-
-#include <stack>
+#include<stack>
 #include "GameStack.h"
 #include "Board.h"
 #include "Bulldozer.h"
@@ -20,7 +19,7 @@ namespace twixt {
 		void undoBulldozer();
 		void undoMines(Dot* mine);
 		void undoDeleteBridge();
-		
+
 	};
 }
 

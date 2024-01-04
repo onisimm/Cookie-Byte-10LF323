@@ -12,7 +12,7 @@ private:
 	uint8_t m_mode;
 	std::stack<Dot*> m_deletedBridgesDotStack;
 public:
-	GameStack(){}
+	GameStack() = default;
 	GameStack(uint8_t mode);
 
 	//getter

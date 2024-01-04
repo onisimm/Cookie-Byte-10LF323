@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="Board.cpp" />
+    <ClCompile Include="Bulldozer.cpp" />
+    <ClCompile Include="Dot.cpp" />
+    <ClCompile Include="GameStack.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="Mine.cpp" />
+    <ClCompile Include="Player.cpp" />
+    <ClCompile Include="SaveGame.cpp" />
+    <ClCompile Include="TwixtGame.cpp" />
+    <ClCompile Include="Undo.cpp" />
+    <ClCompile Include="Bridge.cpp" />
+    <ClCompile Include="Minimax.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Board.h" />
+    <ClInclude Include="Bulldozer.h" />
+    <ClInclude Include="Dot.h" />
+    <ClInclude Include="GameStack.h" />
+    <ClInclude Include="Mine.h" />
+    <ClInclude Include="Player.h" />
+    <ClInclude Include="SaveGame.h" />
+    <ClInclude Include="TwixtGame.h" />
+    <ClInclude Include="Undo.h" />
+    <ClInclude Include="Bridge.h" />
+    <ClInclude Include="Minimax.h" />
+  </ItemGroup>
+</Project>

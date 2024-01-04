@@ -2,6 +2,9 @@
 
 #ifndef TWIXTGAME_H
 #define TWIXTGAME_H
+
+//de sters macro-uri
+
 #define BOARD_SIZE 24
 #define DOTS_NUMBER 50
 
@@ -13,6 +16,7 @@ void TwixtGame::ReadPlayers(Player& player1, Player& player2)
 void TwixtGame::GameTurns(Player& player, bool& isPlaying, Board& board)
 {
 	std::string answer;
+	//
 	std::cout << player.getName() << ", what's you next move?\n";
 
 	// Verificare pentru jucătorul negru în prima tură
@@ -56,15 +60,15 @@ void TwixtGame::GameTurns(Player& player, bool& isPlaying, Board& board)
 		player.setRemainingDots(player.getRemainingDots() + 1);
 
 		std::cout << "REMAINING DOTS for " << player.getName() << ": " << player.getRemainingDots() << "\n";
-		ObjectInStack object = player.turn(board);
-		m_gameStack.AddInGameStack(object.getDot(), object.getType());
+		auto [dot, type] = player.turn(board);
+		m_gameStack.AddInGameStack(dot, type);
 		board.showBoard();
 		std::cout << "\n";
 	}
 	else if (answer == "DELETE")
 	{
 		std::cout << "Choose the first dot: ";
-		int i1, j1, i2, j2;
+		size_t i1, j1, i2, j2;
 		std::cin >> i1 >> j1;
 		std::cout << "Choose the second dot: ";
 		std::cin >> i2 >> j2;
@@ -75,7 +79,7 @@ void TwixtGame::GameTurns(Player& player, bool& isPlaying, Board& board)
 	else if (answer == "DELETEALL")
 	{
 		std::cout << "Choose the dot: ";
-		int i, j;
+		size_t i, j;
 		std::cin >> i >> j;
 		board.getDot(i, j)->deleteAllBridgesForADot();
 	}
@@ -171,7 +175,7 @@ void TwixtGame::GameLoop(Board& board, Player player1, Player player2, Bulldozer
 		{
 			if (bulldozer.flipCoin(board))
 			{
-				m_gameStack.AddInGameStack(board.getDot(bulldozer.getI(), bulldozer.getJ()), int(Dot::DotStatus::Bulldozer));
+				m_gameStack.AddInGameStack(board.getDot(bulldozer.getCoordI(), bulldozer.getCoordJ()), size_t(Dot::DotStatus::Bulldozer));
 
 				std::cout << "Do you want to undo the move? ";
 				std::cin >> answer;
@@ -220,7 +224,7 @@ void TwixtGame::Run()
 	Player player2("player2", Player::Color::Black, DOTS_NUMBER);
 
 	std::cout << "Choose your game mode:\n1->DEFAULT\n2->BULLDOZER\n3->MINES.\n\n";
-	int mode;
+	uint16_t mode; //cel mai mic tip pur numeric
 	std::cin >> mode;
 	//GameStack gameStack;
 	std::cout << "add - add dot\ndelete - delete a bridge\ndeleteall - delete existing bridges for a dot\naddbridge - add a bridge between two existing dots\n\n";
@@ -234,7 +238,7 @@ void TwixtGame::Run()
 	case 3:
 		m_gameStack = GameStack(2);
 		m_gameMode = GameMode::Mines;
-		for (int i = 0; i < 3; i++)
+		for (size_t i = 0; i < 3; i++)
 		{
 			board.placeRandomMine();
 		}

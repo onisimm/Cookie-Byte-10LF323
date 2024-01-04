@@ -1,16 +1,18 @@
 ﻿#include "Player.h"
 
 namespace twixt {
-	Player::Player(std::string name, Color color, int remainingDots) :
+	Player::Player(std::string name, Color color, uint16_t remainingDots) :
 		m_name{ name }, m_color{ color }, m_remainingDots{ remainingDots } {}
 
 	Player::Player(const Player& newPlayer) :
 		m_name{ newPlayer.m_name }, m_color{ newPlayer.m_color }, m_remainingDots{ newPlayer.m_remainingDots } {}
+
 	// Implementarea move constructorului
-	twixt::Player::Player(Player&& other) noexcept : m_name(std::move(other.m_name)), m_color(other.m_color) {
+	twixt::Player::Player(Player&& other) noexcept : m_name(std::move(other.m_name)), m_color(other.m_color), m_remainingDots(other.m_remainingDots) {
 		// Setăm membrii altui obiect pe nullptr sau valorile implicite
 		other.m_name.clear();
 		other.m_color = Color::NoColor;
+		other.m_remainingDots = 0;
 
 	}
 
@@ -26,7 +28,7 @@ namespace twixt {
 		return m_color;
 	}
 
-	int Player::getRemainingDots() const
+	uint16_t Player::getRemainingDots() const
 	{
 		return m_remainingDots;
 	}
@@ -41,16 +43,16 @@ namespace twixt {
 		m_color = color;
 	}
 
-	void Player::setRemainingDots(int remainingDots)
+	void Player::setRemainingDots(uint16_t remainingDots)
 	{
 		m_remainingDots = remainingDots;
 	}
 
-	ObjectInStack Player::turn(Board& board)
+	std::pair<Dot*, uint16_t> Player::turn(Board& board)
 	{
 		std::cout << "Enter position: ";
 
-		int i, j;
+		size_t i, j;
 		std::cin >> i >> j;
 		bool didMineExplode = false;
 
@@ -62,9 +64,9 @@ namespace twixt {
 				if (!didMineExplode)
 				{
 					m_remainingDots--;
-					return ObjectInStack(board.getDot(i, j), int(board.getDot(i, j)->getStatus()));
+					return { board.getDot(i, j), uint16_t(board.getDot(i, j)->getStatus()) };
 				}
-				return ObjectInStack(board.getDot(i, j), int(Dot::DotStatus::Mines));
+				return { board.getDot(i, j), uint16_t(Dot::DotStatus::Mines) };
 				
 			
 			}
@@ -81,9 +83,9 @@ namespace twixt {
 				if (!didMineExplode)
 				{
 					m_remainingDots--;
-					return ObjectInStack(board.getDot(i, j), int(board.getDot(i, j)->getStatus()));
+					return { board.getDot(i, j), uint16_t(board.getDot(i, j)->getStatus()) };
 				}
-				return ObjectInStack(board.getDot(i, j), int(Dot::DotStatus::Mines));
+				return { board.getDot(i, j), uint16_t(Dot::DotStatus::Mines) };
 				
 			}
 			else {

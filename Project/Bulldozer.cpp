@@ -3,8 +3,8 @@
 void twixt::Bulldozer::destoryRandomDot(Board& board)
 {
 	srand(time(NULL));
-	int i = rand() % (board.getSize() - 2) + 1;
-	int j = rand() % (board.getSize() - 2) + 1;
+	size_t i = rand() % (board.getSize() - 2) + 1;
+	size_t j = rand() % (board.getSize() - 2) + 1;
 	while (board.getDot(i, j)->getStatus() != Dot::DotStatus::Player1 && board.getDot(i, j)->getStatus() != Dot::DotStatus::Player2)
 	{
 		i = rand() % (board.getSize() - 2) + 1;
@@ -96,17 +96,17 @@ bool twixt::Bulldozer::exists()
 	return false;
 }
 
-uint8_t twixt::Bulldozer::getI() const
-{
-	return position.first;
-}
+//uint8_t twixt::Bulldozer::getI() const
+//{
+//	return position.first;
+//}
+//
+//uint8_t twixt::Bulldozer::getJ() const
+//{
+//	return position.second;
+//}
 
-uint8_t twixt::Bulldozer::getJ() const
-{
-	return position.second;
-}
-
-std::stack<std::pair<int, int>> twixt::Bulldozer::getPreviousPosition() const
+std::stack<std::pair<size_t, size_t>> twixt::Bulldozer::getPreviousPosition() const
 {
 	return m_previousPosition;
 }

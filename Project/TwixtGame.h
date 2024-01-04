@@ -7,6 +7,8 @@
 #include "SaveGame.h"
 #include "Minimax.h"
 #include<iostream>
+#include <cstdint>
+
 using namespace twixt;
 
 class TwixtGame

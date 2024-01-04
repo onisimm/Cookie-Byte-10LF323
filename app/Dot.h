@@ -1,11 +1,4 @@
-//dot.h
-
 #pragma once
-
-
-
-#ifndef DOT_H
-#define DOT_H
 
 #include <cstdint>
 #include <vector>
@@ -18,6 +11,19 @@ namespace twixt {
     class Bridge;
     class Dot {
     public:
+        // Constructors
+        Dot(); // default
+        Dot(int, int);
+
+        Dot(const Dot& newDot); // copy constructor
+        // Add move constructor
+        Dot(Dot&& other) noexcept;
+
+        // Add move assignment operator
+        Dot& operator=(Dot&& other) noexcept;
+
+        // Destructor 
+        virtual ~Dot();
 
         enum class DotStatus : uint8_t
         {
@@ -28,38 +34,30 @@ namespace twixt {
             Mines //occupied by a mine
         };
 
-        // Constructors
-        Dot(); // default
-        Dot(size_t, size_t);
-        Dot(const Dot& newDot); // copy constructor
-        Dot(Dot&& other) noexcept; // Add move constructor
-
-        // Destructor 
-        virtual ~Dot();
-
         // Getters
-        size_t getCoordI() const;
-        size_t getCoordJ() const;
+        int getCoordI() const;
+        int getCoordJ() const;
         DotStatus getStatus() const;
         const std::vector<Bridge*>& getExistingBridges() const;
 
         // Setters
-        void setCoordI(size_t);
-        void setCoordJ(size_t);
+        void setCoordI(int);
+        void setCoordJ(int);
         void setStatus(const DotStatus&);
         void setExistingBridges(const std::vector<Bridge*>& existingBridges);
 
         // Operators overload
         Dot& operator=(const Dot& newDot); // = overload
-        Dot& operator=(Dot&& other) noexcept;  // Add move assignment operator
         bool operator==(const Dot& otherDot) const; // == overload 
         friend std::ostream& operator<<(std::ostream& os, const Dot& dot); // << overload
 
 
         void addBridge(Dot* connectionDot);
         void clearExistingBridges(); // clear all the existingBridges
+        const bool& checkExistingBridge(Dot* dotToCheck) const; // check if there's a bridge between this dot and dotToCheck
+  
 
-        bool isDotInPath(std::vector<std::pair<Dot*, size_t>> path) const;
+        bool isDotInPath(std::vector<std::pair<Dot*, int>> path) const;
 
         void deleteAllBridgesForADot();
         void removeBridgeFromExisting(Bridge* bridge);
@@ -68,13 +66,11 @@ namespace twixt {
 
         Bridge* getBridgeFromDots(Dot* secondDot);
 
-        //de facut aceasta clasa abstracta
-        //de implementat Pillar
 
     private:
     
         DotStatus m_status : 3;
-        size_t m_i, m_j; // coordinates
+        int m_i, m_j; // coordinates
         std::vector<Bridge*> m_existingBridges;
 
         
@@ -83,5 +79,3 @@ namespace twixt {
 
 #include "Mine.h"
 #include "Bridge.h"
-
-#endif // !DOT_H

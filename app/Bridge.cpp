@@ -12,13 +12,6 @@ twixt::Bridge::~Bridge()
 {
 }
 
-twixt::Bridge& twixt::Bridge::operator=(const Bridge& bridge)
-{
-	m_firstPillar = bridge.m_firstPillar;
-	m_secondPillar = bridge.m_secondPillar;
-	return *this;
-}
-
 void twixt::Bridge::setPillars(Dot* first, Dot* second)
 {
 	m_firstPillar = first;

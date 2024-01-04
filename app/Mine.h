@@ -1,11 +1,7 @@
 #pragma once
 
-#ifndef MINE_H
-#define MINE_H
 #include "Dot.h" 
 #include <vector>
-
-
 
 namespace twixt {
 	class Mine : public Dot
@@ -14,7 +10,6 @@ namespace twixt {
 		std::vector<Dot*> m_explodedDots;
 		bool m_triggered = false;
 		Mine* m_newPlacedMine = nullptr;
-
 	public:
 		Mine() {}
 		~Mine() = default;
@@ -32,5 +27,3 @@ namespace twixt {
 
 	};
 }
-
-#endif // !MINE_H

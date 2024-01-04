@@ -1,8 +1,5 @@
 #pragma once
 
-#ifndef BRIDGE_H
-#define BRIDGE_H
-
 #include "Dot.h"
 
 namespace twixt {
@@ -16,8 +13,6 @@ namespace twixt {
 		Bridge(const Bridge& bridge);
 		Bridge(Dot* firstDot, Dot* secondDot);
 		~Bridge();
-
-		Bridge& operator=(const Bridge& bridge);
 		
 		//setter
 		void setPillars(Dot* first, Dot* second);
@@ -35,5 +30,3 @@ namespace twixt {
 		void rebuiltBridge();
 	};
 }
-
-#endif // BRIDGE_H

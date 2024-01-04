@@ -1,12 +1,11 @@
+#pragma once
 
-#ifndef PLAYER_H
-#define PLAYER_H
 #include <cstdint>
 #include <iostream>
 #include <stack>
 #include "Board.h"
 #include "Dot.h"
-//#include "ObjectInStack.h"
+#include "ObjectInStack.h"
 
 namespace twixt {
 	class Player {
@@ -19,8 +18,8 @@ namespace twixt {
 		};
 
 		// Constructors
-		Player() = default;
-		Player(std::string name, Color color, uint16_t remainingDots);
+		Player() {};
+		Player(std::string name, Color color, int remainingDots);
 		Player(const Player& other);//copy constructor
 		Player(Player&& other) noexcept; // move constructor
 
@@ -30,14 +29,14 @@ namespace twixt {
 		// Getters
 		std::string getName() const;
 		Color getColor() const;
-		uint16_t getRemainingDots() const;
+		int getRemainingDots() const;
 
 		// Setters
 		void setName(std::string);
 		void setColor(Color);
-		void setRemainingDots(uint16_t);
+		void setRemainingDots(int);
 
-		std::pair<Dot*, uint16_t> turn(Board& board);
+		ObjectInStack turn(Board& board);
 		bool hasRemainingDots();
 
 		friend std::istream& operator>>(std::istream& in, Player& player);
@@ -45,8 +44,8 @@ namespace twixt {
 	private:
 		std::string m_name;
 		Color m_color;
-		uint16_t m_remainingDots;
+		std::stack<Dot*> existingDots;
+		int m_remainingDots;
 	};
 }
 
-#endif

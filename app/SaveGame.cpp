@@ -12,8 +12,8 @@ GameStack SaveGame::getSavedStack() const
 
 void SaveGame::saveMatrix(std::vector<std::vector<Dot*>> m_gameMatrix)
 {
-	for (size_t i = 0; i < m_gameMatrix.size(); i++)
-		for (size_t j = 0; j < m_gameMatrix.size(); j++)
+	for (uint8_t i = 0; i < m_gameMatrix.size(); i++)
+		for (uint8_t j = 0; j < m_gameMatrix.size(); j++)
 			m_savedMatrix[i][j] = *m_gameMatrix[i][j];
 }
 

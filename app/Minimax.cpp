@@ -1,6 +1,6 @@
 #include "Minimax.h"
 
-uint16_t twixt::Minimax::evaluate(std::pair<twixt::Dot*, twixt::Dot*> bridgeToEvaluate)
+int twixt::Minimax::evaluate(std::pair<twixt::Dot*, twixt::Dot*> bridgeToEvaluate)
 {
     int score = 1;
     const int LONGEST_PATH_VALUE = 10;
@@ -15,18 +15,15 @@ uint16_t twixt::Minimax::evaluate(std::pair<twixt::Dot*, twixt::Dot*> bridgeToEv
 
 std::pair<twixt::Dot*, twixt::Dot*> twixt::Minimax::minimax(Dot::DotStatus status)
 {
-    uint16_t maximumScore = 0;
+    int maximumScore = 0;
     std::pair<twixt::Dot*, twixt::Dot*> maximumBridge{nullptr, nullptr };
     for (int i = 0; i < copyOfBoard->getSize(); i++)
        for (int j = 0; j < copyOfBoard->getSize(); j++)
        {
-           if (copyOfBoard->getMatrixDot(i, j)->getStatus() == status)
-           {
-               scorePossibleBridges(copyOfBoard->getMatrixDot(i, j));
-               //canBlock(copyOfBoard->getMatrixDot(i, j));
-           }
+           if(copyOfBoard->getMatrixDot(i,j)->getStatus() == status)
+              scorePossibleBridges(copyOfBoard->getMatrixDot(i, j));
        }
-   for (auto& it : mapBridges)
+   for (auto it : mapBridges)
    {
        maximumScore = std::max(maximumScore, it.second);
        if(maximumScore == it.second)
@@ -50,15 +47,13 @@ void twixt::Minimax::canBlock(Dot* centralDot)
     for (int i = 0; i < opponentPlayerDots.size() - 1; i++)
         for (int j = i + 1; j < opponentPlayerDots.size(); j++)
         {
-            if ((abs((int)opponentPlayerDots[i]->getCoordI() - (int)opponentPlayerDots[j]->getCoordI()) == 1 && abs((int)opponentPlayerDots[i]->getCoordJ() - (int)opponentPlayerDots[j]->getCoordJ()) == 2) ||
-                (abs((int)opponentPlayerDots[i]->getCoordI() - (int)opponentPlayerDots[j]->getCoordI()) == 2 && abs((int)opponentPlayerDots[i]->getCoordJ() - (int)opponentPlayerDots[j]->getCoordJ()) == 1))
+            if ((abs(opponentPlayerDots[i]->getCoordI() - opponentPlayerDots[j]->getCoordI()) == 1 && abs(opponentPlayerDots[i]->getCoordJ() - opponentPlayerDots[j]->getCoordJ()) == 2) ||
+                (abs(opponentPlayerDots[i]->getCoordI() - opponentPlayerDots[j]->getCoordI()) == 2 && abs(opponentPlayerDots[i]->getCoordJ() - opponentPlayerDots[j]->getCoordJ()) == 1))
             {
                 Dot* dotToBlock = blockOpponent(centralDot, opponentPlayerDots[i], opponentPlayerDots[j]);
                 if (dotToBlock != nullptr)
                 {
-                    uint16_t newScore = mapBridges[{centralDot, dotToBlock}];
-                    newScore += (longestPath(opponentPlayerDots[i]) + longestPath(opponentPlayerDots[j])) * OPPONENT_LONGEST_PATH_VALUE;
-                    mapBridges[{centralDot, dotToBlock}] = newScore; 
+                    mapBridges[{centralDot, dotToBlock}] += (longestPath(opponentPlayerDots[i]) + longestPath(opponentPlayerDots[j])) * 7;
                 }
             }
 
@@ -67,7 +62,7 @@ void twixt::Minimax::canBlock(Dot* centralDot)
 
 twixt::Dot* twixt::Minimax::blockOpponent(Dot* centralDot, Dot* firstOpponentDot, Dot* secondOpponentDot)
 {
-    std::array<std::pair<int, int>, 8> positions{ { { -2, -1 }, { -1, -2 }, { 1, -2 }, { 2, -1 }, { 2, 1 }, { 1, 2 }, { -1, 2 }, { -2, 1 } } };
+    std::vector<std::pair<int, int>> positions{ { -2, -1 }, { -1, -2 }, { 1, -2 }, { 2, -1 }, { 2, 1 }, { 1, 2 }, { -1, 2 }, { -2, 1 } };
 
     int i = centralDot->getCoordI();
     int j = centralDot->getCoordJ();
@@ -80,23 +75,23 @@ twixt::Dot* twixt::Minimax::blockOpponent(Dot* centralDot, Dot* firstOpponentDot
         {
             if (copyOfBoard->getMatrix()[newI][newJ]->getStatus() == centralDot->getStatus())
             {
-                /*if (doIntersect(*centralDot, *copyOfBoard->getDot(newI, newJ), *firstOpponentDot, *secondOpponentDot))
+                if (copyOfBoard->checkPossibleObstructingBridges(*copyOfBoard->getDot(i, j), *copyOfBoard->getDot(newI, newJ)))
                 {
                     return copyOfBoard->getDot(newI, newJ);
-                }*/
+                }
             }
         }
     }
     return nullptr;
 }
 
-uint16_t twixt::Minimax::longestPath(Dot* dot)
+int twixt::Minimax::longestPath(Dot* dot)
 {
     Dot* newDot;
-    uint16_t maximLength = 0;
+    int maximLength = 0;
 
     //Creating path vector: pair of dot in path and position of existing bridges for the dot.
-    std::vector<std::pair<Dot*, size_t>> path;
+    std::vector<std::pair<Dot*, int>> path;
     path.push_back({ dot, 0 });
 
     while (!path.empty())
@@ -110,7 +105,7 @@ uint16_t twixt::Minimax::longestPath(Dot* dot)
                 path[path.size() - 1].second++;
                 path.push_back({ newDot, 0 });
                 checkDot = path[path.size() - 1].first;
-                maximLength = std::max(maximLength, (uint16_t)path.size());
+                maximLength = std::max(maximLength, (int)path.size());
             }
             else
             {
@@ -127,7 +122,7 @@ uint16_t twixt::Minimax::longestPath(Dot* dot)
 
 void twixt::Minimax::scorePossibleBridges(Dot* dot)
 {
-    std::array<std::pair<int, int>, 8> positions{ { { -2, -1 }, { -1, -2 }, { 1, -2 }, { 2, -1 }, { 2, 1 }, { 1, 2 }, { -1, 2 }, { -2, 1 } } };
+        std::vector<std::pair<int, int>> positions{ { -2, -1 }, { -1, -2 }, { 1, -2 }, { 2, -1 }, { 2, 1 }, { 1, 2 }, { -1, 2 }, { -2, 1 } };
 
         int y = dot->getCoordI();
         int x = dot->getCoordJ();
@@ -143,10 +138,9 @@ void twixt::Minimax::scorePossibleBridges(Dot* dot)
                 if (copyOfBoard->getMatrixDot(newY,newX)->getStatus() == dot->getStatus() && dot->getStatus() != Dot::DotStatus::Clear)
                 {
                     if (dot->getBridgeFromDots(copyOfBoard->getMatrixDot(newY, newX))==nullptr 
-                        && mapBridges.find({ copyOfBoard->getMatrixDot(newY,newX),dot }) == mapBridges.end() 
-                        && mapBridges.find({dot, copyOfBoard->getMatrixDot(newY,newX)}) == mapBridges.end())
-                        
+                        && mapBridges.find({ copyOfBoard->getMatrixDot(newY,newX),dot }) == mapBridges.end())
                         mapBridges[std::make_pair(copyOfBoard->getMatrixDot(newY, newX), dot)] = evaluate({ copyOfBoard->getMatrixDot(newY,newX),dot });
+                    //de verificat: daca nu exista bridge-ul iontre cele 2 dot-uri, atunci se poate 
                 }
             }
         }
@@ -166,6 +160,6 @@ void twixt::Minimax::suggestMove(Dot::DotStatus status)
     }
     else
     {
-        std::cout << " -> In this case there are no suggestions.\n";
+        std::cout << " -> In this case there is no suggestion.\n";
     }
 }

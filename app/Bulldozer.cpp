@@ -3,8 +3,8 @@
 void twixt::Bulldozer::destoryRandomDot(Board& board)
 {
 	srand(time(NULL));
-	size_t i = rand() % (board.getSize() - 2) + 1;
-	size_t j = rand() % (board.getSize() - 2) + 1;
+	int i = rand() % (board.getSize() - 2) + 1;
+	int j = rand() % (board.getSize() - 2) + 1;
 	while (board.getDot(i, j)->getStatus() != Dot::DotStatus::Player1 && board.getDot(i, j)->getStatus() != Dot::DotStatus::Player2)
 	{
 		i = rand() % (board.getSize() - 2) + 1;
@@ -26,7 +26,7 @@ void twixt::Bulldozer::destoryRandomDot(Board& board)
 
 	delete board.getDot(i, j);
 
-	
+
 
 	//set the new position for the bulldozer
 	position.first = i;
@@ -34,10 +34,10 @@ void twixt::Bulldozer::destoryRandomDot(Board& board)
 	this->setCoordI(i);
 	this->setCoordJ(j);
 	this->setStatus(Dot::DotStatus::Bulldozer);
-	
+
 	board.getDot(i, j) = new Bulldozer(*this);
 
-	
+
 }
 
 void twixt::Bulldozer::allocateBulldozer(Dot*& dot)
@@ -96,17 +96,17 @@ bool twixt::Bulldozer::exists()
 	return false;
 }
 
-//uint8_t twixt::Bulldozer::getI() const
-//{
-//	return position.first;
-//}
-//
-//uint8_t twixt::Bulldozer::getJ() const
-//{
-//	return position.second;
-//}
+uint8_t twixt::Bulldozer::getI() const
+{
+	return position.first;
+}
 
-std::stack<std::pair<size_t, size_t>> twixt::Bulldozer::getPreviousPosition() const
+uint8_t twixt::Bulldozer::getJ() const
+{
+	return position.second;
+}
+
+std::stack<std::pair<int, int>> twixt::Bulldozer::getPreviousPosition() const
 {
 	return m_previousPosition;
 }
@@ -128,7 +128,4 @@ void twixt::Bulldozer::setToPreviousPosition(Board& board)
 
 	delete board.getDot(position.first, position.second);
 	board.getDot(position.first, position.second) = new Bulldozer(*this);
-	
 }
-
-

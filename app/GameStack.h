@@ -1,4 +1,5 @@
 #pragma once
+
 #include <iostream>
 #include "Dot.h"
 #include<stack>
@@ -12,7 +13,7 @@ private:
 	uint8_t m_mode;
 	std::stack<Dot*> m_deletedBridgesDotStack;
 public:
-	GameStack() = default;
+	GameStack(){}
 	GameStack(uint8_t mode);
 
 	//getter

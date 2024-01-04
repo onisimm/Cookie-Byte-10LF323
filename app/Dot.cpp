@@ -6,7 +6,7 @@ namespace twixt {
 
     // Constructors
     Dot::Dot() : m_status{ DotStatus::Clear }, m_i{ 0 }, m_j{ 0 } {}
-    Dot::Dot(size_t i, size_t j) : m_status{ DotStatus::Clear }, m_i{ i }, m_j{ j } {}
+    Dot::Dot(int i, int j) : m_status{ DotStatus::Clear }, m_i{ i }, m_j{ j } {}
     Dot::Dot(const Dot& newDot) : m_status{ newDot.m_status }, m_i{ newDot.m_i }, m_j{ newDot.m_j }//, m_existingBridges{newDot.m_existingBridges} 
     {
         //de vazut ce facem cu m_existingBridges
@@ -53,12 +53,12 @@ namespace twixt {
     Dot::~Dot() {}
 
     // Getters
-    size_t Dot::getCoordI() const
+    int Dot::getCoordI() const
     {
         return m_i;
     }
 
-    size_t Dot::getCoordJ() const
+    int Dot::getCoordJ() const
     {
         return m_j;
     }
@@ -69,12 +69,12 @@ namespace twixt {
     }
 
     // Setters
-    void Dot::setCoordI(size_t x)
+    void Dot::setCoordI(int x)
     {
         m_i = x;
     }
 
-    void Dot::setCoordJ(size_t y)
+    void Dot::setCoordJ(int y)
     {
         m_j = y;
     }
@@ -113,7 +113,13 @@ namespace twixt {
         return m_existingBridges;
     }
 
-    bool Dot::isDotInPath(std::vector<std::pair<Dot*, size_t>> path) const
+   /* const bool& Dot::checkExistingBridge(Dot* dotToCheck) const
+    {
+        std::cout << "S a apelat check exisgting bridges";
+        return std::find(m_existingBridges.begin(), m_existingBridges.end(), dotToCheck) != m_existingBridges.end();
+    }*/
+
+    bool Dot::isDotInPath(std::vector<std::pair<Dot*, int>> path) const
     {
         for (auto i : path)
             if (i.first == this)

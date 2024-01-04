@@ -19,7 +19,7 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>{3F7BEAE2-EE31-4EBC-85E4-062305157D91}</ProjectGuid>
     <Keyword>QtVS_v304</Keyword>
-    <WindowsTargetPlatformVersion Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">10.0.22621.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">10.0.22000.0</WindowsTargetPlatformVersion>
     <WindowsTargetPlatformVersion Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">10.0.22621.0</WindowsTargetPlatformVersion>
     <QtMsBuild Condition="'$(QtMsBuild)'=='' OR !Exists('$(QtMsBuild)\qt.targets')">$(MSBuildProjectDirectory)\QtMsBuild</QtMsBuild>
   </PropertyGroup>
@@ -37,7 +37,7 @@
     <Import Project="$(QtMsBuild)\qt_defaults.props" />
   </ImportGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="QtSettings">
-    <QtInstall>6.6.1_msvc2019_64</QtInstall>
+    <QtInstall>6.7.0_msvc2019_64</QtInstall>
     <QtModules>core;gui;widgets</QtModules>
     <QtBuildConfig>debug</QtBuildConfig>
   </PropertyGroup>
@@ -66,7 +66,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <LanguageStandard>Default</LanguageStandard>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="Configuration">
@@ -101,7 +101,6 @@
     <ClCompile Include="GameStack.cpp" />
     <ClCompile Include="Mine.cpp" />
     <ClCompile Include="Minimax.cpp" />
-    <ClCompile Include="ObjectInStack.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="SaveGame.cpp" />
     <ClCompile Include="SettingsWidget.cpp" />
@@ -142,7 +141,6 @@
     <ClInclude Include="GameStack.h" />
     <ClInclude Include="Mine.h" />
     <ClInclude Include="Minimax.h" />
-    <ClInclude Include="ObjectInStack.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="SaveGame.h" />
     <ClInclude Include="Undo.h" />

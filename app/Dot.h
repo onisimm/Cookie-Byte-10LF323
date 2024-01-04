@@ -41,43 +41,22 @@ namespace twixt {
         size_t getCoordI() const;
         size_t getCoordJ() const;
         DotStatus getStatus() const;
-        const std::vector<Bridge*>& getExistingBridges() const;
 
         // Setters
         void setCoordI(size_t);
         void setCoordJ(size_t);
         void setStatus(const DotStatus&);
-        void setExistingBridges(const std::vector<Bridge*>& existingBridges);
 
         // Operators overload
         Dot& operator=(const Dot& newDot); // = overload
         Dot& operator=(Dot&& other) noexcept;  // Add move assignment operator
         bool operator==(const Dot& otherDot) const; // == overload 
-        friend std::ostream& operator<<(std::ostream& os, const Dot& dot); // << overload
+        // ? friend std::ostream& operator<<(std::ostream& os, const Dot& dot); // << overload
 
-
-        void addBridge(Dot* connectionDot);
-        void clearExistingBridges(); // clear all the existingBridges
-
-        bool isDotInPath(std::vector<std::pair<Dot*, size_t>> path) const;
-
-        void deleteAllBridgesForADot();
-        void removeBridgeFromExisting(Bridge* bridge);
-
-        Dot::DotStatus returnTheOtherPlayer();
-
-        Bridge* getBridgeFromDots(Dot* secondDot);
-
-        //de facut aceasta clasa abstracta
-        //de implementat Pillar
-
-    private:
+    protected:
 
         DotStatus m_status : 3;
-        size_t m_i, m_j; // coordinates
-        std::vector<Bridge*> m_existingBridges;
-
-
+        size_t m_i, m_j; // coordinates;
     };
 }
 

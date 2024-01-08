@@ -24,8 +24,9 @@ namespace twixt {
             Player1, // occupied by player 1
             Player2, // occupied by player 2
             Clear, // not occupied yet
-            Bulldozer, //occupied by a bulldozer
-            Mines //occupied by a mine
+            Bulldozer, // occupied by a bulldozer
+            Mines, // occupied by a mine
+            Exploded // exploded after a mine exploded
         };
 
         // Constructors

@@ -27,18 +27,18 @@ namespace twixt {
 			}
 		};
 
-		std::unordered_map<std::pair<Dot*, Dot*>, uint16_t, PairDotHash> mapBridges;
+		std::unordered_map<std::pair<Peg*, Peg*>, uint16_t, PairDotHash> mapBridges;
 		Board* copyOfBoard;
 
 		//Function that returns the score for each possible bridge
-		uint16_t evaluate(std::pair<twixt::Dot*, twixt::Dot*> bridgeToEvaluate);
+		uint16_t evaluate(std::pair<twixt::Peg*, twixt::Peg*> bridgeToEvaluate);
 		//Function that returns the possible bridge with the highest score
-		std::pair<twixt::Dot*, twixt::Dot*> minimax(Dot::DotStatus status);
+		std::pair<twixt::Peg*, twixt::Peg*> minimax(Dot::DotStatus status);
 		//Function that 
-		void canBlock(Dot* centralDot);
-		Dot* blockOpponent(Dot* centralDot, Dot* firstOpponentDot, Dot* secondOpponentDot);
-		uint16_t longestPath(Dot* dot);
-		void scorePossibleBridges(Dot* dot);
+		void canBlock(Peg* centralDot);
+		Peg* blockOpponent(Peg* centralDot, Peg* firstOpponentDot, Peg* secondOpponentDot);
+		uint16_t longestPath(Peg* dot);
+		void scorePossibleBridges(Peg* dot);
 
 	public:
 		Minimax() = default;

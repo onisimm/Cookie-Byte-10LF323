@@ -217,103 +217,103 @@ namespace twixt
 		return false;
 	}
 
-	bool Board::checkObstructingBridges(const Dot& dot1, const Dot& dot2) const
-	{
-		size_t x1 = dot1.getCoordJ();
-		size_t y1 = dot1.getCoordI();
-		size_t x2 = dot2.getCoordJ();
-		size_t y2 = dot2.getCoordI();
+	//bool Board::checkObstructingBridges(const Dot& dot1, const Dot& dot2) const
+	//{
+	//	size_t x1 = dot1.getCoordJ();
+	//	size_t y1 = dot1.getCoordI();
+	//	size_t x2 = dot2.getCoordJ();
+	//	size_t y2 = dot2.getCoordI();
 
-		// Check if any existing bridge obstructs the way from dot1 to dot2
-		for (size_t i = std::min(y1, y2); i <= std::max(y1, y2); ++i)
-		{
-			for (size_t j = std::min(x1, x2); j <= std::max(x1, x2); ++j)
-			{
-				if (*m_matrixDot[i][j] == dot1 || *m_matrixDot[i][j] == dot2)
-				{
-					continue;
-				}
+	//	// Check if any existing bridge obstructs the way from dot1 to dot2
+	//	for (size_t i = std::min(y1, y2); i <= std::max(y1, y2); ++i)
+	//	{
+	//		for (size_t j = std::min(x1, x2); j <= std::max(x1, x2); ++j)
+	//		{
+	//			if (*m_matrixDot[i][j] == dot1 || *m_matrixDot[i][j] == dot2)
+	//			{
+	//				continue;
+	//			}
 
-				for (auto bridge : m_matrixDot[i][j]->getExistingBridges())
-				{
-					auto [firstDot, secondDot] = bridge->getPillars();
-					if (doIntersect(dot1, dot2, *firstDot, *secondDot))
-					{
-						// std::cout << "Couldn't build a bridge between (" << dot1 << " and " << dot2 << " because of the bridge between " << m_matrixDot[i][j] << " and " << *bridgeDot << "\n";
-						return false;
-					}
-				}
-			}
-		}
-		return true;
-	}
+	//			for (auto bridge : m_matrixDot[i][j]->getExistingBridges())
+	//			{
+	//				auto [firstDot, secondDot] = bridge->getPillars();
+	//				if (doIntersect(dot1, dot2, *firstDot, *secondDot))
+	//				{
+	//					// std::cout << "Couldn't build a bridge between (" << dot1 << " and " << dot2 << " because of the bridge between " << m_matrixDot[i][j] << " and " << *bridgeDot << "\n";
+	//					return false;
+	//				}
+	//			}
+	//		}
+	//	}
+	//	return true;
+	//}
 
-	bool Board::checkPossibleObstructingBridges(const Dot& dot1, const Dot& dot2) const
-	{
-		size_t x1 = dot1.getCoordI();
-		size_t y1 = dot1.getCoordJ();
-		size_t x2 = dot2.getCoordI();
-		size_t y2 = dot2.getCoordJ();
+	//bool Board::checkPossibleObstructingBridges(const Dot& dot1, const Dot& dot2) const
+	//{
+	//	size_t x1 = dot1.getCoordI();
+	//	size_t y1 = dot1.getCoordJ();
+	//	size_t x2 = dot2.getCoordI();
+	//	size_t y2 = dot2.getCoordJ();
 
-		// Check if any existing bridge obstructs the way from dot1 to dot2
-		for (size_t i = std::min(x1, x2); i <= std::max(x1, x2); ++i)
-		{
-			for (size_t j = std::min(y1, y2); j <= std::max(y1, y2); ++j)
-			{
-				if (*m_matrixDot[i][j] == dot1)
-				{
-					continue;
-				}
-				std::unordered_set<Dot*> possibleBridges = buildPossibleBridges(m_matrixDot[i][j]);
-				for (auto secondDot : possibleBridges)
-				{
-					//auto [firstDot, secondDot] = bridge->getPillars();
-					if (doIntersect(dot1, dot2, *m_matrixDot[i][j], *secondDot))
-					{
-						// std::cout << "Couldn't build a bridge between (" << dot1 << " and " << dot2 << " because of the bridge between " << m_matrixDot[i][j] << " and " << *bridgeDot << "\n";
-						return false;
-					}
-				}
-			}
-		}
-		return true;
-	}
+	//	// Check if any existing bridge obstructs the way from dot1 to dot2
+	//	for (size_t i = std::min(x1, x2); i <= std::max(x1, x2); ++i)
+	//	{
+	//		for (size_t j = std::min(y1, y2); j <= std::max(y1, y2); ++j)
+	//		{
+	//			if (*m_matrixDot[i][j] == dot1)
+	//			{
+	//				continue;
+	//			}
+	//			std::unordered_set<Dot*> possibleBridges = buildPossibleBridges(m_matrixDot[i][j]);
+	//			for (auto secondDot : possibleBridges)
+	//			{
+	//				//auto [firstDot, secondDot] = bridge->getPillars();
+	//				if (doIntersect(dot1, dot2, *m_matrixDot[i][j], *secondDot))
+	//				{
+	//					// std::cout << "Couldn't build a bridge between (" << dot1 << " and " << dot2 << " because of the bridge between " << m_matrixDot[i][j] << " and " << *bridgeDot << "\n";
+	//					return false;
+	//				}
+	//			}
+	//		}
+	//	}
+	//	return true;
+	//}
 
-	std::unordered_set<Dot*> Board::buildPossibleBridges(Dot* dot) const
-	{
-		std::array<std::pair<int, int>, 8> positions{ { { -2, -1 }, { -1, -2 }, { 1, -2 }, { 2, -1 }, { 2, 1 }, { 1, 2 }, { -1, 2 }, { -2, 1 } } };
-		std::unordered_set<Dot*> possibleBridges;
-		size_t y = dot->getCoordI();
-		size_t x = dot->getCoordJ();
+	//std::unordered_set<Peg*> Board::buildPossibleBridges(Peg* dot) const
+	//{
+	//	std::array<std::pair<int, int>, 8> positions{ { { -2, -1 }, { -1, -2 }, { 1, -2 }, { 2, -1 }, { 2, 1 }, { 1, 2 }, { -1, 2 }, { -2, 1 } } };
+	//	std::unordered_set<Peg*> possibleBridges;
+	//	size_t y = dot->getCoordI();
+	//	size_t x = dot->getCoordJ();
 
-		for (auto pair : positions)
-		{
-			auto [newY, newX] = pair;
-			newY += y;
-			newX += x;
+	//	for (auto pair : positions)
+	//	{
+	//		auto [newY, newX] = pair;
+	//		newY += y;
+	//		newX += x;
 
-			if (newY >= 0 && newY < m_matrixDot.size() && newX >= 0 && newX < m_matrixDot[newY].size()) // check boundaries
-			{
-				if (m_matrixDot[newY][newX]->getStatus() == dot->getStatus() && dot->getBridgeFromDots(m_matrixDot[newY][newX]) == nullptr)
-				{
-					possibleBridges.insert(m_matrixDot[newY][newX]);
-				}
-			}
-		}
-		return possibleBridges;
-	}
+	//		if (newY >= 0 && newY < m_matrixDot.size() && newX >= 0 && newX < m_matrixDot[newY].size()) // check boundaries
+	//		{
+	//			if (m_matrixDot[newY][newX]->getStatus() == dot->getStatus() && dot->getBridgeFromDots(m_matrixDot[newY][newX]) == nullptr)
+	//			{
+	//				possibleBridges.insert(m_matrixDot[newY][newX]);
+	//			}
+	//		}
+	//	}
+	//	return possibleBridges;
+	//}
 
 	//verify whether the path leads to win or not
 	bool Board::checkPath(twixt::Dot::DotStatus status)
 	{
-		std::vector<Dot*> margins = FindDotInMargins(status);
+		std::vector<Peg*> margins = FindDotInMargins(status);
 		if (margins.empty()) return false;
 		size_t index = 0;
-		Dot* firstDot = margins[index];
-		Dot* newDot;
+		Peg* firstDot = margins[index];
+		Peg* newDot;
 
 		//Creating path vector: pair of dot in path and position of existing bridges for the dot.
-		std::vector<std::pair<Dot*, size_t>> path;
+		std::vector<std::pair<Peg*, size_t>> path;
 
 		bool isFinalDot = false;
 		path.push_back({ firstDot, 0 });
@@ -323,7 +323,7 @@ namespace twixt
 			if (position < checkDot->getExistingBridges().size())
 			{
 				newDot = checkDot->getExistingBridges()[position]->returnTheOtherPillar(checkDot);
-				if (!newDot->isDotInPath(path))
+				if (!newDot->isPegInPath(path))
 				{
 					path.push_back({ newDot, -1 });
 					checkDot = path[path.size() - 1].first;
@@ -352,20 +352,20 @@ namespace twixt
 		return isFinalDot;
 	}
 
-	std::vector<Dot*> Board::FindDotInMargins(Dot::DotStatus status)
+	std::vector<Peg*> Board::FindDotInMargins(Dot::DotStatus status)
 	{
-		std::vector<Dot*> margin;
+		std::vector<Peg*> margin;
 		if (status == Dot::DotStatus::Player1)
 		{
 			for (size_t i = 0; i < m_matrixDot.size(); i++)
 			{
 				if (m_matrixDot[0][i]->getStatus() == Dot::DotStatus::Player1)
 				{
-					margin.push_back(m_matrixDot[0][i]);
+					margin.push_back(dynamic_cast<Peg*>(m_matrixDot[0][i]));
 				}
 				if (m_matrixDot[1][i]->getStatus() == Dot::DotStatus::Player1)
 				{
-					margin.push_back(m_matrixDot[1][i]);
+					margin.push_back(dynamic_cast<Peg*>(m_matrixDot[1][i]));
 				}
 			}
 		}
@@ -375,11 +375,11 @@ namespace twixt
 			{
 				if (m_matrixDot[i][0]->getStatus() == Dot::DotStatus::Player2)
 				{
-					margin.push_back(m_matrixDot[i][0]);
+					margin.push_back(dynamic_cast<Peg*>(m_matrixDot[i][0]));
 				}
 				if (m_matrixDot[i][1]->getStatus() == Dot::DotStatus::Player2)
 				{
-					margin.push_back(m_matrixDot[i][1]);
+					margin.push_back(dynamic_cast<Peg*>(m_matrixDot[i][1]));
 				}
 			}
 		}
@@ -409,9 +409,9 @@ namespace twixt
 		}
 		return false;
 	}
-	void Board::deleteBridge(Dot* firstDot, Dot* secondDot)
+	void Board::deleteBridge(Peg* firstDot, Peg* secondDot)
 	{
-		Dot* findingSecondDot;
+		Peg* findingSecondDot;
 		size_t index = 0;
 		findingSecondDot = firstDot->getExistingBridges()[index]->returnTheOtherPillar(firstDot);
 		while (findingSecondDot != secondDot) {
@@ -465,17 +465,19 @@ namespace twixt
 				if (m_matrixDot[newI][newJ]->getStatus() == Dot::DotStatus::Player1 || m_matrixDot[newI][newJ]->getStatus() == Dot::DotStatus::Player2)
 				{
 					mine->setExplodedDots(m_matrixDot[newI][newJ]);
-					m_matrixDot[newI][newJ]->setStatus(Dot::DotStatus::Clear);
-					m_matrixDot[newI][newJ]->deleteAllBridgesForADot();
+					delete m_matrixDot[newI][newJ];
+					m_matrixDot[newI][newJ] = new Dot;
+					//m_matrixDot[newI][newJ]->setStatus(Dot::DotStatus::Clear);
+					//m_matrixDot[newI][newJ]->deleteAllBridgesForADot();
 
-					std::cout << "DOT " << newI << " " << newJ << " EXPLODED!\n";
+					std::cout << "PEG " << newI << " " << newJ << " EXPLODED!\n";
 				}
 				if (m_matrixDot[newI][newJ]->getStatus() == Dot::DotStatus::Mines && dynamic_cast<Mine*>(m_matrixDot[newI][newJ])->getTrigger() == false)
 				{
 					mine->setExplodedDots(m_matrixDot[newI][newJ]);
 					mineExplodes(dynamic_cast<Mine*>(m_matrixDot[newI][newJ]));
 				}
-
+				m_matrixDot[newI][newJ]->setStatus(Dot::DotStatus::Exploded);
 			}
 		}
 		m_matrixDot[i][j]->setStatus(Dot::DotStatus::Clear);

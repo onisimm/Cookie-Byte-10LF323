@@ -13,7 +13,7 @@ namespace twixt {
 	private:
 		std::pair<size_t, size_t> position;
 		std::stack<std::pair<size_t, size_t>> m_previousPosition;
-		std::stack<Dot> m_dotDestroyed;
+		std::stack<Peg> m_dotDestroyed;
 		void destoryRandomDot(Board& board);
 		void allocateBulldozer(Dot*& dot);
 
@@ -28,7 +28,7 @@ namespace twixt {
 		//uint8_t getI() const;
 		//uint8_t getJ() const;
 		std::stack<std::pair<size_t, size_t>> getPreviousPosition() const;
-		std::stack<Dot> getDotDestroyed() const;
+		std::stack<Peg> getPegDestroyed() const;
 		void setToPreviousPosition(Board& board);
 	};
 }

@@ -85,6 +85,9 @@
     <ClCompile Include="GameStack.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Peg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="MainMenuWidget.h">
@@ -143,6 +146,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Board.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Peg.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

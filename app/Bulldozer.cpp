@@ -10,15 +10,14 @@ void twixt::Bulldozer::destoryRandomDot(Board& board)
 		i = rand() % (board.getSize() - 2) + 1;
 		j = rand() % (board.getSize() - 2) + 1;
 	}
-
 	//assign the destroyed dot 
-	m_dotDestroyed.push(*board.getDot(i, j));
+	m_dotDestroyed.push(*dynamic_cast<Peg*>(board.getDot(i, j)));
 	//assign the previous position
 	m_previousPosition.push(position);
 
 	//delete the random Dot
 	std::cout << "The dot " << i << " " << j << " will be destroyed\n";
-	board.getDot(i, j)->deleteAllBridgesForADot();
+	dynamic_cast<Peg*>(board.getDot(i, j))->deleteAllBridgesForAPeg();
 
 	//eliminate the current bulldozer
 	delete board.getDot(position.first, position.second);
@@ -111,7 +110,7 @@ std::stack<std::pair<size_t, size_t>> twixt::Bulldozer::getPreviousPosition() co
 	return m_previousPosition;
 }
 
-std::stack<twixt::Dot> twixt::Bulldozer::getDotDestroyed() const
+std::stack<twixt::Peg> twixt::Bulldozer::getPegDestroyed() const
 {
 	return m_dotDestroyed;
 }

@@ -1,6 +1,6 @@
 #include "Minimax.h"
 
-uint16_t twixt::Minimax::evaluate(std::pair<twixt::Dot*, twixt::Dot*> bridgeToEvaluate)
+uint16_t twixt::Minimax::evaluate(std::pair<twixt::Peg*, twixt::Peg*> bridgeToEvaluate)
 {
     int score = 1;
     const int LONGEST_PATH_VALUE = 10;
@@ -13,16 +13,16 @@ uint16_t twixt::Minimax::evaluate(std::pair<twixt::Dot*, twixt::Dot*> bridgeToEv
     return score;
 }
 
-std::pair<twixt::Dot*, twixt::Dot*> twixt::Minimax::minimax(Dot::DotStatus status)
+std::pair<twixt::Peg*, twixt::Peg*> twixt::Minimax::minimax(Dot::DotStatus status)
 {
     uint16_t maximumScore = 0;
-    std::pair<twixt::Dot*, twixt::Dot*> maximumBridge{ nullptr, nullptr };
+    std::pair<twixt::Peg*, twixt::Peg*> maximumBridge{ nullptr, nullptr };
     for (int i = 0; i < copyOfBoard->getSize(); i++)
         for (int j = 0; j < copyOfBoard->getSize(); j++)
         {
             if (copyOfBoard->getMatrixDot(i, j)->getStatus() == status)
             {
-                scorePossibleBridges(copyOfBoard->getMatrixDot(i, j));
+                scorePossibleBridges(dynamic_cast<Peg*>(copyOfBoard->getMatrixDot(i, j)));
                 //canBlock(copyOfBoard->getMatrixDot(i, j));
             }
         }
@@ -35,16 +35,16 @@ std::pair<twixt::Dot*, twixt::Dot*> twixt::Minimax::minimax(Dot::DotStatus statu
     return maximumBridge;
 }
 
-void twixt::Minimax::canBlock(Dot* centralDot)
+void twixt::Minimax::canBlock(Peg* centralDot)
 {
     const int OPPONENT_LONGEST_PATH_VALUE = 7;
-    std::vector<Dot*> opponentPlayerDots;
+    std::vector<Peg*> opponentPlayerDots;
     for (int i = centralDot->getCoordI() - 2; i <= centralDot->getCoordI() + 2; i++)
         for (int j = centralDot->getCoordJ() - 2; j <= centralDot->getCoordJ() + 2; j++)
         {
             if (copyOfBoard->getMatrixDot(i, j)->getStatus() == centralDot->returnTheOtherPlayer())
             {
-                opponentPlayerDots.push_back(copyOfBoard->getMatrixDot(i, j));
+                opponentPlayerDots.push_back(dynamic_cast<Peg*>(copyOfBoard->getMatrixDot(i, j)));
             }
         }
     for (int i = 0; i < opponentPlayerDots.size() - 1; i++)
@@ -53,7 +53,7 @@ void twixt::Minimax::canBlock(Dot* centralDot)
             if ((abs((int)opponentPlayerDots[i]->getCoordI() - (int)opponentPlayerDots[j]->getCoordI()) == 1 && abs((int)opponentPlayerDots[i]->getCoordJ() - (int)opponentPlayerDots[j]->getCoordJ()) == 2) ||
                 (abs((int)opponentPlayerDots[i]->getCoordI() - (int)opponentPlayerDots[j]->getCoordI()) == 2 && abs((int)opponentPlayerDots[i]->getCoordJ() - (int)opponentPlayerDots[j]->getCoordJ()) == 1))
             {
-                Dot* dotToBlock = blockOpponent(centralDot, opponentPlayerDots[i], opponentPlayerDots[j]);
+                Peg* dotToBlock = blockOpponent(centralDot, opponentPlayerDots[i], opponentPlayerDots[j]);
                 if (dotToBlock != nullptr)
                 {
                     uint16_t newScore = mapBridges[{centralDot, dotToBlock}];
@@ -65,7 +65,7 @@ void twixt::Minimax::canBlock(Dot* centralDot)
         }
 }
 
-twixt::Dot* twixt::Minimax::blockOpponent(Dot* centralDot, Dot* firstOpponentDot, Dot* secondOpponentDot)
+twixt::Peg* twixt::Minimax::blockOpponent(Peg* centralDot, Peg* firstOpponentDot, Peg* secondOpponentDot)
 {
     std::array<std::pair<int, int>, 8> positions{ { { -2, -1 }, { -1, -2 }, { 1, -2 }, { 2, -1 }, { 2, 1 }, { 1, 2 }, { -1, 2 }, { -2, 1 } } };
 
@@ -90,13 +90,13 @@ twixt::Dot* twixt::Minimax::blockOpponent(Dot* centralDot, Dot* firstOpponentDot
     return nullptr;
 }
 
-uint16_t twixt::Minimax::longestPath(Dot* dot)
+uint16_t twixt::Minimax::longestPath(Peg* dot)
 {
-    Dot* newDot;
+    Peg* newDot;
     uint16_t maximLength = 0;
 
     //Creating path vector: pair of dot in path and position of existing bridges for the dot.
-    std::vector<std::pair<Dot*, size_t>> path;
+    std::vector<std::pair<Peg*, size_t>> path;
     path.push_back({ dot, 0 });
 
     while (!path.empty())
@@ -105,7 +105,7 @@ uint16_t twixt::Minimax::longestPath(Dot* dot)
         if (position < checkDot->getExistingBridges().size())
         {
             newDot = checkDot->getExistingBridges()[position]->returnTheOtherPillar(checkDot);
-            if (!newDot->isDotInPath(path))
+            if (!newDot->isPegInPath(path))
             {
                 path[path.size() - 1].second++;
                 path.push_back({ newDot, 0 });
@@ -125,7 +125,7 @@ uint16_t twixt::Minimax::longestPath(Dot* dot)
     return maximLength;
 }
 
-void twixt::Minimax::scorePossibleBridges(Dot* dot)
+void twixt::Minimax::scorePossibleBridges(Peg* dot)
 {
     std::array<std::pair<int, int>, 8> positions{ { { -2, -1 }, { -1, -2 }, { 1, -2 }, { 2, -1 }, { 2, 1 }, { 1, 2 }, { -1, 2 }, { -2, 1 } } };
 
@@ -142,11 +142,11 @@ void twixt::Minimax::scorePossibleBridges(Dot* dot)
         {
             if (copyOfBoard->getMatrixDot(newY, newX)->getStatus() == dot->getStatus() && dot->getStatus() != Dot::DotStatus::Clear)
             {
-                if (dot->getBridgeFromDots(copyOfBoard->getMatrixDot(newY, newX)) == nullptr
-                    && mapBridges.find({ copyOfBoard->getMatrixDot(newY,newX),dot }) == mapBridges.end()
-                    && mapBridges.find({ dot, copyOfBoard->getMatrixDot(newY,newX) }) == mapBridges.end())
+                if (dot->getBridgeFromPegs(dynamic_cast<Peg*>(copyOfBoard->getMatrixDot(newY, newX))) == nullptr
+                    && mapBridges.find({ dynamic_cast<Peg*>(copyOfBoard->getMatrixDot(newY,newX)),dot }) == mapBridges.end()
+                    && mapBridges.find({ dot, dynamic_cast<Peg*>(copyOfBoard->getMatrixDot(newY,newX)) }) == mapBridges.end())
 
-                    mapBridges[std::make_pair(copyOfBoard->getMatrixDot(newY, newX), dot)] = evaluate({ copyOfBoard->getMatrixDot(newY,newX),dot });
+                    mapBridges[std::make_pair(dynamic_cast<Peg*>(copyOfBoard->getMatrixDot(newY, newX)), dot)] = evaluate({ dynamic_cast<Peg*>(copyOfBoard->getMatrixDot(newY,newX)),dot });
             }
         }
     }

@@ -5,12 +5,11 @@ twixt::Bridge::Bridge(const Bridge& bridge) : m_firstPillar{ bridge.m_firstPilla
 {
 }
 
-twixt::Bridge::Bridge(Dot* firstDot, Dot* secondDot) :m_firstPillar{ firstDot }, m_secondPillar{ secondDot }
+twixt::Bridge::Bridge(Peg* firstPillar, Peg* secondPillar) : m_firstPillar{ firstPillar }, m_secondPillar{ secondPillar }
 {}
 
 twixt::Bridge::~Bridge()
-{
-}
+{}
 
 twixt::Bridge& twixt::Bridge::operator=(const Bridge& bridge)
 {
@@ -19,40 +18,40 @@ twixt::Bridge& twixt::Bridge::operator=(const Bridge& bridge)
 	return *this;
 }
 
-void twixt::Bridge::setPillars(Dot* first, Dot* second)
+void twixt::Bridge::setPillars(Peg* first, Peg* second)
 {
 	m_firstPillar = first;
 	m_secondPillar = second;
 }
 
-void twixt::Bridge::setFirstPillar(Dot* pillar)
+void twixt::Bridge::setFirstPillar(Peg* pillar)
 {
 	m_firstPillar = pillar;
 }
 
-void twixt::Bridge::setSecondPillar(Dot* pillar)
+void twixt::Bridge::setSecondPillar(Peg* pillar)
 {
 	m_secondPillar = pillar;
 }
 
-twixt::Dot* twixt::Bridge::getFirstPillar() const
+twixt::Peg* twixt::Bridge::getFirstPillar() const
 {
 	return m_firstPillar;
 }
 
-twixt::Dot* twixt::Bridge::getSecondPillar() const
+twixt::Peg* twixt::Bridge::getSecondPillar() const
 {
 	return m_secondPillar;
 }
 
-std::pair<twixt::Dot*, twixt::Dot*> twixt::Bridge::getPillars() const
+std::pair<twixt::Peg*, twixt::Peg*> twixt::Bridge::getPillars() const
 {
 	return std::make_pair(m_firstPillar, m_secondPillar);
 }
 
-bool twixt::Bridge::isPillarInBridge(Dot* dot)
+bool twixt::Bridge::isPillarInBridge(Peg* peg)
 {
-	if (dot == m_firstPillar || dot == m_secondPillar)
+	if (peg == m_firstPillar || peg == m_secondPillar)
 		return true;
 	return false;
 }
@@ -64,10 +63,12 @@ void twixt::Bridge::deleteBridge()
 	delete this;
 }
 
-twixt::Dot* twixt::Bridge::returnTheOtherPillar(Dot* dot)
+twixt::Peg* twixt::Bridge::returnTheOtherPillar(Peg* peg)
 {
-	if (dot == m_firstPillar)
+	if (peg == m_firstPillar)
+	{
 		return m_secondPillar;
+	}
 	return m_firstPillar;
 }
 

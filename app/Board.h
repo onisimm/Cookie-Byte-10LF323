@@ -53,13 +53,14 @@ namespace twixt {
 		friend bool onSegment(const Dot& p, const Dot& q, const Dot& r);
 		friend bool doIntersect(const Dot& p1, const Dot& p2, const Dot& q1, const Dot& q2);*/
 
+		//placePeg
 		bool checkObstructingBridges(const Dot& dot1, const Dot& dot2) const;
 		bool checkPossibleObstructingBridges(const Dot& dot1, const Dot& dot2) const;
 
 
 		bool checkPath(Dot::DotStatus status);
 
-		void deleteBridge(Dot* firstDot, Dot* secondDot);
+		void deleteBridge(Peg* firstDot, Peg* secondDot);
 
 		void placeMine(size_t i, size_t j);
 		void placeRandomMine();
@@ -71,10 +72,10 @@ namespace twixt {
 	private:
 
 		//function that is used in checkPossibleObstructingBridges
-		std::unordered_set<Dot*> buildPossibleBridges(Dot* dot) const;
+		std::unordered_set<Peg*> buildPossibleBridges(Peg* dot) const;
 
 		//Functions that are used in CheckPath
-		std::vector<Dot*> FindDotInMargins(Dot::DotStatus status);
+		std::vector<Peg*> FindDotInMargins(Dot::DotStatus status);
 		bool checkFinalMargin(Dot* dotToCheck, Dot::DotStatus status);
 
 		//Function that we use when a mine explodes, in changeDotStatus

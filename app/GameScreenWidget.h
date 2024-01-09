@@ -17,13 +17,15 @@ public:
     void handleDotPressed(int row, int col, QColor color);
 
     void setGameboardSize(const uint8_t& size);
-    void setGamemodeLabel(const QString& gamemode);
+    void setMaxDots(const uint8_t& maxDots);
+    void setMaxBridges(const uint8_t& maxBridges);
+    void setGamemode(const QString& gamemode);
     void setPlayer1Name(const QString& nickname) { player1Name = nickname; }
     void setPlayer2Name(const QString& nickname) { player2Name = nickname; }
     void setPlayerTurnLabel(const QString& nickname = "");
 
     QString getPlayer1Name() const { return player1Name; }
-    QString getPlayer2Name() const { return player2Name; }
+    QString getPlayer2Name() const { return player2Name; }TwixtGame game;
 
 signals:
     void on_backToMenuButton_clicked();

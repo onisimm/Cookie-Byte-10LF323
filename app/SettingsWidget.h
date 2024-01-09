@@ -14,7 +14,9 @@ public:
 	QString getGamemode() const;
 	QString getPlayer1Name() const;
 	QString getPlayer2Name() const;
-	int getGameboardSize() const;
+	uint8_t getGameboardSize() const;
+	uint8_t getMaxDots() const;
+	uint8_t getMaxBridges() const;
 
 signals:
 	void on_backToMenuButton_clicked();

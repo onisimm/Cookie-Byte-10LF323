@@ -24,8 +24,17 @@ QString SettingsWidget::getPlayer2Name() const {
     return name.isEmpty() ? "Player2" : name;
 }
 
-int SettingsWidget::getGameboardSize() const
+uint8_t SettingsWidget::getGameboardSize() const
 {
-    int size = ui.gameboardSize->value();
-    return size;
+    return ui.gameboardSize->value();
+}
+
+uint8_t SettingsWidget::getMaxDots() const
+{
+    return ui.maxDots->value();
+}
+
+uint8_t SettingsWidget::getMaxBridges() const
+{
+    return ui.maxBridges->value();
 }

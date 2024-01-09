@@ -32,29 +32,40 @@ void MainWindow::deleteMenuWidgets()
     isMenuScreenConnected = false;
 }
 
-void MainWindow::switchToGameScreen() {
-    if (!isGameScreenConnected) {
-        gameScreenWidget = new GameScreenWidget();
-        stackedWidget->addWidget(gameScreenWidget);
+void MainWindow::updateGameSettings()
+{
+    if (isGameScreenConnected) {
+        uint8_t gameboardSize = static_cast<SettingsWidget*>(settingsWidget)->getGameboardSize();
+        static_cast<GameScreenWidget*>(gameScreenWidget)->setGameboardSize(gameboardSize);
 
-        // Back to Main Menu Button
-        connect(static_cast<GameScreenWidget*>(gameScreenWidget), &GameScreenWidget::on_backToMenuButton_clicked, this, &MainWindow::confirmLeaveGame);
-
-        // Gamemode Label
         QString gamemode = static_cast<SettingsWidget*>(settingsWidget)->getGamemode();
-        static_cast<GameScreenWidget*>(gameScreenWidget)->setGamemodeLabel(gamemode);
+        static_cast<GameScreenWidget*>(gameScreenWidget)->setGamemode(gamemode);
 
-        // Players' names
         QString player1Name = static_cast<SettingsWidget*>(settingsWidget)->getPlayer1Name();
         QString player2Name = static_cast<SettingsWidget*>(settingsWidget)->getPlayer2Name();
         static_cast<GameScreenWidget*>(gameScreenWidget)->setPlayer1Name(player1Name);
         static_cast<GameScreenWidget*>(gameScreenWidget)->setPlayer2Name(player2Name);
         static_cast<GameScreenWidget*>(gameScreenWidget)->setPlayerTurnLabel(); // It will be automatically set to Player1's nickname
 
-        uint8_t gameboardSize = static_cast<SettingsWidget*>(settingsWidget)->getGameboardSize();
-        static_cast<GameScreenWidget*>(gameScreenWidget)->setGameboardSize(gameboardSize);
+        uint8_t maxDots = static_cast<SettingsWidget*>(settingsWidget)->getMaxDots();
+        static_cast<GameScreenWidget*>(gameScreenWidget)->setMaxDots(maxDots);
 
+        uint8_t maxBridges = static_cast<SettingsWidget*>(settingsWidget)->getMaxBridges();
+        static_cast<GameScreenWidget*>(gameScreenWidget)->setMaxBridges(maxBridges);
+    }
+}
+
+void MainWindow::switchToGameScreen() {
+    if (!isGameScreenConnected) {
+        gameScreenWidget = new GameScreenWidget();
+        stackedWidget->addWidget(gameScreenWidget);
         isGameScreenConnected = true;
+
+        // Back to Main Menu Button
+        connect(static_cast<GameScreenWidget*>(gameScreenWidget), &GameScreenWidget::on_backToMenuButton_clicked, this, &MainWindow::confirmLeaveGame);
+
+        updateGameSettings();
+
         stackedWidget->setCurrentWidget(gameScreenWidget);
     }
 }

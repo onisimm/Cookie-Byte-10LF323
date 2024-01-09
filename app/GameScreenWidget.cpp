@@ -1,6 +1,5 @@
 #include "GameScreenWidget.h"
 #include "ui_GameScreenWidget.h"
-#include "DotWidget.h"
 
 GameScreenWidget::GameScreenWidget(QWidget* parent) :
     QWidget(parent),
@@ -29,9 +28,20 @@ void GameScreenWidget::setGameboardSize(const uint8_t& size)
     gameBoard->setGameboardSize(size);
 }
 
-void GameScreenWidget::setGamemodeLabel(const QString& gamemode)
+void GameScreenWidget::setMaxDots(const uint8_t& maxDots)
+{
+    gameBoard->setMaxDots(maxDots);
+}
+
+void GameScreenWidget::setMaxBridges(const uint8_t& maxBridges)
+{
+    gameBoard->setMaxBridges(maxBridges);
+}
+
+void GameScreenWidget::setGamemode(const QString& gamemode)
 {
     ui->gamemodeLabel->setText("Gamemode: " + gamemode);
+    gameBoard->setGameMode(gamemode);
 }
 
 void GameScreenWidget::handleDotPressed(int row, int col, QColor color) {

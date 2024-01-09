@@ -37,4 +37,5 @@ private:
     bool isMenuScreenConnected = false;
 
     void deleteMenuWidgets();
+    void updateGameSettings();
 };

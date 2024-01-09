@@ -2,8 +2,7 @@
 
 #include"TwixtGame.h"
 
-#define BOARD_SIZE 24
-#define DOTS_NUMBER 50
+//de sters macro-uri
 
 void TwixtGame::GameTurns(Player& player, bool& isPlaying, Board& board)
 {
@@ -51,15 +50,15 @@ void TwixtGame::GameTurns(Player& player, bool& isPlaying, Board& board)
 		player.setRemainingDots(player.getRemainingDots() + 1);
 
 		std::cout << "REMAINING DOTS for " << player.getName() << ": " << player.getRemainingDots() << "\n";
-		ObjectInStack object = player.turn(board);
-		m_gameStack.AddInGameStack(object.getDot(), object.getType());
+		//auto [dot, type] = player.turn(board);
+		//m_gameStack.AddInGameStack(dot, type);
 		board.showBoard();
 		std::cout << "\n";
 	}
 	else if (answer == "DELETE")
 	{
 		std::cout << "Choose the first dot: ";
-		int i1, j1, i2, j2;
+		size_t i1, j1, i2, j2;
 		std::cin >> i1 >> j1;
 		std::cout << "Choose the second dot: ";
 		std::cin >> i2 >> j2;
@@ -70,15 +69,15 @@ void TwixtGame::GameTurns(Player& player, bool& isPlaying, Board& board)
 	else if (answer == "DELETEALL")
 	{
 		std::cout << "Choose the dot: ";
-		int i, j;
+		size_t i, j;
 		std::cin >> i >> j;
 		board.getDot(i, j)->deleteAllBridgesForADot();
 	}
 	else if (answer == "SAVE")
-	{
-		saveGame.saveMatrix(board.getMatrix());
-		saveGame.saveStack(m_gameStack);
-	}
+		{
+			saveGame.saveMatrix(board.getMatrix());
+			saveGame.saveStack(m_gameStack);
+		}
 	else if (answer == "ADDBRIDGE")
 	{
 		std::cout << "Enter the position of the first dot: ";
@@ -108,12 +107,12 @@ void TwixtGame::GameTurns(Player& player, bool& isPlaying, Board& board)
 		isPlaying = false;
 		return;
 	}
-	//nu se adauga automat bridge-uri
+		//nu se adauga automat bridge-uri
 	std::cout << "Do you want to undo the move? ";
 	std::cin >> answer;
-	while (answer != "no")
+	while (answer!="no")
 	{
-
+		
 
 		for (auto& c : answer)
 		{
@@ -129,12 +128,37 @@ void TwixtGame::GameTurns(Player& player, bool& isPlaying, Board& board)
 		std::cout << "\nDo you want to undo the move? ";
 		std::cin >> answer;
 	}
-
+	
 }
 
 bool TwixtGame::IsTie(Player player1, Player player2)
 {
 	return !player1.hasRemainingDots() && !player2.hasRemainingDots();
+}
+
+void TwixtGame::setGameMode(const QString& gamemode)
+{
+	if (gamemode == "Mines")
+		m_gameMode = GameModeType::Mines;
+	else if (gamemode == "Bulldozer")
+		m_gameMode = GameModeType::Bulldozer;
+	else
+		m_gameMode = GameModeType::Default;
+}
+
+void TwixtGame::setMaxDots(const uint8_t& maxDots)
+{
+	m_maxDots = maxDots;
+}
+
+void TwixtGame::setMaxBridges(const uint8_t& maxBridges)
+{
+	m_maxBridges = maxBridges;
+}
+
+void TwixtGame::setGameBoardSize(const uint8_t& size)
+{
+	m_gameBoardSize = size;
 }
 
 //void TwixtGame::ResetGame()
@@ -149,75 +173,6 @@ bool TwixtGame::IsTie(Player player1, Player player2)
 //	std::cout << "The game has been reset.\n";
 //	GameLoop(board, player1, player2);
 //}
-
-void TwixtGame::Run()
-{
-	Board board(BOARD_SIZE);
-
-	Player player1("player1", Player::Color::Red, DOTS_NUMBER);
-	Player player2("player2", Player::Color::Black, DOTS_NUMBER);
-
-	std::cout << "Choose your game mode:\n1->DEFAULT\n2->BULLDOZER\n3->MINES.\n\n";
-	int mode;
-	std::cin >> mode;
-	//GameStack gameStack;
-	std::cout << "add - add dot\ndelete - delete a bridge\ndeleteall - delete existing bridges for a dot\naddbridge - add a bridge between two existing dots\n\n";
-	switch (mode)
-	{
-	case 1:
-		m_gameStack = GameStack(0);
-		m_gameMode = GameMode::Default;
-		//GameLoop(board, player1, player2);
-		break;
-	case 3:
-		m_gameStack = GameStack(2);
-		m_gameMode = GameMode::Mines;
-		for (int i = 0; i < 3; i++)
-		{
-			board.placeRandomMine();
-		}
-		//board.placeMine(board.copieI, board.copieJ + 1);
-		//GameLoop(board, player1, player2);
-		break;
-	case 2:
-		m_gameStack = GameStack(1);
-		m_gameMode = GameMode::Bulldozer;
-		Bulldozer bulldozer(&board);
-		//GameLoop(board, player1, player2, bulldozer);
-		break;
-	}
-}
-
-void TwixtGame::setGameMode(const QString& gamemode)
-{
-	if (gamemode == "Default") {
-		this->m_gameMode = GameMode::Default;
-	}
-	else if (gamemode == "Bulldozer") {
-		this->m_gameMode = GameMode::Bulldozer;
-	}
-	else if (gamemode == "Mines") {
-		this->m_gameMode = GameMode::Mines;
-	}
-	else {
-		this->m_gameMode = GameMode::Default; // or throw an exception
-	}
-}
-
-void TwixtGame::setMaxDots(const uint8_t& maxDots)
-{
-	this->maxDots = maxDots;
-}
-
-void TwixtGame::setMaxBridges(const uint8_t& maxBridges)
-{
-	this->maxBridges = maxBridges;
-}
-
-void TwixtGame::setGameBoardSize(const uint8_t& size)
-{
-	this->gameBoardSize = size;
-}
 
 GameStack TwixtGame::getGameStack() const
 {

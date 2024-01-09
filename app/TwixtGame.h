@@ -1,6 +1,7 @@
 #pragma once
-#include"Dot.h"
-#include"Player.h"
+
+#include "Dot.h"
+#include "Player.h"
 #include "Bulldozer.h"
 #include "GameStack.h"
 #include "Undo.h"
@@ -8,12 +9,14 @@
 #include "Minimax.h"
 #include <iostream>
 #include <QString>
+#include <cstdint>
+
 using namespace twixt;
 
 class TwixtGame
 {
 public:
-	enum class GameMode {
+	enum class GameModeType {
 		Default,
 		Bulldozer,
 		Mines
@@ -22,7 +25,6 @@ public:
 	void GameTurns(Player& player, bool& isPlaying, Board& board);
 	bool IsTie(Player player1, Player player2);
 	void ResetGame();
-	void Run();
 
 	void setGameMode(const QString& gamemode);
 	void setMaxDots(const uint8_t& maxDots);
@@ -31,13 +33,14 @@ public:
 
 	//getter
 	GameStack getGameStack() const;
+
 private:
-	GameMode m_gameMode;
+	GameModeType m_gameMode;
 	GameStack m_gameStack;
 	SaveGame saveGame;
 	bool blackPlayerStoleColor = false;
 
-	uint8_t gameBoardSize;
-	uint8_t maxDots;
-	uint8_t maxBridges;
+	uint8_t m_gameBoardSize;
+	uint8_t m_maxDots;
+	uint8_t m_maxBridges;
 };

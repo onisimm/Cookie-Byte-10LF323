@@ -26,7 +26,8 @@ namespace Ui {
         QLabel* timerLabel;
         QTimer* timer;
         QColor color;
-        int timeLimit;  // Time limit for the player in seconds
+        uint16_t timeLimit;  // Time limit for the player in seconds
+        uint16_t timeLeft;  // Time left for the player in seconds
 
         twixt::Player* backendPlayer; // Pointer to the backend Player object
     };
@@ -49,11 +50,15 @@ public:
 signals:
     void on_backToMenuButton_clicked();
 
+public slots:
+    void switchPlayer();
+
 private:
     Ui::GameScreenWidget* ui;
     GameBoardWidget* gameBoard; // The game board UI
     TwixtGame* game; // The game logic
     Ui::UIPlayer player1UI, player2UI;
+    QFont initialPlayerFont;
     uint8_t currentPlayer : 4; // 1 = player 1, 2 = player 2
     uint8_t maxDots;
     uint8_t maxBridges;
@@ -62,9 +67,6 @@ private:
     void setupConnections();
 
     void applyGameSettings(const Ui::GameSettings& settings);
-    void resetPlayerUI(Ui::UIPlayer& player);
-    void updateUI();
+    void updateUIBasedOnPlayerTurn();
     void updateTimer(Ui::UIPlayer& player);
-
-    void switchPlayer();
 };

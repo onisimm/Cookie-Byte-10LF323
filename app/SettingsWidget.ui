@@ -277,7 +277,7 @@
         </sizepolicy>
        </property>
        <property name="maxLength">
-        <number>15</number>
+        <number>10</number>
        </property>
        <property name="placeholderText">
         <string>Player1</string>
@@ -309,7 +309,7 @@
         </sizepolicy>
        </property>
        <property name="maxLength">
-        <number>15</number>
+        <number>10</number>
        </property>
        <property name="placeholderText">
         <string>Player2</string>

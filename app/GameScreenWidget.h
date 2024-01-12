@@ -63,7 +63,11 @@ private:
     uint8_t maxDots;
     uint8_t maxBridges;
 
-    bool madeAMove = false; // Used to check if a move was made in the current turn
+    // Used to check if the Switch Player button is available
+    // The button isn't available if:
+    //  1. The current player hasn't placed a dot yet
+    //  2. The current player is in the middle of placing a bridge
+    bool ableToSwitchPlayer = false;
 
     void setupUIPlayers(const Ui::GameSettings& settings);
     void setupConnections();

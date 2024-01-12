@@ -113,7 +113,7 @@ void GameScreenWidget::updateUIBasedOnPlayerTurn() {
     activePlayer.timer->start();
     inactivePlayer.timer->stop();
 
-    madeAMove = false;
+    ableToSwitchPlayer = false;
 }
 
 void GameScreenWidget::updateTimer(Ui::UIPlayer& player) {
@@ -131,12 +131,15 @@ void GameScreenWidget::updateTimer(Ui::UIPlayer& player) {
 
 void GameScreenWidget::handleDotPressed(int row, int col) {
     gameBoard->setDotColor(row, col, Qt::red);
-    madeAMove = true;
+    ableToSwitchPlayer = true;
 }
 
 void GameScreenWidget::switchPlayer() {
-    if (madeAMove) {
+    if (ableToSwitchPlayer) {
         currentPlayer = (currentPlayer == 1) ? 2 : 1;
         updateUIBasedOnPlayerTurn();
+    }
+    else {
+        ui->gameMessageLabel->setText("Unable to switch the player.");
     }
 }

@@ -75,4 +75,7 @@ private:
     void applyGameSettings(const Ui::GameSettings& settings);
     void updateUIBasedOnPlayerTurn();
     void updateTimer(Ui::UIPlayer& player);
+
+    bool isGameOver = false;
+    void endGame();
 };

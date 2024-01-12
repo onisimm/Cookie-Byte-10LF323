@@ -125,21 +125,44 @@ void GameScreenWidget::updateTimer(Ui::UIPlayer& player) {
     }
     else {
         player.timer->stop();
-        // TODO: Handle time up situation
+        endGame();
     }
 }
 
+void GameScreenWidget::endGame()
+{
+    // TODO check if there is a winner based on a full path of bridges
+    // TODO check if there is a tie
+
+    // check if there is a player with no more time left
+    if (player1UI.timeLeft == 0) {
+        ui->gameMessageLabel->setText(player1UI.nameLabel->text() + " ran out of time. " 
+            + player2UI.nameLabel->text() + " wins!");
+        isGameOver = true;
+    }
+    else if (player2UI.timeLeft == 0) {
+        ui->gameMessageLabel->setText(player2UI.nameLabel->text() + " ran out of time. "
+            + player1UI.nameLabel->text() + " wins!");
+        isGameOver = true;
+	}
+}
+
 void GameScreenWidget::handleDotPressed(int row, int col) {
-    gameBoard->setDotColor(row, col, Qt::red);
-    ableToSwitchPlayer = true;
+    if (!isGameOver) {
+        gameBoard->setDotColor(row, col, Qt::red);
+        ableToSwitchPlayer = true;
+    }
 }
 
 void GameScreenWidget::switchPlayer() {
-    if (ableToSwitchPlayer) {
+    if (ableToSwitchPlayer && !isGameOver) {
         currentPlayer = (currentPlayer == 1) ? 2 : 1;
         updateUIBasedOnPlayerTurn();
     }
     else {
-        ui->gameMessageLabel->setText("Unable to switch the player.");
+        if (isGameOver)
+			ui->gameMessageLabel->setText("The game is over. Please return to the main menu.");
+		else if (!ableToSwitchPlayer)
+            ui->gameMessageLabel->setText("Unable to switch the player.");
     }
 }

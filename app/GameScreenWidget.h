@@ -63,6 +63,8 @@ private:
     uint8_t maxDots;
     uint8_t maxBridges;
 
+    bool madeAMove = false; // Used to check if a move was made in the current turn
+
     void setupUIPlayers(const Ui::GameSettings& settings);
     void setupConnections();
 

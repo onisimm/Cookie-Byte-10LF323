@@ -10,41 +10,26 @@
 namespace twixt {
 	class Player {
 	public:
-		//enum
-		enum class Color : uint8_t {
-			Red,
-			Black,
-			NoColor
-		};
+		Player(uint8_t remainingDots, uint8_t remainingBridges);
+		Player(const Player& other);
+		Player(Player&& other) noexcept;
 
-		// Constructors
-		Player() {};
-		Player(std::string name, Color color, int remainingDots);
-		Player(const Player& other);//copy constructor
-		Player(Player&& other) noexcept; // move constructor
-
-		// Destructor
 		~Player();
 
-		// Getters
-		std::string getName() const;
-		Color getColor() const;
-		int getRemainingDots() const;
+		uint8_t getRemainingDots() const;
+		uint8_t getRemainingBridges() const;
 
-		// Setters
-		void setName(std::string);
-		void setColor(Color);
-		void setRemainingDots(int);
+		void setRemainingDots(uint8_t);
+		void setRemainingBridges(uint8_t);
 
-		ObjectInStack turn(Board& board);
 		bool hasRemainingDots();
+		bool hasRemainingBridges();
 
-		friend std::istream& operator>>(std::istream& in, Player& player);
+		void addDot(Dot* dot);
 
 	private:
-		std::string m_name;
-		Color m_color;
 		std::stack<Dot*> existingDots;
-		int m_remainingDots;
+		uint8_t m_remainingDots;
+		uint8_t m_remainingBridges;
 	};
 }

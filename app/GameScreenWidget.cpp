@@ -67,12 +67,14 @@ void GameScreenWidget::setupUIPlayers(const Ui::GameSettings& settings) {
 
             connect(playerUI.timer, &QTimer::timeout, this, [this, &playerUI]() { updateTimer(playerUI); });
 
-            // TODO create a Player object and set the backendPlayer pointer to it, and initialize the Player object
+            playerUI.backendPlayer = new twixt::Player(maxDots, maxBridges);
         };
 
     setupPlayer(player1UI, ui->player1NameLabel, ui->player1TimerLabel, settings.player1Name, settings.timeLimit, Qt::red);
+    game->setPlayer1(player1UI.backendPlayer);
 
     setupPlayer(player2UI, ui->player2NameLabel, ui->player2TimerLabel, settings.player2Name, settings.timeLimit, Qt::black);
+    game->setPlayer2(player2UI.backendPlayer);
 
     initialPlayerFont = player1UI.nameLabel->font();
 }
@@ -87,6 +89,7 @@ void GameScreenWidget::applyGameSettings(const Ui::GameSettings& settings) {
     setGamemode(settings.gamemode);
 
     gameBoard->buildBoard();
+    game->initializeGame();
 }
 
 void GameScreenWidget::setupConnections()
@@ -151,8 +154,10 @@ void GameScreenWidget::endGame()
 
 void GameScreenWidget::handleDotPressed(int row, int col) {
     if (!isGameOver) {
-        gameBoard->setDotColor(row, col, Qt::red);
+        Ui::UIPlayer& activePlayer = (currentPlayer == 1) ? player1UI : player2UI; // current player's turn
+        gameBoard->setDotColor(row, col, activePlayer.color);
         ableToSwitchPlayer = true;
+        // after the first dot, make available  the possibility to build bridges
     }
 }
 

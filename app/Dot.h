@@ -1,10 +1,9 @@
 #pragma once
 
 #include <cstdint>
-#include <vector>
 #include <iostream>
 #include <unordered_set>
-
+#include <vector>
 
 namespace twixt {
     class Mine;

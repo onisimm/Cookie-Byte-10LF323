@@ -16,7 +16,7 @@
   <widget class="QLabel" name="gamemodeLabel">
    <property name="geometry">
     <rect>
-     <x>40</x>
+     <x>30</x>
      <y>0</y>
      <width>251</width>
      <height>81</height>
@@ -49,20 +49,20 @@
    <property name="geometry">
     <rect>
      <x>220</x>
-     <y>150</y>
+     <y>180</y>
      <width>481</width>
      <height>411</height>
     </rect>
    </property>
    <layout class="QGridLayout" name="mainLayout"/>
   </widget>
-  <widget class="QLabel" name="playerTurnLabel">
+  <widget class="QLabel" name="player1NameLabel">
    <property name="geometry">
     <rect>
-     <x>250</x>
-     <y>80</y>
-     <width>421</width>
-     <height>81</height>
+     <x>220</x>
+     <y>70</y>
+     <width>151</width>
+     <height>31</height>
     </rect>
    </property>
    <property name="font">
@@ -75,10 +75,126 @@
     <bool>false</bool>
    </property>
    <property name="text">
-    <string>Who's turn</string>
+    <string>Player1</string>
    </property>
    <property name="scaledContents">
     <bool>false</bool>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="player1TimerLabel">
+   <property name="geometry">
+    <rect>
+     <x>220</x>
+     <y>110</y>
+     <width>151</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Comic Sans MS</family>
+     <pointsize>10</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>Player1Timer</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="player2TimerLabel">
+   <property name="geometry">
+    <rect>
+     <x>530</x>
+     <y>110</y>
+     <width>151</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Comic Sans MS</family>
+     <pointsize>10</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>Player2Timer</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="player2NameLabel">
+   <property name="geometry">
+    <rect>
+     <x>530</x>
+     <y>70</y>
+     <width>151</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Comic Sans MS</family>
+     <pointsize>12</pointsize>
+    </font>
+   </property>
+   <property name="autoFillBackground">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Player2</string>
+   </property>
+   <property name="scaledContents">
+    <bool>false</bool>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="switchTurnButton">
+   <property name="geometry">
+    <rect>
+     <x>400</x>
+     <y>90</y>
+     <width>91</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Switch Turn</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="gameMessageLabel">
+   <property name="geometry">
+    <rect>
+     <x>310</x>
+     <y>130</y>
+     <width>291</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Comic Sans MS</family>
+     <pointsize>12</pointsize>
+    </font>
+   </property>
+   <property name="autoFillBackground">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="scaledContents">
+    <bool>false</bool>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
    </property>
   </widget>
  </widget>

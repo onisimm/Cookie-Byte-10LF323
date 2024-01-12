@@ -1,5 +1,5 @@
-#include "GameBoardWidget.h"
 #include "DotWidget.h"
+#include "GameBoardWidget.h"
 #include <QGridLayout>
 #include <QPainter>
 #include <QRect>
@@ -17,6 +17,10 @@ void GameBoardWidget::buildBoard()
     int marginVertical = 5;
     layout->setContentsMargins(marginHorizontal, marginVertical, marginHorizontal, marginVertical);
 
+    if (gameboardSize == -1) {
+        gameboardSize = 24; // Default gameboard size: 24x24
+	}
+
     for (int row = 0; row < gameboardSize; ++row) {
         for (int col = 0; col < gameboardSize; ++col) {
             // Place dots everywhere except the corners of the matrix
@@ -25,41 +29,16 @@ void GameBoardWidget::buildBoard()
                 DotWidget* dot = new DotWidget(this);
                 layout->addWidget(dot, row, col);
                 connect(dot, &DotWidget::pressedChanged, this, [this, row, col]() {
-                    QColor color = isPlayer1CurrentPlayer ? Qt::red : Qt::black;
-                    emit dotPressed(row, col, color);
+                    emit dotPressed(row, col);
                 });
             }
         }
     }
-
-    game = new TwixtGame();
-}
-
-void GameBoardWidget::setGameMode(const QString& gamemode)
-{
-    this->game->setGameMode(gamemode);
 }
 
 void GameBoardWidget::setGameboardSize(const uint8_t& size)
 {
     this->gameboardSize = size;
-    buildBoard();
-    this->game->setGameBoardSize(size);
-}
-
-void GameBoardWidget::setMaxDots(const uint8_t& maxDots)
-{
-    this->game->setMaxDots(maxDots);
-}
-
-void GameBoardWidget::setMaxBridges(const uint8_t& maxBridges)
-{
-    this->game->setMaxBridges(maxBridges);
-}
-
-void GameBoardWidget::setCurrentPlayer(const bool& turn)
-{
-    isPlayer1CurrentPlayer = turn;
 }
 
 void GameBoardWidget::setDotColor(int row, int col, const QColor& color)

@@ -1,7 +1,6 @@
-// DotWidget.cpp
 #include "DotWidget.h"
-#include <QPainter>
 #include <QMouseEvent>
+#include <QPainter>
 
 DotWidget::DotWidget(QWidget* parent)
     : QWidget(parent), currentColor(Qt::lightGray), pressed(false) {

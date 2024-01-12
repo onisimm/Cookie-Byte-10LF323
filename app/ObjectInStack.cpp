@@ -8,7 +8,6 @@ ObjectInStack& ObjectInStack::operator=(const ObjectInStack & newObject)
 	m_dot = newObject.m_dot;
 	m_type = newObject.m_type;
 	return *this;
-	// TODO: insert return statement here
 }
 
 Dot* ObjectInStack::getDot() const

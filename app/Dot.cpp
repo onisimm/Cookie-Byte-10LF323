@@ -1,4 +1,3 @@
-//dot.cpp
 #include "Dot.h"
 #include <iostream>
 

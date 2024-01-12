@@ -38,3 +38,8 @@ uint8_t SettingsWidget::getMaxBridges() const
 {
     return ui.maxBridges->value();
 }
+
+uint16_t SettingsWidget::getTimeLimit() const
+{
+    return ui.timeLimit->value();
+}

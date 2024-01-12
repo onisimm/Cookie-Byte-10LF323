@@ -30,6 +30,38 @@
      <property name="spacing">
       <number>6</number>
      </property>
+     <item row="10" column="1">
+      <widget class="QLabel" name="gameboardSizeLabel">
+       <property name="font">
+        <font>
+         <family>Comic Sans MS</family>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Gameboard size</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="1">
+      <widget class="QLabel" name="timeLimitLabel">
+       <property name="font">
+        <font>
+         <family>Comic Sans MS</family>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Time limit for each player</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+       </property>
+      </widget>
+     </item>
      <item row="10" column="2">
       <widget class="QSpinBox" name="gameboardSize">
        <property name="alignment">
@@ -46,19 +78,19 @@
        </property>
       </widget>
      </item>
-     <item row="0" column="2">
-      <widget class="QSpinBox" name="timerInSeconds">
+     <item row="11" column="1">
+      <widget class="QLabel" name="maxDotsLabel">
+       <property name="font">
+        <font>
+         <family>Comic Sans MS</family>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Maximum dots (pins) per player</string>
+       </property>
        <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-       <property name="minimum">
-        <number>30</number>
-       </property>
-       <property name="maximum">
-        <number>1200</number>
-       </property>
-       <property name="value">
-        <number>180</number>
+        <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
        </property>
       </widget>
      </item>
@@ -78,22 +110,6 @@
        </property>
       </widget>
      </item>
-     <item row="12" column="1">
-      <widget class="QLabel" name="maxBridgesLabel">
-       <property name="font">
-        <font>
-         <family>Comic Sans MS</family>
-         <pointsize>10</pointsize>
-        </font>
-       </property>
-       <property name="text">
-        <string>Maximum bridges per player</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-       </property>
-      </widget>
-     </item>
      <item row="7" column="1">
       <widget class="QLabel" name="gamemodeLabel">
        <property name="font">
@@ -104,54 +120,6 @@
        </property>
        <property name="text">
         <string>Gamemode</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-       </property>
-      </widget>
-     </item>
-     <item row="12" column="2">
-      <widget class="QSpinBox" name="maxBridges">
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-       <property name="minimum">
-        <number>35</number>
-       </property>
-       <property name="maximum">
-        <number>100</number>
-       </property>
-       <property name="value">
-        <number>50</number>
-       </property>
-      </widget>
-     </item>
-     <item row="10" column="1">
-      <widget class="QLabel" name="gameboardSizeLabel">
-       <property name="font">
-        <font>
-         <family>Comic Sans MS</family>
-         <pointsize>10</pointsize>
-        </font>
-       </property>
-       <property name="text">
-        <string>Gameboard size</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-       </property>
-      </widget>
-     </item>
-     <item row="11" column="1">
-      <widget class="QLabel" name="maxDotsLabel">
-       <property name="font">
-        <font>
-         <family>Comic Sans MS</family>
-         <pointsize>10</pointsize>
-        </font>
-       </property>
-       <property name="text">
-        <string>Maximum dots (pins) per player</string>
        </property>
        <property name="alignment">
         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -174,6 +142,54 @@
        </property>
       </spacer>
      </item>
+     <item row="12" column="1">
+      <widget class="QLabel" name="maxBridgesLabel">
+       <property name="font">
+        <font>
+         <family>Comic Sans MS</family>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Maximum bridges per player</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="2">
+      <widget class="QSpinBox" name="timeLimit">
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+       <property name="minimum">
+        <number>30</number>
+       </property>
+       <property name="maximum">
+        <number>1200</number>
+       </property>
+       <property name="value">
+        <number>180</number>
+       </property>
+      </widget>
+     </item>
+     <item row="12" column="2">
+      <widget class="QSpinBox" name="maxBridges">
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+       <property name="minimum">
+        <number>35</number>
+       </property>
+       <property name="maximum">
+        <number>100</number>
+       </property>
+       <property name="value">
+        <number>50</number>
+       </property>
+      </widget>
+     </item>
      <item row="7" column="2">
       <widget class="QComboBox" name="gamemodeOption">
        <item>
@@ -191,22 +207,6 @@
          <string>Mines</string>
         </property>
        </item>
-      </widget>
-     </item>
-     <item row="0" column="1">
-      <widget class="QLabel" name="timerInSecondsLabel">
-       <property name="font">
-        <font>
-         <family>Comic Sans MS</family>
-         <pointsize>10</pointsize>
-        </font>
-       </property>
-       <property name="text">
-        <string>Timer for each player (sec)</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-       </property>
       </widget>
      </item>
     </layout>
@@ -277,7 +277,7 @@
         </sizepolicy>
        </property>
        <property name="maxLength">
-        <number>40</number>
+        <number>15</number>
        </property>
        <property name="placeholderText">
         <string>Player1</string>
@@ -309,7 +309,7 @@
         </sizepolicy>
        </property>
        <property name="maxLength">
-        <number>30</number>
+        <number>15</number>
        </property>
        <property name="placeholderText">
         <string>Player2</string>
@@ -350,6 +350,28 @@
      </item>
     </layout>
    </widget>
+   <widget class="QLabel" name="timeLimitLabel_2">
+    <property name="geometry">
+     <rect>
+      <x>660</x>
+      <y>130</y>
+      <width>161</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Comic Sans MS</family>
+      <pointsize>7</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>in seconds</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
@@ -375,7 +397,7 @@
  <tabstops>
   <tabstop>player1Nickname</tabstop>
   <tabstop>player2Nickname</tabstop>
-  <tabstop>timerInSeconds</tabstop>
+  <tabstop>timeLimit</tabstop>
   <tabstop>gamemodeOption</tabstop>
   <tabstop>gameboardSize</tabstop>
   <tabstop>maxDots</tabstop>

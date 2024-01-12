@@ -1,6 +1,6 @@
 #pragma once
 
-#include"Board.h"
+#include "Board.h"
 #include <random>
 #include <stack>
 

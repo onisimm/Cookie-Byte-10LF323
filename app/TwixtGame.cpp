@@ -2,7 +2,7 @@
 
 #include"TwixtGame.h"
 
-//de sters macro-uri
+//TODO: de sters macro-uri
 
 void TwixtGame::GameTurns(Player& player, bool& isPlaying, Board& board)
 {
@@ -138,27 +138,27 @@ bool TwixtGame::IsTie(Player player1, Player player2)
 
 void TwixtGame::setGameMode(const QString& gamemode)
 {
-	if (gamemode == "Mines")
+	/*if (gamemode == "Mines")
 		m_gameMode = GameModeType::Mines;
 	else if (gamemode == "Bulldozer")
 		m_gameMode = GameModeType::Bulldozer;
 	else
-		m_gameMode = GameModeType::Default;
+		m_gameMode = GameModeType::Default;*/
 }
 
 void TwixtGame::setMaxDots(const uint8_t& maxDots)
 {
-	m_maxDots = maxDots;
+	this->m_maxDots = maxDots;
 }
 
 void TwixtGame::setMaxBridges(const uint8_t& maxBridges)
 {
-	m_maxBridges = maxBridges;
+	this->m_maxBridges = maxBridges;
 }
 
 void TwixtGame::setGameBoardSize(const uint8_t& size)
 {
-	m_gameBoardSize = size;
+	//this->m_gameBoardSize = size;
 }
 
 //void TwixtGame::ResetGame()

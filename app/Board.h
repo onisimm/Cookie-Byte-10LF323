@@ -1,8 +1,9 @@
 #pragma once
-#include <vector>
-#include <iostream>
+
 #include "Dot.h"
+#include <iostream>
 #include <random>
+#include <vector>
 
 namespace twixt {
 	class Board {

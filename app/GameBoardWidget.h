@@ -1,8 +1,7 @@
 #pragma once
 
-#include <QWidget>
 #include <QGridLayout>
-#include "TwixtGame.h"
+#include <QWidget>
 
 class GameBoardWidget : public QWidget {
     Q_OBJECT
@@ -10,24 +9,17 @@ class GameBoardWidget : public QWidget {
 public:
     explicit GameBoardWidget(QWidget* parent = nullptr);
 
-    void setGameMode(const QString& gamemode);
     void setGameboardSize(const uint8_t& size);
-    void setMaxDots(const uint8_t& maxDots);
-    void setMaxBridges(const uint8_t& maxBridges);
-    void setCurrentPlayer(const bool& turn);
     void setDotColor(int row, int col, const QColor& color);
+    void buildBoard();
 
 signals:
-    void dotPressed(int row, int col, QColor color);
+    void dotPressed(int row, int col);
 
 protected:
     void paintEvent(QPaintEvent* event) override;
 
 private:
     QGridLayout* layout; // The dots layout (the board UI)
-    TwixtGame* game;
-    uint8_t gameboardSize;
-
-    bool isPlayer1CurrentPlayer;
-    void buildBoard();
+    uint8_t gameboardSize = -1; // Value -1 means the gameboard size has not been initialized yet
 };

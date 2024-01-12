@@ -1,15 +1,15 @@
 #pragma once
 
-#include "Dot.h"
-#include "Player.h"
 #include "Bulldozer.h"
+#include "Dot.h"
 #include "GameStack.h"
-#include "Undo.h"
-#include "SaveGame.h"
 #include "Minimax.h"
+#include "Player.h"
+#include "SaveGame.h"
+#include "Undo.h"
+#include <cstdint>
 #include <iostream>
 #include <QString>
-#include <cstdint>
 
 using namespace twixt;
 

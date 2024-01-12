@@ -1,6 +1,8 @@
 #pragma once
+
 #include "Board.h"
 #include "GameStack.h"
+
 using namespace twixt;
 
 class SaveGame

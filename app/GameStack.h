@@ -1,8 +1,9 @@
 #pragma once
 
-#include <iostream>
 #include "Dot.h"
-#include<stack>
+#include <iostream>
+#include <stack>
+
 using namespace twixt;
 #define DELETEBRIDGE 5
 

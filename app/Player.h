@@ -1,11 +1,11 @@
 #pragma once
 
-#include <cstdint>
-#include <iostream>
-#include <stack>
 #include "Board.h"
 #include "Dot.h"
 #include "ObjectInStack.h"
+#include <cstdint>
+#include <iostream>
+#include <stack>
 
 namespace twixt {
 	class Player {
@@ -48,4 +48,3 @@ namespace twixt {
 		int m_remainingDots;
 	};
 }
-

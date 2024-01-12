@@ -66,6 +66,8 @@ void GameScreenWidget::setupUIPlayers(const Ui::GameSettings& settings) {
             playerUI.timerLabel->setPalette(palette);
 
             connect(playerUI.timer, &QTimer::timeout, this, [this, &playerUI]() { updateTimer(playerUI); });
+
+            // TODO create a Player object and set the backendPlayer pointer to it, and initialize the Player object
         };
 
     setupPlayer(player1UI, ui->player1NameLabel, ui->player1TimerLabel, settings.player1Name, settings.timeLimit, Qt::red);

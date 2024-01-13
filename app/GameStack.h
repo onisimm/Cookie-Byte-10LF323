@@ -10,11 +10,11 @@ using namespace twixt;
 class GameStack
 {
 private:
-	std::stack<std::pair<Dot*,uint8_t>> m_stack;
+	std::stack<std::pair<Dot*, uint8_t>> m_stack;
 	uint8_t m_mode;
 	std::stack<Dot*> m_deletedBridgesDotStack;
 public:
-	GameStack(){}
+	GameStack() = default;
 	GameStack(uint8_t mode);
 
 	//getter

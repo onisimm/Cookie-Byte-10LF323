@@ -1,6 +1,6 @@
 #include "GameStack.h"
 
-GameStack::GameStack(uint8_t mode): m_mode{mode}
+GameStack::GameStack(uint8_t mode) : m_mode{ mode }
 {}
 
 std::stack<std::pair<Dot*, uint8_t>> GameStack::GetGameStack() const

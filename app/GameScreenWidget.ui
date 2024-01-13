@@ -60,15 +60,15 @@
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>290</y>
+     <y>250</y>
      <width>201</width>
-     <height>31</height>
+     <height>41</height>
     </rect>
    </property>
    <property name="font">
     <font>
      <family>Comic Sans MS</family>
-     <pointsize>12</pointsize>
+     <pointsize>16</pointsize>
     </font>
    </property>
    <property name="autoFillBackground">
@@ -88,7 +88,7 @@
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>320</y>
+     <y>290</y>
      <width>201</width>
      <height>31</height>
     </rect>
@@ -96,7 +96,7 @@
    <property name="font">
     <font>
      <family>Comic Sans MS</family>
-     <pointsize>10</pointsize>
+     <pointsize>12</pointsize>
     </font>
    </property>
    <property name="text">
@@ -110,7 +110,7 @@
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>490</y>
+     <y>500</y>
      <width>201</width>
      <height>31</height>
     </rect>
@@ -118,7 +118,7 @@
    <property name="font">
     <font>
      <family>Comic Sans MS</family>
-     <pointsize>10</pointsize>
+     <pointsize>12</pointsize>
     </font>
    </property>
    <property name="text">
@@ -134,13 +134,13 @@
      <x>10</x>
      <y>460</y>
      <width>201</width>
-     <height>31</height>
+     <height>41</height>
     </rect>
    </property>
    <property name="font">
     <font>
      <family>Comic Sans MS</family>
-     <pointsize>12</pointsize>
+     <pointsize>16</pointsize>
     </font>
    </property>
    <property name="autoFillBackground">
@@ -160,7 +160,7 @@
    <property name="geometry">
     <rect>
      <x>230</x>
-     <y>90</y>
+     <y>80</y>
      <width>111</width>
      <height>41</height>
     </rect>
@@ -178,16 +178,16 @@
   <widget class="QLabel" name="gameMessageLabel">
    <property name="geometry">
     <rect>
-     <x>220</x>
-     <y>150</y>
-     <width>541</width>
-     <height>31</height>
+     <x>180</x>
+     <y>130</y>
+     <width>621</width>
+     <height>51</height>
     </rect>
    </property>
    <property name="font">
     <font>
      <family>Comic Sans MS</family>
-     <pointsize>10</pointsize>
+     <pointsize>13</pointsize>
     </font>
    </property>
    <property name="autoFillBackground">
@@ -202,6 +202,9 @@
    <property name="alignment">
     <set>Qt::AlignCenter</set>
    </property>
+   <property name="wordWrap">
+    <bool>true</bool>
+   </property>
   </widget>
   <widget class="QLabel" name="player1RemainingDotsLabel">
    <property name="geometry">
@@ -215,7 +218,7 @@
    <property name="font">
     <font>
      <family>Comic Sans MS</family>
-     <pointsize>10</pointsize>
+     <pointsize>12</pointsize>
     </font>
    </property>
    <property name="text">
@@ -237,7 +240,7 @@
    <property name="font">
     <font>
      <family>Comic Sans MS</family>
-     <pointsize>10</pointsize>
+     <pointsize>12</pointsize>
     </font>
    </property>
    <property name="text">
@@ -251,7 +254,7 @@
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>520</y>
+     <y>540</y>
      <width>201</width>
      <height>31</height>
     </rect>
@@ -259,7 +262,7 @@
    <property name="font">
     <font>
      <family>Comic Sans MS</family>
-     <pointsize>10</pointsize>
+     <pointsize>12</pointsize>
     </font>
    </property>
    <property name="text">
@@ -273,7 +276,7 @@
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>540</y>
+     <y>560</y>
      <width>201</width>
      <height>41</height>
     </rect>
@@ -281,7 +284,7 @@
    <property name="font">
     <font>
      <family>Comic Sans MS</family>
-     <pointsize>10</pointsize>
+     <pointsize>12</pointsize>
     </font>
    </property>
    <property name="text">
@@ -295,7 +298,7 @@
    <property name="geometry">
     <rect>
      <x>630</x>
-     <y>90</y>
+     <y>80</y>
      <width>111</width>
      <height>41</height>
     </rect>
@@ -314,7 +317,7 @@
    <property name="geometry">
     <rect>
      <x>430</x>
-     <y>90</y>
+     <y>80</y>
      <width>111</width>
      <height>41</height>
     </rect>

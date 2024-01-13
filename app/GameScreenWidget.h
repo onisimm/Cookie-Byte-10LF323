@@ -65,7 +65,12 @@ private:
     uint8_t maxDots;
     uint8_t maxBridges;
 
+    // when is true, bulldozer will move
+    bool bulldozerModeMoveCount = false;
+
+    // used for asking player2 if they want to switch the color
     bool firstTurn = true;
+
     // Used to check if the Switch Player button is available
     // The button isn't available if:
     //  1. The current player hasn't placed a dot yet
@@ -86,8 +91,7 @@ private:
     void checkWinningPath(const Ui::UIPlayer& player);
     void checkIsTie();
     void checkTimerIsOver();
+    void endGame();
 
     void updateGameBoardFromBackend();
-
-    // TODO: update gameBoard based on backendGame
 };

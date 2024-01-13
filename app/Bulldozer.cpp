@@ -80,11 +80,11 @@ twixt::Bulldozer& twixt::Bulldozer::operator=(const Bulldozer& Bulldozer)
 bool twixt::Bulldozer::flipCoin(Board& board)
 {
 	srand(time(NULL));
-	if (rand() % 2)
+	/*if (rand() % 2)
 	{
 		std::cout << "We flipped the coin and nothing will happen.\n";
 		return false;
-	}
+	}*/
 	//If it did not exist the function, we will destory a Dot
 	destoryRandomDot(board);
 	board.showBoard();

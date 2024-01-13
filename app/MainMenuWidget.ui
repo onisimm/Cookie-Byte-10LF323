@@ -18,8 +18,8 @@
     <rect>
      <x>310</x>
      <y>380</y>
-     <width>191</width>
-     <height>61</height>
+     <width>201</width>
+     <height>71</height>
     </rect>
    </property>
    <property name="sizePolicy">
@@ -31,7 +31,7 @@
    <property name="font">
     <font>
      <family>Comic Sans MS</family>
-     <pointsize>22</pointsize>
+     <pointsize>27</pointsize>
     </font>
    </property>
    <property name="text">
@@ -43,8 +43,8 @@
     <rect>
      <x>340</x>
      <y>280</y>
-     <width>131</width>
-     <height>41</height>
+     <width>141</width>
+     <height>51</height>
     </rect>
    </property>
    <property name="sizePolicy">
@@ -56,7 +56,7 @@
    <property name="font">
     <font>
      <family>Comic Sans MS</family>
-     <pointsize>16</pointsize>
+     <pointsize>18</pointsize>
     </font>
    </property>
    <property name="text">
@@ -69,13 +69,13 @@
      <x>0</x>
      <y>80</y>
      <width>801</width>
-     <height>44</height>
+     <height>81</height>
     </rect>
    </property>
    <property name="font">
     <font>
      <family>Comic Sans MS</family>
-     <pointsize>30</pointsize>
+     <pointsize>35</pointsize>
     </font>
    </property>
    <property name="text">

@@ -7,6 +7,7 @@ class DotWidget : public QWidget {
 
 public:
     explicit DotWidget(QWidget* parent = nullptr);
+    DotWidget(QWidget* parent, const uint8_t& size);
 
     void setColor(const QColor& color);
     QColor getColor() const;

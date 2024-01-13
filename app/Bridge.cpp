@@ -23,12 +23,23 @@ twixt::Bridge& twixt::Bridge::operator=(const Bridge& bridge)
 
 bool twixt::Bridge::operator==(const Bridge& bridge) const
 {
-	// TODO == regarding the direction of the bridge
-	if (m_firstPillar.GetPointer()->getCoordI() != bridge.getFirstPillar().GetPointer()->getCoordI())
-		return false;
-	if (m_secondPillar.GetPointer()->getCoordI() != bridge.getSecondPillar().GetPointer()->getCoordI())
-		return false;
-	return true;
+	// Check if the first pillars have the same coordinates
+	bool firstPillarMatch = m_firstPillar.GetPointer()->getCoordI() == bridge.getFirstPillar().GetPointer()->getCoordI()
+		&& m_firstPillar.GetPointer()->getCoordJ() == bridge.getFirstPillar().GetPointer()->getCoordJ();
+
+	// Check if the second pillars have the same coordinates
+	bool secondPillarMatch = m_secondPillar.GetPointer()->getCoordI() == bridge.getSecondPillar().GetPointer()->getCoordI()
+		&& m_secondPillar.GetPointer()->getCoordJ() == bridge.getSecondPillar().GetPointer()->getCoordJ();
+
+	// Check for matching pillars in reverse order
+	bool firstPillarMatchReverse = m_firstPillar.GetPointer()->getCoordI() == bridge.getSecondPillar().GetPointer()->getCoordI()
+		&& m_firstPillar.GetPointer()->getCoordJ() == bridge.getSecondPillar().GetPointer()->getCoordJ();
+
+	bool secondPillarMatchReverse = m_secondPillar.GetPointer()->getCoordI() == bridge.getFirstPillar().GetPointer()->getCoordI()
+		&& m_secondPillar.GetPointer()->getCoordJ() == bridge.getFirstPillar().GetPointer()->getCoordJ();
+
+	// Bridges are equal if both pillars match in order or in reverse order
+	return (firstPillarMatch && secondPillarMatch) || (firstPillarMatchReverse && secondPillarMatchReverse);
 }
 
 void twixt::Bridge::setPillars(std::unique_ptr<Peg> first, std::unique_ptr<Peg> second)

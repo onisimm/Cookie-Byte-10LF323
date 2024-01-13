@@ -23,7 +23,7 @@ void GameBoardWidget::buildBoard()
 
     for (int row = 0; row < gameboardSize; ++row) {
         for (int col = 0; col < gameboardSize; ++col) {
-            DotWidget* dot = new DotWidget(this);
+            DotWidget* dot = new DotWidget(this, (4000 / gameboardSize) / 15);
             layout->addWidget(dot, row, col);
             connect(dot, &DotWidget::pressedChanged, this, [this, row, col]() {
                 emit dotPressed(row, col);

@@ -96,7 +96,7 @@ void TwixtGame::initializeGame()
 
 	if (m_gameMode == GameModeType::Mines)
 	{
-		for (size_t i = 0; i < m_gameBoardSize / 4; i++)
+		for (size_t i = 0; i < m_gameBoardSize ; i++)
 		{
 			m_board->placeRandomMine();
 		}
@@ -140,6 +140,16 @@ uint8_t TwixtGame::ableToPlaceDot(uint8_t row, uint8_t col, Player* currentPlaye
 	{
 		if (m_board->getMatrix()[row][col]->getStatus() == Dot::Status::Empty)
 		{
+			if (currentPlayer->getPlayerType() == twixt::PlayerType::Player1) {
+				// player 1 can't place on the first column or the last column
+				if (col == 0 || col == m_gameBoardSize - 1)
+					return -1; // can't place dot on the first or last row
+			}
+			else {
+				// player 2 can't place on the first row or the last row
+				if (row == 0 || row == m_gameBoardSize - 1)
+					return -1;
+			}
 			return 0; // can place dot
 		}
 		else if (m_board->getMatrix()[row][col]->getStatus() == Dot::Status::Player1 ||

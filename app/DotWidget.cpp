@@ -7,6 +7,11 @@ DotWidget::DotWidget(QWidget* parent)
     setFixedSize(9, 9);  // Adjust size to be smaller
 }
 
+DotWidget::DotWidget(QWidget* parent, const uint8_t& size) : QWidget(parent), currentColor(Qt::lightGray)
+{
+	setFixedSize(size, size);
+}
+
 void DotWidget::mousePressEvent(QMouseEvent* event) {
     emit pressedChanged();
     QWidget::mousePressEvent(event);

@@ -120,14 +120,14 @@ void GameScreenWidget::updateUIBasedOnPlayerTurn() {
     
     QFont font = initialPlayerFont;
     font.setBold(true);
-    font.setPointSize(initialPlayerFont.pointSize() + 3);
+    font.setPointSize(initialPlayerFont.pointSize() + 4);
     activePlayer.nameLabel->setFont(font);
     font.setPointSize(initialPlayerFont.pointSize() + 1);
     activePlayer.timerLabel->setFont(font);
     
     font = initialPlayerFont;
     inactivePlayer.nameLabel->setFont(initialPlayerFont);
-    font.setPointSize(initialPlayerFont.pointSize() - 2); // the timer label is smaller than the name label with 2pt always
+    font.setPointSize(initialPlayerFont.pointSize() - 4); // the timer label is smaller than the name label with 2pt always
     inactivePlayer.timerLabel->setFont(initialPlayerFont);
 
     activePlayer.timer->start();
@@ -152,12 +152,18 @@ void GameScreenWidget::updateTimer(Ui::UIPlayer& player) {
     }
 }
 
+void GameScreenWidget::endGame() {
+    isGameOver = true;
+    player1UI.timer->stop();
+    player2UI.timer->stop();
+}
+
 void GameScreenWidget::checkWinningPath(const Ui::UIPlayer& player)
 {
     if (this->backendGame->checkPathWin(player.backendPlayer))
     {
         ui->gameMessageLabel->setText(player.nameLabel->text() + " wins by building a brigde from end to end!");
-        isGameOver = true;
+        endGame();
     }
 
     updateUIBasedOnPlayerTurn();
@@ -168,7 +174,7 @@ void GameScreenWidget::checkIsTie()
     if (this->backendGame->IsTie(*player1UI.backendPlayer, *player2UI.backendPlayer))
     {
         ui->gameMessageLabel->setText("It's a tie! No more options left.");
-        isGameOver = true;
+        endGame();
     }
     updateUIBasedOnPlayerTurn();
 }
@@ -178,13 +184,13 @@ void GameScreenWidget::checkTimerIsOver()
     if (player1UI.timeLeft == 0) {
         ui->gameMessageLabel->setText(player1UI.nameLabel->text() + " ran out of time. " 
             + player2UI.nameLabel->text() + " wins!");
-        isGameOver = true;
+        endGame();
         return;
     }
     else if (player2UI.timeLeft == 0) {
         ui->gameMessageLabel->setText(player2UI.nameLabel->text() + " ran out of time. "
             + player1UI.nameLabel->text() + " wins!");
-        isGameOver = true;
+        endGame();
         return;
 	}
 
@@ -226,13 +232,13 @@ void GameScreenWidget::updateGameBoardFromBackend()
 		gameBoard->drawBridge(firstPeg.first, firstPeg.second, secondPeg.first, secondPeg.second, bridgeOwner.color);
 	}
 
-    gameBoard->setDotColor(1, 1, Qt::green);
     this->gameBoard->update();
 
 }
 
 void GameScreenWidget::handleDotPressed(int row, int col) {
     if (!isGameOver) {
+        ui->gameMessageLabel->setText("");
         Ui::UIPlayer& activePlayer = (currentPlayer == 1) ? player1UI : player2UI; // current player's turn
 
         twixt::Dot::Status dotStatus = this->backendGame->getDotStatus(row, col);
@@ -286,9 +292,9 @@ void GameScreenWidget::handleDotPressed(int row, int col) {
             if (ableToPlaceDotResult == 0) {
                 gameBoard->setDotColor(row, col, activePlayer.color);
                 this->backendGame->placeDot(row, col, activePlayer.backendPlayer);
-                ui->gameMessageLabel->setText("");
                 ableToSwitchTurns = true;
                 ableToBuildBridges = true;
+                ui->gameMessageLabel->setText("Wanna build some bridges?? Just press on two of your pegs");
             }
             else if (ableToPlaceDotResult == 2) {
 				ui->gameMessageLabel->setText("Oh no, a mine was there! I've never seen such a big explosion!");
@@ -325,33 +331,50 @@ void GameScreenWidget::switchTurns() {
 
         ui->gameMessageLabel->setText("");
         updateUIBasedOnPlayerTurn();
+
+        if (bulldozerModeMoveCount == true && !firstTurn) {
+            this->backendGame->moveBulldozer();
+            bulldozerModeMoveCount = false;
+            updateGameBoardFromBackend();
+            updateUIBasedOnPlayerTurn();
+        }
+        else if (!firstTurn)
+            bulldozerModeMoveCount = true;
+
+        if (firstTurn) {
+            firstTurn = false;
+
+            QMessageBox::StandardButton reply;
+            reply = QMessageBox::question(this, "Confirm", "Do you want to steal " + player1UI.nameLabel->text() + "'s color?",
+                QMessageBox::Yes | QMessageBox::No);
+
+            if (reply == QMessageBox::Yes) {
+                QString player1Name = player1UI.nameLabel->text();
+                player1UI.nameLabel->setText(player2UI.nameLabel->text());
+                player2UI.nameLabel->setText(player1Name);
+
+                switchTurns();
+                ui->gameMessageLabel->setText("Thief! Thief!!!\nI guess we're back to " + player2UI.nameLabel->text() + "'s turn again.");
+            }
+        }
+        else {
+            if (bulldozerModeMoveCount == true) {
+                this->backendGame->moveBulldozer();
+                bulldozerModeMoveCount = false;
+                updateGameBoardFromBackend();
+                updateUIBasedOnPlayerTurn();
+            }
+            else
+                bulldozerModeMoveCount = true;
+        }
     }
     else {
-        // TODO make screen logging more descriptive
-        // Also, clear the message when the player is able to switch again / after 3 seconds
         if (isGameOver)
             ui->gameMessageLabel->setText("The game is over. Please return to the main menu.");
         else if (ableToBuildBridges && (firstDotForBridge != std::make_tuple(0, 0)) && (secondDotForBridge == std::make_tuple(0, 0)))
-            ui->gameMessageLabel->setText("Finish building your bridge first, buddy. Unless you want to cancel it."); //TODO build a cancel button
+            ui->gameMessageLabel->setText("Finish building your bridge first, buddy. Unless you want to cancel it..\n just press on a random peg I guess");
 		else if (!ableToSwitchTurns) 
-            ui->gameMessageLabel->setText("Unable to switch turns.");
-    }
-
-    if (firstTurn) {
-        firstTurn = false;
-
-        QMessageBox::StandardButton reply;
-        reply = QMessageBox::question(this, "Confirm", "Do you want to steal " + player1UI.nameLabel->text() + "'s color?",
-            QMessageBox::Yes | QMessageBox::No);
-
-        if (reply == QMessageBox::Yes) {
-            QString player1Name = player1UI.nameLabel->text();
-            player1UI.nameLabel->setText(player2UI.nameLabel->text());
-            player2UI.nameLabel->setText(player1Name);
-
-            switchTurns();
-            ui->gameMessageLabel->setText("");
-        }
+            ui->gameMessageLabel->setText("Maybe put a peg down first.. you don't wanna lose your turn");
     }
 }
 
@@ -359,7 +382,7 @@ void GameScreenWidget::handleUndoButtonClicked()
 {
     if (!isGameOver) {
         if (!this->backendGame->undo()) {
-            ui->gameMessageLabel->setText("Cannot undo");
+            ui->gameMessageLabel->setText("Time travel ain't possible that far away");
         }
         updateGameBoardFromBackend();
         updateUIBasedOnPlayerTurn();

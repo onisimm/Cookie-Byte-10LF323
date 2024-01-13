@@ -1,9 +1,9 @@
 #include "SettingsWidget.h"
 
-SettingsWidget::SettingsWidget(QWidget *parent)
-	: QMainWindow(parent)
+SettingsWidget::SettingsWidget(QWidget* parent)
+    : QMainWindow(parent)
 {
-	ui.setupUi(this);
+    ui.setupUi(this);
 }
 
 SettingsWidget::~SettingsWidget()
@@ -11,7 +11,7 @@ SettingsWidget::~SettingsWidget()
 
 QString SettingsWidget::getGamemode() const
 {
-	return ui.gamemodeOption->currentText();
+    return ui.gamemodeOption->currentText();
 }
 
 QString SettingsWidget::getPlayer1Name() const {

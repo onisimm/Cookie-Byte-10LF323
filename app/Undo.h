@@ -18,7 +18,7 @@ namespace twixt {
 		Peg m_deletedBridgeDot;
 		Peg m_addedBridgeDot;
 	public:
-		Undo(std::reference_wrapper<GameStack> gameStack, Board& gameBoard);
+		Undo(std::reference_wrapper<GameStack> gameStack, Board* gameBoard);
 		void pressed();
 		void undoPlayers(Dot::Status status);
 		void undoBulldozer();

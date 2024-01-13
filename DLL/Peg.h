@@ -15,6 +15,7 @@ namespace twixt {
 	public:
 		__declspec(dllexport) Peg();
 		__declspec(dllexport) Peg(const Peg& newPeg);
+
 		__declspec(dllexport) ~Peg();
 		__declspec(dllexport) std::vector<Observer_ptr<Bridge>> getExistingBridges();
 

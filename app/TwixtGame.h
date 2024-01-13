@@ -22,7 +22,7 @@ public:
 	};
 
 	bool IsTie(Player player1, Player player2);
-	void ResetGame();
+	void ResetGame(const uint8_t& maxDots, const uint8_t& maxBridges);
 
 	void setGameMode(const QString& gamemode);
 	void setMaxDots(const uint8_t& maxDots);
@@ -31,9 +31,13 @@ public:
 	void setPlayer1(Player* player1);
 	void setPlayer2(Player* player2);
 
+	uint8_t getGameboardSize() const;
+
 	GameStack getGameStack() const;
 
 	void initializeGame();
+	bool isTie();
+	bool checkPathWin(Player* currentPlayer) const;
 
 	// ableToPlaceDot will return:
 	// 0 if the dot was placed successfully
@@ -55,7 +59,7 @@ public:
 	std::pair<uint8_t, uint8_t> getBulldozerPosition() const;
 
 	void undo();
-
+	std::vector<std::unique_ptr<Bridge>>& getBridges();
 	Dot::Status getDotStatus(uint8_t row, uint8_t col) const;
 
 

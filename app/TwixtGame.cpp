@@ -4,11 +4,45 @@
 
 bool TwixtGame::IsTie(Player player1, Player player2)
 {
-	if (!player1.hasRemainingDots() && !player2.hasRemainingDots() || !player1.hasRemainingBridges() && !player2.hasRemainingBridges())
+	if (!player1.hasRemainingDots() && !player2.hasRemainingDots() && !player1.hasRemainingBridges() && !player2.hasRemainingBridges())
 	{
 		return true;
 	}
 	return false;
+}
+
+void TwixtGame::ResetGame(const uint8_t& maxDots, const uint8_t& maxBridges) {
+	//Reset board game
+	m_board->getBridges().clear();
+	for (size_t row = 0; row < m_board->getSize(); row++)
+	{
+		for (size_t column = 0; column < m_board->getSize(); column++)
+		{
+			m_board->getMatrix()[row][column].reset(new Dot(row, column));
+		}
+	}
+
+	//Reset stack
+	m_gameStack.Clear();
+
+	//Reset players
+	m_player1->setRemainingBridges(maxBridges);
+	m_player1->setRemainingDots(maxDots);
+
+	m_player2->setRemainingBridges(maxBridges);
+	m_player2->setRemainingDots(maxDots);
+
+	if (m_gameMode == GameModeType::Bulldozer)
+	{
+		m_board->m_bulldozer = Observer_ptr<Bulldozer>(new Bulldozer(*m_board));
+	}
+	else if (m_gameMode == GameModeType::Mines)
+	{
+		for (size_t i = 0; i < 3; i++)
+		{
+			m_board->placeRandomMine();
+		}
+	}
 }
 
 void TwixtGame::setGameMode(const QString& gamemode)
@@ -46,18 +80,10 @@ void TwixtGame::setPlayer2(Player* player2)
 	this->m_player2 = player2;
 }
 
-//void TwixtGame::ResetGame()
-//{
-//	//Reset board game
-//	Board board(BOARD_SIZE);
-//	//Reset stack
-//	m_gameStack.Clear();
-//	//Reset players
-//	Player player1("player1", Player::Color::Red, DOTS_NUMBER);
-//	Player player2("player2", Player::Color::Black, DOTS_NUMBER);
-//	std::cout << "The game has been reset.\n";
-//	GameLoop(board, player1, player2);
-//}
+uint8_t TwixtGame::getGameboardSize() const
+{
+	return m_gameBoardSize;
+}
 
 GameStack TwixtGame::getGameStack() const
 {
@@ -68,19 +94,41 @@ void TwixtGame::initializeGame()
 {
 	m_board = new Board(m_gameBoardSize);
 
-	// TODO: if gamemode is mines, place random mines on the board
+	if (m_gameMode == GameModeType::Mines)
+	{
+		for (size_t i = 0; i < m_gameBoardSize / 4; i++)
+		{
+			m_board->placeRandomMine();
+		}
+	}
+	else if (m_gameMode == GameModeType::Bulldozer)
+	{
+		m_board->m_bulldozer = Observer_ptr<Bulldozer>(new Bulldozer(*m_board));
+	}
+}
 
-	// TODO: if gamemode is bulldozer, place a random bulldozer on the board
+bool TwixtGame::isTie() {
+	return IsTie(*m_player1, *m_player2);
+}
+
+bool TwixtGame::checkPathWin(Player* currentPlayer) const
+{
+	if (currentPlayer->getPlayerType() == twixt::PlayerType::Player1)
+		return m_board->checkPath(twixt::Dot::Status::Player1);
+	else
+		return m_board->checkPath(twixt::Dot::Status::Player2);
 }
 
 void TwixtGame::placeDot(uint8_t row, uint8_t col, Player* currentPlayer)
 {
-	m_board->getMatrix()[row][col].reset(new Peg());
+	// m_board->getMatrix()[row][col].reset(new Peg());
+	// m_board->getMatrix()[row][col].get()->setCoordI(row);
+	// m_board->getMatrix()[row][col].get()->setCoordJ(col);
 
 	if (currentPlayer->getPlayerType() == twixt::PlayerType::Player1)
-		m_board->getMatrix()[row][col]->setStatus(Dot::Status::Player1);
+		m_board->placePeg(row, col, Dot::Status::Player1);
 	else
-		m_board->getMatrix()[row][col]->setStatus(Dot::Status::Player2);
+		m_board->placePeg(row, col, Dot::Status::Player2);
 
 	m_gameStack.AddInGameStack(Observer_ptr<Dot>(m_board->getMatrix()[row][col].get()), uint16_t(m_board->getMatrix()[row][col]->getStatus()));
 	currentPlayer->setRemainingDots(currentPlayer->getRemainingDots() - 1);
@@ -156,9 +204,20 @@ void TwixtGame::explodeMine(uint8_t row, uint8_t col, Player* currentPlayer)
 	m_gameStack.AddInGameStack(Observer_ptr<Dot>(m_board->getMatrixDot(row, col).get()), uint16_t(m_board->getMatrixDot(row, col)->getStatus()));
 }
 
+void TwixtGame::undo()
+{
+	Undo undo(m_gameStack, m_board);
+	undo.pressed();
+}
+
+std::vector<std::unique_ptr<twixt::Bridge>>& TwixtGame::getBridges()
+{
+	return m_board->getBridges();
+}
+
 Dot::Status TwixtGame::getDotStatus(uint8_t row, uint8_t col) const
 {
-	return m_board->getMatrixDot(row, col)->getStatus();
+	return m_board->getMatrixDot(row, col).get()->getStatus();
 }
 
 void TwixtGame::placeMine(uint8_t row, uint8_t col)
@@ -177,4 +236,9 @@ void TwixtGame::moveBulldozer()
 			m_gameStack.AddInGameStack(Observer_ptr<Dot>(m_board->getDot(bulldozerCoordI, bulldozerCoordJ).get()), size_t(Dot::Status::Bulldozer));
 		}
 	}
+}
+
+std::pair<uint8_t, uint8_t> TwixtGame::getBulldozerPosition() const
+{
+	return { m_board->m_bulldozer.GetPointer()->getCoordI(), m_board->m_bulldozer.GetPointer()->getCoordJ() };
 }

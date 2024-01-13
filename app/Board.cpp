@@ -419,12 +419,12 @@ Board::~Board() {}
 	void Board::placeRandomMine()
 	{
 		srand(time(NULL));
-		size_t i = rand() % 22 + 1;
-		size_t j = rand() % 22 + 1;
+		size_t i = rand() % (m_matrixDot.size()-2) + 1;
+		size_t j = rand() % (m_matrixDot.size()-2) + 1;
 		while (m_matrixDot[i][j]->getStatus() != Dot::Status::Empty)
 		{
-			i = rand() % 22 + 1;
-			j = rand() % 22 + 1;
+			i = rand() % (m_matrixDot.size()-2) + 1;
+			j = rand() % (m_matrixDot.size()-2) + 1;
 		}
 		placeMine(i, j);
 	}

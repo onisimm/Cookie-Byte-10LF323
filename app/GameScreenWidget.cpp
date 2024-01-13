@@ -1,6 +1,7 @@
 #include "GameScreenWidget.h"
 #include "ui_GameScreenWidget.h"
 #include <QTimer>
+#include <QMessageBox>
 
 GameScreenWidget::GameScreenWidget(const Ui::GameSettings& settings, QWidget* parent) :
     QWidget(parent),
@@ -39,7 +40,6 @@ void GameScreenWidget::setMaxBridges(const uint8_t& maxBridges)
 void GameScreenWidget::setGamemode(const QString& gamemode)
 {
     ui->gamemodeLabel->setText("Gamemode: " + gamemode);
-    //gameBoard->setGameMode(gamemode);
     this->backendGame->setGameMode(gamemode);
 }
 
@@ -104,10 +104,12 @@ void GameScreenWidget::applyGameSettings(const Ui::GameSettings& settings) {
 
 void GameScreenWidget::setupConnections()
 {
-    // TOOD back to menu button becomes menu
+    // TOOD back to menu button becomes menu`
     // inside menu there will be a button to go back to the main menu
     // a Save Game button, a Reset Game button,
     connect(ui->backToMenuButton, &QPushButton::clicked, this, &GameScreenWidget::on_backToMenuButton_clicked);
+    connect(ui->undoButton, &QPushButton::clicked, this, &GameScreenWidget::on_undoButton_clicked);
+    connect(this, &GameScreenWidget::on_undoButton_clicked, this, &GameScreenWidget::handleUndoButtonClicked);
     connect(gameBoard, &GameBoardWidget::dotPressed, this, &GameScreenWidget::handleDotPressed);
     connect(ui->switchTurnButton, &QPushButton::clicked, this, &GameScreenWidget::switchTurns);
 }
@@ -146,38 +148,86 @@ void GameScreenWidget::updateTimer(Ui::UIPlayer& player) {
     }
     else {
         player.timer->stop();
-        checkEndGame();
+        checkTimerIsOver();
     }
 }
 
-void GameScreenWidget::checkEndGame()
+void GameScreenWidget::checkWinningPath(const Ui::UIPlayer& player)
 {
-    // TODO check if there is a winner based on a full path of bridges
-    // TODO check if there is a tie
+    if (this->backendGame->checkPathWin(player.backendPlayer))
+    {
+        ui->gameMessageLabel->setText(player.nameLabel->text() + " wins by building a brigde from end to end!");
+        isGameOver = true;
+    }
 
-    // check if there is a player with no more time left
+    updateUIBasedOnPlayerTurn();
+}
+
+void GameScreenWidget::checkIsTie()
+{
+    if (this->backendGame->IsTie(*player1UI.backendPlayer, *player2UI.backendPlayer))
+    {
+        ui->gameMessageLabel->setText("It's a tie! No more options left.");
+        isGameOver = true;
+    }
+    updateUIBasedOnPlayerTurn();
+}
+
+void GameScreenWidget::checkTimerIsOver()
+{
     if (player1UI.timeLeft == 0) {
         ui->gameMessageLabel->setText(player1UI.nameLabel->text() + " ran out of time. " 
             + player2UI.nameLabel->text() + " wins!");
         isGameOver = true;
+        return;
     }
     else if (player2UI.timeLeft == 0) {
         ui->gameMessageLabel->setText(player2UI.nameLabel->text() + " ran out of time. "
             + player1UI.nameLabel->text() + " wins!");
         isGameOver = true;
+        return;
 	}
 
-    // TODO end game if a player has no more dots with tie
-    if (player1UI.backendPlayer->hasRemainingDots() || !player2UI.backendPlayer->hasRemainingDots()) {
-		ui->gameMessageLabel->setText(player1UI.nameLabel->text() + " has no more dots. "
-        			+ player2UI.nameLabel->text() + " wins!");
-		isGameOver = true;
+    updateUIBasedOnPlayerTurn();
+}
+
+void GameScreenWidget::updateGameBoardFromBackend()
+{
+    for (int i = 0; i < this->backendGame->getGameboardSize(); i++) {
+		for (int j = 0; j < this->backendGame->getGameboardSize(); j++) {
+			twixt::Dot::Status dotStatus = this->backendGame->getDotStatus(i, j);
+			if (dotStatus == twixt::Dot::Status::Player1) {
+				gameBoard->setDotColor(i, j, player1UI.color);
+			}
+			else if (dotStatus == twixt::Dot::Status::Player2) {
+				gameBoard->setDotColor(i, j, player2UI.color);
+			}
+			else if (dotStatus == twixt::Dot::Status::Mine) {
+				gameBoard->setDotColor(i, j, QColor(102, 51, 0));
+			}
+            else if (dotStatus == twixt::Dot::Status::Exploded) {
+                gameBoard->setDotColor(i, j, Qt::black);
+            }
+            else if (dotStatus == twixt::Dot::Status::Bulldozer) {
+                gameBoard->setDotColor(i, j, QColor(255, 153, 51));
+            }
+			else if (dotStatus == twixt::Dot::Status::Empty) {
+				gameBoard->setDotColor(i, j, Qt::lightGray);
+			}
+		}
 	}
-    else if (player2UI.backendPlayer->getRemainingDots() == 0) {
-		ui->gameMessageLabel->setText(player2UI.nameLabel->text() + " has no more dots. "
-        			+ player1UI.nameLabel->text() + " wins!");
-		isGameOver = true;
-    }
+
+    for (auto& bridge : this->backendGame->getBridges()) {
+        std::pair<uint8_t, uint8_t> firstPeg = { bridge.get()->getFirstPillar().GetPointer()->getCoordI(), bridge.get()->getFirstPillar().GetPointer()->getCoordJ() };
+        std::pair<uint8_t, uint8_t> secondPeg = { bridge.get()->getSecondPillar().GetPointer()->getCoordI(), bridge.get()->getSecondPillar().GetPointer()->getCoordJ() };
+        Ui::UIPlayer& bridgeOwner = (bridge.get()->getFirstPillar().GetPointer()->getStatus() == Dot::Status::Player1) ? player1UI : player2UI;
+
+		gameBoard->drawBridge(firstPeg.first, firstPeg.second, secondPeg.first, secondPeg.second, bridgeOwner.color);
+	}
+
+    gameBoard->setDotColor(1, 1, Qt::green);
+    this->gameBoard->update();
+
 }
 
 void GameScreenWidget::handleDotPressed(int row, int col) {
@@ -212,6 +262,7 @@ void GameScreenWidget::handleDotPressed(int row, int col) {
                         firstDotForBridge = { 0, 0 };
                         secondDotForBridge = { 0, 0 };
                         ableToSwitchTurns = true;
+                        checkWinningPath(activePlayer);
                     }
                 }
 
@@ -222,6 +273,13 @@ void GameScreenWidget::handleDotPressed(int row, int col) {
                 ableToSwitchTurns = true;
             }
 		}
+        else if (!dotBelongsToAPlayer && ableToBuildBridges) {
+            if (firstDotForBridge != std::make_tuple(0, 0))
+                gameBoard->setDotColor(std::get<0>(firstDotForBridge), std::get<1>(firstDotForBridge), activePlayer.color);
+            firstDotForBridge = { 0, 0 };
+            secondDotForBridge = { 0, 0 };
+            ableToSwitchTurns = true;
+        }
         else if (!ableToBuildBridges) { // If it's not able to build bridges, it means the player is placing a dot
             uint8_t ableToPlaceDotResult = this->backendGame->ableToPlaceDot(row, col, activePlayer.backendPlayer);
             if (ableToPlaceDotResult == 0) {
@@ -233,7 +291,8 @@ void GameScreenWidget::handleDotPressed(int row, int col) {
             }
             else if (ableToPlaceDotResult == 2) {
 				ui->gameMessageLabel->setText("Oh no, a mine was there! I've never seen such a big explosion!");
-                // TODO make that dot explode -> give it rgb(102, 51, 0)
+                this->backendGame->explodeMine(row, col, activePlayer.backendPlayer);
+                this->gameBoard->setDotColor(row, col, QColor(102, 51, 0));
 
                 ableToSwitchTurns = true;
                 ableToBuildBridges = true;
@@ -243,11 +302,11 @@ void GameScreenWidget::handleDotPressed(int row, int col) {
             }
             else if (ableToPlaceDotResult == 5) {
 				ui->gameMessageLabel->setText("You have no more pegs to place.");
-                checkEndGame();
 			}
 		}
     }
 
+    checkIsTie();
     updateUIBasedOnPlayerTurn();
 }
 
@@ -263,6 +322,7 @@ void GameScreenWidget::switchTurns() {
         ableToBuildBridges = false;
 
         ui->gameMessageLabel->setText("");
+        updateUIBasedOnPlayerTurn();
     }
     else {
         // TODO make screen logging more descriptive
@@ -274,4 +334,31 @@ void GameScreenWidget::switchTurns() {
 		else if (!ableToSwitchTurns) 
             ui->gameMessageLabel->setText("Unable to switch turns.");
     }
+
+    if (firstTurn) {
+        firstTurn = false;
+
+        QMessageBox::StandardButton reply;
+        reply = QMessageBox::question(this, "Confirm", "Do you want to steal " + player1UI.nameLabel->text() + "'s color?",
+            QMessageBox::Yes | QMessageBox::No);
+
+        if (reply == QMessageBox::Yes) {
+            QString player1Name = player1UI.nameLabel->text();
+            player1UI.nameLabel->setText(player2UI.nameLabel->text());
+            player2UI.nameLabel->setText(player1Name);
+
+            switchTurns();
+            ui->gameMessageLabel->setText("");
+        }
+    }
+}
+
+void GameScreenWidget::handleUndoButtonClicked() 
+{
+    if (!isGameOver) {
+        this->backendGame->undo();
+        updateGameBoardFromBackend();
+        updateUIBasedOnPlayerTurn();
+    }
+    int a = 2;
 }

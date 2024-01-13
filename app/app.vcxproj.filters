@@ -2,95 +2,47 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="GameStack.cpp">
-      <Filter>Backend</Filter>
-    </ClCompile>
-    <ClCompile Include="Minimax.cpp">
-      <Filter>Backend</Filter>
-    </ClCompile>
-    <ClCompile Include="Player.cpp">
-      <Filter>Backend</Filter>
-    </ClCompile>
-    <ClCompile Include="TwixtGame.cpp">
-      <Filter>Backend</Filter>
-    </ClCompile>
-    <ClCompile Include="Undo.cpp">
-      <Filter>Backend</Filter>
-    </ClCompile>
-    <ClCompile Include="BridgeWidget.cpp">
-      <Filter>Frontend</Filter>
-    </ClCompile>
-    <ClCompile Include="DotWidget.cpp">
-      <Filter>Frontend</Filter>
-    </ClCompile>
-    <ClCompile Include="GameBoardWidget.cpp">
-      <Filter>Frontend</Filter>
-    </ClCompile>
-    <ClCompile Include="GameScreenWidget.cpp">
-      <Filter>Frontend</Filter>
-    </ClCompile>
-    <ClCompile Include="MainMenuWidget.cpp">
-      <Filter>Frontend</Filter>
-    </ClCompile>
-    <ClCompile Include="MainWindow.cpp">
-      <Filter>Frontend</Filter>
-    </ClCompile>
-    <ClCompile Include="SettingsWidget.cpp">
-      <Filter>Frontend</Filter>
-    </ClCompile>
+    <ClCompile Include="BridgeWidget.cpp" />
+    <ClCompile Include="DotWidget.cpp" />
+    <ClCompile Include="GameBoardWidget.cpp" />
+    <ClCompile Include="GameScreenWidget.cpp" />
+    <ClCompile Include="MainMenuWidget.cpp" />
+    <ClCompile Include="MainWindow.cpp" />
+    <ClCompile Include="TwixtGame.cpp" />
+    <ClCompile Include="Player.cpp" />
+    <ClCompile Include="Undo.cpp" />
+    <ClCompile Include="GameStack.cpp" />
+    <ClCompile Include="Minimax.cpp" />
+    <ClCompile Include="SettingsWidget.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="GameStack.h">
-      <Filter>Backend</Filter>
-    </ClInclude>
-    <ClInclude Include="Minimax.h">
-      <Filter>Backend</Filter>
-    </ClInclude>
-    <ClInclude Include="Player.h">
-      <Filter>Backend</Filter>
-    </ClInclude>
-    <ClInclude Include="TwixtGame.h">
-      <Filter>Backend</Filter>
-    </ClInclude>
-    <ClInclude Include="Undo.h">
-      <Filter>Backend</Filter>
-    </ClInclude>
+    <ClInclude Include="Undo.h" />
+    <ClInclude Include="GameStack.h" />
+    <ClInclude Include="Minimax.h" />
+    <ClInclude Include="Player.h" />
+    <ClInclude Include="TwixtGame.h" />
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="BridgeWidget.h">
-      <Filter>Frontend</Filter>
-    </QtMoc>
-    <QtMoc Include="DotWidget.h">
-      <Filter>Frontend</Filter>
-    </QtMoc>
-    <QtMoc Include="GameBoardWidget.h">
-      <Filter>Frontend</Filter>
-    </QtMoc>
-    <QtMoc Include="GameScreenWidget.h">
-      <Filter>Frontend</Filter>
-    </QtMoc>
-    <QtMoc Include="MainMenuWidget.h">
-      <Filter>Frontend</Filter>
-    </QtMoc>
-    <QtMoc Include="MainWindow.h">
-      <Filter>Frontend</Filter>
-    </QtMoc>
-    <QtMoc Include="SettingsWidget.h">
-      <Filter>Frontend</Filter>
-    </QtMoc>
+    <QtMoc Include="MainWindow.h" />
+    <QtMoc Include="SettingsWidget.h" />
+    <QtMoc Include="BridgeWidget.h" />
+    <QtMoc Include="DotWidget.h" />
+    <QtMoc Include="GameBoardWidget.h" />
+    <QtMoc Include="GameScreenWidget.h" />
+    <QtMoc Include="MainMenuWidget.h" />
   </ItemGroup>
   <ItemGroup>
+    <QtUic Include="SettingsWidget.ui">
+      <Filter>Frontend\Resource Files</Filter>
+    </QtUic>
     <QtUic Include="GameScreenWidget.ui">
-      <Filter>Frontend</Filter>
+      <Filter>Frontend\Resource Files</Filter>
     </QtUic>
     <QtUic Include="MainMenuWidget.ui">
-      <Filter>Frontend</Filter>
+      <Filter>Frontend\Resource Files</Filter>
     </QtUic>
     <QtUic Include="MainWindow.ui">
-      <Filter>Frontend</Filter>
-    </QtUic>
-    <QtUic Include="SettingsWidget.ui">
-      <Filter>Frontend</Filter>
+      <Filter>Frontend\Resource Files</Filter>
     </QtUic>
   </ItemGroup>
   <ItemGroup>
@@ -99,6 +51,21 @@
     </Filter>
     <Filter Include="Frontend">
       <UniqueIdentifier>{1276c938-9b31-4548-a930-fff67dfcff3a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Frontend\Header Files">
+      <UniqueIdentifier>{ab2b1185-885d-4d38-9e3b-ca7f74987fdb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Frontend\Source Files">
+      <UniqueIdentifier>{a90c72a6-c4f3-440e-90c7-ee156b511bd3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Backend\Source Files">
+      <UniqueIdentifier>{39ae3997-360f-4a9b-951f-01b849339307}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Backend\Header Files">
+      <UniqueIdentifier>{615ba23c-7431-4b85-beba-4de360bae0e0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Frontend\Resource Files">
+      <UniqueIdentifier>{4ff506c0-674a-45d5-a2cb-6dbb7b7e529e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

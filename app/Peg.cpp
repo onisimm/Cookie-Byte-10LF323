@@ -1,4 +1,5 @@
 #include "Peg.h"
+#include "Peg.h"
 
 twixt::Peg::Peg() : Dot()
 {}

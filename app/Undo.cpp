@@ -1,6 +1,6 @@
 #include "Undo.h"
 
-twixt::Undo::Undo(std::reference_wrapper<GameStack> gameStack, Board& gameBoard):board{gameBoard}
+twixt::Undo::Undo(std::reference_wrapper<GameStack> gameStack, Board* gameBoard):board{*gameBoard}
 {
 	Observer_ptr<Dot> topDot = gameStack.get().GetGameStack().top().first;
 
@@ -72,7 +72,7 @@ void twixt::Undo::undoPlayers(Dot::Status status)
 	}
 	size_t lastDotI = m_lastDot->getCoordI();
 	size_t lastDotJ = m_lastDot->getCoordJ();
-	board.get().getDot(m_lastDot->getCoordI(), m_lastDot->getCoordJ()).reset(new Dot);
+	board.get().getDot(m_lastDot->getCoordI(), m_lastDot->getCoordJ()).reset(new Dot(m_lastDot->getCoordI(), m_lastDot->getCoordJ()));
 }
 
 void twixt::Undo::undoBulldozer()

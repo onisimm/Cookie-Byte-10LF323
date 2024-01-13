@@ -23,17 +23,21 @@ void GameBoardWidget::buildBoard()
 
     for (int row = 0; row < gameboardSize; ++row) {
         for (int col = 0; col < gameboardSize; ++col) {
-            // Place dots everywhere except the corners of the matrix
-            if (!(row == 0 && col == 0) && !(row == 0 && col == (gameboardSize - 1)) &&
-                !(row == (gameboardSize - 1) && col == 0) && !(row == (gameboardSize - 1) && col == (gameboardSize - 1))) {
-                DotWidget* dot = new DotWidget(this);
-                layout->addWidget(dot, row, col);
-                connect(dot, &DotWidget::pressedChanged, this, [this, row, col]() {
-                    emit dotPressed(row, col);
+            DotWidget* dot = new DotWidget(this);
+            layout->addWidget(dot, row, col);
+            connect(dot, &DotWidget::pressedChanged, this, [this, row, col]() {
+                emit dotPressed(row, col);
                 });
+            // Place dots everywhere except the corners of the matrix
+            if ((row == 0 && col == 0) || (row == 0 && col == (gameboardSize - 1)) ||
+                (row == (gameboardSize - 1) && col == 0) || (row == (gameboardSize - 1) && col == (gameboardSize - 1))) {
+                dot->setVisible(false);
+                bool isDotVisible = dot->isVisible();
             }
         }
     }
+
+    update();
 }
 
 void GameBoardWidget::setGameboardSize(const uint8_t& size)
@@ -68,8 +72,8 @@ QColor GameBoardWidget::getDotColor(int row, int col) const
 }
 
 void GameBoardWidget::drawBridge(const int& startRow, const int& startCol, const int& endRow, const int& endCol, const QColor& color) {
-    DotWidget* startDot = dynamic_cast<DotWidget*>(layout->itemAtPosition(startRow, startCol)->widget());
-    DotWidget* endDot = dynamic_cast<DotWidget*>(layout->itemAtPosition(endRow, endCol)->widget());
+    DotWidget* startDot = qobject_cast<DotWidget*>(layout->itemAtPosition(startRow, startCol)->widget());
+    DotWidget* endDot = qobject_cast<DotWidget*>(layout->itemAtPosition(endRow, endCol)->widget());
 
     if (!startDot || !endDot) return; // Safety check
 

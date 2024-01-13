@@ -49,9 +49,11 @@ public:
 
 signals:
     void on_backToMenuButton_clicked();
+    void on_undoButton_clicked();
 
 public slots:
     void switchTurns();
+    void handleUndoButtonClicked();
 
 private:
     Ui::GameScreenWidget* ui;
@@ -63,6 +65,7 @@ private:
     uint8_t maxDots;
     uint8_t maxBridges;
 
+    bool firstTurn = true;
     // Used to check if the Switch Player button is available
     // The button isn't available if:
     //  1. The current player hasn't placed a dot yet
@@ -80,5 +83,11 @@ private:
     void updateTimer(Ui::UIPlayer& player);
 
     bool isGameOver = false;
-    void checkEndGame();
+    void checkWinningPath(const Ui::UIPlayer& player);
+    void checkIsTie();
+    void checkTimerIsOver();
+
+    void updateGameBoardFromBackend();
+
+    // TODO: update gameBoard based on backendGame
 };

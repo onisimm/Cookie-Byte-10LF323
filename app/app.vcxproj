@@ -37,7 +37,7 @@
     <Import Project="$(QtMsBuild)\qt_defaults.props" />
   </ImportGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="QtSettings">
-    <QtInstall>6.6.1_msvc2019_64</QtInstall>
+    <QtInstall>6.7.0_msvc2019_64</QtInstall>
     <QtModules>core;gui;widgets</QtModules>
     <QtBuildConfig>debug</QtBuildConfig>
   </PropertyGroup>
@@ -94,15 +94,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Board.cpp" />
-    <ClCompile Include="Bridge.cpp" />
     <ClCompile Include="BridgeWidget.cpp" />
-    <ClCompile Include="Bulldozer.cpp" />
-    <ClCompile Include="Dot.cpp" />
     <ClCompile Include="GameStack.cpp" />
-    <ClCompile Include="Mine.cpp" />
     <ClCompile Include="Minimax.cpp" />
-    <ClCompile Include="Peg.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="SettingsWidget.cpp" />
     <ClCompile Include="TwixtGame.cpp" />
@@ -135,18 +129,17 @@
     <QtMoc Include="SettingsWidget.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Board.h" />
-    <ClInclude Include="Bridge.h" />
     <QtMoc Include="BridgeWidget.h" />
-    <ClInclude Include="Bulldozer.h" />
-    <ClInclude Include="Dot.h" />
     <ClInclude Include="GameStack.h" />
-    <ClInclude Include="Mine.h" />
     <ClInclude Include="Minimax.h" />
-    <ClInclude Include="Peg.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="TwixtGame.h" />
     <ClInclude Include="Undo.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DLL\DLL.vcxproj">
+      <Project>{62af093b-a952-4873-8d02-ee4bda8f8334}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

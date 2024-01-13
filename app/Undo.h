@@ -5,8 +5,8 @@
 
 #include<stack>
 #include "GameStack.h"
-#include "Board.h"
-#include "Bulldozer.h"
+#include "../DLL/Board.h"
+#include "../DLL/Bulldozer.h"
 
 namespace twixt {
 	class Undo

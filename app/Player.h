@@ -3,8 +3,8 @@
 #include <cstdint>
 #include <iostream>
 #include <stack>
-#include "Board.h"
-#include "Dot.h"
+#include "../DLL/Board.h"
+#include "../DLL/Dot.h"
 
 namespace twixt {
 	enum class PlayerType {

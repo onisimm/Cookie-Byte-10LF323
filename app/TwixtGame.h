@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Bulldozer.h"
-#include "Dot.h"
+#include "../DLL/Bulldozer.h"
+#include "../DLL/Dot.h"
 #include "GameStack.h"
 #include "Minimax.h"
 #include "Player.h"

@@ -4,7 +4,7 @@
 #define GAMESTACK_H
 
 #include <iostream>
-#include "Dot.h"
+#include "../DLL/Dot.h"
 #include<stack>
 
 

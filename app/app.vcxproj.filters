@@ -2,28 +2,10 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Board.cpp">
-      <Filter>Backend</Filter>
-    </ClCompile>
-    <ClCompile Include="Bridge.cpp">
-      <Filter>Backend</Filter>
-    </ClCompile>
-    <ClCompile Include="Bulldozer.cpp">
-      <Filter>Backend</Filter>
-    </ClCompile>
-    <ClCompile Include="Dot.cpp">
-      <Filter>Backend</Filter>
-    </ClCompile>
     <ClCompile Include="GameStack.cpp">
       <Filter>Backend</Filter>
     </ClCompile>
-    <ClCompile Include="Mine.cpp">
-      <Filter>Backend</Filter>
-    </ClCompile>
     <ClCompile Include="Minimax.cpp">
-      <Filter>Backend</Filter>
-    </ClCompile>
-    <ClCompile Include="Peg.cpp">
       <Filter>Backend</Filter>
     </ClCompile>
     <ClCompile Include="Player.cpp">
@@ -58,28 +40,10 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Board.h">
-      <Filter>Backend</Filter>
-    </ClInclude>
-    <ClInclude Include="Bridge.h">
-      <Filter>Backend</Filter>
-    </ClInclude>
-    <ClInclude Include="Bulldozer.h">
-      <Filter>Backend</Filter>
-    </ClInclude>
-    <ClInclude Include="Dot.h">
-      <Filter>Backend</Filter>
-    </ClInclude>
     <ClInclude Include="GameStack.h">
       <Filter>Backend</Filter>
     </ClInclude>
-    <ClInclude Include="Mine.h">
-      <Filter>Backend</Filter>
-    </ClInclude>
     <ClInclude Include="Minimax.h">
-      <Filter>Backend</Filter>
-    </ClInclude>
-    <ClInclude Include="Peg.h">
       <Filter>Backend</Filter>
     </ClInclude>
     <ClInclude Include="Player.h">

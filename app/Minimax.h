@@ -5,7 +5,7 @@
 
 
 
-#include "Board.h"
+#include "../DLL/Board.h"
 #include<unordered_map>
 namespace twixt {
 	class Minimax

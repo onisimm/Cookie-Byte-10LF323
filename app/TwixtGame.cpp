@@ -38,7 +38,7 @@ void TwixtGame::ResetGame(const uint8_t& maxDots, const uint8_t& maxBridges) {
 	}
 	else if (m_gameMode == GameModeType::Mines)
 	{
-		for (size_t i = 0; i < 3; i++)
+		for (size_t i = 0; i < m_gameBoardSize / 3; i++)
 		{
 			m_board->placeRandomMine();
 		}
@@ -96,7 +96,7 @@ void TwixtGame::initializeGame()
 
 	if (m_gameMode == GameModeType::Mines)
 	{
-		for (size_t i = 0; i < m_gameBoardSize ; i++)
+		for (size_t i = 0; i < m_gameBoardSize / 3; i++)
 		{
 			m_board->placeRandomMine();
 		}

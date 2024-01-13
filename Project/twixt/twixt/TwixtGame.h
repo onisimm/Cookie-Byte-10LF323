@@ -4,7 +4,6 @@
 #include "Bulldozer.h"
 #include "GameStack.h"
 #include "Undo.h"
-#include "SaveGame.h"
 #include "Minimax.h"
 #include<iostream>
 #include <cstdint>
@@ -21,10 +20,10 @@ public:
 	};
 
 	void ReadPlayers(Player& player1, Player& player2);
-	void GameTurns(Player& player, bool& isPlaying, Board& board);
+	void GameTurns(Player& player, bool& isPlaying, Board& board, bool& isReseted);
 	bool IsTie(Player player1, Player player2);
-	void GameLoop(Board& board, Player player1, Player player2, Bulldozer bulldozer = Bulldozer());
-	void ResetGame();
+	void GameLoop(Board& board, Player player1, Player player2);
+	void ResetGame(Board& board, Player& player1, Player& player2);
 	void Run();
 
 	//getter
@@ -32,7 +31,4 @@ public:
 private:
 	GameMode m_gameMode;
 	GameStack m_gameStack;
-	SaveGame saveGame;
-	bool blackPlayerStoleColor = false;
-
 };

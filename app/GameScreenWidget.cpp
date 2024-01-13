@@ -100,6 +100,7 @@ void GameScreenWidget::applyGameSettings(const Ui::GameSettings& settings) {
 
     gameBoard->buildBoard();
     backendGame->initializeGame();
+    updateGameBoardFromBackend();
 }
 
 void GameScreenWidget::setupConnections()
@@ -293,6 +294,7 @@ void GameScreenWidget::handleDotPressed(int row, int col) {
 				ui->gameMessageLabel->setText("Oh no, a mine was there! I've never seen such a big explosion!");
                 this->backendGame->explodeMine(row, col, activePlayer.backendPlayer);
                 this->gameBoard->setDotColor(row, col, QColor(102, 51, 0));
+                updateGameBoardFromBackend();
 
                 ableToSwitchTurns = true;
                 ableToBuildBridges = true;

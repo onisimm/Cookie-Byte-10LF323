@@ -2,7 +2,7 @@
 
 twixt::Undo::Undo(std::reference_wrapper<GameStack> gameStack, Board* gameBoard):board{*gameBoard}
 {
-	Observer_ptr<Dot> topDot = gameStack.get().GetGameStack().top().first;
+	Observer_ptr<Dot> topDot = gameStack.get().getGameStack().top().first;
 
 	Mine* ptrMine = topDot.To<Mine>();
 	if (ptrMine)
@@ -22,15 +22,15 @@ twixt::Undo::Undo(std::reference_wrapper<GameStack> gameStack, Board* gameBoard)
 			m_lastDot.reset(new Peg(*ptrDot));
 		}
 	}
-	m_type = gameStack.get().GetGameStack().top().second;
+	m_type = gameStack.get().getGameStack().top().second;
 	if (m_type == DELETEBRIDGE)
 	{
-		m_deletedBridgeDot = gameStack.get().GetDeletedBridgesDotStack().top();
+		m_deletedBridgeDot = gameStack.get().getDeletedBridgesDotStack().top();
 		gameStack.get().popDeletedBridgesStack();
 	}
 	if (m_type == ADDBRIDGE)
 	{
-		m_addedBridgeDot = gameStack.get().GetAddedBridgesDotStack().top();
+		m_addedBridgeDot = gameStack.get().getAddedBridgesDotStack().top();
 		gameStack.get().popAddedBridgesStack();
 	}
 	gameStack.get().popGameStack();

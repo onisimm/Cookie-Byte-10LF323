@@ -18,7 +18,7 @@
     <rect>
      <x>30</x>
      <y>0</y>
-     <width>251</width>
+     <width>291</width>
      <height>81</height>
     </rect>
    </property>
@@ -59,9 +59,9 @@
   <widget class="QLabel" name="player1NameLabel">
    <property name="geometry">
     <rect>
-     <x>30</x>
+     <x>10</x>
      <y>290</y>
-     <width>161</width>
+     <width>201</width>
      <height>31</height>
     </rect>
    </property>
@@ -87,10 +87,10 @@
   <widget class="QLabel" name="player1TimerLabel">
    <property name="geometry">
     <rect>
-     <x>30</x>
+     <x>10</x>
      <y>320</y>
-     <width>161</width>
-     <height>16</height>
+     <width>201</width>
+     <height>31</height>
     </rect>
    </property>
    <property name="font">
@@ -109,10 +109,10 @@
   <widget class="QLabel" name="player2TimerLabel">
    <property name="geometry">
     <rect>
-     <x>30</x>
+     <x>10</x>
      <y>490</y>
-     <width>161</width>
-     <height>20</height>
+     <width>201</width>
+     <height>31</height>
     </rect>
    </property>
    <property name="font">
@@ -131,9 +131,9 @@
   <widget class="QLabel" name="player2NameLabel">
    <property name="geometry">
     <rect>
-     <x>30</x>
+     <x>10</x>
      <y>460</y>
-     <width>161</width>
+     <width>201</width>
      <height>31</height>
     </rect>
    </property>
@@ -159,7 +159,7 @@
   <widget class="QPushButton" name="switchTurnButton">
    <property name="geometry">
     <rect>
-     <x>300</x>
+     <x>230</x>
      <y>90</y>
      <width>111</width>
      <height>41</height>
@@ -206,10 +206,10 @@
   <widget class="QLabel" name="player1RemainingDotsLabel">
    <property name="geometry">
     <rect>
-     <x>30</x>
-     <y>340</y>
-     <width>161</width>
-     <height>21</height>
+     <x>10</x>
+     <y>350</y>
+     <width>201</width>
+     <height>31</height>
     </rect>
    </property>
    <property name="font">
@@ -228,10 +228,10 @@
   <widget class="QLabel" name="player1RemainingBridgesLabel">
    <property name="geometry">
     <rect>
-     <x>30</x>
-     <y>360</y>
-     <width>161</width>
-     <height>21</height>
+     <x>10</x>
+     <y>370</y>
+     <width>201</width>
+     <height>41</height>
     </rect>
    </property>
    <property name="font">
@@ -250,10 +250,10 @@
   <widget class="QLabel" name="player2RemainingDotsLabel">
    <property name="geometry">
     <rect>
-     <x>30</x>
-     <y>510</y>
-     <width>161</width>
-     <height>21</height>
+     <x>10</x>
+     <y>520</y>
+     <width>201</width>
+     <height>31</height>
     </rect>
    </property>
    <property name="font">
@@ -272,10 +272,10 @@
   <widget class="QLabel" name="player2RemainingBridgesLabel">
    <property name="geometry">
     <rect>
-     <x>30</x>
-     <y>530</y>
-     <width>161</width>
-     <height>21</height>
+     <x>10</x>
+     <y>540</y>
+     <width>201</width>
+     <height>41</height>
     </rect>
    </property>
    <property name="font">
@@ -294,7 +294,7 @@
   <widget class="QPushButton" name="undoButton">
    <property name="geometry">
     <rect>
-     <x>560</x>
+     <x>630</x>
      <y>90</y>
      <width>111</width>
      <height>41</height>
@@ -308,6 +308,25 @@
    </property>
    <property name="text">
     <string>Undo</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="getHintButton">
+   <property name="geometry">
+    <rect>
+     <x>430</x>
+     <y>90</y>
+     <width>111</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Comic Sans MS</family>
+     <pointsize>11</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>Get Hint</string>
    </property>
   </widget>
  </widget>

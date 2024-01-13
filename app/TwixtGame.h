@@ -58,9 +58,11 @@ public:
 	void moveBulldozer();
 	std::pair<uint8_t, uint8_t> getBulldozerPosition() const;
 
-	void undo();
+	bool undo();
 	std::vector<std::unique_ptr<Bridge>>& getBridges();
 	Dot::Status getDotStatus(uint8_t row, uint8_t col) const;
+
+	std::pair<std::pair<int,int>, std::pair<int, int>> minimax(Player* currentPlayer);
 
 
 private:

@@ -3,17 +3,17 @@
 GameStack::GameStack(uint16_t mode) : m_mode{ mode }
 {}
 
-std::stack<std::pair<Dot*, uint16_t>> GameStack::GetGameStack() const
+std::stack<std::pair<Dot*, uint16_t>> GameStack::getGameStack() const
 {
 	return m_stack;
 }
 
-std::stack<Peg> GameStack::GetDeletedBridgesDotStack() const
+std::stack<Peg> GameStack::getDeletedBridgesDotStack() const
 {
 	return m_deletedBridgesDotStack;
 }
 
-std::stack<Peg> GameStack::GetAddedBridgesDotStack() const
+std::stack<Peg> GameStack::getAddedBridgesDotStack() const
 {
 	return m_addedBridgesDotStack;
 }

@@ -27,9 +27,9 @@ public:
 	GameStack(uint16_t mode);
 
 	//getter
-	std::stack<std::pair<Dot*, uint16_t>> GetGameStack() const;
-	std::stack<Peg> GetDeletedBridgesDotStack() const;
-	std::stack<Peg> GetAddedBridgesDotStack() const;
+	std::stack<std::pair<Dot*, uint16_t>> getGameStack() const;
+	std::stack<Peg> getDeletedBridgesDotStack() const;
+	std::stack<Peg> getAddedBridgesDotStack() const;
 	void popGameStack();
 	void popDeletedBridgesStack();
 	void popAddedBridgesStack();

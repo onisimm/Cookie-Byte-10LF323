@@ -1,6 +1,9 @@
 #pragma once
 
 #include <QWidget>
+#include <QPainter>
+#include <QColor>
+#include <QPoint>
 
 class BridgeWidget : public QWidget {
     Q_OBJECT
@@ -8,13 +11,19 @@ class BridgeWidget : public QWidget {
 public:
     explicit BridgeWidget(QWidget* parent = nullptr);
 
-    void setPositionAndSize(int startX, int startY, int endX, int endY);
-    void setColor(const QColor& color);
+    void setStartPosition(const QPoint& startPos);
+    void setEndPosition(const QPoint& endPos);
+    void setLineColor(const QColor& color);
+
+    QColor getLineColor() const;
+    QPoint getStartPosition() const;
+    QPoint getEndPosition() const;
 
 protected:
     void paintEvent(QPaintEvent* event) override;
 
 private:
-    QColor currentColor;
-    QRect bridgeRect;
+    QPoint startPosition;
+    QPoint endPosition;
+    QColor lineColor;
 };

@@ -20,6 +20,7 @@ public:
     QColor getDotColor(int row, int col) const;
 
     void drawBridge(const int& startRow, const int& startCol, const int& endRow, const int& endCol, const QColor& color);
+    void deleteBridges();
     void deleteBridge(const int& startRow, const int& startCol, const int& endRow, const int& endCol);
 
 signals:

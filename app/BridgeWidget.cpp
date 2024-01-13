@@ -1,23 +1,40 @@
 #include "BridgeWidget.h"
-#include <QPainter>
 
-BridgeWidget::BridgeWidget(QWidget* parent) : QWidget(parent) {}
+BridgeWidget::BridgeWidget(QWidget* parent) : QWidget(parent), lineColor(Qt::black) {}
 
-void BridgeWidget::setPositionAndSize(int startX, int startY, int endX, int endY) {
-    // Set geometry based on start and end coordinates
-    bridgeRect.setRect(startX, startY, endX - startX, endY - startY);
-    setGeometry(bridgeRect);
+void BridgeWidget::setStartPosition(const QPoint& startPos) {
+    startPosition = startPos;
 }
 
-void BridgeWidget::setColor(const QColor& color)
+void BridgeWidget::setEndPosition(const QPoint& endPos) {
+    endPosition = endPos;
+}
+
+void BridgeWidget::setLineColor(const QColor& color) {
+    lineColor = color;
+}
+
+QColor BridgeWidget::getLineColor() const
 {
-    currentColor = color;
-	update(); // repaint
+    return lineColor;
+}
+
+QPoint BridgeWidget::getStartPosition() const
+{
+    return startPosition;
+}
+
+QPoint BridgeWidget::getEndPosition() const
+{
+    return endPosition;
 }
 
 void BridgeWidget::paintEvent(QPaintEvent* event) {
+    Q_UNUSED(event);
     QPainter painter(this);
     painter.setRenderHint(QPainter::Antialiasing);
-    painter.setPen(currentColor);
-    painter.drawLine(bridgeRect.topLeft(), bridgeRect.bottomRight());
+
+    QPen pen(lineColor, 2); // Line width 2, can be adjusted as needed
+    painter.setPen(pen);
+    painter.drawLine(startPosition, endPosition);
 }

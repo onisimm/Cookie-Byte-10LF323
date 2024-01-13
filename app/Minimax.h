@@ -53,7 +53,7 @@ namespace twixt {
 	public:
 		Minimax() = default;
 		Minimax(Board& board);
-		void suggestMove(Dot::Status status);
+		std::pair<Observer_ptr<Peg>, Observer_ptr<Peg>> suggestMove(Dot::Status status);
 
 
 	};

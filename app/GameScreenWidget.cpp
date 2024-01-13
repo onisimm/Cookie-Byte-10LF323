@@ -109,7 +109,6 @@ void GameScreenWidget::setupConnections()
     // a Save Game button, a Reset Game button,
     connect(ui->backToMenuButton, &QPushButton::clicked, this, &GameScreenWidget::on_backToMenuButton_clicked);
     connect(ui->undoButton, &QPushButton::clicked, this, &GameScreenWidget::handleUndoButtonClicked);
-   // connect(this, &GameScreenWidget::on_undoButton_clicked, this, &GameScreenWidget::handleUndoButtonClicked);
     connect(gameBoard, &GameBoardWidget::dotPressed, this, &GameScreenWidget::handleDotPressed);
     connect(ui->switchTurnButton, &QPushButton::clicked, this, &GameScreenWidget::switchTurns);
 }
@@ -217,6 +216,7 @@ void GameScreenWidget::updateGameBoardFromBackend()
 		}
 	}
 
+    this->gameBoard->deleteBridges();
     for (auto& bridge : this->backendGame->getBridges()) {
         std::pair<uint8_t, uint8_t> firstPeg = { bridge.get()->getFirstPillar().GetPointer()->getCoordI(), bridge.get()->getFirstPillar().GetPointer()->getCoordJ() };
         std::pair<uint8_t, uint8_t> secondPeg = { bridge.get()->getSecondPillar().GetPointer()->getCoordI(), bridge.get()->getSecondPillar().GetPointer()->getCoordJ() };
@@ -356,7 +356,9 @@ void GameScreenWidget::switchTurns() {
 void GameScreenWidget::handleUndoButtonClicked() 
 {
     if (!isGameOver) {
-        this->backendGame->undo();
+        if (!this->backendGame->undo()) {
+            ui->gameMessageLabel->setText("Cannot undo");
+        }
         updateGameBoardFromBackend();
         updateUIBasedOnPlayerTurn();
     }

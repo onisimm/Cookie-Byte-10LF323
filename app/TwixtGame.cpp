@@ -204,10 +204,15 @@ void TwixtGame::explodeMine(uint8_t row, uint8_t col, Player* currentPlayer)
 	m_gameStack.AddInGameStack(Observer_ptr<Dot>(m_board->getMatrixDot(row, col).get()), uint16_t(m_board->getMatrixDot(row, col)->getStatus()));
 }
 
-void TwixtGame::undo()
+bool TwixtGame::undo()
 {
-	Undo undo(m_gameStack, m_board);
-	undo.pressed();
+	if (m_gameStack.getGameStack().size() > 0)
+	{
+		Undo undo(m_gameStack, m_board);
+		undo.pressed();
+		return true;
+	}
+	return false;
 }
 
 std::vector<std::unique_ptr<twixt::Bridge>>& TwixtGame::getBridges()
@@ -241,4 +246,15 @@ void TwixtGame::moveBulldozer()
 std::pair<uint8_t, uint8_t> TwixtGame::getBulldozerPosition() const
 {
 	return { m_board->m_bulldozer.GetPointer()->getCoordI(), m_board->m_bulldozer.GetPointer()->getCoordJ() };
+}
+
+std::pair<std::pair<int,int>, std::pair<int, int>> TwixtGame::minimax(Player* currentPlayer)
+{
+	Minimax suggestion(*m_board);
+	std::pair<Observer_ptr<Peg>, Observer_ptr<Peg>> myPegs;
+	if (currentPlayer->getPlayerType() == PlayerType::Player1)
+		myPegs = suggestion.suggestMove(Dot::Status::Player1);
+	else myPegs = suggestion.suggestMove(Dot::Status::Player2);
+	return { {myPegs.first.GetPointer()->getCoordI(), myPegs.first.GetPointer()->getCoordJ()}, {myPegs.second.GetPointer()->getCoordI(), myPegs.second.GetPointer()->getCoordJ()}};
+
 }

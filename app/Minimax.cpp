@@ -1,4 +1,6 @@
 #include "Minimax.h"
+#include "..//DLL//Dot.h"
+#include "..//DLL//Peg.h"
 
 uint16_t twixt::Minimax::evaluate(std::pair<Observer_ptr<Peg>, Observer_ptr<Peg>> bridgeToEvaluate)
 {
@@ -172,11 +174,9 @@ bool twixt::Minimax::existsBridgeBetween(Observer_ptr<Peg> firstPeg, Observer_pt
     return false;
 }
 
-twixt::Minimax::Minimax(Board& board) : copyOfBoard{board}
-{
-}
+twixt::Minimax::Minimax(Board& board) : copyOfBoard{board} {}
 
-void twixt::Minimax::suggestMove(Dot::Status status)
+std::pair<twixt::Observer_ptr<twixt::Peg>, twixt::Observer_ptr<twixt::Peg>> twixt::Minimax::suggestMove(Dot::Status status)
 {
     std::pair<Observer_ptr<Peg>, Observer_ptr<Peg>>myBridge = minimax(status);
     if (myBridge != std::make_pair(nullptr, nullptr))
@@ -187,4 +187,5 @@ void twixt::Minimax::suggestMove(Dot::Status status)
     {
         std::cout << " -> In this case there are no suggestions.\n";
     }
+    return myBridge ; 
 }

@@ -193,9 +193,9 @@ void TwixtGame::GameLoop(Board& board, Player player1, Player player2)
 				player1.setRemainingDots(player1.getRemainingDots() + 1);
 				player2.setRemainingDots(player2.getRemainingDots() - 1);
 
-				std::pair<size_t, size_t> firstRedDot = { m_gameStack.GetGameStack().top().first->getCoordI(),m_gameStack.GetGameStack().top().first->getCoordJ() };
+				std::pair<size_t, size_t> firstRedDot = { m_gameStack.getGameStack().top().first->getCoordI(),m_gameStack.getGameStack().top().first->getCoordJ() };
 				board.getDot(firstRedDot.first, firstRedDot.second).get()->setStatus(Dot::DotStatus::Player2);
-				m_gameStack.GetGameStack().top().first->setStatus(Dot::DotStatus::Player2);
+				m_gameStack.getGameStack().top().first->setStatus(Dot::DotStatus::Player2);
 
 				if(!isReseted)
 				{

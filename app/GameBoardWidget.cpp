@@ -72,36 +72,60 @@ QColor GameBoardWidget::getDotColor(int row, int col) const
 }
 
 void GameBoardWidget::drawBridge(const int& startRow, const int& startCol, const int& endRow, const int& endCol, const QColor& color) {
-    DotWidget* startDot = qobject_cast<DotWidget*>(layout->itemAtPosition(startRow, startCol)->widget());
-    DotWidget* endDot = qobject_cast<DotWidget*>(layout->itemAtPosition(endRow, endCol)->widget());
+    // Assume DotWidget size is uniform and calculate the center point for start and end dots
+    QRect startDotRect = layout->itemAtPosition(startRow, startCol)->widget()->geometry();
+    QRect endDotRect = layout->itemAtPosition(endRow, endCol)->widget()->geometry();
+    QPoint startPoint = startDotRect.center();
+    QPoint endPoint = endDotRect.center();
 
-    if (!startDot || !endDot) return; // Safety check
+    // Create a BridgeWidget or find it if it already exists
+    QPair<int, int> startPair = qMakePair(startRow, startCol);
+    QPair<int, int> endPair = qMakePair(endRow, endCol);
+    BridgeWidget* bridge;
 
-    int startX = mapToParent(startDot->pos()).x() + startDot->width() / 2;
-    int startY = mapToParent(startDot->pos()).y() + startDot->height() / 2;
-    int endX = mapToParent(endDot->pos()).x() + endDot->width() / 2;
-    int endY = mapToParent(endDot->pos()).y() + endDot->height() / 2;
+    // Check if the bridge already exists
+    if (bridges.contains(startPair) && bridges[startPair] == bridges[endPair]) {
+        bridge = bridges[startPair];
+    }
+    else {
+        bridge = new BridgeWidget(this);
+        bridge->setObjectName(QStringLiteral("Bridge_%1_%2_to_%3_%4").arg(startRow).arg(startCol).arg(endRow).arg(endCol));
+        bridges[startPair] = bridge;
+        bridges[endPair] = bridge;
+    }
 
-    BridgeWidget* bridge = new BridgeWidget(this);
-    bridge->setPositionAndSize(startX, startY, endX, endY);
-    bridge->setColor(color);
-    bridge->show();
-    bridge->raise(); // Bring the bridge to the front
+    // Configure the BridgeWidget
+    bridge->setStartPosition(startPoint);
+    bridge->setEndPosition(endPoint);
+    bridge->setLineColor(color);
+    bridge->show(); // Make sure the bridge is visible
 
-    QPair<int, int> key = qMakePair((startRow << 16) | startCol, (endRow << 16) | endCol);
-    bridges.insert(key, bridge);
+    update(); // Update the GameBoardWidget to repaint
+}
+
+void GameBoardWidget::deleteBridges()
+{
+    for (auto bridge : bridges) {
+		deleteBridge(bridge->getStartPosition().x(), bridge->getStartPosition().y(), bridge->getEndPosition().x(), bridge->getEndPosition().y());
+	}
 }
 
 
 void GameBoardWidget::deleteBridge(const int& startRow, const int& startCol, const int& endRow, const int& endCol) {
-    QPair<int, int> key = qMakePair((startRow << 16) | startCol, (endRow << 16) | endCol);
-    BridgeWidget* bridge = bridges.value(key, nullptr);
-    if (bridge) {
-        bridge->hide();
-        bridge->deleteLater();
-        bridges.remove(key);
+    QPair<int, int> startPair = qMakePair(startRow, startCol);
+    QPair<int, int> endPair = qMakePair(endRow, endCol);
+
+    if (bridges.contains(startPair) && bridges[startPair] == bridges[endPair]) {
+        BridgeWidget* bridge = bridges[startPair];
+        bridges.remove(startPair);
+        bridges.remove(endPair);
+        bridge->hide(); // Hide the bridge
+        bridge->setVisible(false); // Optionally delete the bridge
     }
+
+    update(); // Update the GameBoardWidget to repaint
 }
+
 
 void GameBoardWidget::paintEvent(QPaintEvent* event) {
     QWidget::paintEvent(event);  // Call the superclass paintEvent
@@ -148,4 +172,10 @@ void GameBoardWidget::paintEvent(QPaintEvent* event) {
     QPoint rightTop(lastDotRect.right() + (distanceBetweenDots / 2), firstDotRect.top());
     QPoint rightBottom(lastDotRect.right() + (distanceBetweenDots / 2), lastDotRect.bottom());
     painter.drawLine(rightTop, rightBottom);
+
+    for (auto bridge : bridges) {
+		pen.setColor(bridge->getLineColor());
+		painter.setPen(pen);
+		painter.drawLine(bridge->getStartPosition(), bridge->getEndPosition());
+	}
 }

@@ -30,11 +30,17 @@ public:
 	void setMaxDots(const uint8_t& maxDots);
 	void setMaxBridges(const uint8_t& maxBridges);
 	void setGameBoardSize(const uint8_t& size);
+	void setPlayer1(Player* player1);
+	void setPlayer2(Player* player2);
 
 	//getter
 	GameStack getGameStack() const;
 
+	void initializeGame();
+
 private:
+	Board* m_board;
+	Player* m_player1, * m_player2;
 	GameModeType m_gameMode;
 	GameStack m_gameStack;
 	SaveGame saveGame;

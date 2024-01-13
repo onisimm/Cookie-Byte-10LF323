@@ -2,8 +2,6 @@
 #include <iostream>
 
 namespace twixt {
-
-    // Constructors
     Dot::Dot() : m_status{ DotStatus::Clear }, m_i{ 0 }, m_j{ 0 } {}
     Dot::Dot(size_t i, size_t j) : m_status{ DotStatus::Clear }, m_i{ i }, m_j{ j } {}
     Dot::Dot(const Dot& newDot) : m_status{ newDot.m_status }, m_i{ newDot.m_i }, m_j{ newDot.m_j }

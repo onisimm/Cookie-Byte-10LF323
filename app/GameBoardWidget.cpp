@@ -50,6 +50,37 @@ void GameBoardWidget::setDotColor(int row, int col, const QColor& color)
     }
 }
 
+void GameBoardWidget::drawBridge(const int& startRow, const int& startCol, const int& endRow, const int& endCol, const QColor& color) {
+    QPair<int, int> key = qMakePair((startRow << 16) | startCol, (endRow << 16) | endCol);
+    if (bridges.contains(key)) {
+        return; // Bridge already exists
+    }
+
+    QWidget* startDotWidget = layout->itemAtPosition(startRow, startCol)->widget();
+    QWidget* endDotWidget = layout->itemAtPosition(endRow, endCol)->widget();
+
+    QRect startRect = startDotWidget->geometry();
+    QRect endRect = endDotWidget->geometry();
+
+    BridgeWidget* bridge = new BridgeWidget(this);
+    bridge->setPositionAndSize(startRect.center().x(), startRect.center().y(),
+        endRect.center().x(), endRect.center().y());
+    bridge->show();
+
+    bridges.insert(key, bridge);
+
+    bridge->setColor(color);
+}
+
+void GameBoardWidget::deleteBridge(const int& startRow, const int& startCol, const int& endRow, const int& endCol) {
+    QPair<int, int> key = qMakePair((startRow << 16) | startCol, (endRow << 16) | endCol);
+    BridgeWidget* bridge = bridges.value(key, nullptr);
+    if (bridge) {
+        bridge->deleteLater();
+        bridges.remove(key);
+    }
+}
+
 void GameBoardWidget::paintEvent(QPaintEvent* event) {
     QWidget::paintEvent(event);  // Call the superclass paintEvent
 

@@ -1,98 +1,40 @@
 ﻿#include "Player.h"
 
 namespace twixt {
-	Player::Player(std::string name, Color color, uint16_t remainingDots) :
-		m_name{ name }, m_color{ color }, m_remainingDots{ remainingDots } {}
+	Player::Player(uint8_t remainingDots, uint8_t remainingBridges) :
+		m_remainingDots{ remainingDots }, 
+		m_remainingBridges{ remainingBridges } {}
 
-	Player::Player(const Player& newPlayer) :
-		m_name{ newPlayer.m_name }, m_color{ newPlayer.m_color }, m_remainingDots{ newPlayer.m_remainingDots } {}
+	Player::Player(const Player& newPlayer) : 
+		m_remainingDots{ newPlayer.m_remainingDots }, 
+		m_remainingBridges{ newPlayer.m_remainingBridges } {}
 
-	// Implementarea move constructorului
-	twixt::Player::Player(Player&& other) noexcept : m_name(std::move(other.m_name)), m_color(other.m_color), m_remainingDots(other.m_remainingDots) {
-		// Setăm membrii altui obiect pe nullptr sau valorile implicite
-		other.m_name.clear();
-		other.m_color = Color::NoColor;
-		other.m_remainingDots = 0;
-
+	Player::Player(Player&& other) noexcept
+	{
+		m_remainingDots = other.m_remainingDots;
+		m_remainingBridges = other.m_remainingBridges;
 	}
 
 	Player::~Player() {}
 
-	std::string Player::getName() const
-	{
-		return m_name;
-	}
-
-	Player::Color Player::getColor() const
-	{
-		return m_color;
-	}
-
-	uint16_t Player::getRemainingDots() const
+	uint8_t Player::getRemainingDots() const
 	{
 		return m_remainingDots;
 	}
 
-	void Player::setName(std::string name)
+	uint8_t Player::getRemainingBridges() const
 	{
-		m_name = name;
+		return m_remainingBridges;
 	}
 
-	void Player::setColor(Color color)
-	{
-		m_color = color;
-	}
-
-	void Player::setRemainingDots(uint16_t remainingDots)
+	void Player::setRemainingDots(uint8_t remainingDots)
 	{
 		m_remainingDots = remainingDots;
 	}
 
-	std::pair<Dot*, uint16_t> Player::turn(Board& board)
+	void Player::setRemainingBridges(uint8_t remainingBridges)
 	{
-		std::cout << "Enter position: ";
-
-		size_t i, j;
-		std::cin >> i >> j;
-		bool didMineExplode = false;
-
-		if (m_color == Color::Red)
-		{
-			if (j != 0 && j != (board.getSize() - 1))
-			{
-				board.changeDotStatus(i, j, Dot::DotStatus::Player1, didMineExplode);
-				if (!didMineExplode)
-				{
-					m_remainingDots--;
-					return { board.getDot(i, j), uint16_t(board.getDot(i, j)->getStatus()) };
-				}
-				return { board.getDot(i, j), uint16_t(Dot::DotStatus::Mines) };
-
-
-			}
-			else {
-				std::cout << "Not possible! Try again!\n";
-				return turn(board);
-			}
-		}
-		else
-		{
-			if (i != 0 && i != (board.getSize() - 1))
-			{
-				board.changeDotStatus(i, j, Dot::DotStatus::Player2, didMineExplode);
-				if (!didMineExplode)
-				{
-					m_remainingDots--;
-					return { board.getDot(i, j), uint16_t(board.getDot(i, j)->getStatus()) };
-				}
-				return { board.getDot(i, j), uint16_t(Dot::DotStatus::Mines) };
-
-			}
-			else {
-				std::cout << "Not possible! Try again!\n";
-				return turn(board);
-			}
-		}
+		m_remainingBridges = remainingBridges;
 	}
 
 	bool Player::hasRemainingDots()
@@ -100,10 +42,13 @@ namespace twixt {
 		return m_remainingDots > 0;
 	}
 
-	std::istream& operator>>(std::istream& in, Player& player)
+	bool Player::hasRemainingBridges()
 	{
-		in >> player.m_name;
-		player.setName(player.m_name);
-		return in;
+		return m_remainingBridges > 0;
+	}
+
+	void Player::addDot(Dot* dot)
+	{
+		existingDots.push(dot);
 	}
 }

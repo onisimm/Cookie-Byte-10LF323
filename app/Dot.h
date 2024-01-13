@@ -10,7 +10,6 @@ namespace twixt {
     class Bridge;
     class Dot {
     public:
-
         enum class DotStatus : uint8_t
         {
             Player1, // occupied by player 1
@@ -21,33 +20,26 @@ namespace twixt {
             Exploded // exploded after a mine exploded
         };
 
-        // Constructors
-        Dot(); // default
+        Dot();
         Dot(size_t, size_t);
-        Dot(const Dot& newDot); // copy constructor
-        Dot(Dot&& other) noexcept; // Add move constructor
+        Dot(const Dot& newDot);
+        Dot(Dot&& other) noexcept;
 
-        // Destructor 
         virtual ~Dot();
 
-        // Getters
         size_t getCoordI() const;
         size_t getCoordJ() const;
         DotStatus getStatus() const;
-
-        // Setters
+      
         void setCoordI(size_t);
         void setCoordJ(size_t);
         void setStatus(const DotStatus&);
-
-        // Operators overload
+      
         Dot& operator=(const Dot& newDot); // = overload
         Dot& operator=(Dot&& other) noexcept;  // Add move assignment operator
         bool operator==(const Dot& otherDot) const; // == overload 
-        // ? friend std::ostream& operator<<(std::ostream& os, const Dot& dot); // << overload
 
     protected:
-
         DotStatus m_status : 3;
         size_t m_i, m_j; // coordinates;
     };

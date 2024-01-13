@@ -66,11 +66,15 @@ void GameScreenWidget::setupUIPlayers(const Ui::GameSettings& settings) {
             playerUI.timerLabel->setPalette(palette);
 
             connect(playerUI.timer, &QTimer::timeout, this, [this, &playerUI]() { updateTimer(playerUI); });
+
+            playerUI.backendPlayer = new twixt::Player(maxDots, maxBridges);
         };
 
     setupPlayer(player1UI, ui->player1NameLabel, ui->player1TimerLabel, settings.player1Name, settings.timeLimit, Qt::red);
+    game->setPlayer1(player1UI.backendPlayer);
 
     setupPlayer(player2UI, ui->player2NameLabel, ui->player2TimerLabel, settings.player2Name, settings.timeLimit, Qt::black);
+    game->setPlayer2(player2UI.backendPlayer);
 
     initialPlayerFont = player1UI.nameLabel->font();
 }
@@ -85,10 +89,14 @@ void GameScreenWidget::applyGameSettings(const Ui::GameSettings& settings) {
     setGamemode(settings.gamemode);
 
     gameBoard->buildBoard();
+    game->initializeGame();
 }
 
 void GameScreenWidget::setupConnections()
 {
+    // TOOD back to menu button becomes menu
+    // inside menu there will be a button to go back to the main menu
+    // a Save Game button, a Reset Game button,
     connect(ui->backToMenuButton, &QPushButton::clicked, this, &GameScreenWidget::on_backToMenuButton_clicked);
     connect(gameBoard, &GameBoardWidget::dotPressed, this, &GameScreenWidget::handleDotPressed);
     connect(ui->switchTurnButton, &QPushButton::clicked, this, &GameScreenWidget::switchPlayer);
@@ -149,8 +157,19 @@ void GameScreenWidget::endGame()
 
 void GameScreenWidget::handleDotPressed(int row, int col) {
     if (!isGameOver) {
-        gameBoard->setDotColor(row, col, Qt::red);
+        Ui::UIPlayer& activePlayer = (currentPlayer == 1) ? player1UI : player2UI; // current player's turn
+        gameBoard->setDotColor(row, col, activePlayer.color);
         ableToSwitchPlayer = true;
+        // TODO
+        // after the first dot, make available  the possibility to build bridges (e.g. bool ableToBuildBridges = true)
+        // if dotPlaced is true, then the player can build bridges 
+        // if dotPicked is available -> firstDotForBridge is picked, make the dot Blue (maybe a pair of row col of the dot) 
+        // while firstDotForBridge & !secondDotForBridge -> Popup when clicking switch player (do you want to cancel the bridge?)
+                // ooorrr, just make a cancel button (show / hide when the player clicks on the first dot)
+        // if dotPicked is available -> secondDotForBridge is picked, make the first dot player color again (maybe a pair of row col of the dot)
+        // if distance is right for a bridge, then build the bridge of playercolor (bridge between firstDotForBridge and secondDotForBridge)
+        // if distance is wrong, then cancel the bridge, make the dots playerColor again (unassign firstDotForBridge and secondDotForBridge)
+
     }
 }
 
@@ -160,9 +179,11 @@ void GameScreenWidget::switchPlayer() {
         updateUIBasedOnPlayerTurn();
     }
     else {
+        // TODO make screen logging more descriptive
+        // Also, clear the message when the player is able to switch again / after 3 seconds
         if (isGameOver)
 			ui->gameMessageLabel->setText("The game is over. Please return to the main menu.");
-		else if (!ableToSwitchPlayer)
+		else if (!ableToSwitchPlayer) 
             ui->gameMessageLabel->setText("Unable to switch the player.");
     }
 }

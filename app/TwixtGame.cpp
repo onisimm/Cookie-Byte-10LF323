@@ -83,7 +83,7 @@ void TwixtGame::placeDot(uint8_t row, uint8_t col, Player* currentPlayer)
 		m_board->getMatrix()[row][col]->setStatus(Dot::Status::Player2);
 
 	m_gameStack.AddInGameStack(Observer_ptr<Dot>(m_board->getMatrix()[row][col].get()), uint16_t(m_board->getMatrix()[row][col]->getStatus()));
-
+	currentPlayer->setRemainingDots(currentPlayer->getRemainingDots() - 1);
 }
 
 uint8_t TwixtGame::ableToPlaceDot(uint8_t row, uint8_t col, Player* currentPlayer)
@@ -126,6 +126,7 @@ void TwixtGame::buildBridge(uint8_t row1, uint8_t col1, uint8_t row2, uint8_t co
 	m_board->addBridgeInBoard(Observer_ptr<Peg>(dynamic_cast<Peg*>(m_board->getMatrixDot(row1, col1).get())), Observer_ptr<Peg>(dynamic_cast<Peg*>(m_board->getMatrixDot(row2, col2).get())));
 	m_gameStack.AddInGameStack(Observer_ptr<Dot>(m_board->getMatrixDot(row1, col1).get()), ADDBRIDGE);
 	m_gameStack.AddInAddedBridgesDotStack(*(dynamic_cast<Peg*>(m_board->getMatrixDot(row2, col2).get())));
+
 	currentPlayer->setRemainingBridges(currentPlayer->getRemainingBridges() - 1);
 }
 

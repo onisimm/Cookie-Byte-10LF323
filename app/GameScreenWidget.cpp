@@ -75,16 +75,16 @@ void GameScreenWidget::setupUIPlayers(const Ui::GameSettings& settings) {
     backendGame->setPlayer1(player1UI.backendPlayer);
     gameBoard->setPlayer1Color(player1UI.color);
     player1UI.backendPlayer->setPlayerType(twixt::PlayerType::Player1);
-    player1UI.backendPlayer->setRemainingDots(maxDots);
-    player1UI.backendPlayer->setRemainingBridges(maxBridges);
+    player1UI.backendPlayer->setRemainingDots(settings.maxDots);
+    player1UI.backendPlayer->setRemainingBridges(settings.maxBridges);
 
     QColor player2Color(0, 102, 204); // for player 2
     setupPlayer(player2UI, ui->player2NameLabel, ui->player2TimerLabel, settings.player2Name, settings.timeLimit, player2Color);
     backendGame->setPlayer2(player2UI.backendPlayer);
     gameBoard->setPlayer2Color(player2UI.color);
     player2UI.backendPlayer->setPlayerType(twixt::PlayerType::Player2);
-    player2UI.backendPlayer->setRemainingDots(maxDots);
-    player2UI.backendPlayer->setRemainingBridges(maxBridges);
+    player2UI.backendPlayer->setRemainingDots(settings.maxDots);
+    player2UI.backendPlayer->setRemainingBridges(settings.maxBridges);
 
     initialPlayerFont = player1UI.nameLabel->font();
 }
@@ -222,7 +222,7 @@ void GameScreenWidget::handleDotPressed(int row, int col) {
                 ableToSwitchTurns = true;
             }
 		}
-        else { // If it's not able to build bridges, it means the player is placing a dot
+        else if (!ableToBuildBridges) { // If it's not able to build bridges, it means the player is placing a dot
             uint8_t ableToPlaceDotResult = this->backendGame->ableToPlaceDot(row, col, activePlayer.backendPlayer);
             if (ableToPlaceDotResult == 0) {
                 gameBoard->setDotColor(row, col, activePlayer.color);
@@ -247,6 +247,8 @@ void GameScreenWidget::handleDotPressed(int row, int col) {
 			}
 		}
     }
+
+    updateUIBasedOnPlayerTurn();
 }
 
 void GameScreenWidget::switchTurns() {
@@ -261,7 +263,6 @@ void GameScreenWidget::switchTurns() {
         ableToBuildBridges = false;
 
         ui->gameMessageLabel->setText("");
-        updateUIBasedOnPlayerTurn();
     }
     else {
         // TODO make screen logging more descriptive

@@ -1,12 +1,10 @@
 #pragma once
+
 #include <vector>
 #include <array>
 #include <iostream>
 #include <random>
 #include <vector>
-
-#ifndef BOARD_H
-#define BOARD_H
 
 namespace twixt {
 	int orientation(const Dot& p, const Dot& q, const Dot& r);

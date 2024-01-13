@@ -1,8 +1,5 @@
 #pragma once
 
-#ifndef BRIDGE_H
-#define BRIDGE_H
-
 #include "Peg.h"
 
 namespace twixt {
@@ -36,5 +33,3 @@ namespace twixt {
 		void rebuiltBridge();
 	};
 }
-
-#endif // BRIDGE_H

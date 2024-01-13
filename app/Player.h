@@ -1,6 +1,5 @@
+#pragma once
 
-#ifndef PLAYER_H
-#define PLAYER_H
 #include <cstdint>
 #include <iostream>
 #include <stack>
@@ -48,5 +47,3 @@ namespace twixt {
 		uint16_t m_remainingDots;
 	};
 }
-
-#endif

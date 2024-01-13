@@ -1,11 +1,4 @@
-//dot.h
-
 #pragma once
-
-
-
-#ifndef DOT_H
-#define DOT_H
 
 #include <cstdint>
 #include <iostream>
@@ -62,5 +55,3 @@ namespace twixt {
 
 #include "Mine.h"
 #include "Bridge.h"
-
-#endif // !DOT_H

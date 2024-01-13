@@ -1,15 +1,11 @@
 #include "Bridge.h"
+#include <utility>
 
+twixt::Bridge::Bridge(const Bridge& bridge) : m_firstPillar{ bridge.m_firstPillar }, m_secondPillar{ bridge.m_secondPillar } {}
 
-twixt::Bridge::Bridge(const Bridge& bridge) : m_firstPillar{ bridge.m_firstPillar }, m_secondPillar{ bridge.m_secondPillar }
-{
-}
+twixt::Bridge::Bridge(Peg* firstPillar, Peg* secondPillar) : m_firstPillar{ firstPillar }, m_secondPillar{ secondPillar } {}
 
-twixt::Bridge::Bridge(Peg* firstPillar, Peg* secondPillar) : m_firstPillar{ firstPillar }, m_secondPillar{ secondPillar }
-{}
-
-twixt::Bridge::~Bridge()
-{}
+twixt::Bridge::~Bridge() {}
 
 twixt::Bridge& twixt::Bridge::operator=(const Bridge& bridge)
 {

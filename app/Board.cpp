@@ -2,8 +2,6 @@
 
 namespace twixt
 {
-
-	//this function shows the board
 	void Board::showBoard() const
 	{
 		for (size_t i = 0; i < m_matrixDot.size(); i++)

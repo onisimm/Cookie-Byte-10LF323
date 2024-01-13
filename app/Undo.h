@@ -1,8 +1,9 @@
 #pragma once
-#include<stack>
-#include "GameStack.h"
+
 #include "Board.h"
 #include "Bulldozer.h"
+#include "GameStack.h"
+#include <stack>
 
 namespace twixt {
 	class Undo

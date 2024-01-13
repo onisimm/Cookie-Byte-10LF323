@@ -2,8 +2,8 @@
 #include <vector>
 #include <array>
 #include <iostream>
-#include "Dot.h"
 #include <random>
+#include <vector>
 
 #ifndef BOARD_H
 #define BOARD_H

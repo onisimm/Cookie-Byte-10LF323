@@ -1,9 +1,6 @@
 #pragma once
 
-#ifndef BULLDOZER_H
-#define BULLDOZER_H
-
-#include"Board.h"
+#include "Board.h"
 #include <random>
 #include <stack>
 
@@ -32,6 +29,3 @@ namespace twixt {
 		void setToPreviousPosition(Board& board);
 	};
 }
-
-
-#endif

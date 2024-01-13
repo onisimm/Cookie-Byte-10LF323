@@ -1,5 +1,5 @@
-#include "GameBoardWidget.h"
 #include "DotWidget.h"
+#include "GameBoardWidget.h"
 #include <QGridLayout>
 #include <QPainter>
 #include <QRect>
@@ -9,24 +9,28 @@ GameBoardWidget::GameBoardWidget(QWidget* parent) : QWidget(parent) {}
 void GameBoardWidget::buildBoard()
 {
     layout = new QGridLayout(this);
-    layout->setSpacing(0.5); // Set this to the desired spacing between dots
+
+    layout->setSpacing(0.5); // Spacing between dots
 
     // Adjust the margins around the grid
     int marginHorizontal = 5; // Horizontal margin; adjust as needed
     int marginVertical = 5;
     layout->setContentsMargins(marginHorizontal, marginVertical, marginHorizontal, marginVertical);
 
+    if (gameboardSize == -1) {
+        gameboardSize = 24; // Default gameboard size: 24x24
+	}
+
     for (int row = 0; row < gameboardSize; ++row) {
         for (int col = 0; col < gameboardSize; ++col) {
-            // put dots everywhere but the corners of the matrix
+            // Place dots everywhere except the corners of the matrix
             if (!(row == 0 && col == 0) && !(row == 0 && col == (gameboardSize - 1)) &&
                 !(row == (gameboardSize - 1) && col == 0) && !(row == (gameboardSize - 1) && col == (gameboardSize - 1))) {
                 DotWidget* dot = new DotWidget(this);
                 layout->addWidget(dot, row, col);
                 connect(dot, &DotWidget::pressedChanged, this, [this, row, col]() {
-                    QColor color = isPlayer1CurrentPlayer ? Qt::red : Qt::black;
-                    emit dotPressed(row, col, color);
-                    });
+                    emit dotPressed(row, col);
+                });
             }
         }
     }
@@ -35,12 +39,6 @@ void GameBoardWidget::buildBoard()
 void GameBoardWidget::setGameboardSize(const uint8_t& size)
 {
     this->gameboardSize = size;
-    buildBoard();
-}
-
-void GameBoardWidget::setCurrentPlayer(const bool& turn)
-{
-    isPlayer1CurrentPlayer = turn;
 }
 
 void GameBoardWidget::setDotColor(int row, int col, const QColor& color)

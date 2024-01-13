@@ -1,32 +1,35 @@
 #pragma once
 
-#include "Dot.h"
+#include "Peg.h"
 
 namespace twixt {
+	class Peg;
 	class Bridge
 	{
 	private:
-		Dot* m_firstPillar;
-		Dot* m_secondPillar;
+		Peg* m_firstPillar;
+		Peg* m_secondPillar;
 	public:
-		Bridge()= default;
+		Bridge() = default;
 		Bridge(const Bridge& bridge);
-		Bridge(Dot* firstDot, Dot* secondDot);
+		Bridge(Peg* firstPillar, Peg* secondPillar);
 		~Bridge();
-		
+
+		Bridge& operator=(const Bridge& bridge);
+
 		//setter
-		void setPillars(Dot* first, Dot* second);
-		void setFirstPillar(Dot* pillar);
-		void setSecondPillar(Dot* pillar);
+		void setPillars(Peg* first, Peg* second);
+		void setFirstPillar(Peg* peg);
+		void setSecondPillar(Peg* peg);
 
 		//getter
-		Dot* getFirstPillar() const;
-		Dot* getSecondPillar() const;
-		std::pair<Dot*,Dot*> getPillars() const ;
+		Peg* getFirstPillar() const;
+		Peg* getSecondPillar() const;
+		std::pair<Peg*, Peg*> getPillars() const;
 
-		bool isPillarInBridge(Dot* dot);
+		bool isPillarInBridge(Peg* peg);
 		void deleteBridge();
-		Dot* returnTheOtherPillar(Dot* dot);
+		Peg* returnTheOtherPillar(Peg* peg);
 		void rebuiltBridge();
 	};
 }

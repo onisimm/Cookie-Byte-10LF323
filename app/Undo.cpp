@@ -3,7 +3,7 @@
 twixt::Undo::Undo(GameStack* gameStack, Board* gameBoard)
 {
 	Dot* topDot = gameStack->GetGameStack().top().first;
-	
+
 
 	if (Mine* ptrMine = dynamic_cast<Mine*>(topDot)) {
 		m_lastDot = ptrMine;
@@ -54,30 +54,32 @@ void twixt::Undo::pressed()
 
 void twixt::Undo::undoPlayers(Dot::DotStatus status)
 {
-	if (m_lastDot->getExistingBridges().size())
+	if (dynamic_cast<Peg*>(m_lastDot)->getExistingBridges().size())
 	{
-		board->getDot(m_lastDot->getCoordI(), m_lastDot->getCoordJ())->deleteAllBridgesForADot();
+		dynamic_cast<Peg*>(board->getDot(m_lastDot->getCoordI(), m_lastDot->getCoordJ()))->deleteAllBridgesForAPeg();
 	}
-	board->getDot(m_lastDot->getCoordI(), m_lastDot->getCoordJ())->setStatus(Dot::DotStatus::Clear);
+	//board->getDot(m_lastDot->getCoordI(), m_lastDot->getCoordJ())->setStatus(Dot::DotStatus::Clear);
+	delete board->getDot(m_lastDot->getCoordI(), m_lastDot->getCoordJ());
+	board->getDot(m_lastDot->getCoordI(), m_lastDot->getCoordJ()) = new Dot;
 }
 
 void twixt::Undo::undoBulldozer()
 {
 	Bulldozer* lastBulldozer = dynamic_cast<Bulldozer*>(m_lastDot);
-	int coordILastBulldozer = lastBulldozer->getCoordI();
-	int coordJLastBulldozer = lastBulldozer->getCoordJ();
+	size_t coordILastBulldozer = lastBulldozer->getCoordI();
+	size_t coordJLastBulldozer = lastBulldozer->getCoordJ();
 	//set lastBulldozer to previous position
 	lastBulldozer->setToPreviousPosition(*board);
-	
+
 	//make a copy of the last DestroyedDot
-	Dot copyOfDot = lastBulldozer->getDotDestroyed().top();
+	Peg copyOfDot = lastBulldozer->getPegDestroyed().top();
 	bool didMineExplode = false;
 	//delete the last dot that is on the i and j of the destroyedDot
 	delete board->getDot(coordILastBulldozer, coordJLastBulldozer);
 	//alocate memory that copies data form copyOfDot
 	board->getDot(coordILastBulldozer, coordJLastBulldozer) = new Dot(copyOfDot);
 	//delete existing bridges
-	board->getDot(coordILastBulldozer, coordJLastBulldozer)->clearExistingBridges();
+	//board->getDot(coordILastBulldozer, coordJLastBulldozer)->clearExistingBridges();
 	//build bridges for both copyOfDot and the other dot in bridge
 	for (auto bridges : copyOfDot.getExistingBridges())
 	{
@@ -90,7 +92,7 @@ void twixt::Undo::undoMines(Dot* mine)
 {
 	Mine* lastMine = dynamic_cast<Mine*>(mine);
 	bool didMineExplode = false;
-	
+
 	if (lastMine->getNewPlacedMine())
 	{
 		board->getMatrixDot(lastMine->getNewPlacedMine()->getCoordI(), lastMine->getNewPlacedMine()->getCoordJ())->setStatus(Dot::DotStatus::Clear);
@@ -109,7 +111,7 @@ void twixt::Undo::undoMines(Dot* mine)
 			std::cout << "REBUILT DOT " << elements->getCoordI() << " " << elements->getCoordJ() << "\n";
 			board->changeDotStatus(elements->getCoordI(), elements->getCoordJ(), elements->getStatus(), didMineExplode);
 			//de verificat zona de memorie cum se aloca ( daca elements este mina, sa se dealoce/aloce memorie corespunzator)
-			for (auto bridges : elements->getExistingBridges())
+			for (auto bridges : dynamic_cast<Peg*>(elements)->getExistingBridges())
 			{
 				bridges->rebuiltBridge();
 			}
@@ -121,5 +123,5 @@ void twixt::Undo::undoMines(Dot* mine)
 
 void twixt::Undo::undoDeleteBridge()
 {
-	board->getDot(m_lastDot->getCoordI(), m_lastDot->getCoordJ())->addBridge(m_deletedBridgeDot);
+	dynamic_cast<Peg*>(board->getDot(m_lastDot->getCoordI(), m_lastDot->getCoordJ()))->addBridge(dynamic_cast<Peg*>(m_deletedBridgeDot));
 }

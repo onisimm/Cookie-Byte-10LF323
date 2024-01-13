@@ -1,11 +1,11 @@
 #pragma once
 
-#include "Board.h"
-#include "Dot.h"
-#include "ObjectInStack.h"
 #include <cstdint>
 #include <iostream>
 #include <stack>
+#include "Board.h"
+#include "Dot.h"
+//#include "ObjectInStack.h"
 
 namespace twixt {
 	class Player {

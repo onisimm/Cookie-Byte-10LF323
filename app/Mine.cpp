@@ -1,6 +1,6 @@
 #include "Mine.h"
 
-twixt::Mine::Mine(const Mine& newMine): m_triggered{newMine.m_triggered}
+twixt::Mine::Mine(const Mine& newMine) : m_triggered{ newMine.m_triggered }
 {
 	for (auto element : newMine.m_explodedDots)
 	{
@@ -38,7 +38,7 @@ void twixt::Mine::setExplodedDots(Dot* explodedDot)
 		*newDot = *explodedDot;
 		m_explodedDots.push_back(newDot);
 	}
-	
+
 }
 
 void twixt::Mine::setNewPlacedMine(Mine* newPlacedMine)

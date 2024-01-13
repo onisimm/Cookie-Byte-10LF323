@@ -64,9 +64,6 @@
     <ClCompile Include="SaveGame.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ObjectInStack.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Player.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -86,6 +83,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="GameStack.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Peg.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="TwixtGame.cpp">
@@ -151,13 +151,13 @@
     <ClInclude Include="Player.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ObjectInStack.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="GameStack.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Board.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Peg.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="TwixtGame.h">

@@ -20,8 +20,6 @@ namespace twixt {
 		void undoBulldozer();
 		void undoMines(Dot* mine);
 		void undoDeleteBridge();
-		
+
 	};
 }
-
-

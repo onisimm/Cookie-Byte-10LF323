@@ -13,7 +13,7 @@ uint16_t twixt::Minimax::evaluate(std::pair<Observer_ptr<Peg>, Observer_ptr<Peg>
     return score;
 }
 
-std::pair<twixt::Observer_ptr<twixt::Peg>,twixt::Observer_ptr<twixt::Peg>> twixt::Minimax::minimax(Dot::DotStatus status)
+std::pair<twixt::Observer_ptr<twixt::Peg>,twixt::Observer_ptr<twixt::Peg>> twixt::Minimax::minimax(Dot::Status status)
 {
     uint16_t maximumScore = 0;
     std::pair<Observer_ptr<Peg>, Observer_ptr<Peg>> maximumBridge{ nullptr, nullptr };
@@ -150,7 +150,7 @@ void twixt::Minimax::scorePossibleBridges(Observer_ptr<Peg> dot)
 
         if (newY >= 0 && newY < copyOfBoard.get().getSize() && newX >= 0 && newX < copyOfBoard.get().getSize()) // check boundaries
         {
-            if (copyOfBoard.get().getMatrixDot(newY, newX)->getStatus() == dot.GetPointer()->getStatus() && dot.GetPointer()->getStatus() != Dot::DotStatus::Clear && copyOfBoard.get().checkObstructingBridges(*dynamic_cast<Peg*>(copyOfBoard.get().getMatrixDot(newY, newX).get()), *dot.GetPointer()) && !existsBridgeBetween(Observer_ptr<Dot>(copyOfBoard.get().getMatrixDot(newX, newY).get()).To<Peg>(),dot ))
+            if (copyOfBoard.get().getMatrixDot(newY, newX)->getStatus() == dot.GetPointer()->getStatus() && dot.GetPointer()->getStatus() != Dot::Status::Empty && copyOfBoard.get().checkObstructingBridges(*dynamic_cast<Peg*>(copyOfBoard.get().getMatrixDot(newY, newX).get()), *dot.GetPointer()) && !existsBridgeBetween(Observer_ptr<Dot>(copyOfBoard.get().getMatrixDot(newX, newY).get()).To<Peg>(),dot ))
             {
                 if (dot.GetPointer()->getBridgeFromPegs(Observer_ptr<Peg>(dynamic_cast<Peg*>(copyOfBoard.get().getMatrixDot(newY, newX).get()))) == nullptr
                     && mapBridges.find({ Observer_ptr<Peg>(dynamic_cast<Peg*>(copyOfBoard.get().getMatrixDot(newY,newX).get())),dot }) == mapBridges.end()
@@ -176,7 +176,7 @@ twixt::Minimax::Minimax(Board& board) : copyOfBoard{board}
 {
 }
 
-void twixt::Minimax::suggestMove(Dot::DotStatus status)
+void twixt::Minimax::suggestMove(Dot::Status status)
 {
     std::pair<Observer_ptr<Peg>, Observer_ptr<Peg>>myBridge = minimax(status);
     if (myBridge != std::make_pair(nullptr, nullptr))

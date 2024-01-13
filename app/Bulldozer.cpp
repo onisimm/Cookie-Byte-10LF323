@@ -5,7 +5,7 @@ void twixt::Bulldozer::destoryRandomDot(Board& board)
 	srand(time(NULL));
 	size_t i = rand() % (board.getSize() - 2) + 1;
 	size_t j = rand() % (board.getSize() - 2) + 1;
-	while (board.getDot(i, j)->getStatus() != Dot::DotStatus::Player1 && board.getDot(i, j)->getStatus() != Dot::DotStatus::Player2)
+	while (board.getDot(i, j)->getStatus() != Dot::Status::Player1 && board.getDot(i, j)->getStatus() != Dot::Status::Player2)
 	{
 		i = rand() % (board.getSize() - 2) + 1;
 		j = rand() % (board.getSize() - 2) + 1;
@@ -27,7 +27,7 @@ void twixt::Bulldozer::destoryRandomDot(Board& board)
 	position.second = j;
 	this->setCoordI(i);
 	this->setCoordJ(j);
-	this->setStatus(Dot::DotStatus::Bulldozer);
+	this->setStatus(Dot::Status::Bulldozer);
 
 	board.getDot(i, j).reset(new Bulldozer(*this));
 	board.m_bulldozer = Observer_ptr<Bulldozer>(dynamic_cast<Bulldozer*>(board.getDot(i, j).get()));
@@ -46,7 +46,7 @@ twixt::Bulldozer::Bulldozer(Board& board)
 	i = rand() % (board.getSize() - 2) + 1;
 	j = rand() % (board.getSize() - 2) + 1;
 	//find a clear Dot and set it as a bulldozer
-	while (board.getDot(i, j)->getStatus() != Dot::DotStatus::Clear)
+	while (board.getDot(i, j)->getStatus() != Dot::Status::Empty)
 	{
 		i = rand() % (board.getSize() - 2) + 1;
 		j = rand() % (board.getSize() - 2) + 1;
@@ -62,7 +62,7 @@ twixt::Bulldozer::Bulldozer(const Bulldozer& bulldozer) : Dot(bulldozer), positi
 {
 	this->setCoordI(position.first);
 	this->setCoordJ(position.second);
-	this->setStatus(Dot::DotStatus::Bulldozer);
+	this->setStatus(Dot::Status::Bulldozer);
 }
 
 twixt::Bulldozer& twixt::Bulldozer::operator=(const Bulldozer& Bulldozer)
@@ -72,7 +72,7 @@ twixt::Bulldozer& twixt::Bulldozer::operator=(const Bulldozer& Bulldozer)
 	m_dotDestroyed =  Bulldozer.m_dotDestroyed;
 	this->setCoordI(position.first);
 	this->setCoordJ(position.second);
-	this->setStatus(Dot::DotStatus::Bulldozer);
+	this->setStatus(Dot::Status::Bulldozer);
 	return *this;
 }
 

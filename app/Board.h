@@ -51,42 +51,36 @@ namespace twixt {
 		void showBoard() const;
 
 		//place Dot
-		//de cresaat un dot in spate si apoi adaugat in place Dot
+		//de creat un dot in spate si apoi adaugat in place Dot
 		//change the Status to a dot
-		void placePiece(size_t i, size_t j, Dot::DotStatus status, bool& didMineExplode);
-		void placePiece(size_t i, size_t j, Dot::DotStatus status);
-
-		/*friend int orientation(const Dot& p, const Dot& q, const Dot& r);
-		friend bool onSegment(const Dot& p, const Dot& q, const Dot& r);
-		friend bool doIntersect(const Dot& p1, const Dot& p2, const Dot& q1, const Dot& q2);*/
+		void placePiece(size_t i, size_t j, Dot::Status status, bool& didMineExplode);
+		void placePiece(size_t i, size_t j, Dot::Status status);
 
 		//placePeg
 		bool checkObstructingBridges(const Peg& dot1, const Peg& dot2) const;
-		bool checkPossibleObstructingBridges(const Dot& dot1, const Dot& dot2) const;
 
-
-		bool checkPath(Dot::DotStatus status);
+		bool checkPath(Dot::Status status);
 
 		//void deleteBridge(Observer_ptr<Peg> firstDot, Observer_ptr<Peg> secondDot);
 
 		void placeMine(size_t i, size_t j);
 		void placeRandomMine();
-		void placePeg(size_t i, size_t j, Dot::DotStatus status);
+		void placePeg(size_t i, size_t j, Dot::Status status);
 
 		void addBridgeInBoard(Observer_ptr<Peg> firstPeg, Observer_ptr<Peg> secondPeg);
 		void deleteBridgeInBoard(Observer_ptr<Peg> firstPeg, Observer_ptr<Peg> secondPeg);
 		void deleteAllBridgesForAPegInBoard(Observer_ptr<Peg> peg);
-	private:
 
+		//Function that we use when a mine explodes, in placePiece
+		void explodeMine(Observer_ptr<Mine> mine);
+
+	private:
 		//function that is used in checkPossibleObstructingBridges
 		//std::unordered_set<Peg*> buildPossibleBridges(Peg* dot) const;
 
 		//Functions that are used in CheckPath
-		std::vector<Observer_ptr<Peg>> FindDotInMargins(Dot::DotStatus status);
-		bool checkFinalMargin(Observer_ptr<Peg> dotToCheck, Dot::DotStatus status);
-
-		//Function that we use when a mine explodes, in placePiece
-		void mineExplodes(Observer_ptr<Mine> mine);
+		std::vector<Observer_ptr<Peg>> FindDotInMargins(Dot::Status status);
+		bool checkFinalMargin(Observer_ptr<Peg> dotToCheck, Dot::Status status);
 
 		//daca vrem array ne trb variabile cunoscute la compilare (intr un namespace: const size_t, SAU variabila statice cosnt intr-o clasa
 		std::vector<std::vector<std::unique_ptr<Dot>>> m_matrixDot;

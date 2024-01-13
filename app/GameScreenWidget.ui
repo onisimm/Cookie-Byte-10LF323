@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>750</width>
-    <height>600</height>
+    <width>800</width>
+    <height>700</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -35,7 +35,7 @@
   <widget class="QPushButton" name="backToMenuButton">
    <property name="geometry">
     <rect>
-     <x>530</x>
+     <x>590</x>
      <y>30</y>
      <width>171</width>
      <height>24</height>
@@ -48,10 +48,10 @@
   <widget class="QWidget" name="gridLayoutWidget">
    <property name="geometry">
     <rect>
-     <x>220</x>
+     <x>210</x>
      <y>180</y>
-     <width>481</width>
-     <height>411</height>
+     <width>551</width>
+     <height>481</height>
     </rect>
    </property>
    <layout class="QGridLayout" name="mainLayout"/>
@@ -59,9 +59,9 @@
   <widget class="QLabel" name="player1NameLabel">
    <property name="geometry">
     <rect>
-     <x>220</x>
-     <y>70</y>
-     <width>151</width>
+     <x>30</x>
+     <y>290</y>
+     <width>161</width>
      <height>31</height>
     </rect>
    </property>
@@ -87,9 +87,9 @@
   <widget class="QLabel" name="player1TimerLabel">
    <property name="geometry">
     <rect>
-     <x>220</x>
-     <y>110</y>
-     <width>151</width>
+     <x>30</x>
+     <y>320</y>
+     <width>161</width>
      <height>16</height>
     </rect>
    </property>
@@ -109,10 +109,10 @@
   <widget class="QLabel" name="player2TimerLabel">
    <property name="geometry">
     <rect>
-     <x>530</x>
-     <y>110</y>
-     <width>151</width>
-     <height>16</height>
+     <x>30</x>
+     <y>490</y>
+     <width>161</width>
+     <height>20</height>
     </rect>
    </property>
    <property name="font">
@@ -131,9 +131,9 @@
   <widget class="QLabel" name="player2NameLabel">
    <property name="geometry">
     <rect>
-     <x>530</x>
-     <y>70</y>
-     <width>151</width>
+     <x>30</x>
+     <y>460</y>
+     <width>161</width>
      <height>31</height>
     </rect>
    </property>
@@ -159,11 +159,17 @@
   <widget class="QPushButton" name="switchTurnButton">
    <property name="geometry">
     <rect>
-     <x>400</x>
+     <x>300</x>
      <y>90</y>
-     <width>91</width>
-     <height>24</height>
+     <width>111</width>
+     <height>41</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Comic Sans MS</family>
+     <pointsize>11</pointsize>
+    </font>
    </property>
    <property name="text">
     <string>Switch Turn</string>
@@ -172,16 +178,16 @@
   <widget class="QLabel" name="gameMessageLabel">
    <property name="geometry">
     <rect>
-     <x>310</x>
-     <y>130</y>
-     <width>291</width>
+     <x>220</x>
+     <y>150</y>
+     <width>541</width>
      <height>31</height>
     </rect>
    </property>
    <property name="font">
     <font>
      <family>Comic Sans MS</family>
-     <pointsize>12</pointsize>
+     <pointsize>10</pointsize>
     </font>
    </property>
    <property name="autoFillBackground">
@@ -195,6 +201,113 @@
    </property>
    <property name="alignment">
     <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="player1RemainingDotsLabel">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>340</y>
+     <width>161</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Comic Sans MS</family>
+     <pointsize>10</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>Player1RemainingDots</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="player1RemainingBridgesLabel">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>360</y>
+     <width>161</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Comic Sans MS</family>
+     <pointsize>10</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>Player1RemainingBridges</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="player2RemainingDotsLabel">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>510</y>
+     <width>161</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Comic Sans MS</family>
+     <pointsize>10</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>Player2RemainingDots</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="player2RemainingBridgesLabel">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>530</y>
+     <width>161</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Comic Sans MS</family>
+     <pointsize>10</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>Player2RemainingBridges</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="undoButton">
+   <property name="geometry">
+    <rect>
+     <x>560</x>
+     <y>90</y>
+     <width>111</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Comic Sans MS</family>
+     <pointsize>11</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>Undo</string>
    </property>
   </widget>
  </widget>

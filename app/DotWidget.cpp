@@ -3,23 +3,12 @@
 #include <QPainter>
 
 DotWidget::DotWidget(QWidget* parent)
-    : QWidget(parent), currentColor(Qt::lightGray), pressed(false) {
+    : QWidget(parent), currentColor(Qt::lightGray) {
     setFixedSize(9, 9);  // Adjust size to be smaller
 }
 
-bool DotWidget::isPressed() const {
-    return pressed;
-}
-
-void DotWidget::setPressed(bool pressed) {
-    if (!isPressed() && pressed) {
-        this->pressed = true;
-        emit pressedChanged();
-    }
-}
-
 void DotWidget::mousePressEvent(QMouseEvent* event) {
-    setPressed(true);
+    emit pressedChanged();
     QWidget::mousePressEvent(event);
 }
 
@@ -35,4 +24,9 @@ void DotWidget::paintEvent(QPaintEvent* event) {
 void DotWidget::setColor(const QColor& color) {
     currentColor = color;
     update(); // repaint
+}
+
+QColor DotWidget::getColor() const
+{
+    return currentColor;
 }

@@ -5,9 +5,13 @@
 #include <stack>
 #include "Board.h"
 #include "Dot.h"
-//#include "ObjectInStack.h"
 
 namespace twixt {
+	enum class PlayerType {
+		Player1,
+		Player2
+	};
+
 	class Player {
 	public:
 		Player(uint8_t remainingDots, uint8_t remainingBridges);
@@ -18,18 +22,18 @@ namespace twixt {
 
 		uint8_t getRemainingDots() const;
 		uint8_t getRemainingBridges() const;
+		PlayerType getPlayerType() const;
 
 		void setRemainingDots(uint8_t);
 		void setRemainingBridges(uint8_t);
+		void setPlayerType(PlayerType playerType);
 
 		bool hasRemainingDots();
 		bool hasRemainingBridges();
 
-		void addDot(Dot* dot);
-
 	private:
-		std::stack<Dot*> existingDots;
 		uint8_t m_remainingDots;
 		uint8_t m_remainingBridges;
+		PlayerType m_playerType;
 	};
 }

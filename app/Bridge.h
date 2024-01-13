@@ -1,12 +1,6 @@
 #pragma once
 
-#ifndef BRIDGE_H
-#define BRIDGE_H
-
-
 #include "Observer_ptr.h"
-
-
 
 namespace twixt {
 	class Peg;
@@ -23,7 +17,7 @@ namespace twixt {
 		~Bridge();
 
 		Bridge& operator=(const Bridge& bridge);
-		bool operator==(const Bridge& bridge);
+		bool operator==(const Bridge& bridge) const;
 
 		//setter
 		void setPillars(std::unique_ptr<Peg> first, std::unique_ptr<Peg> second);
@@ -35,13 +29,9 @@ namespace twixt {
 		Observer_ptr<Peg> getSecondPillar() const;
 		std::pair<Observer_ptr<Peg>, Observer_ptr<Peg>> getPillars() const;
 
-		bool isPillarInBridge(Observer_ptr<Peg> peg);
+		bool isPillarInBridge(Observer_ptr<Peg> peg) const;
 		Observer_ptr<Peg> returnTheOtherPillar(Observer_ptr<Peg> peg);
 	};
 }
 
-
-
 #include "Peg.h"
-
-#endif // BRIDGE_H

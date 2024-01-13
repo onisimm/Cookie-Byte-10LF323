@@ -5,8 +5,8 @@
 namespace twixt {
 
     // Constructors
-    Dot::Dot() : m_status{ DotStatus::Clear }, m_i{ 0 }, m_j{ 0 } {}
-    Dot::Dot(size_t i, size_t j) : m_status{ DotStatus::Clear }, m_i{ i }, m_j{ j } {}
+    Dot::Dot() : m_status{ Status::Empty }, m_i{ 0 }, m_j{ 0 } {}
+    Dot::Dot(size_t i, size_t j) : m_status{ Status::Empty }, m_i{ i }, m_j{ j } {}
     Dot::Dot(const Dot& newDot) : m_status{ newDot.m_status }, m_i{ newDot.m_i }, m_j{ newDot.m_j }
     {}
 
@@ -15,7 +15,7 @@ namespace twixt {
         m_i(other.m_i),
         m_j(other.m_j){
         // Reset the moved from object
-        other.m_status = DotStatus::Clear;
+        other.m_status = Status::Empty;
         other.m_i = 0;
         other.m_j = 0;
     }
@@ -31,7 +31,7 @@ namespace twixt {
             m_j = other.m_j;
            
             // Reset the moved from object
-            other.m_status = DotStatus::Clear;
+            other.m_status = Status::Empty;
             other.m_i = 0;
             other.m_j = 0;
         }
@@ -52,7 +52,7 @@ namespace twixt {
         return m_j;
     }
 
-    twixt::Dot::DotStatus Dot::getStatus() const
+    twixt::Dot::Status Dot::getStatus() const
     {
         return m_status;
     }
@@ -68,7 +68,7 @@ namespace twixt {
         m_j = y;
     }
 
-    void Dot::setStatus(const DotStatus& status)
+    void Dot::setStatus(const Status& status)
     {
         m_status = status;
     }

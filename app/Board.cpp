@@ -10,22 +10,22 @@ namespace twixt
 		{
 			for (size_t j = 0; j < m_matrixDot[i].size(); j++)
 			{
-				if (m_matrixDot[i][j].get()->getStatus() == Dot::DotStatus::Clear)
+				if (m_matrixDot[i][j].get()->getStatus() == Dot::Status::Empty)
 					std::cout << "_";
 
-				if (m_matrixDot[i][j].get()->getStatus() == Dot::DotStatus::Player1)
+				if (m_matrixDot[i][j].get()->getStatus() == Dot::Status::Player1)
 					std::cout << "R";
 
-				if (m_matrixDot[i][j].get()->getStatus() == Dot::DotStatus::Player2)
+				if (m_matrixDot[i][j].get()->getStatus() == Dot::Status::Player2)
 					std::cout << "B";
 
 
-				if (m_matrixDot[i][j].get()->getStatus() == Dot::DotStatus::Bulldozer)
+				if (m_matrixDot[i][j].get()->getStatus() == Dot::Status::Bulldozer)
 					std::cout << "@";
 
-				if (m_matrixDot[i][j].get()->getStatus() == Dot::DotStatus::Mines)
+				if (m_matrixDot[i][j].get()->getStatus() == Dot::Status::Mine)
 					std::cout << "M";
-				if (m_matrixDot[i][j].get()->getStatus() == Dot::DotStatus::Exploded)
+				if (m_matrixDot[i][j].get()->getStatus() == Dot::Status::Exploded)
 					std::cout << " ";
 
 
@@ -44,17 +44,17 @@ namespace twixt
 		}
 	}
 
-	void Board::placePiece(size_t i, size_t j, Dot::DotStatus status, bool& didMineExplode)
+	void Board::placePiece(size_t i, size_t j, Dot::Status status, bool& didMineExplode)
 	{
-		if (m_matrixDot[i][j]->getStatus() == Dot::DotStatus::Clear)
+		if (m_matrixDot[i][j]->getStatus() == Dot::Status::Empty)
 		{
 			placePeg(i, j, status);
 		}
-		else if (m_matrixDot[i][j]->getStatus() == Dot::DotStatus::Mines) // in case there is a mine it will explode
+		else if (m_matrixDot[i][j]->getStatus() == Dot::Status::Mine) // in case there is a mine it will explode
 		{
 			didMineExplode = true;
 			Observer_ptr<Mine> MinePointer(dynamic_cast<Mine*>(m_matrixDot[i][j].get()));
-			mineExplodes(MinePointer);
+			explodeMine(MinePointer);
 			std::cout << "You lost your turn!\n";
 			std::cout << "Choose another mine!\n";
 			showBoard();
@@ -71,7 +71,7 @@ namespace twixt
 		}
 	}
 
-	void Board::placePiece(size_t i, size_t j, Dot::DotStatus status)
+	void Board::placePiece(size_t i, size_t j, Dot::Status status)
 	{
 		bool didMineExplode = false;
 		placePiece(i, j, status, didMineExplode);
@@ -261,63 +261,8 @@ Board::~Board() {}
 		return true;
 	}
 
-//	//bool Board::checkPossibleObstructingBridges(const Dot& dot1, const Dot& dot2) const
-//	//{
-//	//	size_t x1 = dot1.getCoordI();
-//	//	size_t y1 = dot1.getCoordJ();
-//	//	size_t x2 = dot2.getCoordI();
-//	//	size_t y2 = dot2.getCoordJ();
-//
-//	//	// Check if any existing bridge obstructs the way from dot1 to dot2
-//	//	for (size_t i = std::min(x1, x2); i <= std::max(x1, x2); ++i)
-//	//	{
-//	//		for (size_t j = std::min(y1, y2); j <= std::max(y1, y2); ++j)
-//	//		{
-//	//			if (*m_matrixDot[i][j] == dot1)
-//	//			{
-//	//				continue;
-//	//			}
-//	//			std::unordered_set<Dot*> possibleBridges = buildPossibleBridges(m_matrixDot[i][j]);
-//	//			for (auto secondDot : possibleBridges)
-//	//			{
-//	//				//auto [firstDot, secondDot] = bridge->getPillars();
-//	//				if (doIntersect(dot1, dot2, *m_matrixDot[i][j], *secondDot))
-//	//				{
-//	//					// std::cout << "Couldn't build a bridge between (" << dot1 << " and " << dot2 << " because of the bridge between " << m_matrixDot[i][j] << " and " << *bridgeDot << "\n";
-//	//					return false;
-//	//				}
-//	//			}
-//	//		}
-//	//	}
-//	//	return true;
-//	//}
-//
-//	//std::unordered_set<Peg*> Board::buildPossibleBridges(Peg* dot) const
-//	//{
-//	//	std::array<std::pair<int, int>, 8> positions{ { { -2, -1 }, { -1, -2 }, { 1, -2 }, { 2, -1 }, { 2, 1 }, { 1, 2 }, { -1, 2 }, { -2, 1 } } };
-//	//	std::unordered_set<Peg*> possibleBridges;
-//	//	size_t y = dot->getCoordI();
-//	//	size_t x = dot->getCoordJ();
-//
-//	//	for (auto pair : positions)
-//	//	{
-//	//		auto [newY, newX] = pair;
-//	//		newY += y;
-//	//		newX += x;
-//
-//	//		if (newY >= 0 && newY < m_matrixDot.size() && newX >= 0 && newX < m_matrixDot[newY].size()) // check boundaries
-//	//		{
-//	//			if (m_matrixDot[newY][newX]->getStatus() == dot->getStatus() && dot->getBridgeFromDots(m_matrixDot[newY][newX]) == nullptr)
-//	//			{
-//	//				possibleBridges.insert(m_matrixDot[newY][newX]);
-//	//			}
-//	//		}
-//	//	}
-//	//	return possibleBridges;
-//	//}
-//
-	//verify whether the path leads to win or not
-	bool Board::checkPath(twixt::Dot::DotStatus status)
+	// Verify whether the path leads to win or not
+	bool Board::checkPath(twixt::Dot::Status status)
 	{
 		std::vector<Observer_ptr<Peg>> margins = FindDotInMargins(status);
 		if (margins.empty()) return false;
@@ -365,18 +310,18 @@ Board::~Board() {}
 		return isFinalDot;
 	}
 
-	std::vector<Observer_ptr<Peg>> Board::FindDotInMargins(Dot::DotStatus status)
+	std::vector<Observer_ptr<Peg>> Board::FindDotInMargins(Dot::Status status)
 	{
 		std::vector<Observer_ptr<Peg>> margin;
-		if (status == Dot::DotStatus::Player1)
+		if (status == Dot::Status::Player1)
 		{
 			for (size_t i = 0; i < m_matrixDot.size(); i++)
 			{
-				if (m_matrixDot[0][i]->getStatus() == Dot::DotStatus::Player1)
+				if (m_matrixDot[0][i]->getStatus() == Dot::Status::Player1)
 				{
 					margin.push_back(Observer_ptr<Peg>(dynamic_cast<Peg*>(m_matrixDot[0][i].get())));
 				}
-				if (m_matrixDot[1][i]->getStatus() == Dot::DotStatus::Player1)
+				if (m_matrixDot[1][i]->getStatus() == Dot::Status::Player1)
 				{
 					margin.push_back(Observer_ptr<Peg>(dynamic_cast<Peg*>(m_matrixDot[1][i].get())));
 				}
@@ -386,11 +331,11 @@ Board::~Board() {}
 		{
 			for (size_t i = 0; i < m_matrixDot.size(); i++)
 			{
-				if (m_matrixDot[i][0]->getStatus() == Dot::DotStatus::Player2)
+				if (m_matrixDot[i][0]->getStatus() == Dot::Status::Player2)
 				{
 					margin.push_back(Observer_ptr<Peg>(dynamic_cast<Peg*>(m_matrixDot[i][0].get())));
 				}
-				if (m_matrixDot[i][1]->getStatus() == Dot::DotStatus::Player2)
+				if (m_matrixDot[i][1]->getStatus() == Dot::Status::Player2)
 				{
 					margin.push_back(Observer_ptr<Peg>(dynamic_cast<Peg*>(m_matrixDot[i][1].get())));
 				}
@@ -399,9 +344,9 @@ Board::~Board() {}
 		return margin;
 	}
 
-	bool Board::checkFinalMargin(Observer_ptr<Peg> dotToCheck, Dot::DotStatus status)
+	bool Board::checkFinalMargin(Observer_ptr<Peg> dotToCheck, Dot::Status status)
 	{
-		if (status == Dot::DotStatus::Player1)
+		if (status == Dot::Status::Player1)
 		{
 			for (size_t i = 0; i < m_matrixDot.size(); i++)
 			{
@@ -447,7 +392,7 @@ Board::~Board() {}
 		}
 	}
 
-	void Board::placePeg(size_t i,size_t j, Dot::DotStatus status)
+	void Board::placePeg(size_t i,size_t j, Dot::Status status)
 	{
 		m_matrixDot[i][j].reset(new Peg());
 		m_matrixDot[i][j]->setStatus(status);
@@ -467,7 +412,7 @@ Board::~Board() {}
 	{
 		std::cout << "MINE PLACED on " << i << " " << j << "\n";
 		m_matrixDot[i][j].reset(new Mine());
-		m_matrixDot[i][j]->setStatus(Dot::DotStatus::Mines);
+		m_matrixDot[i][j]->setStatus(Dot::Status::Mine);
 		m_matrixDot[i][j]->setCoordI(i);
 		m_matrixDot[i][j]->setCoordJ(j);
 	}
@@ -476,7 +421,7 @@ Board::~Board() {}
 		srand(time(NULL));
 		size_t i = rand() % 22 + 1;
 		size_t j = rand() % 22 + 1;
-		while (m_matrixDot[i][j]->getStatus() != Dot::DotStatus::Clear)
+		while (m_matrixDot[i][j]->getStatus() != Dot::Status::Empty)
 		{
 			i = rand() % 22 + 1;
 			j = rand() % 22 + 1;
@@ -484,12 +429,12 @@ Board::~Board() {}
 		placeMine(i, j);
 	}
 
-	void Board::mineExplodes(Observer_ptr<Mine> mine)
+	void Board::explodeMine(Observer_ptr<Mine> mine)
 	{
 		std::array<std::pair<int, int>, 8> positions{ { {-1, -1},{-1,0},{-1,1},{0,1},{1,1},{1,0},{1,-1},{0,-1} } };
 		size_t i = mine.GetPointer()->getCoordI();
 		size_t j = mine.GetPointer()->getCoordJ();
-		std::cout << "MINE " << i << " " << j << " EXPLODED!\n";
+
 		mine.GetPointer()->setTrigger(true);
 		for (auto pair : positions)
 		{
@@ -499,22 +444,20 @@ Board::~Board() {}
 			if (newI >= 0 && newI < m_matrixDot.size() && newJ >= 0 && newJ < m_matrixDot[newI].size()) // check boundaries
 			{
 
-				if (m_matrixDot[newI][newJ].get()->getStatus() == Dot::DotStatus::Player1 || m_matrixDot[newI][newJ].get()->getStatus() == Dot::DotStatus::Player2)
+				if (m_matrixDot[newI][newJ].get()->getStatus() == Dot::Status::Player1 || m_matrixDot[newI][newJ].get()->getStatus() == Dot::Status::Player2)
 				{
 					mine.GetPointer()->setExplodedDots(m_matrixDot[newI][newJ]);
 					deleteAllBridgesForAPegInBoard(Observer_ptr<Peg>(dynamic_cast<Peg*>(m_matrixDot[newI][newJ].get())));
 					m_matrixDot[newI][newJ].reset(new Dot(newI, newJ));
-
-					std::cout << "PEG " << newI << " " << newJ << " EXPLODED!\n";
 				}
-				if (m_matrixDot[newI][newJ].get()->getStatus() == Dot::DotStatus::Mines && (dynamic_cast<Mine*>(m_matrixDot[newI][newJ].get()))->getTrigger() == false)
+				if (m_matrixDot[newI][newJ].get()->getStatus() == Dot::Status::Mine && (dynamic_cast<Mine*>(m_matrixDot[newI][newJ].get()))->getTrigger() == false)
 				{
-					mineExplodes(Observer_ptr<Mine>(dynamic_cast<Mine*>(m_matrixDot[newI][newJ].get())));
+					explodeMine(Observer_ptr<Mine>(dynamic_cast<Mine*>(m_matrixDot[newI][newJ].get())));
 					mine.GetPointer()->setExplodedDots(m_matrixDot[newI][newJ]);
 				}
-				m_matrixDot[newI][newJ].get()->setStatus(Dot::DotStatus::Exploded);
+				m_matrixDot[newI][newJ].get()->setStatus(Dot::Status::Exploded);
 			}
 		}
-		m_matrixDot[i][j].get()->setStatus(Dot::DotStatus::Exploded);
+		m_matrixDot[i][j].get()->setStatus(Dot::Status::Exploded);
 	}
 }

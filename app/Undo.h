@@ -20,12 +20,11 @@ namespace twixt {
 	public:
 		Undo(std::reference_wrapper<GameStack> gameStack, Board& gameBoard);
 		void pressed();
-		void undoPlayers(Dot::DotStatus status);
+		void undoPlayers(Dot::Status status);
 		void undoBulldozer();
 		void undoMines(std::unique_ptr<Dot>& mine);
 		void undoDeleteBridge();
 		void undoAddBridge();
-
 	};
 }
 

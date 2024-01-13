@@ -51,12 +51,12 @@ signals:
     void on_backToMenuButton_clicked();
 
 public slots:
-    void switchPlayer();
+    void switchTurns();
 
 private:
     Ui::GameScreenWidget* ui;
     GameBoardWidget* gameBoard; // The game board UI
-    TwixtGame* game; // The game logic
+    TwixtGame* backendGame; // The game logic
     Ui::UIPlayer player1UI, player2UI;
     QFont initialPlayerFont;
     uint8_t currentPlayer : 4; // 1 = player 1, 2 = player 2
@@ -67,7 +67,10 @@ private:
     // The button isn't available if:
     //  1. The current player hasn't placed a dot yet
     //  2. The current player is in the middle of placing a bridge
-    bool ableToSwitchPlayer = false;
+    bool ableToSwitchTurns = false;
+    bool ableToBuildBridges = false; // will be true if the current player has placed a dot
+    std::tuple<uint8_t, uint8_t> firstDotForBridge = { 0, 0 };
+    std::tuple<uint8_t, uint8_t> secondDotForBridge = { 0, 0 };
 
     void setupUIPlayers(const Ui::GameSettings& settings);
     void setupConnections();
@@ -77,5 +80,5 @@ private:
     void updateTimer(Ui::UIPlayer& player);
 
     bool isGameOver = false;
-    void endGame();
+    void checkEndGame();
 };

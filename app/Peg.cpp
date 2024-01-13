@@ -57,13 +57,13 @@ void twixt::Peg::removeBridgeFromExisting(Observer_ptr<Bridge> bridge)
     m_existingBridges.erase(find(m_existingBridges.begin(), m_existingBridges.end(), bridge));
 }
 
-twixt::Dot::DotStatus twixt::Peg::returnTheOtherPlayer()
+twixt::Dot::Status twixt::Peg::returnTheOtherPlayer()
 {
-    if (m_status == Dot::DotStatus::Player1)
-        return Dot::DotStatus::Player2;
-    if (m_status == Dot::DotStatus::Player2)
-        return Dot::DotStatus::Player1;
-    return Dot::DotStatus::Clear;
+    if (m_status == Dot::Status::Player1)
+        return Dot::Status::Player2;
+    if (m_status == Dot::Status::Player2)
+        return Dot::Status::Player1;
+    return Dot::Status::Empty;
 }
 
 twixt::Observer_ptr<twixt::Bridge> twixt::Peg::getBridgeFromPegs(Observer_ptr<Peg> secondDot)

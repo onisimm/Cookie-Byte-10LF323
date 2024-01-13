@@ -1,161 +1,140 @@
-﻿﻿<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Source Files">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>qml;cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
-    <Filter Include="Header Files">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
-    </Filter>
-    <Filter Include="Resource Files">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>qrc;rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
-    <Filter Include="Form Files">
-      <UniqueIdentifier>{99349809-55BA-4b9d-BF79-8FDBB0286EB3}</UniqueIdentifier>
-      <Extensions>ui</Extensions>
-    </Filter>
-    <Filter Include="Translation Files">
-      <UniqueIdentifier>{639EADAA-A684-42e4-A9AD-28FC9BCB8F7C}</UniqueIdentifier>
-      <Extensions>ts</Extensions>
-    </Filter>
-  </ItemGroup>
-  <ItemGroup>
-    <QtRcc Include="MainWindow.qrc">
-      <Filter>Resource Files</Filter>
-    </QtRcc>
-    <QtUic Include="MainWindow.ui">
-      <Filter>Form Files</Filter>
-    </QtUic>
-    <QtMoc Include="MainWindow.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <ClCompile Include="MainWindow.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="MainMenuWidget.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="GameScreenWidget.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="GameBoardWidget.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="DotWidget.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="SettingsWidget.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Bulldozer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Undo.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Player.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Minimax.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Mine.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Dot.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="Board.cpp">
+      <Filter>Backend</Filter>
     </ClCompile>
     <ClCompile Include="Bridge.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Backend</Filter>
     </ClCompile>
-    <ClCompile Include="Board.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Bulldozer.cpp">
+      <Filter>Backend</Filter>
+    </ClCompile>
+    <ClCompile Include="Dot.cpp">
+      <Filter>Backend</Filter>
     </ClCompile>
     <ClCompile Include="GameStack.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Backend</Filter>
+    </ClCompile>
+    <ClCompile Include="Mine.cpp">
+      <Filter>Backend</Filter>
+    </ClCompile>
+    <ClCompile Include="Minimax.cpp">
+      <Filter>Backend</Filter>
     </ClCompile>
     <ClCompile Include="Peg.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Backend</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Backend</Filter>
     </ClCompile>
     <ClCompile Include="TwixtGame.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Backend</Filter>
+    </ClCompile>
+    <ClCompile Include="Undo.cpp">
+      <Filter>Backend</Filter>
     </ClCompile>
     <ClCompile Include="BridgeWidget.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Frontend</Filter>
+    </ClCompile>
+    <ClCompile Include="DotWidget.cpp">
+      <Filter>Frontend</Filter>
+    </ClCompile>
+    <ClCompile Include="GameBoardWidget.cpp">
+      <Filter>Frontend</Filter>
+    </ClCompile>
+    <ClCompile Include="GameScreenWidget.cpp">
+      <Filter>Frontend</Filter>
+    </ClCompile>
+    <ClCompile Include="MainMenuWidget.cpp">
+      <Filter>Frontend</Filter>
+    </ClCompile>
+    <ClCompile Include="MainWindow.cpp">
+      <Filter>Frontend</Filter>
+    </ClCompile>
+    <ClCompile Include="SettingsWidget.cpp">
+      <Filter>Frontend</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="MainMenuWidget.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="GameScreenWidget.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="GameBoardWidget.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="DotWidget.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="SettingsWidget.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="BridgeWidget.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-  </ItemGroup>
-  <ItemGroup>
-    <QtUic Include="MainMenuWidget.ui">
-      <Filter>Form Files</Filter>
-    </QtUic>
-    <QtUic Include="GameScreenWidget.ui">
-      <Filter>Form Files</Filter>
-    </QtUic>
-    <QtUic Include="SettingsWidget.ui">
-      <Filter>Form Files</Filter>
-    </QtUic>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Undo.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Bulldozer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Minimax.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Mine.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Dot.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Board.h">
+      <Filter>Backend</Filter>
     </ClInclude>
     <ClInclude Include="Bridge.h">
-      <Filter>Header Files</Filter>
+      <Filter>Backend</Filter>
     </ClInclude>
-    <ClInclude Include="Player.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Bulldozer.h">
+      <Filter>Backend</Filter>
+    </ClInclude>
+    <ClInclude Include="Dot.h">
+      <Filter>Backend</Filter>
     </ClInclude>
     <ClInclude Include="GameStack.h">
-      <Filter>Header Files</Filter>
+      <Filter>Backend</Filter>
     </ClInclude>
-    <ClInclude Include="Board.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Mine.h">
+      <Filter>Backend</Filter>
+    </ClInclude>
+    <ClInclude Include="Minimax.h">
+      <Filter>Backend</Filter>
     </ClInclude>
     <ClInclude Include="Peg.h">
-      <Filter>Header Files</Filter>
+      <Filter>Backend</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Backend</Filter>
     </ClInclude>
     <ClInclude Include="TwixtGame.h">
-      <Filter>Header Files</Filter>
+      <Filter>Backend</Filter>
     </ClInclude>
+    <ClInclude Include="Undo.h">
+      <Filter>Backend</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <QtMoc Include="BridgeWidget.h">
+      <Filter>Frontend</Filter>
+    </QtMoc>
+    <QtMoc Include="DotWidget.h">
+      <Filter>Frontend</Filter>
+    </QtMoc>
+    <QtMoc Include="GameBoardWidget.h">
+      <Filter>Frontend</Filter>
+    </QtMoc>
+    <QtMoc Include="GameScreenWidget.h">
+      <Filter>Frontend</Filter>
+    </QtMoc>
+    <QtMoc Include="MainMenuWidget.h">
+      <Filter>Frontend</Filter>
+    </QtMoc>
+    <QtMoc Include="MainWindow.h">
+      <Filter>Frontend</Filter>
+    </QtMoc>
+    <QtMoc Include="SettingsWidget.h">
+      <Filter>Frontend</Filter>
+    </QtMoc>
+  </ItemGroup>
+  <ItemGroup>
+    <QtUic Include="GameScreenWidget.ui">
+      <Filter>Frontend</Filter>
+    </QtUic>
+    <QtUic Include="MainMenuWidget.ui">
+      <Filter>Frontend</Filter>
+    </QtUic>
+    <QtUic Include="MainWindow.ui">
+      <Filter>Frontend</Filter>
+    </QtUic>
+    <QtUic Include="SettingsWidget.ui">
+      <Filter>Frontend</Filter>
+    </QtUic>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Backend">
+      <UniqueIdentifier>{a85f526a-05fc-49d7-b820-08f55ed7f3b3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Frontend">
+      <UniqueIdentifier>{1276c938-9b31-4548-a930-fff67dfcff3a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
 </Project>

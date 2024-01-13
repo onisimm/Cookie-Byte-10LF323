@@ -6,7 +6,7 @@ GameScreenWidget::GameScreenWidget(const Ui::GameSettings& settings, QWidget* pa
     QWidget(parent),
     ui(new Ui::GameScreenWidget),
     gameBoard(new GameBoardWidget(this)),
-    game(new TwixtGame()),
+    backendGame(new TwixtGame()),
     currentPlayer(1) {  // Assuming Player 1 starts first
 
     ui->setupUi(this);
@@ -23,7 +23,7 @@ GameScreenWidget::~GameScreenWidget() {
 void GameScreenWidget::setGameboardSize(const uint8_t& size)
 {
     gameBoard->setGameboardSize(size);
-    this->game->setGameBoardSize(size);
+    this->backendGame->setGameBoardSize(size);
 }
 
 void GameScreenWidget::setMaxDots(const uint8_t& maxDots)
@@ -40,7 +40,7 @@ void GameScreenWidget::setGamemode(const QString& gamemode)
 {
     ui->gamemodeLabel->setText("Gamemode: " + gamemode);
     //gameBoard->setGameMode(gamemode);
-    this->game->setGameMode(gamemode);
+    this->backendGame->setGameMode(gamemode);
 }
 
 void GameScreenWidget::setupUIPlayers(const Ui::GameSettings& settings) {
@@ -70,11 +70,21 @@ void GameScreenWidget::setupUIPlayers(const Ui::GameSettings& settings) {
             playerUI.backendPlayer = new twixt::Player(maxDots, maxBridges);
         };
 
-    setupPlayer(player1UI, ui->player1NameLabel, ui->player1TimerLabel, settings.player1Name, settings.timeLimit, Qt::red);
-    game->setPlayer1(player1UI.backendPlayer);
+    QColor player1Color(255, 80, 80); // for player 1
+    setupPlayer(player1UI, ui->player1NameLabel, ui->player1TimerLabel, settings.player1Name, settings.timeLimit, player1Color);
+    backendGame->setPlayer1(player1UI.backendPlayer);
+    gameBoard->setPlayer1Color(player1UI.color);
+    player1UI.backendPlayer->setPlayerType(twixt::PlayerType::Player1);
+    player1UI.backendPlayer->setRemainingDots(maxDots);
+    player1UI.backendPlayer->setRemainingBridges(maxBridges);
 
-    setupPlayer(player2UI, ui->player2NameLabel, ui->player2TimerLabel, settings.player2Name, settings.timeLimit, Qt::black);
-    game->setPlayer2(player2UI.backendPlayer);
+    QColor player2Color(0, 102, 204); // for player 2
+    setupPlayer(player2UI, ui->player2NameLabel, ui->player2TimerLabel, settings.player2Name, settings.timeLimit, player2Color);
+    backendGame->setPlayer2(player2UI.backendPlayer);
+    gameBoard->setPlayer2Color(player2UI.color);
+    player2UI.backendPlayer->setPlayerType(twixt::PlayerType::Player2);
+    player2UI.backendPlayer->setRemainingDots(maxDots);
+    player2UI.backendPlayer->setRemainingBridges(maxBridges);
 
     initialPlayerFont = player1UI.nameLabel->font();
 }
@@ -89,7 +99,7 @@ void GameScreenWidget::applyGameSettings(const Ui::GameSettings& settings) {
     setGamemode(settings.gamemode);
 
     gameBoard->buildBoard();
-    game->initializeGame();
+    backendGame->initializeGame();
 }
 
 void GameScreenWidget::setupConnections()
@@ -99,7 +109,7 @@ void GameScreenWidget::setupConnections()
     // a Save Game button, a Reset Game button,
     connect(ui->backToMenuButton, &QPushButton::clicked, this, &GameScreenWidget::on_backToMenuButton_clicked);
     connect(gameBoard, &GameBoardWidget::dotPressed, this, &GameScreenWidget::handleDotPressed);
-    connect(ui->switchTurnButton, &QPushButton::clicked, this, &GameScreenWidget::switchPlayer);
+    connect(ui->switchTurnButton, &QPushButton::clicked, this, &GameScreenWidget::switchTurns);
 }
 
 void GameScreenWidget::updateUIBasedOnPlayerTurn() {
@@ -121,7 +131,10 @@ void GameScreenWidget::updateUIBasedOnPlayerTurn() {
     activePlayer.timer->start();
     inactivePlayer.timer->stop();
 
-    ableToSwitchPlayer = false;
+    ui->player1RemainingDotsLabel->setText("Remaining dots: " + QString::number(player1UI.backendPlayer->getRemainingDots()));
+    ui->player2RemainingDotsLabel->setText("Remaining dots: " + QString::number(player2UI.backendPlayer->getRemainingDots()));
+    ui->player1RemainingBridgesLabel->setText("Remaining bridges: " + QString::number(player1UI.backendPlayer->getRemainingBridges()));
+    ui->player2RemainingBridgesLabel->setText("Remaining bridges: " + QString::number(player2UI.backendPlayer->getRemainingBridges()));
 }
 
 void GameScreenWidget::updateTimer(Ui::UIPlayer& player) {
@@ -133,11 +146,11 @@ void GameScreenWidget::updateTimer(Ui::UIPlayer& player) {
     }
     else {
         player.timer->stop();
-        endGame();
+        checkEndGame();
     }
 }
 
-void GameScreenWidget::endGame()
+void GameScreenWidget::checkEndGame()
 {
     // TODO check if there is a winner based on a full path of bridges
     // TODO check if there is a tie
@@ -153,37 +166,111 @@ void GameScreenWidget::endGame()
             + player1UI.nameLabel->text() + " wins!");
         isGameOver = true;
 	}
+
+    // TODO end game if a player has no more dots with tie
+    if (player1UI.backendPlayer->hasRemainingDots() || !player2UI.backendPlayer->hasRemainingDots()) {
+		ui->gameMessageLabel->setText(player1UI.nameLabel->text() + " has no more dots. "
+        			+ player2UI.nameLabel->text() + " wins!");
+		isGameOver = true;
+	}
+    else if (player2UI.backendPlayer->getRemainingDots() == 0) {
+		ui->gameMessageLabel->setText(player2UI.nameLabel->text() + " has no more dots. "
+        			+ player1UI.nameLabel->text() + " wins!");
+		isGameOver = true;
+    }
 }
 
 void GameScreenWidget::handleDotPressed(int row, int col) {
     if (!isGameOver) {
         Ui::UIPlayer& activePlayer = (currentPlayer == 1) ? player1UI : player2UI; // current player's turn
-        gameBoard->setDotColor(row, col, activePlayer.color);
-        ableToSwitchPlayer = true;
-        // TODO
-        // after the first dot, make available  the possibility to build bridges (e.g. bool ableToBuildBridges = true)
-        // if dotPlaced is true, then the player can build bridges 
-        // if dotPicked is available -> firstDotForBridge is picked, make the dot Blue (maybe a pair of row col of the dot) 
-        // while firstDotForBridge & !secondDotForBridge -> Popup when clicking switch player (do you want to cancel the bridge?)
-                // ooorrr, just make a cancel button (show / hide when the player clicks on the first dot)
-        // if dotPicked is available -> secondDotForBridge is picked, make the first dot player color again (maybe a pair of row col of the dot)
-        // if distance is right for a bridge, then build the bridge of playercolor (bridge between firstDotForBridge and secondDotForBridge)
-        // if distance is wrong, then cancel the bridge, make the dots playerColor again (unassign firstDotForBridge and secondDotForBridge)
 
+        twixt::Dot::Status dotStatus = this->backendGame->getDotStatus(row, col);
+        bool dotBelongsToAPlayer = (dotStatus == twixt::Dot::Status::Player1 || dotStatus == twixt::Dot::Status::Player2);
+        
+        if (ableToBuildBridges && dotBelongsToAPlayer) {
+            twixt::PlayerType dotOwner = (dotStatus == twixt::Dot::Status::Player1) ? twixt::PlayerType::Player1 : twixt::PlayerType::Player2;
+
+            if (firstDotForBridge == std::make_tuple(0, 0)) { // if it hasn't been initialized
+                if ((dotStatus == twixt::Dot::Status::Player1 || dotStatus == twixt::Dot::Status::Player2) && 
+                    dotOwner == activePlayer.backendPlayer->getPlayerType())  // if the dot is occupied by the current player
+                {
+                    firstDotForBridge = { row, col };
+                    gameBoard->setDotColor(row, col, QColor(0, 204, 102));
+                    ableToSwitchTurns = false;
+                }
+            }
+            else { // if there is already a first dot picked, we're gonna pick the second
+                if ((dotStatus == twixt::Dot::Status::Player1 || dotStatus == twixt::Dot::Status::Player2) &&
+                    dotOwner == activePlayer.backendPlayer->getPlayerType()) // if the dot is occupied by the current player
+                {
+                    bool isPossibleToBuildBridge = backendGame->ableToBuildBridge(std::get<0>(firstDotForBridge), std::get<1>(firstDotForBridge), row, col);
+
+                    if (isPossibleToBuildBridge) {
+                        gameBoard->drawBridge(std::get<0>(firstDotForBridge), std::get<1>(firstDotForBridge), row, col, activePlayer.color);
+                        this->backendGame->buildBridge(std::get<0>(firstDotForBridge), std::get<1>(firstDotForBridge), row, col, activePlayer.backendPlayer);
+                        gameBoard->setDotColor(std::get<0>(firstDotForBridge), std::get<1>(firstDotForBridge), activePlayer.color);
+                        firstDotForBridge = { 0, 0 };
+                        secondDotForBridge = { 0, 0 };
+                        ableToSwitchTurns = true;
+                    }
+                }
+
+                if (firstDotForBridge != std::make_tuple(0, 0))
+                    gameBoard->setDotColor(std::get<0>(firstDotForBridge), std::get<1>(firstDotForBridge), activePlayer.color);
+                firstDotForBridge = { 0, 0 };
+                secondDotForBridge = { 0, 0 };
+                ableToSwitchTurns = true;
+            }
+		}
+        else { // If it's not able to build bridges, it means the player is placing a dot
+            uint8_t ableToPlaceDotResult = this->backendGame->ableToPlaceDot(row, col, activePlayer.backendPlayer);
+            if (ableToPlaceDotResult == 0) {
+                gameBoard->setDotColor(row, col, activePlayer.color);
+                this->backendGame->placeDot(row, col, activePlayer.backendPlayer);
+                ui->gameMessageLabel->setText("");
+                ableToSwitchTurns = true;
+                ableToBuildBridges = true;
+            }
+            else if (ableToPlaceDotResult == 2) {
+				ui->gameMessageLabel->setText("Oh no, a mine was there! I've never seen such a big explosion!");
+                // TODO make that dot explode -> give it rgb(102, 51, 0)
+
+                ableToSwitchTurns = true;
+                ableToBuildBridges = true;
+			}
+            else if (ableToPlaceDotResult == 3) {
+                ui->gameMessageLabel->setText("That spot is still a mess.. Can't build there yet.");
+            }
+            else if (ableToPlaceDotResult == 5) {
+				ui->gameMessageLabel->setText("You have no more pegs to place.");
+                checkEndGame();
+			}
+		}
     }
 }
 
-void GameScreenWidget::switchPlayer() {
-    if (ableToSwitchPlayer && !isGameOver) {
+void GameScreenWidget::switchTurns() {
+    if (ableToSwitchTurns && !isGameOver) {
         currentPlayer = (currentPlayer == 1) ? 2 : 1;
+
+        Ui::UIPlayer& activePlayer = (currentPlayer == 1) ? player1UI : player2UI;
+        if (firstDotForBridge != std::make_tuple(0, 0))
+            gameBoard->setDotColor(std::get<0>(firstDotForBridge), std::get<1>(firstDotForBridge), activePlayer.color);
+
+        ableToSwitchTurns = false;
+        ableToBuildBridges = false;
+
+        ui->gameMessageLabel->setText("");
         updateUIBasedOnPlayerTurn();
     }
     else {
         // TODO make screen logging more descriptive
         // Also, clear the message when the player is able to switch again / after 3 seconds
         if (isGameOver)
-			ui->gameMessageLabel->setText("The game is over. Please return to the main menu.");
-		else if (!ableToSwitchPlayer) 
-            ui->gameMessageLabel->setText("Unable to switch the player.");
+            ui->gameMessageLabel->setText("The game is over. Please return to the main menu.");
+        else if (ableToBuildBridges && (firstDotForBridge != std::make_tuple(0, 0)) && (secondDotForBridge == std::make_tuple(0, 0)))
+            ui->gameMessageLabel->setText("Finish building your bridge first, buddy. Unless you want to cancel it."); //TODO build a cancel button
+		else if (!ableToSwitchTurns) 
+            ui->gameMessageLabel->setText("Unable to switch turns.");
     }
 }

@@ -30,7 +30,7 @@ namespace twixt {
 		//void deleteAllBridgesForAPeg();
 		void removeBridgeFromExisting(Observer_ptr<Bridge> bridge);
 
-		Dot::DotStatus returnTheOtherPlayer();
+		Dot::Status returnTheOtherPlayer();
 
 		Observer_ptr<Bridge> getBridgeFromPegs(Observer_ptr<Peg> secondDot);
 

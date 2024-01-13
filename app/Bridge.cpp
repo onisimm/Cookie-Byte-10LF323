@@ -21,8 +21,9 @@ twixt::Bridge& twixt::Bridge::operator=(const Bridge& bridge)
 	return *this;
 }
 
-bool twixt::Bridge::operator==(const Bridge& bridge)
+bool twixt::Bridge::operator==(const Bridge& bridge) const
 {
+	// TODO == regarding the direction of the bridge
 	if (m_firstPillar.GetPointer()->getCoordI() != bridge.getFirstPillar().GetPointer()->getCoordI())
 		return false;
 	if (m_secondPillar.GetPointer()->getCoordI() != bridge.getSecondPillar().GetPointer()->getCoordI())
@@ -61,7 +62,7 @@ std::pair<twixt::Observer_ptr<twixt::Peg>, twixt::Observer_ptr<twixt::Peg>> twix
 	return std::make_pair(m_firstPillar, m_secondPillar);
 }
 
-bool twixt::Bridge::isPillarInBridge(Observer_ptr<Peg> peg)
+bool twixt::Bridge::isPillarInBridge(Observer_ptr<Peg> peg) const
 {
 	if (peg == m_firstPillar || peg == m_secondPillar)
 		return true;

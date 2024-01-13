@@ -107,7 +107,6 @@
     <ClCompile Include="SettingsWidget.cpp" />
     <ClCompile Include="TwixtGame.cpp" />
     <ClCompile Include="Undo.cpp" />
-    <QtRcc Include="MainWindow.qrc" />
     <QtUic Include="GameScreenWidget.ui" />
     <QtUic Include="MainMenuWidget.ui" />
     <QtUic Include="MainWindow.ui" />

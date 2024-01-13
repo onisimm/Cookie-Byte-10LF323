@@ -27,6 +27,11 @@ namespace twixt {
 		return m_remainingBridges;
 	}
 
+	PlayerType Player::getPlayerType() const
+	{
+		return m_playerType;
+	}
+
 	void Player::setRemainingDots(uint8_t remainingDots)
 	{
 		m_remainingDots = remainingDots;
@@ -37,6 +42,11 @@ namespace twixt {
 		m_remainingBridges = remainingBridges;
 	}
 
+	void Player::setPlayerType(PlayerType playerType)
+	{
+		m_playerType = playerType;
+	}
+
 	bool Player::hasRemainingDots()
 	{
 		return m_remainingDots > 0;
@@ -45,10 +55,5 @@ namespace twixt {
 	bool Player::hasRemainingBridges()
 	{
 		return m_remainingBridges > 0;
-	}
-
-	void Player::addDot(Dot* dot)
-	{
-		existingDots.push(dot);
 	}
 }

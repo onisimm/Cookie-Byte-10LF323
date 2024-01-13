@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>750</width>
-    <height>600</height>
+    <width>800</width>
+    <height>700</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -16,10 +16,10 @@
   <widget class="QPushButton" name="playButton">
    <property name="geometry">
     <rect>
-     <x>290</x>
-     <y>330</y>
-     <width>171</width>
-     <height>51</height>
+     <x>310</x>
+     <y>380</y>
+     <width>191</width>
+     <height>61</height>
     </rect>
    </property>
    <property name="sizePolicy">
@@ -31,7 +31,7 @@
    <property name="font">
     <font>
      <family>Comic Sans MS</family>
-     <pointsize>16</pointsize>
+     <pointsize>22</pointsize>
     </font>
    </property>
    <property name="text">
@@ -41,10 +41,10 @@
   <widget class="QPushButton" name="settingsButton">
    <property name="geometry">
     <rect>
-     <x>320</x>
-     <y>260</y>
-     <width>111</width>
-     <height>31</height>
+     <x>340</x>
+     <y>280</y>
+     <width>131</width>
+     <height>41</height>
     </rect>
    </property>
    <property name="sizePolicy">
@@ -56,7 +56,7 @@
    <property name="font">
     <font>
      <family>Comic Sans MS</family>
-     <pointsize>12</pointsize>
+     <pointsize>16</pointsize>
     </font>
    </property>
    <property name="text">
@@ -68,14 +68,14 @@
     <rect>
      <x>0</x>
      <y>80</y>
-     <width>751</width>
+     <width>801</width>
      <height>44</height>
     </rect>
    </property>
    <property name="font">
     <font>
      <family>Comic Sans MS</family>
-     <pointsize>23</pointsize>
+     <pointsize>30</pointsize>
     </font>
    </property>
    <property name="text">

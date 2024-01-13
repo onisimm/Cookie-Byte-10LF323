@@ -50,32 +50,50 @@ void GameBoardWidget::setDotColor(int row, int col, const QColor& color)
     }
 }
 
+void GameBoardWidget::setPlayer1Color(const QColor& color)
+{
+    this->player1Color = color;
+}
+
+void GameBoardWidget::setPlayer2Color(const QColor& color)
+{
+    this->player2Color = color;
+}
+
+QColor GameBoardWidget::getDotColor(int row, int col) const
+{
+    QWidget* widget = layout->itemAtPosition(row, col)->widget();
+    DotWidget* dot = qobject_cast<DotWidget*>(widget);
+    return dot->getColor();
+}
+
 void GameBoardWidget::drawBridge(const int& startRow, const int& startCol, const int& endRow, const int& endCol, const QColor& color) {
-    QPair<int, int> key = qMakePair((startRow << 16) | startCol, (endRow << 16) | endCol);
-    if (bridges.contains(key)) {
-        return; // Bridge already exists
-    }
+    DotWidget* startDot = dynamic_cast<DotWidget*>(layout->itemAtPosition(startRow, startCol)->widget());
+    DotWidget* endDot = dynamic_cast<DotWidget*>(layout->itemAtPosition(endRow, endCol)->widget());
 
-    QWidget* startDotWidget = layout->itemAtPosition(startRow, startCol)->widget();
-    QWidget* endDotWidget = layout->itemAtPosition(endRow, endCol)->widget();
+    if (!startDot || !endDot) return; // Safety check
 
-    QRect startRect = startDotWidget->geometry();
-    QRect endRect = endDotWidget->geometry();
+    int startX = mapToParent(startDot->pos()).x() + startDot->width() / 2;
+    int startY = mapToParent(startDot->pos()).y() + startDot->height() / 2;
+    int endX = mapToParent(endDot->pos()).x() + endDot->width() / 2;
+    int endY = mapToParent(endDot->pos()).y() + endDot->height() / 2;
 
     BridgeWidget* bridge = new BridgeWidget(this);
-    bridge->setPositionAndSize(startRect.center().x(), startRect.center().y(),
-        endRect.center().x(), endRect.center().y());
-    bridge->show();
-
-    bridges.insert(key, bridge);
-
+    bridge->setPositionAndSize(startX, startY, endX, endY);
     bridge->setColor(color);
+    bridge->show();
+    bridge->raise(); // Bring the bridge to the front
+
+    QPair<int, int> key = qMakePair((startRow << 16) | startCol, (endRow << 16) | endCol);
+    bridges.insert(key, bridge);
 }
+
 
 void GameBoardWidget::deleteBridge(const int& startRow, const int& startCol, const int& endRow, const int& endCol) {
     QPair<int, int> key = qMakePair((startRow << 16) | startCol, (endRow << 16) | endCol);
     BridgeWidget* bridge = bridges.value(key, nullptr);
     if (bridge) {
+        bridge->hide();
         bridge->deleteLater();
         bridges.remove(key);
     }
@@ -102,7 +120,7 @@ void GameBoardWidget::paintEvent(QPaintEvent* event) {
     //int distanceBetweenDots = secondDotRect.left() - firstDotRect.left() + dotWidth;
 
     // Draw the top border line
-    pen.setColor(Qt::red);
+    pen.setColor(player1Color);
     painter.setPen(pen);
     QPoint topLeft(firstDotRect.left(), firstDotRect.top() - (distanceBetweenDots / 2));
     QPoint topRight(lastDotRect.right(), firstDotRect.top() - (distanceBetweenDots / 2));
@@ -114,7 +132,7 @@ void GameBoardWidget::paintEvent(QPaintEvent* event) {
     painter.drawLine(bottomLeft, bottomRight);
 
     // Set pen color for the vertical lines
-    pen.setColor(Qt::black);
+    pen.setColor(player2Color);
     painter.setPen(pen);
 
     // Draw the left border line

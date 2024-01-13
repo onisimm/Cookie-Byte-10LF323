@@ -42,7 +42,7 @@ namespace twixt {
 		//Function that returns the score for each possible bridge
 		uint16_t evaluate(std::pair<Observer_ptr<Peg>, Observer_ptr<Peg>> bridgeToEvaluate);
 		//Function that returns the possible bridge with the highest score
-		std::pair<Observer_ptr<Peg>, Observer_ptr<Peg>> minimax(Dot::DotStatus status);
+		std::pair<Observer_ptr<Peg>, Observer_ptr<Peg>> minimax(Dot::Status status);
 		//Function that 
 		void canBlock(Observer_ptr<Peg> centralDot);
 		Observer_ptr<Peg> blockOpponent(Observer_ptr<Peg> centralDot, Observer_ptr<Peg> firstOpponentDot, Observer_ptr<Peg> secondOpponentDot);
@@ -53,7 +53,7 @@ namespace twixt {
 	public:
 		Minimax() = default;
 		Minimax(Board& board);
-		void suggestMove(Dot::DotStatus status);
+		void suggestMove(Dot::Status status);
 
 
 	};

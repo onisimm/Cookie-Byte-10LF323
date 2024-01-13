@@ -42,10 +42,10 @@ void twixt::Undo::pressed()
 	switch (m_type)
 	{
 	case 0:
-		undoPlayers(Dot::DotStatus::Player1);
+		undoPlayers(Dot::Status::Player1);
 		break;
 	case 1:
-		undoPlayers(Dot::DotStatus::Player2);
+		undoPlayers(Dot::Status::Player2);
 		break;
 	case 3:
 		undoBulldozer();
@@ -64,7 +64,7 @@ void twixt::Undo::pressed()
 	}
 }
 
-void twixt::Undo::undoPlayers(Dot::DotStatus status)
+void twixt::Undo::undoPlayers(Dot::Status status)
 {
 	if (dynamic_cast<Peg*>(m_lastDot.get())->getExistingBridges().size())
 	{
@@ -107,8 +107,8 @@ void twixt::Undo::undoMines(std::unique_ptr<Dot>& mine)
 	for (auto& [coordRow,coordColumn] : positions)
 	{
 		if (coordRow + lastMine.GetPointer()->getCoordI() >= 0 && coordRow + lastMine.GetPointer()->getCoordI() < board.get().getSize() && coordColumn + lastMine.GetPointer()->getCoordJ() >= 0 && coordColumn + lastMine.GetPointer()->getCoordJ() < board.get().getSize()) // check boundaries
-			if(board.get().getDot(coordRow + lastMine.GetPointer()->getCoordI(), coordColumn + lastMine.GetPointer()->getCoordJ()).get()->getStatus() == Dot::DotStatus::Exploded)
-				board.get().getDot(coordRow + lastMine.GetPointer()->getCoordI(),coordColumn + lastMine.GetPointer()->getCoordJ()).get()->setStatus(Dot::DotStatus::Clear);
+			if(board.get().getDot(coordRow + lastMine.GetPointer()->getCoordI(), coordColumn + lastMine.GetPointer()->getCoordJ()).get()->getStatus() == Dot::Status::Exploded)
+				board.get().getDot(coordRow + lastMine.GetPointer()->getCoordI(),coordColumn + lastMine.GetPointer()->getCoordJ()).get()->setStatus(Dot::Status::Empty);
 	}
 	
 

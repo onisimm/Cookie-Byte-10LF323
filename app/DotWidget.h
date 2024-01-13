@@ -8,9 +8,8 @@ class DotWidget : public QWidget {
 public:
     explicit DotWidget(QWidget* parent = nullptr);
 
-    bool isPressed() const;
-    void setPressed(bool pressed);
     void setColor(const QColor& color);
+    QColor getColor() const;
 
 signals:
     void pressedChanged();
@@ -21,5 +20,4 @@ protected:
 
 private:
     QColor currentColor;
-    bool pressed = false;
 };

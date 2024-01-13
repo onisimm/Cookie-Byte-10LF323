@@ -21,7 +21,6 @@ public:
 		Mines
 	};
 
-	void GameTurns(Player& player, bool& isPlaying, Board& board);
 	bool IsTie(Player player1, Player player2);
 	void ResetGame();
 
@@ -32,10 +31,33 @@ public:
 	void setPlayer1(Player* player1);
 	void setPlayer2(Player* player2);
 
-	//getter
 	GameStack getGameStack() const;
 
 	void initializeGame();
+
+	// ableToPlaceDot will return:
+	// 0 if the dot was placed successfully
+	// 1 if the dot is already occupied
+	// 2 if the dot is occupied by a mine
+	// 3 if the dot is a mine exploded, where there can't be a dot placed
+	// 4 if the dot is occupied by a bulldozer
+	// 5 if the player has no more dots to place
+	uint8_t ableToPlaceDot(uint8_t row, uint8_t col, Player* currentPlayer);
+	void placeDot(uint8_t row, uint8_t col, Player* currentPlayer);
+
+	bool ableToBuildBridge(uint8_t row1, uint8_t col1, uint8_t row2, uint8_t col2);
+	void buildBridge(uint8_t row1, uint8_t col1, uint8_t row2, uint8_t col2, Player* currentPlayer);
+
+	void explodeMine(uint8_t row, uint8_t col, Player* currentPlayer);
+	void placeMine(uint8_t row, uint8_t col);
+
+	void moveBulldozer();
+	std::pair<uint8_t, uint8_t> getBulldozerPosition() const;
+
+	void undo();
+
+	Dot::Status getDotStatus(uint8_t row, uint8_t col) const;
+
 
 private:
 	Board* m_board;

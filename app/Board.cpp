@@ -277,7 +277,7 @@ Board::~Board() {}
 		path.push_back({firstDot, 0 });
 		while (!isFinalDot && !path.empty())
 		{
-			auto& [checkDot, position] = path[path.size() - 1];
+			auto [checkDot, position] = path[path.size() - 1];
 			if (position < checkDot.GetPointer()->getExistingBridges().size())
 			{
 				newDot = checkDot.GetPointer()->getExistingBridges()[position].GetPointer()->returnTheOtherPillar(checkDot);

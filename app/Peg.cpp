@@ -45,7 +45,7 @@ bool twixt::Peg::isPegInPath(std::vector<std::pair<Observer_ptr<Peg>, size_t>> p
 {
     for (const auto& [peg, position] : path)
     {
-        if (peg.GetPointer() == this)
+        if (peg.GetPointer()->getCoordI() == this->getCoordI() && peg.GetPointer()->getCoordJ() == this->getCoordJ())
         {
             return true;
         }

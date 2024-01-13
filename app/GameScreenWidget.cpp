@@ -108,8 +108,8 @@ void GameScreenWidget::setupConnections()
     // inside menu there will be a button to go back to the main menu
     // a Save Game button, a Reset Game button,
     connect(ui->backToMenuButton, &QPushButton::clicked, this, &GameScreenWidget::on_backToMenuButton_clicked);
-    connect(ui->undoButton, &QPushButton::clicked, this, &GameScreenWidget::on_undoButton_clicked);
-    connect(this, &GameScreenWidget::on_undoButton_clicked, this, &GameScreenWidget::handleUndoButtonClicked);
+    connect(ui->undoButton, &QPushButton::clicked, this, &GameScreenWidget::handleUndoButtonClicked);
+   // connect(this, &GameScreenWidget::on_undoButton_clicked, this, &GameScreenWidget::handleUndoButtonClicked);
     connect(gameBoard, &GameBoardWidget::dotPressed, this, &GameScreenWidget::handleDotPressed);
     connect(ui->switchTurnButton, &QPushButton::clicked, this, &GameScreenWidget::switchTurns);
 }

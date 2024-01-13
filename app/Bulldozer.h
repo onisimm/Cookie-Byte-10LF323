@@ -1,6 +1,10 @@
 #pragma once
 
-#include "Board.h"
+#ifndef BULLDOZER_H
+#define BULLDOZER_H
+
+#include"Board.h"
+
 #include <random>
 #include <stack>
 
@@ -12,20 +16,22 @@ namespace twixt {
 		std::stack<std::pair<size_t, size_t>> m_previousPosition;
 		std::stack<Peg> m_dotDestroyed;
 		void destoryRandomDot(Board& board);
-		void allocateBulldozer(Dot*& dot);
 
 	public:
-		Bulldozer(Board* board);
+		Bulldozer(Board& board);
 		Bulldozer(const Bulldozer& Bulldozer);
-		Bulldozer() {};
+		Bulldozer() = default;
 		~Bulldozer()override
 		{}
+
+		Bulldozer& operator=(const Bulldozer& Bulldozer);
 		bool flipCoin(Board& board);
 		bool exists();
-		//uint8_t getI() const;
-		//uint8_t getJ() const;
 		std::stack<std::pair<size_t, size_t>> getPreviousPosition() const;
 		std::stack<Peg> getPegDestroyed() const;
 		void setToPreviousPosition(Board& board);
 	};
 }
+
+#include "Peg.h"
+#endif

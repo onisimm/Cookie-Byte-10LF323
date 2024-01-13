@@ -1,25 +1,32 @@
 #pragma once
+#ifndef UNDO_H
+#define UNDO_H
 
+
+#include<stack>
+#include "GameStack.h"
 #include "Board.h"
 #include "Bulldozer.h"
-#include "GameStack.h"
-#include <stack>
 
 namespace twixt {
 	class Undo
 	{
 	private:
-		twixt::Dot* m_lastDot;
+		std::unique_ptr<Dot> m_lastDot;
 		int m_type;
-		Board* board;
-		Dot* m_deletedBridgeDot;
+		std::reference_wrapper<Board> board;
+		Peg m_deletedBridgeDot;
+		Peg m_addedBridgeDot;
 	public:
-		Undo(GameStack* gameStack, Board* gameBoard);
+		Undo(std::reference_wrapper<GameStack> gameStack, Board& gameBoard);
 		void pressed();
 		void undoPlayers(Dot::DotStatus status);
 		void undoBulldozer();
-		void undoMines(Dot* mine);
+		void undoMines(std::unique_ptr<Dot>& mine);
 		void undoDeleteBridge();
+		void undoAddBridge();
 
 	};
 }
+
+#endif // !UNDO_H

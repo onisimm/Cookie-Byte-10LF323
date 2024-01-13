@@ -5,7 +5,6 @@
 #include "GameStack.h"
 #include "Minimax.h"
 #include "Player.h"
-#include "SaveGame.h"
 #include "Undo.h"
 #include <cstdint>
 #include <iostream>
@@ -43,7 +42,6 @@ private:
 	Player* m_player1, * m_player2;
 	GameModeType m_gameMode;
 	GameStack m_gameStack;
-	SaveGame saveGame;
 	bool blackPlayerStoleColor = false;
 
 	uint8_t m_gameBoardSize;

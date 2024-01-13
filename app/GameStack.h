@@ -1,30 +1,43 @@
 #pragma once
 
-#include "Dot.h"
+#ifndef GAMESTACK_H
+#define GAMESTACK_H
+
 #include <iostream>
-#include <stack>
+#include "Dot.h"
+#include<stack>
+
+
+
 
 using namespace twixt;
 #define DELETEBRIDGE 5
+#define ADDBRIDGE 6
 
 class GameStack
 {
 private:
-	std::stack<std::pair<Dot*, uint8_t>> m_stack;
-	uint8_t m_mode;
-	std::stack<Dot*> m_deletedBridgesDotStack;
+	// facem un stack de Dot* pentru a face o copie a ultimei mutari, nu trebuie sa point-am la adresa, ci ne trb copie
+	std::stack<std::pair<Dot*, uint16_t>> m_stack;
+	uint16_t m_mode;
+	std::stack<Peg> m_deletedBridgesDotStack;
+	std::stack<Peg> m_addedBridgesDotStack;
 public:
 	GameStack() = default;
-	GameStack(uint8_t mode);
+	GameStack(uint16_t mode);
 
 	//getter
-	std::stack<std::pair<Dot*, uint8_t>> GetGameStack() const;
-	std::stack<Dot*> GetDeletedBridgesDotStack() const;
+	std::stack<std::pair<Dot*, uint16_t>> GetGameStack() const;
+	std::stack<Peg> GetDeletedBridgesDotStack() const;
+	std::stack<Peg> GetAddedBridgesDotStack() const;
 	void popGameStack();
 	void popDeletedBridgesStack();
+	void popAddedBridgesStack();
 
-	void AddInGameStack(Dot*, uint8_t);
-	void AddInDeletedBridgesDotStack(Dot*);
+	void AddInGameStack(Observer_ptr<Dot>, uint16_t);
+	void AddInDeletedBridgesDotStack(Peg);
+	void AddInAddedBridgesDotStack(Peg);
 	void Clear();
 };
 
+#endif // !GAMESTACK_H

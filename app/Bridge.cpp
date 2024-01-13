@@ -1,75 +1,79 @@
 #include "Bridge.h"
-#include <utility>
 
-twixt::Bridge::Bridge(const Bridge& bridge) : m_firstPillar{ bridge.m_firstPillar }, m_secondPillar{ bridge.m_secondPillar } {}
 
-twixt::Bridge::Bridge(Peg* firstPillar, Peg* secondPillar) : m_firstPillar{ firstPillar }, m_secondPillar{ secondPillar } {}
+twixt::Bridge::Bridge(const Bridge& bridge) : m_firstPillar{bridge.m_firstPillar}, m_secondPillar{bridge.m_secondPillar}
+{
+}
 
-twixt::Bridge::~Bridge() {}
+twixt::Bridge::Bridge(Observer_ptr<Peg> firstPillar, Observer_ptr<Peg> secondPillar) : m_firstPillar{firstPillar}, m_secondPillar{secondPillar}
+{}
+
+twixt::Bridge::~Bridge()
+{}
 
 twixt::Bridge& twixt::Bridge::operator=(const Bridge& bridge)
 {
-	m_firstPillar = bridge.m_firstPillar;
-	m_secondPillar = bridge.m_secondPillar;
+	if (this != &bridge)
+	{
+		m_firstPillar = bridge.m_firstPillar;
+		m_secondPillar = bridge.m_secondPillar;
+	}
 	return *this;
 }
 
-void twixt::Bridge::setPillars(Peg* first, Peg* second)
+bool twixt::Bridge::operator==(const Bridge& bridge)
 {
-	m_firstPillar = first;
-	m_secondPillar = second;
+	if (m_firstPillar.GetPointer()->getCoordI() != bridge.getFirstPillar().GetPointer()->getCoordI())
+		return false;
+	if (m_secondPillar.GetPointer()->getCoordI() != bridge.getSecondPillar().GetPointer()->getCoordI())
+		return false;
+	return true;
 }
 
-void twixt::Bridge::setFirstPillar(Peg* pillar)
+void twixt::Bridge::setPillars(std::unique_ptr<Peg> first, std::unique_ptr<Peg> second)
 {
-	m_firstPillar = pillar;
+	m_firstPillar = first.get();
+	m_secondPillar = second.get();
 }
 
-void twixt::Bridge::setSecondPillar(Peg* pillar)
+void twixt::Bridge::setFirstPillar(std::unique_ptr<Peg> pillar)
 {
-	m_secondPillar = pillar;
+	m_firstPillar = pillar.get();
 }
 
-twixt::Peg* twixt::Bridge::getFirstPillar() const
+void twixt::Bridge::setSecondPillar(std::unique_ptr<Peg> pillar)
+{
+	m_secondPillar = pillar.get();
+}
+
+twixt::Observer_ptr<twixt::Peg> twixt::Bridge::getFirstPillar() const
 {
 	return m_firstPillar;
 }
 
-twixt::Peg* twixt::Bridge::getSecondPillar() const
+twixt::Observer_ptr<twixt::Peg> twixt::Bridge::getSecondPillar() const
 {
 	return m_secondPillar;
 }
 
-std::pair<twixt::Peg*, twixt::Peg*> twixt::Bridge::getPillars() const
+std::pair<twixt::Observer_ptr<twixt::Peg>, twixt::Observer_ptr<twixt::Peg>> twixt::Bridge::getPillars() const
 {
 	return std::make_pair(m_firstPillar, m_secondPillar);
 }
 
-bool twixt::Bridge::isPillarInBridge(Peg* peg)
+bool twixt::Bridge::isPillarInBridge(Observer_ptr<Peg> peg)
 {
 	if (peg == m_firstPillar || peg == m_secondPillar)
 		return true;
 	return false;
 }
 
-void twixt::Bridge::deleteBridge()
-{
-	m_firstPillar->removeBridgeFromExisting(this);
-	m_secondPillar->removeBridgeFromExisting(this);
-	delete this;
-}
 
-twixt::Peg* twixt::Bridge::returnTheOtherPillar(Peg* peg)
+twixt::Observer_ptr<twixt::Peg> twixt::Bridge::returnTheOtherPillar(Observer_ptr<Peg> peg)
 {
-	if (peg == m_firstPillar)
+	if (peg.GetPointer() == m_firstPillar.GetPointer())
 	{
 		return m_secondPillar;
 	}
 	return m_firstPillar;
-}
-
-void twixt::Bridge::rebuiltBridge()
-{
-	m_firstPillar->addBridge(m_secondPillar);
-	delete this;
 }

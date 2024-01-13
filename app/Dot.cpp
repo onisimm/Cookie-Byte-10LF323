@@ -1,7 +1,10 @@
+//dot.cpp
 #include "Dot.h"
 #include <iostream>
 
 namespace twixt {
+
+    // Constructors
     Dot::Dot() : m_status{ DotStatus::Clear }, m_i{ 0 }, m_j{ 0 } {}
     Dot::Dot(size_t i, size_t j) : m_status{ DotStatus::Clear }, m_i{ i }, m_j{ j } {}
     Dot::Dot(const Dot& newDot) : m_status{ newDot.m_status }, m_i{ newDot.m_i }, m_j{ newDot.m_j }
@@ -83,30 +86,5 @@ namespace twixt {
     {
         return this->m_i == otherDot.m_i && this->m_j == otherDot.m_j;
     }
-
-    //std::ostream& operator<<(std::ostream& os, const twixt::Dot& dot) {
-    //    // Output the relevant information about the Dot object
-    //    os << "Dot Position: (" << dot.getCoordI() << ", " << dot.getCoordJ() << ") "
-    //        << "Status: ";
-
-    //    /*switch (dot.getStatus()) {
-    //    case twixt::Dot::DotStatus::Player1:
-    //        os << "Player1";
-    //        break;
-    //    case twixt::Dot::DotStatus::Player2:
-    //        os << "Player2";
-    //        break;
-    //    case twixt::Dot::DotStatus::Clear:
-    //        os << "Clear";
-    //        break;
-    //    }*/
-
-    //    //os << ", Possible Bridges: " << dot.getPossibleBridges().size()
-    //    //    << ", Existing Bridges: " << dot.getExistingBridges().size();
-
-    //    os << std::endl;
-
-    //    return os;
-    //}
 
 }

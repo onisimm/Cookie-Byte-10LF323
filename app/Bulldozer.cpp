@@ -10,22 +10,17 @@ void twixt::Bulldozer::destoryRandomDot(Board& board)
 		i = rand() % (board.getSize() - 2) + 1;
 		j = rand() % (board.getSize() - 2) + 1;
 	}
-	//assign the destroyed dot 
-	m_dotDestroyed.push(*dynamic_cast<Peg*>(board.getDot(i, j)));
-	//assign the previous position
-	m_previousPosition.push(position);
+	
+	
 
 	//delete the random Dot
 	std::cout << "The dot " << i << " " << j << " will be destroyed\n";
-	dynamic_cast<Peg*>(board.getDot(i, j))->deleteAllBridgesForAPeg();
+	board.deleteAllBridgesForAPegInBoard(Observer_ptr<Peg>(dynamic_cast<Peg*>(board.getDot(i, j).get())));
 
-	//eliminate the current bulldozer
-	delete board.getDot(position.first, position.second);
-	board.getDot(position.first, position.second) = new Dot(position.first, position.second);
-
-	delete board.getDot(i, j);
-
-
+	//assign the previous position
+	m_previousPosition.push(position);
+	//assign the destroyed dot 
+	m_dotDestroyed.push(*dynamic_cast<Peg*>(board.getDot(i, j).get()));
 
 	//set the new position for the bulldozer
 	position.first = i;
@@ -34,54 +29,62 @@ void twixt::Bulldozer::destoryRandomDot(Board& board)
 	this->setCoordJ(j);
 	this->setStatus(Dot::DotStatus::Bulldozer);
 
-	board.getDot(i, j) = new Bulldozer(*this);
+	board.getDot(i, j).reset(new Bulldozer(*this));
+	board.m_bulldozer = Observer_ptr<Bulldozer>(dynamic_cast<Bulldozer*>(board.getDot(i, j).get()));
 
-
-}
-
-void twixt::Bulldozer::allocateBulldozer(Dot*& dot)
-{
-	delete dot;
-	dot = new Bulldozer(*this);
+	//eliminate the current bulldozer
+	board.getDot(m_previousPosition.top().first, m_previousPosition.top().second).reset(new Dot(m_previousPosition.top().first, m_previousPosition.top().second));
 
 }
+
 
 //Constructor 
-twixt::Bulldozer::Bulldozer(Board* board)
+twixt::Bulldozer::Bulldozer(Board& board)
 {
 	srand(time(NULL));
 	auto [i, j] = position;
-	i = rand() % (board->getSize() - 2) + 1;
-	j = rand() % (board->getSize() - 2) + 1;
-	bool didMineExplode = false;
+	i = rand() % (board.getSize() - 2) + 1;
+	j = rand() % (board.getSize() - 2) + 1;
 	//find a clear Dot and set it as a bulldozer
-	while (board->getDot(i, j)->getStatus() != Dot::DotStatus::Clear)
+	while (board.getDot(i, j)->getStatus() != Dot::DotStatus::Clear)
 	{
-		i = rand() % (board->getSize() - 2) + 1;
-		j = rand() % (board->getSize() - 2) + 1;
+		i = rand() % (board.getSize() - 2) + 1;
+		j = rand() % (board.getSize() - 2) + 1;
 	}
-	delete board->getDot(i, j);
 	position.first = i;
 	position.second = j;
-	board->getDot(i, j) = new Bulldozer(*this);
-	board->changeDotStatus(i, j, Dot::DotStatus::Bulldozer, didMineExplode);
+	board.getDot(i, j).reset(new Bulldozer(*this));
+	board.m_bulldozer = Observer_ptr<Bulldozer>(dynamic_cast<Bulldozer*>(board.getDot(i, j).get()));
+	//board->placePiece(i, j, Dot::DotStatus::Bulldozer, didMineExplode);
 }
 
 twixt::Bulldozer::Bulldozer(const Bulldozer& bulldozer) : Dot(bulldozer), position{ bulldozer.position }, m_previousPosition{ bulldozer.m_previousPosition }, m_dotDestroyed{ bulldozer.m_dotDestroyed }
 {
 	this->setCoordI(position.first);
 	this->setCoordJ(position.second);
+	this->setStatus(Dot::DotStatus::Bulldozer);
+}
+
+twixt::Bulldozer& twixt::Bulldozer::operator=(const Bulldozer& Bulldozer)
+{
+	position = Bulldozer.position;
+	m_previousPosition = Bulldozer.m_previousPosition;
+	m_dotDestroyed =  Bulldozer.m_dotDestroyed;
+	this->setCoordI(position.first);
+	this->setCoordJ(position.second);
+	this->setStatus(Dot::DotStatus::Bulldozer);
+	return *this;
 }
 
 //Flipping the coin and deciding whether to destory a Dot or not
 bool twixt::Bulldozer::flipCoin(Board& board)
 {
-	/*srand(time(NULL));
+	srand(time(NULL));
 	if (rand() % 2)
 	{
 		std::cout << "We flipped the coin and nothing will happen.\n";
 		return false;
-	}*/
+	}
 	//If it did not exist the function, we will destory a Dot
 	destoryRandomDot(board);
 	board.showBoard();
@@ -95,16 +98,6 @@ bool twixt::Bulldozer::exists()
 	return false;
 }
 
-//uint8_t twixt::Bulldozer::getI() const
-//{
-//	return position.first;
-//}
-//
-//uint8_t twixt::Bulldozer::getJ() const
-//{
-//	return position.second;
-//}
-
 std::stack<std::pair<size_t, size_t>> twixt::Bulldozer::getPreviousPosition() const
 {
 	return m_previousPosition;
@@ -117,16 +110,13 @@ std::stack<twixt::Peg> twixt::Bulldozer::getPegDestroyed() const
 
 void twixt::Bulldozer::setToPreviousPosition(Board& board)
 {
-	//this->setStatus(Dot::DotStatus::Clear);
 	position.first = m_previousPosition.top().first;
 	position.second = m_previousPosition.top().second;
 
-	bool didMineExplode = false;
-	board.changeDotStatus(position.first, position.second, Dot::DotStatus::Bulldozer, didMineExplode);
 	m_previousPosition.pop();
 
-	delete board.getDot(position.first, position.second);
-	board.getDot(position.first, position.second) = new Bulldozer(*this);
+	board.getDot(position.first, position.second).reset(new Bulldozer(*this));
+	board.m_bulldozer = Observer_ptr<Bulldozer>(dynamic_cast<Bulldozer*>(board.getDot(position.first, position.second).get()));
 
 }
 

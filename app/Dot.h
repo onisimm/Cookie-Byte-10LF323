@@ -10,18 +10,14 @@ namespace twixt {
     class Bridge;
     class Dot {
     public:
-        // Constructors
-        Dot(); // default
-        Dot(int, int);
+        Dot();
+        Dot(int i, int j);
 
-        Dot(const Dot& newDot); // copy constructor
-        // Add move constructor
+        Dot(const Dot& newDot);
         Dot(Dot&& other) noexcept;
 
-        // Add move assignment operator
         Dot& operator=(Dot&& other) noexcept;
 
-        // Destructor 
         virtual ~Dot();
 
         enum class DotStatus : uint8_t

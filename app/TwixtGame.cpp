@@ -9,12 +9,12 @@ bool TwixtGame::IsTie(Player player1, Player player2)
 
 void TwixtGame::setGameMode(const QString& gamemode)
 {
-	/*if (gamemode == "Mines")
+	if (gamemode == "Mines")
 		m_gameMode = GameModeType::Mines;
 	else if (gamemode == "Bulldozer")
 		m_gameMode = GameModeType::Bulldozer;
 	else
-		m_gameMode = GameModeType::Default;*/
+		m_gameMode = GameModeType::Default;
 }
 
 void TwixtGame::setMaxDots(const uint8_t& maxDots)
@@ -29,7 +29,7 @@ void TwixtGame::setMaxBridges(const uint8_t& maxBridges)
 
 void TwixtGame::setGameBoardSize(const uint8_t& size)
 {
-	//this->m_gameBoardSize = size;
+	this->m_gameBoardSize = size;
 }
 
 void TwixtGame::setPlayer1(Player* player1)

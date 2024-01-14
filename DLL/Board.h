@@ -5,6 +5,8 @@
 #include <vector>
 #include <array>
 #include <iostream>
+#include <algorithm>
+#include <ranges>
 #include "Dot.h"
 #include "Peg.h"
 

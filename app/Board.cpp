@@ -190,7 +190,10 @@ Board::~Board() {}
 	bool Board::checkPath(twixt::Dot::Status status)
 	{
 		std::vector<Observer_ptr<Peg>> margins = FindDotInMargins(status);
-		if (margins.empty()) return false;
+		if (std::ranges::empty(margins))
+		{
+			return false;
+		}
 		size_t index = 0;
 		Observer_ptr<Peg> firstDot = margins[index];
 		Observer_ptr<Peg> newDot;
@@ -220,7 +223,7 @@ Board::~Board() {}
 			{
 				path.pop_back();
 			}
-			if (!path.empty())
+			if (!std::ranges::empty(path))
 				path[path.size() - 1].second++;
 			else
 			{

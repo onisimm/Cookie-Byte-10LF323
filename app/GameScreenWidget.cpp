@@ -314,8 +314,11 @@ void GameScreenWidget::handleDotPressed(int row, int col) {
                     {
                         if (this->backendGame->existsBridge(std::get<0>(firstDotForBridge), std::get<1>(firstDotForBridge), row, col, activePlayer.backendPlayer))
                         { 
-                            this->backendGame->deleteBridge(std::get<0>(firstDotForBridge), std::get<1>(firstDotForBridge), row, col, activePlayer.backendPlayer); 
-                            updateGameBoardFromBackend();
+                            if(std::get<0>(firstDotForBridge) != row && std::get<1>(firstDotForBridge) != col)
+                            {
+                                this->backendGame->deleteBridge(std::get<0>(firstDotForBridge), std::get<1>(firstDotForBridge), row, col, activePlayer.backendPlayer);
+                                updateGameBoardFromBackend();
+                            }
                         } 
 
                     }

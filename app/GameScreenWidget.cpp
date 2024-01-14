@@ -295,6 +295,16 @@ void GameScreenWidget::handleDotPressed(int row, int col) {
                         checkWinningPath(activePlayer);
                         clearHint();
                     }
+                    else 
+                    {
+                        if (this->backendGame->existsBridge(std::get<0>(firstDotForBridge), std::get<1>(firstDotForBridge), row, col, activePlayer.backendPlayer))
+                        { 
+                            this->backendGame->deleteBridge(std::get<0>(firstDotForBridge), std::get<1>(firstDotForBridge), row, col, activePlayer.backendPlayer); 
+                            updateGameBoardFromBackend();
+                        } 
+
+                    }
+
                 }
 
                 if (firstDotForBridge != std::make_tuple(0, 0))

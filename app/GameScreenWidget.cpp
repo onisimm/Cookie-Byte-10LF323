@@ -248,7 +248,7 @@ void GameScreenWidget::updateGameBoardFromBackend()
 				gameBoard->setDotColor(i, j, player2UI.color);
 			}
 			else if (dotStatus == twixt::Dot::Status::Mine) {
-				gameBoard->setDotColor(i, j, QColor(102, 51, 0));
+				gameBoard->setDotColor(i, j, Qt::lightGray);
 			}
             else if (dotStatus == twixt::Dot::Status::Exploded) {
                 gameBoard->setDotColor(i, j, Qt::black);
@@ -341,8 +341,8 @@ void GameScreenWidget::handleDotPressed(int row, int col) {
         }
         else if (!ableToBuildBridges) { // If it's not able to build bridges, it means the player is placing a dot
             uint8_t ableToPlaceDotResult = this->backendGame->ableToPlaceDot(row, col, activePlayer.backendPlayer);
-            if ((ableToPlaceMine && ableToPlaceDotResult != 0) || (row == 0 || col == 0 || 
-                (row == this->backendGame->getGameboardSize() - 1) || (col == this->backendGame->getGameboardSize() - 1))) 
+            if (ableToPlaceMine && ((ableToPlaceMine && ableToPlaceDotResult != 0) || (row == 0 || col == 0 ||
+                (row == this->backendGame->getGameboardSize() - 1) || (col == this->backendGame->getGameboardSize() - 1))))
             {
                 ui->gameMessageLabel->setText("Would've been nice to place a mine there, huh? Chose some other peg...");
             }

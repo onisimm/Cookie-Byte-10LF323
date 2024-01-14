@@ -81,6 +81,11 @@ private:
     std::tuple<uint8_t, uint8_t> firstDotForBridge = { 0, 0 };
     std::tuple<uint8_t, uint8_t> secondDotForBridge = { 0, 0 };
 
+    bool hintOnScreen = false;
+    std::pair<int, int> firstHintDot = { -1, -1 };
+    std::pair<int, int> secondHintDot = { -1, -1 };
+    void clearHint();
+
     void setupUIPlayers(const Ui::GameSettings& settings);
     void setupConnections();
 

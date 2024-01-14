@@ -198,6 +198,26 @@ void GameScreenWidget::checkTimerIsOver()
     updateUIBasedOnPlayerTurn();
 }
 
+void GameScreenWidget::clearHint()
+{
+    if (hintOnScreen) {
+        twixt::Dot::Status firstDotStatus = this->backendGame->getDotStatus(firstHintDot.first, firstHintDot.second);
+        QColor colorToRedrawDots = Qt::lightGray;
+        if (firstDotStatus == twixt::Dot::Status::Player1) {
+            colorToRedrawDots = player1UI.color;
+        }
+        else if (firstDotStatus == twixt::Dot::Status::Player2) {
+			colorToRedrawDots = player2UI.color;
+		}
+
+        gameBoard->setDotColor(firstHintDot.first, firstHintDot.second, colorToRedrawDots);
+		gameBoard->setDotColor(secondHintDot.first, secondHintDot.second, colorToRedrawDots);
+        firstHintDot = { -1, -1 };
+        secondHintDot = { -1, -1 };
+		hintOnScreen = false;
+    }
+}
+
 void GameScreenWidget::updateGameBoardFromBackend()
 {
     this->gameBoard->clearBoard();
@@ -273,6 +293,7 @@ void GameScreenWidget::handleDotPressed(int row, int col) {
                         secondDotForBridge = { 0, 0 };
                         ableToSwitchTurns = true;
                         checkWinningPath(activePlayer);
+                        clearHint();
                     }
                 }
 
@@ -372,6 +393,8 @@ void GameScreenWidget::switchTurns() {
 		else if (!ableToSwitchTurns) 
             ui->gameMessageLabel->setText("Maybe put a peg down first.. you don't wanna lose your turn");
     }
+
+    clearHint();
 }
 
 void GameScreenWidget::handleUndoButtonClicked() 
@@ -399,5 +422,8 @@ void GameScreenWidget::handleGetHintButtonClicked()
 		gameBoard->setDotColor(hint.first.first, hint.first.second, Qt::yellow);
 		gameBoard->setDotColor(hint.second.first, hint.second.second, Qt::yellow);
 		ui->gameMessageLabel->setText("A bridge there might work!");
+        hintOnScreen = true;
+        firstHintDot = hint.first;
+        secondHintDot = hint.second;
 	}
 }

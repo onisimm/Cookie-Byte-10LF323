@@ -199,6 +199,8 @@ void GameScreenWidget::checkTimerIsOver()
 
 void GameScreenWidget::updateGameBoardFromBackend()
 {
+    this->gameBoard->clearBoard();
+
     for (int i = 0; i < this->backendGame->getGameboardSize(); i++) {
 		for (int j = 0; j < this->backendGame->getGameboardSize(); j++) {
 			twixt::Dot::Status dotStatus = this->backendGame->getDotStatus(i, j);
@@ -223,7 +225,6 @@ void GameScreenWidget::updateGameBoardFromBackend()
 		}
 	}
 
-    this->gameBoard->deleteBridges();
     for (auto& bridge : this->backendGame->getBridges()) {
         std::pair<uint8_t, uint8_t> firstPeg = { bridge.get()->getFirstPillar().GetPointer()->getCoordI(), bridge.get()->getFirstPillar().GetPointer()->getCoordJ() };
         std::pair<uint8_t, uint8_t> secondPeg = { bridge.get()->getSecondPillar().GetPointer()->getCoordI(), bridge.get()->getSecondPillar().GetPointer()->getCoordJ() };
@@ -332,15 +333,6 @@ void GameScreenWidget::switchTurns() {
         ui->gameMessageLabel->setText("");
         updateUIBasedOnPlayerTurn();
 
-        if (bulldozerModeMoveCount == true && !firstTurn) {
-            this->backendGame->moveBulldozer();
-            bulldozerModeMoveCount = false;
-            updateGameBoardFromBackend();
-            updateUIBasedOnPlayerTurn();
-        }
-        else if (!firstTurn)
-            bulldozerModeMoveCount = true;
-
         if (firstTurn) {
             firstTurn = false;
 
@@ -358,14 +350,16 @@ void GameScreenWidget::switchTurns() {
             }
         }
         else {
-            if (bulldozerModeMoveCount == true) {
-                this->backendGame->moveBulldozer();
-                bulldozerModeMoveCount = false;
-                updateGameBoardFromBackend();
-                updateUIBasedOnPlayerTurn();
+            if (this->backendGame->getGameMode() == TwixtGame::GameModeType::Bulldozer) {
+                if (bulldozerModeMoveCount == true) {
+                    this->backendGame->moveBulldozer();
+                    bulldozerModeMoveCount = false;
+                    updateGameBoardFromBackend();
+                    updateUIBasedOnPlayerTurn();
+                }
+                else
+                    bulldozerModeMoveCount = true;
             }
-            else
-                bulldozerModeMoveCount = true;
         }
     }
     else {
@@ -387,5 +381,4 @@ void GameScreenWidget::handleUndoButtonClicked()
         updateGameBoardFromBackend();
         updateUIBasedOnPlayerTurn();
     }
-    int a = 2;
 }

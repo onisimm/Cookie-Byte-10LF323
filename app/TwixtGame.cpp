@@ -85,6 +85,11 @@ uint8_t TwixtGame::getGameboardSize() const
 	return m_gameBoardSize;
 }
 
+TwixtGame::GameModeType TwixtGame::getGameMode() const
+{
+	return m_gameMode;
+}
+
 GameStack TwixtGame::getGameStack() const
 {
 	return m_gameStack;

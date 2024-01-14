@@ -57,7 +57,7 @@ public slots:
 
 private:
     Ui::GameScreenWidget* ui;
-    GameBoardWidget* gameBoard; // The game board UI
+    GameBoardWidget* gameBoard = nullptr; // The game board UI
     TwixtGame* backendGame; // The game logic
     Ui::UIPlayer player1UI, player2UI;
     QFont initialPlayerFont;

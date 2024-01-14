@@ -23,7 +23,7 @@ void GameBoardWidget::buildBoard()
 
     for (int row = 0; row < gameboardSize; ++row) {
         for (int col = 0; col < gameboardSize; ++col) {
-            DotWidget* dot = new DotWidget(this, (4000 / gameboardSize) / 15);
+            DotWidget* dot = new DotWidget(this, (3000 / gameboardSize) / 12);
             layout->addWidget(dot, row, col);
             connect(dot, &DotWidget::pressedChanged, this, [this, row, col]() {
                 emit dotPressed(row, col);
@@ -103,11 +103,16 @@ void GameBoardWidget::drawBridge(const int& startRow, const int& startCol, const
     update(); // Update the GameBoardWidget to repaint
 }
 
-void GameBoardWidget::deleteBridges()
+void GameBoardWidget::clearBoard()
 {
-    for (auto bridge : bridges) {
-		deleteBridge(bridge->getStartPosition().x(), bridge->getStartPosition().y(), bridge->getEndPosition().x(), bridge->getEndPosition().y());
-	}
+    // Delete all bridge widgets and remove them from the map
+    for (auto bridge : qAsConst(bridges)) {
+        bridge->deleteLater();
+    }
+    bridges.clear();
+
+    // Force the game board widget to update and redraw without the bridges
+    update();
 }
 
 
@@ -115,16 +120,22 @@ void GameBoardWidget::deleteBridge(const int& startRow, const int& startCol, con
     QPair<int, int> startPair = qMakePair(startRow, startCol);
     QPair<int, int> endPair = qMakePair(endRow, endCol);
 
+    // Check if the bridge exists with the given start and end pair
     if (bridges.contains(startPair) && bridges[startPair] == bridges[endPair]) {
-        BridgeWidget* bridge = bridges[startPair];
-        bridges.remove(startPair);
-        bridges.remove(endPair);
-        bridge->hide(); // Hide the bridge
-        bridge->setVisible(false); // Optionally delete the bridge
+        BridgeWidget* bridge = bridges.take(startPair); // Take the bridge out of the map
+        bridge->deleteLater(); // Schedule the bridge for deletion
+        bridges.remove(endPair); // Remove the corresponding end pair
+    }
+    // Check if the bridge exists with the start and end pair reversed
+    else if (bridges.contains(endPair) && bridges[endPair] == bridges[startPair]) {
+        BridgeWidget* bridge = bridges.take(endPair); // Take the bridge out of the map
+        bridge->deleteLater(); // Schedule the bridge for deletion
+        bridges.remove(startPair); // Remove the corresponding start pair
     }
 
-    update(); // Update the GameBoardWidget to repaint
+    update(); // Ensure the widget is updated to reflect the removal
 }
+
 
 
 void GameBoardWidget::paintEvent(QPaintEvent* event) {

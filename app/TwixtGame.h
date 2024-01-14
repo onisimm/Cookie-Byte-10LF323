@@ -32,6 +32,7 @@ public:
 	void setPlayer2(Player* player2);
 
 	uint8_t getGameboardSize() const;
+	GameModeType getGameMode() const;
 
 	GameStack getGameStack() const;
 

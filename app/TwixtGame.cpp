@@ -4,6 +4,8 @@
 
 bool TwixtGame::IsTie(Player player1, Player player2)
 {
+	//Check if both players ran out of dots 
+	//Check if both players ran out of bridges
 	if (!player1.hasRemainingDots() && !player2.hasRemainingDots() && !player1.hasRemainingBridges() && !player2.hasRemainingBridges())
 	{
 		return true;
@@ -32,6 +34,8 @@ void TwixtGame::ResetGame(const uint8_t& maxDots, const uint8_t& maxBridges) {
 	m_player2->setRemainingBridges(maxBridges);
 	m_player2->setRemainingDots(maxDots);
 
+
+	//Check game mode
 	if (m_gameMode == GameModeType::Bulldozer)
 	{
 		m_board->m_bulldozer = Observer_ptr<Bulldozer>(new Bulldozer(*m_board));

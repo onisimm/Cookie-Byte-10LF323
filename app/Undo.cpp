@@ -4,6 +4,7 @@ twixt::Undo::Undo(std::reference_wrapper<GameStack> gameStack, Board* gameBoard)
 {
 	Observer_ptr<Dot> topDot = gameStack.get().getGameStack().top().first;
 
+	//Check if it is mine
 	Mine* ptrMine = topDot.To<Mine>();
 	if (ptrMine)
 	{
@@ -11,6 +12,7 @@ twixt::Undo::Undo(std::reference_wrapper<GameStack> gameStack, Board* gameBoard)
 	}
 	else
 	{
+		//Check if it is bulldozer
 		Bulldozer* ptrBulldozer = topDot.To<Bulldozer>();
 		if (ptrBulldozer)
 		{
@@ -18,6 +20,7 @@ twixt::Undo::Undo(std::reference_wrapper<GameStack> gameStack, Board* gameBoard)
 		}
 		else
 		{
+			//then it is peg
 			Peg* ptrDot = topDot.To<Peg>();
 			m_lastDot.reset(new Peg(*ptrDot));
 		}

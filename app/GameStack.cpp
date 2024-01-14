@@ -3,6 +3,11 @@
 GameStack::GameStack(uint16_t mode) : m_mode{ mode }
 {}
 
+//GameStack::GameStack(GameStack && other) noexcept
+//   : m_stack(std::move(other.m_stack)),m_mode(std::move(other.m_mode)), m_deletedBridgesDotStack(std::move(other.m_deletedBridgesDotStack)), m_addedBridgesDotStack(std::move(other.m_addedBridgesDotStack))
+//{}
+   
+
 std::stack<std::pair<Dot*, uint16_t>> GameStack::getGameStack() const
 {
 	return m_stack;

@@ -31,7 +31,7 @@ namespace twixt {
 		__declspec(dllexport) ~Board();
 
 		// Getters
-		__declspec(dllexport) std::unique_ptr<Dot>& getDot(size_t i, size_t j);
+		__declspec(dllexport) std::unique_ptr<Dot>& getDot(size_t row, size_t column);
 		__declspec(dllexport) uint32_t getSize() const;
 		__declspec(dllexport) std::vector<std::vector<std::unique_ptr<Dot>>>& getMatrix();
 		__declspec(dllexport) std::unique_ptr<Dot>& getMatrixDot(size_t, size_t);
@@ -53,8 +53,8 @@ namespace twixt {
 		//place Dot
 		//de creat un dot in spate si apoi adaugat in place Dot
 		//change the Status to a dot
-		__declspec(dllexport) void placePiece(size_t i, size_t j, Dot::Status status, bool& didMineExplode);
-		__declspec(dllexport) void placePiece(size_t i, size_t j, Dot::Status status);
+		__declspec(dllexport) void placePiece(size_t row, size_t column, Dot::Status status, bool& didMineExplode);
+		__declspec(dllexport) void placePiece(size_t row, size_t column, Dot::Status status);
 
 		//placePeg
 		__declspec(dllexport) bool checkObstructingBridges(const Peg& dot1, const Peg& dot2) const;
@@ -63,9 +63,9 @@ namespace twixt {
 
 		//void deleteBridge(Observer_ptr<Peg> firstDot, Observer_ptr<Peg> secondDot);
 
-		__declspec(dllexport) void placeMine(size_t i, size_t j);
+		__declspec(dllexport) void placeMine(size_t row, size_t column);
 		__declspec(dllexport) void placeRandomMine();
-		__declspec(dllexport) void placePeg(size_t i, size_t j, Dot::Status status);
+		__declspec(dllexport) void placePeg(size_t row, size_t column, Dot::Status status);
 
 		__declspec(dllexport) void addBridgeInBoard(Observer_ptr<Peg> firstPeg, Observer_ptr<Peg> secondPeg);
 		__declspec(dllexport) void deleteBridgeInBoard(Observer_ptr<Peg> firstPeg, Observer_ptr<Peg> secondPeg);

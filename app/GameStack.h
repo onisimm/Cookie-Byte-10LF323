@@ -25,7 +25,8 @@ private:
 public:
 	GameStack() = default;
 	GameStack(uint16_t mode);
-
+	////Add move constructor
+	// GameStack(GameStack&& other) noexcept;
 	//getter
 	std::stack<std::pair<Dot*, uint16_t>> getGameStack() const;
 	std::stack<Peg> getDeletedBridgesDotStack() const;

@@ -53,6 +53,7 @@ public:
 	bool ableToBuildBridge(uint8_t row1, uint8_t col1, uint8_t row2, uint8_t col2);
 	void buildBridge(uint8_t row1, uint8_t col1, uint8_t row2, uint8_t col2, Player* currentPlayer);
 	void deleteBridge(uint8_t row1, uint8_t col1, uint8_t row2, uint8_t col2, Player* currentPlayer);
+	bool existsBridge(uint8_t row1, uint8_t col1, uint8_t row2, uint8_t col2, Player* currentPlayer);
 
 	void explodeMine(uint8_t row, uint8_t col, Player* currentPlayer);
 	void placeMine(uint8_t row, uint8_t col);

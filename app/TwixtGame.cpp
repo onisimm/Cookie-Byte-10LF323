@@ -209,6 +209,17 @@ void TwixtGame::deleteBridge(uint8_t row1, uint8_t col1, uint8_t row2, uint8_t c
 	m_gameStack.AddInDeletedBridgesDotStack(*(dynamic_cast<Peg*>(m_board->getMatrixDot(row2, col2).get())));
 }
 
+bool TwixtGame::existsBridge(uint8_t row1, uint8_t col1, uint8_t row2, uint8_t col2, Player* currentPlayer)
+{
+	for(auto& bridge: m_board->getBridges())
+	{
+		if (bridge.get()->isPillarInBridge(Observer_ptr<Dot>(m_board->getDot(row1, col1).get()).To<Peg>()) && bridge.get()->isPillarInBridge(Observer_ptr<Dot>(m_board->getDot(row1, col1).get()).To<Peg>()))
+			return true;
+	}
+	return false;
+}
+
+
 bool TwixtGame::ableToBuildBridge(uint8_t row1, uint8_t col1, uint8_t row2, uint8_t col2)
 {
 	if (m_board->getMatrixDot(row1, col1).get()->getStatus() == m_board->getMatrixDot(row2, col2).get()->getStatus() && m_board->getMatrixDot(row1, col1).get()->getStatus() != Dot::Status::Empty)

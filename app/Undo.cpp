@@ -150,14 +150,22 @@ void twixt::Undo::undoMines(std::unique_ptr<Dot>& mine)
 			board.get().placePeg(elements->getCoordI(), elements->getCoordJ(), elements->getStatus());
 		}
 	}
+	size_t index = 0;
 	for (auto& elements : lastMine.GetPointer()->getExplodedDots())
 	{
-		size_t index = 0;
+
 		if (dynamic_cast<Peg*>(elements.get()))
 		{
 			for (auto bridges : dynamic_cast<Peg*>(elements.get())->getExistingBridges())
 			{
-				board.get().addBridgeInBoard((Observer_ptr<Dot>(board.get().getDot(elements->getCoordI(), elements->getCoordJ()).get())).To<Peg>(), (Observer_ptr<Dot>(board.get().getDot(lastMine.GetPointer()->getExplodedBridgesTheOtherDot()[index].get()->getCoordI(), lastMine.GetPointer()->getExplodedBridgesTheOtherDot()[index].get()->getCoordJ()).get())).To<Peg>());
+				bool existsBridge = false;
+				for(auto& bridgesInBoard : board.get().getBridges())
+				{
+					if (bridgesInBoard.get()->isPillarInBridge((Observer_ptr<Dot>(board.get().getDot(elements->getCoordI(), elements->getCoordJ()).get())).To<Peg>()) && bridgesInBoard.get()->isPillarInBridge((Observer_ptr<Dot>(board.get().getDot(lastMine.GetPointer()->getExplodedBridgesTheOtherDot()[index].get()->getCoordI(), lastMine.GetPointer()->getExplodedBridgesTheOtherDot()[index].get()->getCoordJ()).get())).To<Peg>()))
+						existsBridge = true;
+				}
+				if(!existsBridge)
+					board.get().addBridgeInBoard((Observer_ptr<Dot>(board.get().getDot(elements->getCoordI(), elements->getCoordJ()).get())).To<Peg>(), (Observer_ptr<Dot>(board.get().getDot(lastMine.GetPointer()->getExplodedBridgesTheOtherDot()[index].get()->getCoordI(), lastMine.GetPointer()->getExplodedBridgesTheOtherDot()[index].get()->getCoordJ()).get())).To<Peg>());
 				index++;
 			}
 		}

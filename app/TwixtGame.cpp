@@ -243,7 +243,7 @@ bool TwixtGame::ableToBuildBridge(uint8_t row1, uint8_t col1, uint8_t row2, uint
 void TwixtGame::explodeMine(uint8_t row, uint8_t col, Player* currentPlayer)
 {
 	m_board->explodeMine(Observer_ptr<Mine>(dynamic_cast<Mine*>(m_board->getMatrixDot(row, col).get())));
-	m_gameStack.AddInGameStack(Observer_ptr<Dot>(m_board->getMatrixDot(row, col).get()), uint16_t(m_board->getMatrixDot(row, col)->getStatus()));
+	m_gameStack.AddInGameStack(Observer_ptr<Dot>(m_board->getMatrixDot(row, col).get()), uint16_t(Dot::Status::Mine));
 }
 
 bool TwixtGame::undo()

@@ -44,9 +44,12 @@ void twixt::Minimax::canBlock(Observer_ptr<Peg> centralDot)
     for (int row = centralDot.GetPointer()->getCoordI() - 2; row <= centralDot.GetPointer()->getCoordI() + 2; row++)
         for (int column = centralDot.GetPointer()->getCoordJ() - 2; column <= centralDot.GetPointer()->getCoordJ() + 2; column++)
         {
-            if (copyOfBoard.get().getMatrixDot(row, column)->getStatus() == centralDot.GetPointer()->returnTheOtherPlayer())
+            if(row >= 0 && row < copyOfBoard.get().getSize() && column >= 0 && column < copyOfBoard.get().getSize())
             {
-                opponentPlayerDots.push_back(Observer_ptr<Peg>(dynamic_cast<Peg*>(copyOfBoard.get().getMatrixDot(row, column).get())));
+                if (copyOfBoard.get().getMatrixDot(row, column)->getStatus() == centralDot.GetPointer()->returnTheOtherPlayer())
+                {
+                    opponentPlayerDots.push_back(Observer_ptr<Peg>(dynamic_cast<Peg*>(copyOfBoard.get().getMatrixDot(row, column).get())));
+                }
             }
         }
     if(opponentPlayerDots.size() >= 2)
@@ -166,12 +169,9 @@ void twixt::Minimax::scorePossibleBridges(Observer_ptr<Peg> dot)
 
 bool twixt::Minimax::existsBridgeBetween(Observer_ptr<Peg> firstPeg, Observer_ptr<Peg> secondPeg)
 {
-    for (auto& bridges : copyOfBoard.get().getBridges())
-    {
-        if (bridges.get()->isPillarInBridge(firstPeg) && bridges.get()->isPillarInBridge(secondPeg))
-            return true;
-    }
-    return false;
+    return std::any_of(copyOfBoard.get().getBridges().begin(), copyOfBoard.get().getBridges().end(), [&](auto& bridge) {
+        return bridge->isPillarInBridge(firstPeg) && bridge->isPillarInBridge(secondPeg);
+        });
 }
 
 twixt::Minimax::Minimax(Board& board) : copyOfBoard{board} {}

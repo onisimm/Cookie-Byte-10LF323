@@ -68,12 +68,14 @@ twixt::Dot::Status twixt::Peg::returnTheOtherPlayer()
 
 twixt::Observer_ptr<twixt::Bridge> twixt::Peg::getBridgeFromPegs(Observer_ptr<Peg> secondDot)
 {
-    for (auto& bridge : m_existingBridges)
-    {
-        if (bridge.GetPointer()->isPillarInBridge(secondDot))
-        {
-            return bridge;
-        }
+    auto it = std::find_if(m_existingBridges.begin(), m_existingBridges.end(), [&secondDot](Observer_ptr<Bridge> bridge) {
+        return bridge.GetPointer()->isPillarInBridge(secondDot);
+        });
+
+    if (it != m_existingBridges.end()) {
+        return *it; // Return a pointer to the found bridge
     }
-    return nullptr;
+
+    return nullptr; // Return nullptr if no matching bridge is found
+
 }

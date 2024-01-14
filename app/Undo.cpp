@@ -146,7 +146,6 @@ void twixt::Undo::undoMines(std::unique_ptr<Dot>& mine)
 		}
 		else
 		{
-			std::cout << "REBUILT DOT " << elements->getCoordI() << " " << elements->getCoordJ() << "\n";
 			board.get().placePeg(elements->getCoordI(), elements->getCoordJ(), elements->getStatus());
 		}
 	}

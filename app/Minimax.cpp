@@ -19,13 +19,13 @@ std::pair<twixt::Observer_ptr<twixt::Peg>,twixt::Observer_ptr<twixt::Peg>> twixt
 {
     uint16_t maximumScore = 0;
     std::pair<Observer_ptr<Peg>, Observer_ptr<Peg>> maximumBridge{ nullptr, nullptr };
-    for (int i = 0; i < copyOfBoard.get().getSize(); i++)
-        for (int j = 0; j < copyOfBoard.get().getSize(); j++)
+    for (int row = 0; row < copyOfBoard.get().getSize(); row++)
+        for (int column = 0; column < copyOfBoard.get().getSize(); column++)
         {
-            if (i>=0 && j>=0 && i<copyOfBoard.get().getSize() && j< copyOfBoard.get().getSize()&& copyOfBoard.get().getMatrixDot(i, j)->getStatus() == status)
+            if (row>=0 && column>=0 && row<copyOfBoard.get().getSize() && column< copyOfBoard.get().getSize()&& copyOfBoard.get().getMatrixDot(row, column)->getStatus() == status)
             {
-               scorePossibleBridges(Observer_ptr<Peg>(dynamic_cast<Peg*>(copyOfBoard.get().getMatrixDot(i, j).get())));
-                canBlock(Observer_ptr<Dot>(copyOfBoard.get().getMatrixDot(i, j).get()).To<Peg>());
+               scorePossibleBridges(Observer_ptr<Peg>(dynamic_cast<Peg*>(copyOfBoard.get().getMatrixDot(row, column).get())));
+                canBlock(Observer_ptr<Dot>(copyOfBoard.get().getMatrixDot(row, column).get()).To<Peg>());
             }
         }
     for (auto& it : mapBridges)
@@ -41,24 +41,24 @@ void twixt::Minimax::canBlock(Observer_ptr<Peg> centralDot)
 {
     const int OPPONENT_LONGEST_PATH_VALUE = 7;
     std::vector<Observer_ptr<Peg>> opponentPlayerDots;
-    for (int i = centralDot.GetPointer()->getCoordI() - 2; i <= centralDot.GetPointer()->getCoordI() + 2; i++)
-        for (int j = centralDot.GetPointer()->getCoordJ() - 2; j <= centralDot.GetPointer()->getCoordJ() + 2; j++)
+    for (int row = centralDot.GetPointer()->getCoordI() - 2; row <= centralDot.GetPointer()->getCoordI() + 2; row++)
+        for (int column = centralDot.GetPointer()->getCoordJ() - 2; column <= centralDot.GetPointer()->getCoordJ() + 2; column++)
         {
-            if (copyOfBoard.get().getMatrixDot(i, j)->getStatus() == centralDot.GetPointer()->returnTheOtherPlayer())
+            if (copyOfBoard.get().getMatrixDot(row, column)->getStatus() == centralDot.GetPointer()->returnTheOtherPlayer())
             {
-                opponentPlayerDots.push_back(Observer_ptr<Peg>(dynamic_cast<Peg*>(copyOfBoard.get().getMatrixDot(i, j).get())));
+                opponentPlayerDots.push_back(Observer_ptr<Peg>(dynamic_cast<Peg*>(copyOfBoard.get().getMatrixDot(row, column).get())));
             }
         }
     if(opponentPlayerDots.size() >= 2)
     {
-        for (int i = 0; i < opponentPlayerDots.size() - 1; i++)
-            for (int j = i + 1; j < opponentPlayerDots.size(); j++)
+        for (int row = 0; row < opponentPlayerDots.size() - 1; row++)
+            for (int column = row + 1; column < opponentPlayerDots.size(); column++)
             {
-                if ((abs((int)opponentPlayerDots[i].GetPointer()->getCoordI() - (int)opponentPlayerDots[j].GetPointer()->getCoordI()) == 1 && abs((int)opponentPlayerDots[i].GetPointer()->getCoordJ() - (int)opponentPlayerDots[j].GetPointer()->getCoordJ()) == 2) ||
-                    (abs((int)opponentPlayerDots[i].GetPointer()->getCoordI() - (int)opponentPlayerDots[j].GetPointer()->getCoordI()) == 2 && abs((int)opponentPlayerDots[i].GetPointer()->getCoordJ() - (int)opponentPlayerDots[j].GetPointer()->getCoordJ()) == 1) ||
-                    !existsBridgeBetween(opponentPlayerDots[i], opponentPlayerDots[j]))
+                if ((abs((int)opponentPlayerDots[row].GetPointer()->getCoordI() - (int)opponentPlayerDots[column].GetPointer()->getCoordI()) == 1 && abs((int)opponentPlayerDots[row].GetPointer()->getCoordJ() - (int)opponentPlayerDots[column].GetPointer()->getCoordJ()) == 2) ||
+                    (abs((int)opponentPlayerDots[row].GetPointer()->getCoordI() - (int)opponentPlayerDots[column].GetPointer()->getCoordI()) == 2 && abs((int)opponentPlayerDots[row].GetPointer()->getCoordJ() - (int)opponentPlayerDots[column].GetPointer()->getCoordJ()) == 1) ||
+                    !existsBridgeBetween(opponentPlayerDots[row], opponentPlayerDots[column]))
                 {
-                    Observer_ptr<Peg> dotToBlock = blockOpponent(centralDot, opponentPlayerDots[i], opponentPlayerDots[j]);
+                    Observer_ptr<Peg> dotToBlock = blockOpponent(centralDot, opponentPlayerDots[row], opponentPlayerDots[column]);
                     if (dotToBlock != nullptr && !existsBridgeBetween(dotToBlock,centralDot) && copyOfBoard.get().checkObstructingBridges(*dotToBlock.GetPointer(),*centralDot.GetPointer()))
                     {
                         uint16_t newScore = 5;
@@ -68,7 +68,7 @@ void twixt::Minimax::canBlock(Observer_ptr<Peg> centralDot)
                             newScore = it->second;
 
                         }
-                        newScore += (longestPath(opponentPlayerDots[i]) + longestPath(opponentPlayerDots[j])) * OPPONENT_LONGEST_PATH_VALUE;
+                        newScore += (longestPath(opponentPlayerDots[row]) + longestPath(opponentPlayerDots[column])) * OPPONENT_LONGEST_PATH_VALUE;
                         mapBridges[{centralDot, dotToBlock}] = newScore;
                     }
                 }
@@ -81,13 +81,13 @@ twixt::Observer_ptr<twixt::Peg> twixt::Minimax::blockOpponent(Observer_ptr<Peg> 
 {
     std::array<std::pair<int, int>, 8> positions{ { { -2, -1 }, { -1, -2 }, { 1, -2 }, { 2, -1 }, { 2, 1 }, { 1, 2 }, { -1, 2 }, { -2, 1 } } };
 
-    int i = centralDot.GetPointer()->getCoordI();
-    int j = centralDot.GetPointer()->getCoordJ();
+    int row = centralDot.GetPointer()->getCoordI();
+    int column = centralDot.GetPointer()->getCoordJ();
 
     for (auto& [newI, newJ] : positions)
     {
-        newI += i;
-        newJ += j;
+        newI += row;
+        newJ += column;
         if (newI >= 0 && newI < copyOfBoard.get().getMatrix().size() && newJ >= 0 && newJ < copyOfBoard.get().getMatrix().size()) // check boundaries
         {
             if (copyOfBoard.get().getMatrix()[newI][newJ]->getStatus() == centralDot.GetPointer()->getStatus())

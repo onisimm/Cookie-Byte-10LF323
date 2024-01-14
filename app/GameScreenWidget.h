@@ -54,6 +54,7 @@ signals:
 public slots:
     void switchTurns();
     void handleUndoButtonClicked();
+    void handleGetHintButtonClicked();
 
 private:
     Ui::GameScreenWidget* ui;

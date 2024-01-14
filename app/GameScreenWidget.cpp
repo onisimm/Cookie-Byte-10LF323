@@ -110,6 +110,7 @@ void GameScreenWidget::setupConnections()
     // a Save Game button, a Reset Game button,
     connect(ui->backToMenuButton, &QPushButton::clicked, this, &GameScreenWidget::on_backToMenuButton_clicked);
     connect(ui->undoButton, &QPushButton::clicked, this, &GameScreenWidget::handleUndoButtonClicked);
+    connect(ui->getHintButton, &QPushButton::clicked, this, &GameScreenWidget::handleGetHintButtonClicked);
     connect(gameBoard, &GameBoardWidget::dotPressed, this, &GameScreenWidget::handleDotPressed);
     connect(ui->switchTurnButton, &QPushButton::clicked, this, &GameScreenWidget::switchTurns);
 }
@@ -267,6 +268,7 @@ void GameScreenWidget::handleDotPressed(int row, int col) {
                         gameBoard->drawBridge(std::get<0>(firstDotForBridge), std::get<1>(firstDotForBridge), row, col, activePlayer.color);
                         this->backendGame->buildBridge(std::get<0>(firstDotForBridge), std::get<1>(firstDotForBridge), row, col, activePlayer.backendPlayer);
                         gameBoard->setDotColor(std::get<0>(firstDotForBridge), std::get<1>(firstDotForBridge), activePlayer.color);
+                        gameBoard->setDotColor(row, col, activePlayer.color);
                         firstDotForBridge = { 0, 0 };
                         secondDotForBridge = { 0, 0 };
                         ableToSwitchTurns = true;
@@ -381,4 +383,21 @@ void GameScreenWidget::handleUndoButtonClicked()
         updateGameBoardFromBackend();
         updateUIBasedOnPlayerTurn();
     }
+}
+
+void GameScreenWidget::handleGetHintButtonClicked()
+{
+	if (!isGameOver) {
+        Ui::UIPlayer& activePlayer = (currentPlayer == 1) ? player1UI : player2UI;
+
+        std::pair<std::pair<int, int>, std::pair<int, int>> hint = this->backendGame->getHintByMinimax(activePlayer.backendPlayer);
+        if (hint.first.first == -1 && hint.first.second == -1) {
+			ui->gameMessageLabel->setText("No more hints available. You're on your own until you place some more pegs.");
+			return;
+		}
+
+		gameBoard->setDotColor(hint.first.first, hint.first.second, Qt::yellow);
+		gameBoard->setDotColor(hint.second.first, hint.second.second, Qt::yellow);
+		ui->gameMessageLabel->setText("A bridge there might work!");
+	}
 }

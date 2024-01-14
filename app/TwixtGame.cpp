@@ -263,13 +263,27 @@ std::pair<uint8_t, uint8_t> TwixtGame::getBulldozerPosition() const
 	return { m_board->m_bulldozer.GetPointer()->getCoordI(), m_board->m_bulldozer.GetPointer()->getCoordJ() };
 }
 
-std::pair<std::pair<int,int>, std::pair<int, int>> TwixtGame::minimax(Player* currentPlayer)
+std::pair<std::pair<int, int>, std::pair<int, int>> TwixtGame::getHintByMinimax(Player* currentPlayer)
 {
 	Minimax suggestion(*m_board);
 	std::pair<Observer_ptr<Peg>, Observer_ptr<Peg>> myPegs;
 	if (currentPlayer->getPlayerType() == PlayerType::Player1)
-		myPegs = suggestion.suggestMove(Dot::Status::Player1);
-	else myPegs = suggestion.suggestMove(Dot::Status::Player2);
+	{
+		try {
+			myPegs = suggestion.suggestMove(Dot::Status::Player1);
+		}
+		catch (std::exception& e) {
+			return { {-1, -1}, {-1, -1} };
+		}
+	}
+	else {
+		try {
+			myPegs = suggestion.suggestMove(Dot::Status::Player2);
+		}
+		catch (std::exception& e) {
+			return { {-1, -1}, {-1, -1} };
+		}
+	}
 	return { {myPegs.first.GetPointer()->getCoordI(), myPegs.first.GetPointer()->getCoordJ()}, {myPegs.second.GetPointer()->getCoordI(), myPegs.second.GetPointer()->getCoordJ()}};
 
 }

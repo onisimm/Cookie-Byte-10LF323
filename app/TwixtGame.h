@@ -63,7 +63,7 @@ public:
 	std::vector<std::unique_ptr<Bridge>>& getBridges();
 	Dot::Status getDotStatus(uint8_t row, uint8_t col) const;
 
-	std::pair<std::pair<int,int>, std::pair<int, int>> minimax(Player* currentPlayer);
+	std::pair<std::pair<int,int>, std::pair<int, int>> getHintByMinimax(Player* currentPlayer);
 
 
 private:

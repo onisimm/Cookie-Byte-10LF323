@@ -14,6 +14,7 @@
     <ClCompile Include="GameStack.cpp" />
     <ClCompile Include="Minimax.cpp" />
     <ClCompile Include="SettingsWidget.cpp" />
+    <ClCompile Include="GameScreenMenuDialog.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Undo.h" />
@@ -30,6 +31,7 @@
     <QtMoc Include="GameBoardWidget.h" />
     <QtMoc Include="GameScreenWidget.h" />
     <QtMoc Include="MainMenuWidget.h" />
+    <QtMoc Include="GameScreenMenuDialog.h" />
   </ItemGroup>
   <ItemGroup>
     <QtUic Include="SettingsWidget.ui">
@@ -44,6 +46,8 @@
     <QtUic Include="MainWindow.ui">
       <Filter>Frontend\Resource Files</Filter>
     </QtUic>
+    <QtUic Include="GameScreenMenuDialog.ui" />
+    <QtUic Include="GameScreenMenuDialogOld.ui" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Backend">

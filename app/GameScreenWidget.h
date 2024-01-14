@@ -85,6 +85,7 @@ private:
     //  2. The current player is in the middle of placing a bridge
     bool ableToSwitchTurns = false;
     bool ableToBuildBridges = false; // will be true if the current player has placed a dot
+    bool ableToPlaceMine = false;
     std::tuple<uint8_t, uint8_t> firstDotForBridge = { 0, 0 };
     std::tuple<uint8_t, uint8_t> secondDotForBridge = { 0, 0 };
 

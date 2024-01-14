@@ -338,21 +338,36 @@ void GameScreenWidget::handleDotPressed(int row, int col) {
         }
         else if (!ableToBuildBridges) { // If it's not able to build bridges, it means the player is placing a dot
             uint8_t ableToPlaceDotResult = this->backendGame->ableToPlaceDot(row, col, activePlayer.backendPlayer);
-            if (ableToPlaceDotResult == 0) {
-                gameBoard->setDotColor(row, col, activePlayer.color);
-                this->backendGame->placeDot(row, col, activePlayer.backendPlayer);
+            if ((ableToPlaceMine && ableToPlaceDotResult != 0) || (row == 0 || col == 0 || 
+                (row == this->backendGame->getGameboardSize() - 1) || (col == this->backendGame->getGameboardSize() - 1))) 
+            {
+                ui->gameMessageLabel->setText("Would've been nice to place a mine there, huh? Chose some other peg...");
+            }
+            else if (ableToPlaceDotResult == 0) {
+                if (ableToPlaceMine) {
+                    this->backendGame->placeMine(row, col);
+                    ableToPlaceMine = false;
+                }
+                else {
+                    gameBoard->setDotColor(row, col, activePlayer.color);
+                    this->backendGame->placeDot(row, col, activePlayer.backendPlayer);
+                }
                 ableToSwitchTurns = true;
                 ableToBuildBridges = true;
                 ui->gameMessageLabel->setText("Wanna build some bridges?? Just press on two of your pegs");
             }
             else if (ableToPlaceDotResult == 2) {
-				ui->gameMessageLabel->setText("Oh no, a mine was there! I've never seen such a big explosion!");
-                this->backendGame->explodeMine(row, col, activePlayer.backendPlayer);
-                this->gameBoard->setDotColor(row, col, QColor(102, 51, 0));
-                updateGameBoardFromBackend();
+                if (!ableToPlaceMine) {
+                    ui->gameMessageLabel->setText("Oh no, a mine was there! I've never seen such a big explosion!\nNo worries, you get to place a mine wherever you want now");
+                    this->backendGame->explodeMine(row, col, activePlayer.backendPlayer);
+                    this->gameBoard->setDotColor(row, col, QColor(102, 51, 0));
+                    updateGameBoardFromBackend();
 
-                ableToSwitchTurns = true;
-                ableToBuildBridges = true;
+                    /*ableToSwitchTurns = true;
+                    ableToBuildBridges = true;*/
+
+                    ableToPlaceMine = true;
+                }
 			}
             else if (ableToPlaceDotResult == 3) {
                 ui->gameMessageLabel->setText("That spot is still a mess.. Can't build there yet.");

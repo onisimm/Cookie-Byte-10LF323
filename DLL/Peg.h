@@ -3,6 +3,7 @@
 #ifndef PEG_H
 #define PEG_H
 #include "Dot.h"
+#include <algorithm>
 
 
 

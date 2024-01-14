@@ -1,4 +1,5 @@
 #include "Minimax.h"
+#include <algorithm>
 #include "..//DLL//Dot.h"
 #include "..//DLL//Peg.h"
 

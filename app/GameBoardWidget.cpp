@@ -23,7 +23,12 @@ void GameBoardWidget::buildBoard()
 
     for (int row = 0; row < gameboardSize; ++row) {
         for (int col = 0; col < gameboardSize; ++col) {
-            DotWidget* dot = new DotWidget(this, (3000 / gameboardSize) / 12);
+            int totalSpaceAvailable = 4000;
+            int spaceForSpacing = gameboardSize + 1;
+            int scalingFactor = 12;
+            int dotDiameter = (totalSpaceAvailable / spaceForSpacing) / scalingFactor;
+            DotWidget* dot = new DotWidget(this, dotDiameter);
+
             layout->addWidget(dot, row, col);
             connect(dot, &DotWidget::pressedChanged, this, [this, row, col]() {
                 emit dotPressed(row, col);

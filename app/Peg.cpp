@@ -36,7 +36,6 @@ void twixt::Peg::setExistingBridges(const std::vector<Observer_ptr<Bridge>>& exi
 
 void twixt::Peg::addBridge(Observer_ptr<Bridge> myBridge)
 {
-    std::cout << "BUILD BRIDGE\n";
     m_existingBridges.push_back(myBridge);
 }
 
@@ -69,11 +68,11 @@ twixt::Dot::Status twixt::Peg::returnTheOtherPlayer()
 
 twixt::Observer_ptr<twixt::Bridge> twixt::Peg::getBridgeFromPegs(Observer_ptr<Peg> secondDot)
 {
-    for (auto& i : m_existingBridges)
+    for (auto& bridge : m_existingBridges)
     {
-        if (i.GetPointer()->isPillarInBridge(secondDot))
+        if (bridge.GetPointer()->isPillarInBridge(secondDot))
         {
-            return i;
+            return bridge;
         }
     }
     return nullptr;

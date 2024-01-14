@@ -139,10 +139,10 @@
   <ItemGroup>
     <ClCompile Include="..\app\Board.cpp" />
     <ClCompile Include="..\app\Bridge.cpp" />
-    <ClCompile Include="..\app\Bulldozer.cpp" />
     <ClCompile Include="..\app\Dot.cpp" />
     <ClCompile Include="..\app\Mine.cpp" />
     <ClCompile Include="..\app\Peg.cpp" />
+    <ClCompile Include="Bulldozer.cpp" />
     <ClCompile Include="Observer_ptr.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

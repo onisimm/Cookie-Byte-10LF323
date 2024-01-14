@@ -19,6 +19,7 @@ namespace twixt {
 		__declspec(dllexport) ~Peg();
 		__declspec(dllexport) std::vector<Observer_ptr<Bridge>> getExistingBridges();
 
+
 		__declspec(dllexport) Peg& operator=(const Peg& newPeg);
 		__declspec(dllexport) bool operator==(const Peg& newPeg);
 

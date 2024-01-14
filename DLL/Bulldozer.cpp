@@ -10,12 +10,12 @@ void twixt::Bulldozer::destoryRandomDot(Board& board)
 		row = rand() % (board.getSize() - 2) + 1;
 		column = rand() % (board.getSize() - 2) + 1;
 	}
-	
+
 	//assign the destroyed dot 
 	m_dotDestroyed.push(*dynamic_cast<Peg*>(board.getDot(row, column).get()));
 	for (int index = 0; index < m_dotDestroyed.top().getExistingBridges().size(); index++)
 	{
-		m_dotBridgesDestroyed.push(*dynamic_cast<Peg*>(m_dotDestroyed.top().getExistingBridges()[index].GetPointer()));
+		m_dotBridgesDestroyed.push(*(m_dotDestroyed.top().getExistingBridges()[index].GetPointer()->returnTheOtherPillar(Observer_ptr<Dot>(board.getDot(row, column).get()).To<Peg>())).GetPointer());
 	}
 
 	//delete the random Dot
@@ -23,7 +23,7 @@ void twixt::Bulldozer::destoryRandomDot(Board& board)
 
 	//assign the previous position
 	m_previousPosition.push(position);
-	
+
 
 	//set the new position for the bulldozer
 	position.first = row;
@@ -61,7 +61,7 @@ twixt::Bulldozer::Bulldozer(Board& board)
 	//board->placePiece(i, j, Dot::DotStatus::Bulldozer, didMineExplode);
 }
 
-twixt::Bulldozer::Bulldozer(const Bulldozer& bulldozer) : Dot(bulldozer), position{ bulldozer.position }, m_previousPosition{ bulldozer.m_previousPosition }, m_dotDestroyed{ bulldozer.m_dotDestroyed }
+twixt::Bulldozer::Bulldozer(const Bulldozer& bulldozer) : Dot(bulldozer), position{ bulldozer.position }, m_previousPosition{ bulldozer.m_previousPosition }, m_dotDestroyed{ bulldozer.m_dotDestroyed }, m_dotBridgesDestroyed{ bulldozer.m_dotBridgesDestroyed }
 {
 	this->setCoordI(position.first);
 	this->setCoordJ(position.second);
@@ -72,7 +72,8 @@ twixt::Bulldozer& twixt::Bulldozer::operator=(const Bulldozer& Bulldozer)
 {
 	position = Bulldozer.position;
 	m_previousPosition = Bulldozer.m_previousPosition;
-	m_dotDestroyed =  Bulldozer.m_dotDestroyed;
+	m_dotDestroyed = Bulldozer.m_dotDestroyed;
+	m_dotBridgesDestroyed = Bulldozer.m_dotBridgesDestroyed;
 	this->setCoordI(position.first);
 	this->setCoordJ(position.second);
 	this->setStatus(Dot::Status::Bulldozer);
@@ -106,9 +107,14 @@ std::stack<std::pair<size_t, size_t>> twixt::Bulldozer::getPreviousPosition() co
 	return m_previousPosition;
 }
 
-std::stack<twixt::Peg> twixt::Bulldozer::getPegDestroyed() const
+std::stack<twixt::Peg>& twixt::Bulldozer::getPegDestroyed()
 {
 	return m_dotDestroyed;
+}
+
+std::stack<twixt::Peg>& twixt::Bulldozer::getPegBridgeDestroyed()
+{
+	return m_dotBridgesDestroyed;
 }
 
 void twixt::Bulldozer::setToPreviousPosition(Board& board)

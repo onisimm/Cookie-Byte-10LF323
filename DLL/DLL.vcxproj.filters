@@ -24,9 +24,6 @@
     <ClInclude Include="Bridge.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Bulldozer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Dot.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -36,15 +33,15 @@
     <ClInclude Include="Peg.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Bulldozer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\app\Board.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\app\Bridge.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\app\Bulldozer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\app\Dot.cpp">
@@ -57,6 +54,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Observer_ptr.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Bulldozer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

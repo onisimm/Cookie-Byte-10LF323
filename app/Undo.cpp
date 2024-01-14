@@ -83,17 +83,26 @@ void twixt::Undo::undoBulldozer()
 	//set lastBulldozer to previous position
 	lastBulldozer.GetPointer()->setToPreviousPosition(board);
 
+	if (lastBulldozer.GetPointer()->getPegDestroyed().empty())
+		return;
 	//make a copy of the last DestroyedDot
 	Peg copyOfDot = lastBulldozer.GetPointer()->getPegDestroyed().top();
 
 	//delete the last dot that is on the i and j of the destroyedDot
 	board.get().getDot(coordILastBulldozer, coordJLastBulldozer).reset(new Peg(copyOfDot));
+	Observer_ptr<Dot>(board.get().getDot(coordILastBulldozer, coordJLastBulldozer).get()).To<Peg>()->setExistingBridges({});
+
 
 	//build bridges for both copyOfDot and the other dot in bridge
-	for (auto bridges : copyOfDot.getExistingBridges())
+	for (size_t index=0; index< copyOfDot.getExistingBridges().size(); index++)
 	{
-		board.get().addBridgeInBoard(bridges.GetPointer()->getFirstPillar(), bridges.GetPointer()->getSecondPillar());
+		board.get().addBridgeInBoard(Observer_ptr<Dot>(board.get().getDot(coordILastBulldozer, coordJLastBulldozer).get()).To<Peg>(),
+			Observer_ptr<Dot>(board.get().getDot(lastBulldozer.GetPointer()->getPegBridgeDestroyed().top().getCoordI(), lastBulldozer.GetPointer()->getPegBridgeDestroyed().top().getCoordJ()).get()).To<Peg>());
+		lastBulldozer.GetPointer()->getPegBridgeDestroyed().pop();
+		board.get().m_bulldozer.GetPointer()->getPegBridgeDestroyed().pop();
 	}
+
+	board.get().m_bulldozer.GetPointer()->getPegDestroyed().pop();
 
 }
 

@@ -15,6 +15,7 @@ namespace twixt {
 		std::pair<size_t, size_t> position;
 		std::stack<std::pair<size_t, size_t>> m_previousPosition;
 		std::stack<Peg> m_dotDestroyed;
+		std::stack<Peg> m_dotBridgesDestroyed;
 		void destoryRandomDot(Board& board);
 
 	public:
@@ -28,7 +29,8 @@ namespace twixt {
 		__declspec(dllexport) bool flipCoin(Board& board);
 		__declspec(dllexport) bool exists();
 		__declspec(dllexport) std::stack<std::pair<size_t, size_t>> getPreviousPosition() const;
-		__declspec(dllexport) std::stack<Peg> getPegDestroyed() const;
+		__declspec(dllexport) std::stack<Peg>& getPegDestroyed();
+		__declspec(dllexport) std::stack<Peg>& getPegBridgeDestroyed();
 		__declspec(dllexport) void setToPreviousPosition(Board& board);
 	};
 }

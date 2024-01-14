@@ -61,26 +61,31 @@ void TwixtGame::setGameMode(const QString& gamemode)
 
 void TwixtGame::setMaxDots(const uint8_t& maxDots)
 {
+	//set max number of dots
 	this->m_maxDots = maxDots;
 }
 
 void TwixtGame::setMaxBridges(const uint8_t& maxBridges)
 {
+	//set max number of bridges
 	this->m_maxBridges = maxBridges;
 }
 
 void TwixtGame::setGameBoardSize(const uint8_t& size)
 {
+	//set max number of board
 	this->m_gameBoardSize = size;
 }
 
 void TwixtGame::setPlayer1(Player* player1)
 {
+	//set  player1
 	this->m_player1 = player1;
 }
 
 void TwixtGame::setPlayer2(Player* player2)
 {
+	//set player2
 	this->m_player2 = player2;
 }
 
@@ -195,6 +200,13 @@ void TwixtGame::buildBridge(uint8_t row1, uint8_t col1, uint8_t row2, uint8_t co
 	m_gameStack.AddInAddedBridgesDotStack(*(dynamic_cast<Peg*>(m_board->getMatrixDot(row2, col2).get())));
 
 	currentPlayer->setRemainingBridges(currentPlayer->getRemainingBridges() - 1);
+}
+
+void TwixtGame::deleteBridge(uint8_t row1, uint8_t col1, uint8_t row2, uint8_t col2, Player* currentPlayer)
+{
+	m_board->deleteBridgeInBoard(Observer_ptr<Peg>(dynamic_cast<Peg*>(m_board->getMatrixDot(row1, col1).get())), Observer_ptr<Peg>(dynamic_cast<Peg*>(m_board->getMatrixDot(row2, col2).get())));
+	m_gameStack.AddInGameStack(Observer_ptr<Dot>(m_board->getMatrixDot(row1, col1).get()), DELETEBRIDGE);
+	m_gameStack.AddInDeletedBridgesDotStack(*(dynamic_cast<Peg*>(m_board->getMatrixDot(row2, col2).get())));
 }
 
 bool TwixtGame::ableToBuildBridge(uint8_t row1, uint8_t col1, uint8_t row2, uint8_t col2)

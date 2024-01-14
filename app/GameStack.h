@@ -5,14 +5,15 @@
 
 #include <iostream>
 #include "../DLL/Dot.h"
+#include "../DLL/Bulldozer.h"
 #include<stack>
 
 
 
 
 using namespace twixt;
-#define DELETEBRIDGE 5
-#define ADDBRIDGE 6
+const uint16_t DELETEBRIDGE = 5;
+const uint16_t ADDBRIDGE = 6;
 
 class GameStack
 {

@@ -41,7 +41,13 @@ twixt::Undo::Undo(std::reference_wrapper<GameStack> gameStack, Board* gameBoard)
 
 void twixt::Undo::pressed()
 {
-
+	//mtype for undo:
+	// case 0 = player1
+	// case 1 = player2
+	// case 3 = bulldozer
+	// case 4 = mine
+	// case 5 = deleteBridge
+	// case 6 = addbridge
 	switch (m_type)
 	{
 	case 0:

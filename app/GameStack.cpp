@@ -40,13 +40,18 @@ void GameStack::popAddedBridgesStack()
 
 void GameStack::AddInGameStack(Observer_ptr<Dot> dot, uint16_t type)
 {
-	m_stack.push({ dot.GetPointer(), type});
+	if(type == 0 || type == 1 || type == 5 || type == 6)
+		m_stack.push({ new Peg(*dot.To<Peg>()), type});
+	if(type == 3)
+		m_stack.push({ new Bulldozer(*dot.To<Bulldozer>()), type });
+	if(type == 4)
+		m_stack.push({ new Mine(*dot.To<Mine>()), type });
 	// type 0 = player1
 	// type 1 = player2
-	// type 2 = bulldozer
-	// type 3 = mina
-	// type 4 = deleteBridge
-	// type 4 = addeBridge
+	// type 3 = bulldozer
+	// type 4 = mina
+	// type 5 = deleteBridge
+	// type 6 = addeBridge
 	//type o sa fie player1, player2, bulldozer, mina, deletebridg, addedbridge
 }
 

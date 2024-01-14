@@ -21,8 +21,8 @@ public:
 		Mines
 	};
 
-	bool IsTie(Player player1, Player player2);
-	void ResetGame(const uint8_t& maxDots, const uint8_t& maxBridges);
+	bool isTie(Player player1, Player player2);
+	void resetGame(const uint8_t& maxDots, const uint8_t& maxBridges);
 
 	void setGameMode(const QString& gamemode);
 	void setMaxDots(const uint8_t& maxDots);
@@ -32,8 +32,9 @@ public:
 	void setPlayer2(Player* player2);
 
 	uint8_t getGameboardSize() const;
+	uint8_t getMaxDots() const;
+	uint8_t getMaxBridges() const;
 	GameModeType getGameMode() const;
-
 	GameStack getGameStack() const;
 
 	void initializeGame();

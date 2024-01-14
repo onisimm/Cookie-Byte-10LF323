@@ -43,6 +43,11 @@ void GameScreenWidget::setGamemode(const QString& gamemode)
     this->backendGame->setGameMode(gamemode);
 }
 
+void GameScreenWidget::closeMenuDialog()
+{
+    handleBackToGameButton();
+}
+
 void GameScreenWidget::setupUIPlayers(const Ui::GameSettings& settings) {
     auto setupPlayer = [this](Ui::UIPlayer& playerUI, QLabel* nameLabel, QLabel* timerLabel,
         const QString& playerName, const uint16_t& timeLimit, const QColor& color) {
@@ -105,14 +110,12 @@ void GameScreenWidget::applyGameSettings(const Ui::GameSettings& settings) {
 
 void GameScreenWidget::setupConnections()
 {
-    // TOOD back to menu button becomes menu`
-    // inside menu there will be a button to go back to the main menu
-    // a Save Game button, a Reset Game button,
-    connect(ui->backToMenuButton, &QPushButton::clicked, this, &GameScreenWidget::on_backToMenuButton_clicked);
+    //connect(ui->backToMenuButton, &QPushButton::clicked, this, &GameScreenWidget::on_backToMenuButton_clicked);
     connect(ui->undoButton, &QPushButton::clicked, this, &GameScreenWidget::handleUndoButtonClicked);
     connect(ui->getHintButton, &QPushButton::clicked, this, &GameScreenWidget::handleGetHintButtonClicked);
     connect(gameBoard, &GameBoardWidget::dotPressed, this, &GameScreenWidget::handleDotPressed);
     connect(ui->switchTurnButton, &QPushButton::clicked, this, &GameScreenWidget::switchTurns);
+    connect(ui->menuButton, &QPushButton::clicked, this, &GameScreenWidget::showMenu);
 }
 
 void GameScreenWidget::updateUIBasedOnPlayerTurn() {
@@ -153,6 +156,19 @@ void GameScreenWidget::updateTimer(Ui::UIPlayer& player) {
     }
 }
 
+void GameScreenWidget::resetTimer(Ui::UIPlayer& playerUI)
+{
+    if (playerUI.timer->isActive()) {
+        playerUI.timer->stop();
+    }
+    playerUI.timeLeft = playerUI.timeLimit;
+    int minutes = playerUI.timeLeft / 60;
+    int seconds = playerUI.timeLeft % 60;
+    playerUI.timerLabel->setText(QString("%1:%2").arg(minutes, 2, 10, QChar('0')).arg(seconds, 2, 10, QChar('0')));
+
+    playerUI.timer->start(1000);
+}
+
 void GameScreenWidget::endGame() {
     isGameOver = true;
     player1UI.timer->stop();
@@ -172,7 +188,7 @@ void GameScreenWidget::checkWinningPath(const Ui::UIPlayer& player)
 
 void GameScreenWidget::checkIsTie()
 {
-    if (this->backendGame->IsTie(*player1UI.backendPlayer, *player2UI.backendPlayer))
+    if (this->backendGame->isTie(*player1UI.backendPlayer, *player2UI.backendPlayer))
     {
         ui->gameMessageLabel->setText("It's a tie! No more options left.");
         endGame();
@@ -255,7 +271,6 @@ void GameScreenWidget::updateGameBoardFromBackend()
 	}
 
     this->gameBoard->update();
-
 }
 
 void GameScreenWidget::handleDotPressed(int row, int col) {
@@ -436,4 +451,43 @@ void GameScreenWidget::handleGetHintButtonClicked()
         firstHintDot = hint.first;
         secondHintDot = hint.second;
 	}
+}
+
+void GameScreenWidget::showMenu()
+{
+    menuDialog = new GameScreenMenuDialog();
+
+    connect(menuDialog, &GameScreenMenuDialog::backToMenuButtonClicked, this, &GameScreenWidget::on_backToMenuButton_clicked);
+    connect(menuDialog, &GameScreenMenuDialog::resetGameButtonClicked, this, &GameScreenWidget::confirmResetGame);
+    connect(menuDialog, &GameScreenMenuDialog::backToGameButtonClicked, this, &GameScreenWidget::handleBackToGameButton);
+
+    menuDialog->setModal(true);
+    menuDialog->show();
+}
+
+void GameScreenWidget::handleBackToGameButton()
+{
+    menuDialog->setVisible(false);
+    delete menuDialog;
+}
+
+void GameScreenWidget::confirmResetGame() {
+    QMessageBox::StandardButton reply;
+    reply = QMessageBox::question(this, "Confirm", "Are you sure you want to reset the game?\nAll your progress will be lost.",
+        QMessageBox::Yes | QMessageBox::No);
+
+    if (reply == QMessageBox::Yes) {
+        this->backendGame->resetGame(this->backendGame->getMaxDots(), this->backendGame->getMaxBridges());
+        updateGameBoardFromBackend();
+        currentPlayer = 1;
+        resetTimer(player1UI);
+        resetTimer(player2UI);
+        updateUIBasedOnPlayerTurn();
+        handleBackToGameButton();
+    }
+    if (reply == QMessageBox::No) {
+        return;
+    }
+
+    return;
 }

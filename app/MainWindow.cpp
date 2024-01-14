@@ -91,6 +91,7 @@ void MainWindow::confirmLeaveGame() {
         QMessageBox::Yes | QMessageBox::No);
 
     if (reply == QMessageBox::Yes) {
+        static_cast<GameScreenWidget*>(gameScreenWidget)->closeMenuDialog();
         switchToMainMenu();
     }
 

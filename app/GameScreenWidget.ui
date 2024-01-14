@@ -32,17 +32,23 @@
     <string>Type of Gamemode</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="backToMenuButton">
+  <widget class="QPushButton" name="menuButton">
    <property name="geometry">
     <rect>
-     <x>590</x>
-     <y>30</y>
-     <width>171</width>
-     <height>24</height>
+     <x>660</x>
+     <y>20</y>
+     <width>81</width>
+     <height>31</height>
     </rect>
    </property>
+   <property name="font">
+    <font>
+     <family>Comic Sans MS</family>
+     <pointsize>9</pointsize>
+    </font>
+   </property>
    <property name="text">
-    <string>Go back to main menu</string>
+    <string>Menu</string>
    </property>
   </widget>
   <widget class="QWidget" name="gridLayoutWidget">

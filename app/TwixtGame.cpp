@@ -2,7 +2,7 @@
 
 #include"TwixtGame.h"
 
-bool TwixtGame::IsTie(Player player1, Player player2)
+bool TwixtGame::isTie(Player player1, Player player2)
 {
 	//Check if both players ran out of dots 
 	//Check if both players ran out of bridges
@@ -13,7 +13,7 @@ bool TwixtGame::IsTie(Player player1, Player player2)
 	return false;
 }
 
-void TwixtGame::ResetGame(const uint8_t& maxDots, const uint8_t& maxBridges) {
+void TwixtGame::resetGame(const uint8_t& maxDots, const uint8_t& maxBridges) {
 	//Reset board game
 	m_board->getBridges().clear();
 	for (size_t row = 0; row < m_board->getSize(); row++)
@@ -94,6 +94,16 @@ uint8_t TwixtGame::getGameboardSize() const
 	return m_gameBoardSize;
 }
 
+uint8_t TwixtGame::getMaxDots() const
+{
+	return m_maxDots;
+}
+
+uint8_t TwixtGame::getMaxBridges() const
+{
+	return m_maxBridges;
+}
+
 TwixtGame::GameModeType TwixtGame::getGameMode() const
 {
 	return m_gameMode;
@@ -122,7 +132,7 @@ void TwixtGame::initializeGame()
 }
 
 bool TwixtGame::isTie() {
-	return IsTie(*m_player1, *m_player2);
+	return isTie(*m_player1, *m_player2);
 }
 
 bool TwixtGame::checkPathWin(Player* currentPlayer) const

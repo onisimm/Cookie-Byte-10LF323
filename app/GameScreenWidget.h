@@ -1,6 +1,7 @@
 #pragma once
 
 #include "GameBoardWidget.h"
+#include "GameScreenMenuDialog.h"
 #include "TwixtGame.h"
 #include <QWidget>
 #include <QLabel>
@@ -47,6 +48,8 @@ public:
     void setMaxBridges(const uint8_t& maxBridges);
     void setGamemode(const QString& gamemode);
 
+    void closeMenuDialog();
+
 signals:
     void on_backToMenuButton_clicked();
     void on_undoButton_clicked();
@@ -55,11 +58,15 @@ public slots:
     void switchTurns();
     void handleUndoButtonClicked();
     void handleGetHintButtonClicked();
+    void handleBackToGameButton();
+    void showMenu();
+    void confirmResetGame();
 
 private:
     Ui::GameScreenWidget* ui;
     GameBoardWidget* gameBoard = nullptr; // The game board UI
     TwixtGame* backendGame; // The game logic
+    GameScreenMenuDialog* menuDialog = nullptr;
     Ui::UIPlayer player1UI, player2UI;
     QFont initialPlayerFont;
     uint8_t currentPlayer : 4; // 1 = player 1, 2 = player 2
@@ -92,6 +99,7 @@ private:
     void applyGameSettings(const Ui::GameSettings& settings);
     void updateUIBasedOnPlayerTurn();
     void updateTimer(Ui::UIPlayer& player);
+    void resetTimer(Ui::UIPlayer& player);
 
     bool isGameOver = false;
     void checkWinningPath(const Ui::UIPlayer& player);

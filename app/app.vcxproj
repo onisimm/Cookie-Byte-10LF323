@@ -37,7 +37,7 @@
     <Import Project="$(QtMsBuild)\qt_defaults.props" />
   </ImportGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="QtSettings">
-    <QtInstall>6.7.0_msvc2019_64</QtInstall>
+    <QtInstall>6.6.1_msvc2019_64</QtInstall>
     <QtModules>core;gui;widgets</QtModules>
     <QtBuildConfig>debug</QtBuildConfig>
   </PropertyGroup>
@@ -95,12 +95,15 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="BridgeWidget.cpp" />
+    <ClCompile Include="GameScreenMenuDialog.cpp" />
     <ClCompile Include="GameStack.cpp" />
     <ClCompile Include="Minimax.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="SettingsWidget.cpp" />
     <ClCompile Include="TwixtGame.cpp" />
     <ClCompile Include="Undo.cpp" />
+    <QtUic Include="GameScreenMenuDialog.ui" />
+    <QtUic Include="GameScreenMenuDialogOld.ui" />
     <QtUic Include="GameScreenWidget.ui" />
     <QtUic Include="MainMenuWidget.ui" />
     <QtUic Include="MainWindow.ui" />
@@ -130,6 +133,7 @@
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="BridgeWidget.h" />
+    <QtMoc Include="GameScreenMenuDialog.h" />
     <ClInclude Include="GameStack.h" />
     <ClInclude Include="Minimax.h" />
     <ClInclude Include="Player.h" />

@@ -269,21 +269,19 @@ std::pair<std::pair<int, int>, std::pair<int, int>> TwixtGame::getHintByMinimax(
 	std::pair<Observer_ptr<Peg>, Observer_ptr<Peg>> myPegs;
 	if (currentPlayer->getPlayerType() == PlayerType::Player1)
 	{
-		try {
-			myPegs = suggestion.suggestMove(Dot::Status::Player1);
-		}
-		catch (std::exception& e) {
-			return { {-1, -1}, {-1, -1} };
-		}
+		myPegs = suggestion.suggestMove(Dot::Status::Player1);
+		
 	}
 	else {
-		try {
 			myPegs = suggestion.suggestMove(Dot::Status::Player2);
-		}
-		catch (std::exception& e) {
-			return { {-1, -1}, {-1, -1} };
-		}
+		
 	}
-	return { {myPegs.first.GetPointer()->getCoordI(), myPegs.first.GetPointer()->getCoordJ()}, {myPegs.second.GetPointer()->getCoordI(), myPegs.second.GetPointer()->getCoordJ()}};
-
+	if (myPegs.first.GetPointer() && myPegs.second.GetPointer())
+	{
+		return { {myPegs.first.GetPointer()->getCoordI(), myPegs.first.GetPointer()->getCoordJ()}, {myPegs.second.GetPointer()->getCoordI(), myPegs.second.GetPointer()->getCoordJ()} };
+	}
+	else
+	{
+		return { {-1, -1}, {-1, -1} };
+	}
 }

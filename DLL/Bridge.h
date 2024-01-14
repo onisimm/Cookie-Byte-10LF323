@@ -14,9 +14,6 @@ namespace twixt {
 		__declspec(dllexport) Bridge() = default;
 		__declspec(dllexport) Bridge(const Bridge& bridge);
 		__declspec(dllexport) Bridge(Observer_ptr<Peg> firstPillar, Observer_ptr<Peg> secondPillar);
-		//Add move constructor
-		__declspec(dllexport) Bridge(Bridge&& other) noexcept;
-
 		__declspec(dllexport) ~Bridge();
 
 		__declspec(dllexport) Bridge& operator=(const Bridge& bridge);

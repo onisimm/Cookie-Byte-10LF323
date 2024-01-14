@@ -58,7 +58,6 @@ twixt::Bulldozer::Bulldozer(Board& board)
 	position.second = column;
 	board.getDot(row, column).reset(new Bulldozer(*this));
 	board.m_bulldozer = Observer_ptr<Bulldozer>(dynamic_cast<Bulldozer*>(board.getDot(row, column).get()));
-	//board->placePiece(i, j, Dot::DotStatus::Bulldozer, didMineExplode);
 }
 
 twixt::Bulldozer::Bulldozer(const Bulldozer& bulldozer) : Dot(bulldozer), position{ bulldozer.position }, m_previousPosition{ bulldozer.m_previousPosition }, m_dotDestroyed{ bulldozer.m_dotDestroyed }, m_dotBridgesDestroyed{ bulldozer.m_dotBridgesDestroyed }
@@ -84,14 +83,13 @@ twixt::Bulldozer& twixt::Bulldozer::operator=(const Bulldozer& Bulldozer)
 bool twixt::Bulldozer::flipCoin(Board& board)
 {
 	srand(time(NULL));
-	/*if (rand() % 2)
+	if (rand() % 2)
 	{
 		std::cout << "We flipped the coin and nothing will happen.\n";
 		return false;
-	}*/
+	}
 	//If it did not exist the function, we will destory a Dot
 	destoryRandomDot(board);
-	board.showBoard();
 	return true;
 }
 

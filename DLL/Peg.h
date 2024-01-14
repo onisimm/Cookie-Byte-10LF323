@@ -29,7 +29,6 @@ namespace twixt {
 
 		__declspec(dllexport) bool isPegInPath(std::vector<std::pair<Observer_ptr<Peg>, size_t>> path) const;
 
-		//void deleteAllBridgesForAPeg();
 		__declspec(dllexport) void removeBridgeFromExisting(Observer_ptr<Bridge> bridge);
 
 		__declspec(dllexport) Dot::Status returnTheOtherPlayer();

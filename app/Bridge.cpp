@@ -9,10 +9,6 @@ twixt::Bridge::Bridge(const Bridge& bridge) : m_firstPillar{bridge.m_firstPillar
 twixt::Bridge::Bridge(Observer_ptr<Peg> firstPillar, Observer_ptr<Peg> secondPillar) : m_firstPillar{firstPillar}, m_secondPillar{secondPillar}
 {}
 
-//twixt::Bridge::Bridge(Bridge && other) noexcept
-//   :m_firstPillar(std::move(other.m_firstPillar)),m_secondPillar(std::move(other.m_secondPillar))
-//{}
-
 
 twixt::Bridge::~Bridge()
 {}

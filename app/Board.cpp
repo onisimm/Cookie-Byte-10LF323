@@ -2,81 +2,6 @@
 
 namespace twixt
 {
-
-	//this function shows the board
-	void Board::showBoard() const
-	{
-		for (size_t row = 0; row < m_matrixDot.size(); row++)
-		{
-			for (size_t column = 0; column < m_matrixDot[row].size(); column++)
-			{
-				if (m_matrixDot[row][column].get()->getStatus() == Dot::Status::Empty)
-					std::cout << "_";
-
-				if (m_matrixDot[row][column].get()->getStatus() == Dot::Status::Player1)
-					std::cout << "R";
-
-				if (m_matrixDot[row][column].get()->getStatus() == Dot::Status::Player2)
-					std::cout << "B";
-
-
-				if (m_matrixDot[row][column].get()->getStatus() == Dot::Status::Bulldozer)
-					std::cout << "@";
-
-				if (m_matrixDot[row][column].get()->getStatus() == Dot::Status::Mine)
-					std::cout << "M";
-				if (m_matrixDot[row][column].get()->getStatus() == Dot::Status::Exploded)
-					std::cout << " ";
-
-
-				std::cout << " ";
-			}
-			std::cout << "\n";
-		}
-		std::cout << "\nThe existing bridges are:\n";
-		if (m_bridges.size() == 0)
-		{
-			std::cout << "There aren't any existing bridges!\n\n";
-		}
-		for (auto& it : m_bridges)
-		{
-			std::cout << it.get()->getFirstPillar().GetPointer()->getCoordI() << " " << it.get()->getFirstPillar().GetPointer()->getCoordJ() << "  AND  " << it.get()->getSecondPillar().GetPointer()->getCoordI() << " " << it.get()->getSecondPillar().GetPointer()->getCoordJ()<<"\n";
-		}
-	}
-
-	void Board::placePiece(size_t row, size_t column, Dot::Status status, bool& didMineExplode)
-	{
-		if (m_matrixDot[row][column]->getStatus() == Dot::Status::Empty)
-		{
-			placePeg(row, column, status);
-		}
-		else if (m_matrixDot[row][column]->getStatus() == Dot::Status::Mine) // in case there is a mine it will explode
-		{
-			didMineExplode = true;
-			Observer_ptr<Mine> MinePointer(dynamic_cast<Mine*>(m_matrixDot[row][column].get()));
-			explodeMine(MinePointer);
-			std::cout << "You lost your turn!\n";
-			std::cout << "Choose another mine!\n";
-			showBoard();
-			size_t mineI, mineJ;
-			std::cin >> mineI >> mineJ;
-			placeMine(mineI, mineJ);
-			MinePointer.GetPointer()->setNewPlacedMine(Observer_ptr<Mine>(dynamic_cast<Mine*>(m_matrixDot[mineI][mineJ].get())));
-		}
-		else
-		{
-			std::cout << "Node already occupied!\nChoose another dot!\nEnter position: ";
-			std::cin >> row >> column;
-			placePiece(row, column, status, didMineExplode);
-		}
-	}
-
-	void Board::placePiece(size_t row, size_t column, Dot::Status status)
-	{
-		bool didMineExplode = false;
-		placePiece(row, column, status, didMineExplode);
-	}
-
 	Board::Board() {}
 
 	Board::Board(uint32_t size)
@@ -386,10 +311,9 @@ Board::~Board() {}
 	void Board::deleteAllBridgesForAPegInBoard(Observer_ptr<Peg> peg)
 	{
 		auto existingBridges = peg.GetPointer()->getExistingBridges();  // Store the result in a local variable
-		for (auto it = existingBridges.begin(); it != existingBridges.end(); it++)
-		{
-			deleteBridgeInBoard(peg, it->GetPointer()->returnTheOtherPillar(peg));
-		}
+		std::for_each(existingBridges.begin(), existingBridges.end(), [this, peg](auto it) {
+			deleteBridgeInBoard(peg, it.GetPointer()->returnTheOtherPillar(peg));
+			});
 	}
 
 	void Board::placePeg(size_t row,size_t column, Dot::Status status)
@@ -410,7 +334,6 @@ Board::~Board() {}
 
 	void Board::placeMine(size_t row, size_t column)
 	{
-		std::cout << "MINE PLACED on " << row << " " << column << "\n";
 		m_matrixDot[row][column].reset(new Mine());
 		m_matrixDot[row][column]->setStatus(Dot::Status::Mine);
 		m_matrixDot[row][column]->setCoordI(row);

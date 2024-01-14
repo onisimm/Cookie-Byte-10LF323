@@ -179,15 +179,5 @@ twixt::Minimax::Minimax(Board& board) : copyOfBoard{board} {}
 std::pair<twixt::Observer_ptr<twixt::Peg>, twixt::Observer_ptr<twixt::Peg>> twixt::Minimax::suggestMove(Dot::Status status)
 {
     std::pair<Observer_ptr<Peg>, Observer_ptr<Peg>>myBridge = minimax(status);
-    if (myBridge != std::make_pair(nullptr, nullptr))
-    {
-        //std::cout << "It is recommended to create the bridge between " << myBridge.first.GetPointer()->getCoordI() << " " << myBridge.first.GetPointer()->getCoordJ() << " and " << myBridge.second.GetPointer()->getCoordI() << " " << myBridge.second.GetPointer()->getCoordJ() << ".\n";
-    }
-    else
-    {
-       //in these case there are no suggestions 
-        
-    }
-    //if my bridge is pair of nullptr,nullptr,then there are no suggestions
     return myBridge ; 
 }
